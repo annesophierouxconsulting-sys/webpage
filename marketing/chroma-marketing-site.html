@@ -16,11 +16,6 @@
   --ink-4:rgba(27,42,58,0.04); --ink-8:rgba(27,42,58,0.08);
   --ink-12:rgba(27,42,58,0.12); --ink-18:rgba(27,42,58,0.18);
   --ink-32:rgba(27,42,58,0.32);
-  --fg-1:var(--ink); --fg-2:var(--ink-soft); --fg-3:var(--ink-faint);
-  --bg-1:var(--paper); --bg-2:var(--bone);
-  --accent:var(--vermilion); --accent-press:var(--vermilion-2);
-  --success:var(--sage); --warning:var(--ochre);
-  --border:var(--ink-12); --border-strong:var(--ink-32);
   --font-display:'Instrument Serif','Times New Roman',Georgia,serif;
   --font-body:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   --font-mono:'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace;
@@ -29,28 +24,26 @@
   --fs-display-m:clamp(32px,4vw,48px);
   --fs-display-s:clamp(24px,3vw,32px);
   --fs-lead:22px; --fs-body:17px; --fs-ui:15px; --fs-small:13px; --fs-micro:11px;
-  --lh-display:1.02; --lh-body:1.55; --lh-tight:1.2;
+  --lh-display:1.02; --lh-body:1.55;
   --ls-display:-0.01em; --ls-overline:0.12em;
   --shadow-card:0 1px 0 rgba(27,42,58,.06),0 12px 32px -16px rgba(27,42,58,.18);
-  --shadow-lift:0 2px 0 rgba(27,42,58,.08),0 24px 48px -20px rgba(27,42,58,.24);
   --ease:cubic-bezier(0.2,0.6,0.2,1);
   --t-fast:160ms; --t-med:240ms; --t-slow:400ms;
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html,body{background:var(--bg-1);color:var(--fg-1);font-family:var(--font-body);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased;}
-h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:400;letter-spacing:var(--ls-display);line-height:var(--lh-display);color:var(--fg-1);margin:0;}
+html,body{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:var(--fs-body);line-height:var(--lh-body);-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:400;letter-spacing:var(--ls-display);line-height:var(--lh-display);color:var(--ink);margin:0;}
 h1{font-size:var(--fs-display-xl);}h2{font-size:var(--fs-display-l);}h3{font-size:var(--fs-display-m);}h4{font-size:var(--fs-display-s);}
 p{margin:0;}
-.lead{font-size:var(--fs-lead);line-height:1.45;color:var(--fg-2);}
-.overline{font-family:var(--font-mono);font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:var(--ls-overline);color:var(--fg-2);}
-a{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;transition:color var(--t-fast) var(--ease);}
-a:hover{color:var(--accent-press);}
+.lead{font-size:var(--fs-lead);line-height:1.45;color:var(--ink-soft);}
+.overline{font-family:var(--font-mono);font-size:var(--fs-micro);text-transform:uppercase;letter-spacing:var(--ls-overline);color:var(--ink-soft);}
+a{color:var(--vermilion);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;transition:color var(--t-fast) var(--ease);}
+a:hover{color:var(--vermilion-2);}
 ::selection{background:var(--vermilion);color:var(--paper);}
 :focus-visible{outline:2px solid var(--vermilion);outline-offset:3px;}
 
 .page{max-width:1240px;margin:0 auto;padding:0 32px;}
-
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:15px;font-weight:500;padding:12px 20px;border-radius:2px;border:1px solid transparent;cursor:pointer;transition:all 160ms var(--ease);text-decoration:none;}
 .btn-primary{background:var(--vermilion);color:var(--paper);}
 .btn-primary:hover{background:var(--vermilion-2);color:var(--paper);}
@@ -58,7 +51,6 @@ a:hover{color:var(--accent-press);}
 .btn-ghost:hover{border-color:var(--ink);background:var(--ink-4);color:var(--ink);}
 .btn-lg{padding:14px 26px;font-size:16px;}
 
-/* Logo */
 .logo-wordmark{display:inline-flex;align-items:baseline;gap:2px;font-family:var(--font-display);font-weight:400;color:var(--ink);line-height:1;letter-spacing:-0.01em;text-decoration:none;}
 .logo-wordmark .w{font-size:1em;}
 .logo-wordmark .d{display:inline-block;width:0.18em;height:0.18em;border-radius:999px;background:var(--vermilion);transform:translateY(-0.04em);}
@@ -71,11 +63,12 @@ a:hover{color:var(--accent-press);}
 .nav-links a{color:var(--ink);text-decoration:none;font-size:15px;}
 .nav-links a:hover{text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--vermilion);}
 .nav-coming{position:relative;color:var(--ink-faint);font-size:15px;cursor:default;user-select:none;}
-.nav-coming .coming-tooltip{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 10px;border-radius:2px;white-space:nowrap;}
+.nav-coming .coming-tooltip{display:none;position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 10px;border-radius:2px;white-space:nowrap;z-index:200;}
+.nav-coming:hover{color:var(--ink-soft);}
 .nav-coming:hover .coming-tooltip{display:block;}
 
 /* Hero */
-.hero{padding:96px 0 96px;}
+.hero{padding:96px 0;}
 .hero-overline{font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:40px;display:inline-block;padding-bottom:4px;border-bottom:1px solid var(--ink-32);}
 .hero-title{font-family:var(--font-display);font-weight:400;font-size:clamp(56px,8vw,112px);line-height:1.0;letter-spacing:-0.015em;margin:0 0 32px;max-width:14ch;}
 .hero-title em{font-style:italic;color:var(--vermilion);}
@@ -85,7 +78,7 @@ a:hover{color:var(--accent-press);}
 /* Pain */
 .pain{padding:96px 0;border-top:1px solid var(--ink-8);}
 .pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;align-items:start;}
-.pain-title{font-family:var(--font-display);font-size:clamp(24px,3vw,32px);font-weight:400;line-height:1.15;margin-bottom:24px;}
+.pain-col-label{font-family:var(--font-display);font-size:clamp(24px,3vw,32px);font-weight:400;line-height:1.15;margin-bottom:24px;}
 .pain-list{list-style:none;}
 .pain-list li{padding:16px 0;border-bottom:1px solid var(--ink-8);font-size:15px;color:var(--ink-soft);display:flex;gap:14px;}
 .pain-list li:first-child{border-top:1px solid var(--ink-8);}
@@ -99,9 +92,9 @@ a:hover{color:var(--accent-press);}
 .sec-head .overline{display:inline-block;margin-bottom:20px;}
 .sec-head h3{font-family:var(--font-display);font-size:clamp(32px,4vw,44px);line-height:1.1;letter-spacing:-0.01em;margin:0 0 16px;}
 .sec-head .lead{color:var(--ink-soft);font-size:18px;margin:0;}
-.sec-head .hook{font-size:16px;color:var(--ink);font-style:italic;margin-top:12px;max-width:52ch;margin-left:auto;margin-right:auto;}
+.sec-head .hook{font-size:16px;color:var(--ink);font-style:italic;margin-top:12px;max-width:52ch;margin-left:auto;margin-right:auto;line-height:1.55;}
 
-/* Methodology cycle */
+/* Methodology */
 .methodology{padding:128px 0;border-top:1px solid var(--ink-8);}
 .cycle{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;}
 .cycle-stage{display:flex;justify-content:center;}
@@ -117,28 +110,22 @@ a:hover{color:var(--accent-press);}
 .phase-desc{font-size:15px;color:var(--ink-soft);line-height:1.5;}
 .phase-out{font-family:var(--font-mono);font-size:12px;color:var(--ink);margin-top:4px;}
 
-/* Methods cards */
+/* Methods — opt-card design with quali/quanti stamp */
 .methods{padding:96px 0;border-top:1px solid var(--ink-8);}
-.methods-cols{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:960px;margin:0 auto;}
-.methods-group-head{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.12em;padding-bottom:12px;border-bottom:2px solid;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
-.methods-group-head.quanti{color:var(--asagi);border-color:var(--asagi);}
-.methods-group-head.quali{color:var(--shikon);border-color:var(--shikon);}
-.methods-group-head .ghead-badge{font-size:9px;padding:3px 7px;border-radius:2px;font-weight:500;letter-spacing:0.06em;}
-.methods-group-head.quanti .ghead-badge{background:rgba(65,138,163,0.15);color:var(--asagi);}
-.methods-group-head.quali .ghead-badge{background:rgba(123,59,110,0.15);color:var(--shikon);}
-
-.mcard{padding:20px 22px;margin-bottom:10px;border-radius:4px;border:1px solid;position:relative;transition:box-shadow 160ms var(--ease);}
+.methods-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.mcard{text-align:left;border-radius:4px;padding:24px;cursor:default;transition:all 240ms var(--ease);font-family:var(--font-body);border:1px solid;position:relative;}
 .mcard:hover{box-shadow:var(--shadow-card);}
-.mcard.quanti{background:rgba(65,138,163,0.07);border-color:rgba(65,138,163,0.25);}
-.mcard.quali{background:rgba(123,59,110,0.06);border-color:rgba(123,59,110,0.2);}
-.mcard-dot{position:absolute;top:18px;right:18px;width:7px;height:7px;border-radius:999px;}
-.mcard.quanti .mcard-dot{background:var(--asagi);}
-.mcard.quali .mcard-dot{background:var(--shikon);}
-.mcard-name{font-weight:500;font-size:15px;margin-bottom:5px;}
-.mcard.quanti .mcard-name{color:var(--ink);}
-.mcard.quali .mcard-name{color:var(--ink);}
-.mcard-desc{font-size:13px;line-height:1.5;}
-.mcard.quanti .mcard-desc{color:var(--asagi);opacity:0.85;}
+.mcard.quanti{background:rgba(65,138,163,0.08);border-color:rgba(65,138,163,0.28);}
+.mcard.quali{background:rgba(123,59,110,0.07);border-color:rgba(123,59,110,0.22);}
+.mcard-stamp{position:absolute;top:16px;right:16px;font-family:var(--font-mono);font-size:9px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;}
+.mcard.quanti .mcard-stamp{background:rgba(65,138,163,0.18);color:var(--asagi);}
+.mcard.quali .mcard-stamp{background:rgba(123,59,110,0.15);color:var(--shikon);}
+.mcard-n{font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;opacity:0.5;margin-bottom:20px;}
+.mcard.quanti .mcard-n{color:var(--asagi);}
+.mcard.quali .mcard-n{color:var(--shikon);}
+.mcard-title{font-family:var(--font-display);font-size:22px;line-height:1.1;margin-bottom:10px;color:var(--ink);}
+.mcard-desc{font-size:14px;line-height:1.5;}
+.mcard.quanti .mcard-desc{color:var(--asagi);}
 .mcard.quali .mcard-desc{color:var(--shikon);opacity:0.85;}
 
 /* Rec stack */
@@ -173,20 +160,6 @@ a:hover{color:var(--accent-press);}
 .rec-dot.on{color:var(--vermilion);}
 .rec-dot.on .rec-dot-bullet{background:var(--vermilion);width:8px;height:8px;}
 
-/* Opt cards */
-.opts{padding:96px 0;border-top:1px solid var(--ink-8);}
-.opt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-.opt-card{text-align:left;background:var(--bone);border:1px solid var(--ink-8);border-radius:4px;padding:24px;cursor:pointer;transition:all 240ms var(--ease);font-family:var(--font-body);}
-.opt-card:hover{border-color:var(--ink-32);box-shadow:var(--shadow-card);}
-.opt-card.is-open{background:var(--ink);color:var(--paper);border-color:var(--ink);}
-.opt-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
-.opt-n{font-family:var(--font-mono);font-size:11px;letter-spacing:0.08em;color:inherit;opacity:0.6;}
-.opt-title{font-family:var(--font-display);font-size:28px;line-height:1.1;margin-bottom:10px;}
-.opt-desc{font-size:14px;color:var(--ink-soft);line-height:1.5;}
-.opt-card.is-open .opt-desc{color:rgba(244,237,224,0.75);}
-.opt-meta{display:flex;gap:20px;margin-top:20px;padding-top:16px;border-top:1px solid rgba(244,237,224,0.2);font-family:var(--font-mono);font-size:12px;}
-.opt-meta em{font-style:normal;opacity:0.55;margin-right:6px;text-transform:uppercase;letter-spacing:0.08em;font-size:10px;}
-
 /* Team */
 .team{padding:96px 0;border-top:1px solid var(--ink-8);}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin-top:56px;}
@@ -203,7 +176,7 @@ a:hover{color:var(--accent-press);}
 .double-regard-label{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:rgba(244,237,224,0.4);margin-bottom:16px;}
 .double-regard-item{margin-bottom:14px;font-size:15px;line-height:1.65;color:rgba(244,237,224,0.75);padding-left:18px;position:relative;}
 .double-regard-item::before{content:'—';position:absolute;left:0;color:rgba(244,237,224,0.35);}
-.double-regard-conclusion{margin-top:20px;padding-top:16px;border-top:1px solid rgba(244,237,224,0.12);font-size:14px;color:rgba(244,237,224,0.6);font-family:var(--font-mono);font-size:12px;letter-spacing:0.04em;}
+.double-regard-conclusion{margin-top:20px;padding-top:16px;border-top:1px solid rgba(244,237,224,0.12);font-size:12px;color:rgba(244,237,224,0.55);font-family:var(--font-mono);letter-spacing:0.04em;}
 
 /* Booking */
 .booking{padding:96px 0;border-top:1px solid var(--ink-8);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
@@ -233,8 +206,8 @@ a:hover{color:var(--accent-press);}
 
 @media(max-width:900px){
   .page{padding:0 20px;}
-  .pain-grid,.cycle,.booking,.team-grid,.footer,.methods-cols{grid-template-columns:1fr;gap:40px;}
-  .opt-grid{grid-template-columns:1fr 1fr;}
+  .pain-grid,.cycle,.booking,.team-grid,.footer,.methods-grid{grid-template-columns:1fr;gap:40px;}
+  .methods-grid{grid-template-columns:1fr 1fr;}
   .book-form{grid-template-columns:1fr;}
   .rec-stage{grid-template-columns:1fr;gap:24px;}
   .rec-deck{height:580px;max-width:100%;}
@@ -243,8 +216,9 @@ a:hover{color:var(--accent-press);}
   .nav-coming .coming-tooltip{left:auto;right:0;transform:none;}
 }
 @media(max-width:600px){
-  .nav-links{display:none;}
-  .nav-links-mobile{display:flex;flex-direction:column;gap:12px;padding:16px 0;border-top:1px solid var(--ink-8);}
+  .methods-grid{grid-template-columns:1fr;}
+  .nav-links{gap:12px;}
+  .nav-links a:not(:last-child){display:none;}
 }
 </style>
 </head>
@@ -304,19 +278,20 @@ function Hero() {
 function Pain() {
   return (
     <section className="pain">
-      <p className="overline">Ce que nous observons</p>
+      <p className="overline">De ce qui bloque à ce qui a de l'impact</p>
       <div className="pain-grid">
         <div>
-          <p className="pain-title">Votre site génère du trafic.<br/>Mais pas assez de revenus.</p>
+          <p className="pain-col-label">Ça vous ressemble ?</p>
           <ul className="pain-list">
             <li><span className="pain-dash">—</span><span>Vos campagnes ramènent du monde, mais le taux de conversion stagne.</span></li>
             <li><span className="pain-dash">—</span><span>Vous ne savez pas exactement où ni pourquoi vous perdez vos visiteurs.</span></li>
             <li><span className="pain-dash">—</span><span>Vos équipes ont des hypothèses, mais rien de priorisé ni de testé.</span></li>
             <li><span className="pain-dash">—</span><span>Vous optimisez dans le vide, sans cadre pour mesurer ce qui fonctionne vraiment.</span></li>
+            <li><span className="pain-dash">—</span><span>Vous êtes une équipe réduite et ne savez pas par où commencer pour obtenir plus de ventes ou de leads.</span></li>
           </ul>
         </div>
         <div>
-          <p className="pain-title">Ce que vous obtenez<br/>à l'issue de l'audit.</p>
+          <p className="pain-col-label">Ce que vous repartez avec.</p>
           <div className="outcome-item">
             <strong>Un backlog priorisé</strong>
             <span>Les actions classées par impact potentiel sur votre revenu, pas par opinion.</span>
@@ -354,9 +329,7 @@ const PHASES=[
   {n:'03',fr:'Priorisation des actions',desc:'Croiser les hypothèses business avec les insights pour faire émerger les leviers les plus pertinents.',output:'Backlog priorisé — impact, confiance, effort'},
   {n:'04',fr:'Conversion Redesign',desc:'Mise en production des variantes les plus prometteuses — A/B tests ou refontes ciblées selon les reco.',output:'Une approche orientée clarté, fluidité et performance'},
 ];
-
 const SEG_COLORS=['#C8413A','#418AA3','#7B3B6E','#7A8F7A'];
-
 const ICONS_SVG={
   '01':<g fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7 3h8l4 4v14H7z"/><path d="M15 3v4h4"/><circle cx="12" cy="14" r="2.5"/><path d="m14 16 2 2"/></g>,
   '02':<g fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="6"/><path d="m19.5 19.5-3.5-3.5"/><path d="M8 13v-2M11 13V9M14 13v-3"/></g>,
@@ -423,15 +396,14 @@ function Methodology() {
   );
 }
 
-const METHODES_QUANTI=[
-  {name:'Analytics',desc:'Review du tracking, identification des pages/produits et parcours qui convertissent — et ceux qui saignent, détection des segments qui tirent la croissance...'},
-];
-const METHODES_QUALI=[
-  {name:'Heatmaps & Sessions recordings',desc:'Comportements réels. Ce que les utilisateurs regardent, cliquent, ignorent — ou abandonnent.'},
-  {name:'Sondages onsite',desc:'Hésitations et motivations en amont et après la décision. Ce que la data ne peut pas dire.'},
-  {name:'Interviews clients',desc:'Expérience d\'achat et vécu. Pour comprendre le pourquoi derrière les comportements observés.'},
-  {name:'Tests utilisateurs',desc:'Compréhension du site et frictions en situation réelle. On observe, on ne devine pas.'},
-  {name:'Évaluation heuristique',desc:'Audit des bonnes pratiques UX et sectorielles. Ce que l\'œil expert repère avant même les données.'},
+/* Methods */
+const METHODES=[
+  {type:'quanti',stamp:'Quanti',n:'01',title:'Analytics',desc:'Review du tracking, identification des pages/produits et parcours qui convertissent — et ceux qui saignent, détection des segments qui tirent la croissance...'},
+  {type:'quali',stamp:'Quali',n:'02',title:'Heatmaps & Sessions recordings',desc:'Comportements réels. Ce que les utilisateurs regardent, cliquent, ignorent — ou abandonnent.'},
+  {type:'quali',stamp:'Quali',n:'03',title:'Sondages onsite',desc:'Hésitations et motivations en amont et après la décision. Ce que la data ne peut pas dire.'},
+  {type:'quali',stamp:'Quali',n:'04',title:'Interviews clients',desc:'Expérience d\'achat et vécu. Pour comprendre le pourquoi derrière les comportements observés.'},
+  {type:'quali',stamp:'Quali',n:'05',title:'Tests utilisateurs',desc:'Compréhension du site et frictions en situation réelle. On observe, on ne devine pas.'},
+  {type:'quali',stamp:'Quali',n:'06',title:'Évaluation heuristique',desc:'Audit des bonnes pratiques UX et sectorielles. Ce que l\'œil expert repère avant même les données.'},
 ];
 
 function Methods() {
@@ -442,38 +414,21 @@ function Methods() {
         <h3>Les méthodes qui alimentent<br/>cette démarche.</h3>
         <p className="lead">Chaque analyse s'appuie sur des méthodes complémentaires — quantitatives et qualitatives.</p>
       </div>
-      <div className="methods-cols">
-        <div>
-          <div className="methods-group-head quanti">
-            Recherches quantitatives
-            <span className="ghead-badge">DATA</span>
+      <div className="methods-grid">
+        {METHODES.map(m=>(
+          <div key={m.n} className={`mcard ${m.type}`}>
+            <span className="mcard-stamp">{m.stamp}</span>
+            <div className="mcard-n">{m.n}</div>
+            <div className="mcard-title">{m.title}</div>
+            <div className="mcard-desc">{m.desc}</div>
           </div>
-          {METHODES_QUANTI.map(m=>(
-            <div key={m.name} className="mcard quanti">
-              <div className="mcard-dot"></div>
-              <div className="mcard-name">{m.name}</div>
-              <div className="mcard-desc">{m.desc}</div>
-            </div>
-          ))}
-        </div>
-        <div>
-          <div className="methods-group-head quali">
-            Recherches qualitatives
-            <span className="ghead-badge">TERRAIN</span>
-          </div>
-          {METHODES_QUALI.map(m=>(
-            <div key={m.name} className="mcard quali">
-              <div className="mcard-dot"></div>
-              <div className="mcard-name">{m.name}</div>
-              <div className="mcard-desc">{m.desc}</div>
-            </div>
-          ))}
-        </div>
+        ))}
       </div>
     </section>
   );
 }
 
+/* Rec stack */
 const TAG={
   place:{bg:'rgba(200,65,58,0.10)',fg:'#8A2E29'},
   cat:{bg:'rgba(27,42,58,0.08)',fg:'#1B2A3A'},
@@ -495,12 +450,14 @@ const RECS=[
 ];
 
 function Pill({kind,children}){const s=TAG[kind]||TAG.cat;return <span className="rec-pill" style={{background:s.bg,color:s.fg}}>{children}</span>;}
-function ImpDots({level}){const color=IMPORTANCE[level]?.color||'#8A95A2';return <span className="rec-imp" title={IMPORTANCE[level]?.label||''}>{[1,2,3,4,5].map(i=><span key={i} className="rec-imp-dot" style={{background:i<=level?color:'rgba(27,42,58,0.12)'}}></span>)}<span className="rec-imp-lbl" style={{color}}>{IMPORTANCE[level]?.label}</span></span>;}
+function ImpDots({level}){
+  const color=IMPORTANCE[level]?.color||'#8A95A2';
+  return <span className="rec-imp">{[1,2,3,4,5].map(i=><span key={i} className="rec-imp-dot" style={{background:i<=level?color:'rgba(27,42,58,0.12)'}}></span>)}<span className="rec-imp-lbl" style={{color}}>{IMPORTANCE[level]?.label}</span></span>;
+}
 
 function RecommendationStack(){
   const[order,setOrder]=useState([0,1,2,3,4,5]);
   const bringToFront=(idx)=>setOrder(prev=>[idx,...prev.filter(i=>i!==idx)]);
-  const frontIdx=order[0];
   return (
     <div className="rec-wrap" id="recos">
       <div className="sec-head">
@@ -552,37 +509,6 @@ function RecommendationStack(){
   );
 }
 
-const OPTS=[
-  {n:'01',title:'Simplifier le checkout.',desc:'Retirer deux champs, remonter les badges de confiance.',impact:'Élevé',effort:'Faible'},
-  {n:'02',title:'Réécrire le hero.',desc:'Partir du résultat client, pas du produit.',impact:'Moyen',effort:'Faible'},
-  {n:'03',title:'Tester le pricing en 3 tiers.',desc:'Ancrer avec une offre premium visible.',impact:'Élevé',effort:'Moyen'},
-  {n:'04',title:'Refondre la page produit.',desc:'Visuels d\'abord, specs en accordéon.',impact:'Moyen',effort:'Élevé'},
-  {n:'05',title:'Ajouter la preuve sociale.',desc:'Avis clients dans le flow, pas en bas de page.',impact:'Moyen',effort:'Faible'},
-  {n:'06',title:'Réduire le poids mobile.',desc:'LCP sous 2s. Payoff direct sur le taux.',impact:'Élevé',effort:'Moyen'},
-];
-function OptCards(){
-  const[open,setOpen]=useState(0);
-  return (
-    <section className="opts">
-      <div className="sec-head">
-        <h6 className="overline">Exemples d'optimisations</h6>
-        <h3>Des optimisations, pas des idées.</h3>
-        <p className="lead">Chaque carte est un chantier réel tiré d'un audit récent. Cliquez pour voir le détail.</p>
-      </div>
-      <div className="opt-grid">
-        {OPTS.map((o,i)=>(
-          <button key={o.n} className={'opt-card'+(i===open?' is-open':'')} onClick={()=>setOpen(i)}>
-            <div className="opt-top"><span className="opt-n">{o.n}</span></div>
-            <div className="opt-title">{o.title}</div>
-            <div className="opt-desc">{o.desc}</div>
-            {i===open&&<div className="opt-meta"><span><em>Impact</em>{o.impact}</span><span><em>Effort</em>{o.effort}</span></div>}
-          </button>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function Team(){
   return (
     <section className="team" id="equipe">
@@ -593,14 +519,24 @@ function Team(){
         <div className="team-card">
           <div className="team-role">Growth &amp; Acquisition · CRO</div>
           <div className="team-name">Anne-Sophie Roux</div>
-          <div className="team-desc">Une lecture du funnel depuis l'acquisition. Une vision transversale et data qui relie business, message, campagnes et parcours.</div>
-          <div className="team-tags"><span className="team-tag">Growth</span><span className="team-tag">Acquisition</span><span className="team-tag">Funnel</span><span className="team-tag">CRO</span></div>
+          <div className="team-desc">Une lecture CRO du funnel depuis l'acquisition. Une vision transversale et data qui relie business, message, campagnes et parcours.</div>
+          <div className="team-tags">
+            <span className="team-tag">Growth</span>
+            <span className="team-tag">Acquisition</span>
+            <span className="team-tag">Funnel</span>
+            <span className="team-tag">CRO</span>
+          </div>
         </div>
         <div className="team-card">
-          <div className="team-role">CRO · E-commerce · SaaS · Leadgen · Formation</div>
+          <div className="team-role">CRO · Formation</div>
           <div className="team-name">Florent Kiecken</div>
           <div className="team-desc">Spécialiste CRO avec un historique de missions sur des sites e-commerce, SaaS et leadgen à fort trafic. Il forme également des équipes à l'optimisation de la conversion.</div>
-          <div className="team-tags"><span className="team-tag">CRO</span><span className="team-tag">E-commerce</span><span className="team-tag">SaaS</span><span className="team-tag">Leadgen</span><span className="team-tag">Formation</span></div>
+          <div className="team-tags">
+            <span className="team-tag">CRO</span>
+            <span className="team-tag">UX Research</span>
+            <span className="team-tag">A/B test</span>
+            <span className="team-tag">Formation</span>
+          </div>
           <a href="#" className="team-link">→ Voir son site — SDLV</a>
         </div>
       </div>
@@ -703,7 +639,6 @@ function App(){
       <Methodology/>
       <Methods/>
       <RecommendationStack/>
-      <OptCards/>
       <Team/>
       <BookingForm/>
       <Footer/>
