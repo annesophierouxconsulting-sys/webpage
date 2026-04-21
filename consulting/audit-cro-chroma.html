@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chroma — Audit CRO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f0ebe0;
+      --ink: #1a1a1a;
+      --vermilion: #c0392b;
+      --muted: #6b6560;
+      --border: #ddd8ce;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 48px;
+      border-bottom: 1px solid var(--border);
+      background: var(--cream);
+    }
+
+    .logo {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-weight: 400;
+      font-size: 1.25rem;
+      color: var(--ink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .logo span {
+      color: var(--vermilion);
+      font-size: 1.5rem;
+      line-height: 1;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'IBM Plex Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--vermilion); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 48px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .audit-meta {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      display: flex;
+      gap: 40px;
+    }
+
+    .hero h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--vermilion);
+    }
+
+    /* ── STATS ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      margin-top: 60px;
+    }
+
+    .stat {
+      padding: 32px 0;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-family: 'Instrument Serif', serif;
+      font-size: 2.2rem;
+      color: var(--ink);
+    }
+
+    .stat-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 80px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .section h2 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      max-width: 700px;
+      margin-bottom: 20px;
+    }
+
+    .section p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    /* ── FINDINGS TABLE ── */
+    .findings {
+      margin-top: 48px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .findings thead tr {
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .findings th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      padding: 0 0 12px;
+      text-align: left;
+      font-weight: 400;
+    }
+
+    .findings td {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      font-size: 0.9rem;
+    }
+
+    .findings td:first-child {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      width: 60px;
+    }
+
+    .finding-title {
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .finding-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      padding: 3px 8px;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-high { background: #fde8e6; color: var(--vermilion); }
+    .badge-med  { background: #fef3e2; color: #b07020; }
+    .badge-low  { background: #e8f0e8; color: #3a6e3a; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 40px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="#">chroma<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#">Méthodologie</a></li>
+      <li><a href="#">Cas</a></li>
+      <li><a href="#">À propos</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="audit-meta">
+      <span>Audit #028</span>
+      <span>28.04.2026</span>
+    </div>
+    <h1>Audit CRO.<br><em>Atelier Brume</em></h1>
+
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-label">Client</div>
+        <div class="stat-value" style="font-size:1.2rem; font-family:'IBM Plex Sans'">Atelier Brume</div>
+        <div class="stat-sub">brume.ca · e-commerce</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Période analysée</div>
+        <div class="stat-value" style="font-size:1.2rem; font-family:'IBM Plex Sans'">6 semaines</div>
+        <div class="stat-sub">142k sessions</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Réalisé par</div>
+        <div class="stat-value" style="font-size:1.2rem; font-family:'IBM Plex Sans'">Chroma</div>
+        <div class="stat-sub">2 auditeurs</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Gain estimé</div>
+        <div class="stat-value">+42%</div>
+        <div class="stat-sub">taux de conversion</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Synthèse executive</div>
+    <h2>Trois chantiers suffisent..</h2>
+    <p>Sur 23 observations, 5 constats comptent. Trois sont faciles à tester en deux semaines. Voici le classement.</p>
+
+    <table class="findings">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Observation</th>
+          <th>Impact</th>
+          <th>Effort</th>
+          <th>Priorité</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>01</td>
+          <td>
+            <div class="finding-title">CTA principal invisible au scroll</div>
+            <div class="finding-desc">Le bouton d'achat disparaît dès 300px de scroll sur mobile. 67% du trafic est mobile.</div>
+          </td>
+          <td><span class="badge badge-high">Élevé</span></td>
+          <td><span class="badge badge-low">Faible</span></td>
+          <td><span class="badge badge-high">P1</span></td>
+        </tr>
+        <tr>
+          <td>02</td>
+          <td>
+            <div class="finding-title">Formulaire de checkout en 5 étapes</div>
+            <div class="finding-desc">La moyenne du secteur est à 2,3 étapes. Chaque étape supplémentaire coûte ~12% d'abandon.</div>
+          </td>
+          <td><span class="badge badge-high">Élevé</span></td>
+          <td><span class="badge badge-med">Moyen</span></td>
+          <td><span class="badge badge-high">P1</span></td>
+        </tr>
+        <tr>
+          <td>03</td>
+          <td>
+            <div class="finding-title">Absence de preuve sociale sur la fiche produit</div>
+            <div class="finding-desc">Aucun avis visible avant le fold. Les concurrents affichent une note agrégée dans le header produit.</div>
+          </td>
+          <td><span class="badge badge-med">Moyen</span></td>
+          <td><span class="badge badge-low">Faible</span></td>
+          <td><span class="badge badge-med">P2</span></td>
+        </tr>
+        <tr>
+          <td>04</td>
+          <td>
+            <div class="finding-title">Images produit non optimisées</div>
+            <div class="finding-desc">Temps de chargement moyen : 4,2s. Objectif e-commerce : sous 1,5s. Impact direct sur le bounce rate.</div>
+          </td>
+          <td><span class="badge badge-med">Moyen</span></td>
+          <td><span class="badge badge-med">Moyen</span></td>
+          <td><span class="badge badge-med">P2</span></td>
+        </tr>
+        <tr>
+          <td>05</td>
+          <td>
+            <div class="finding-title">Navigation catégories trop profonde</div>
+            <div class="finding-desc">3 niveaux de navigation pour atteindre une catégorie feuille. Réduire à 2 niveaux maximum.</div>
+          </td>
+          <td><span class="badge badge-low">Faible</span></td>
+          <td><span class="badge badge-high">Élevé</span></td>
+          <td><span class="badge badge-low">P3</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <span>Chroma · Audit CRO #028</span>
+    <span>Confidentiel — Atelier Brume</span>
+    <span>28.04.2026</span>
+  </footer>
+
+</body>
+</html>
