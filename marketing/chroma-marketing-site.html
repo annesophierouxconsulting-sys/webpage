@@ -10,12 +10,10 @@
   --paper:#F4EDE0; --paper-2:#EFE6D4; --bone:#E8DFCE;
   --ink:#1B2A3A; --ink-soft:#4A5A6E; --ink-faint:#8A95A2; --charcoal:#0E1620;
   --vermilion:#C8413A; --vermilion-2:#A83530;
-  --sage:#7A8F7A; --sage-2:#5F7360;
-  --ochre:#C49A3E; --ochre-2:#A07E2F;
+  --sage:#7A8F7A; --ochre:#C49A3E;
   --asagi:#418AA3; --shikon:#7B3B6E;
   --ink-4:rgba(27,42,58,0.04); --ink-8:rgba(27,42,58,0.08);
-  --ink-12:rgba(27,42,58,0.12); --ink-18:rgba(27,42,58,0.18);
-  --ink-32:rgba(27,42,58,0.32);
+  --ink-12:rgba(27,42,58,0.12); --ink-32:rgba(27,42,58,0.32);
   --font-display:'Instrument Serif','Times New Roman',Georgia,serif;
   --font-body:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   --font-mono:'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace;
@@ -110,7 +108,7 @@ a:hover{color:var(--vermilion-2);}
 .phase-desc{font-size:15px;color:var(--ink-soft);line-height:1.5;}
 .phase-out{font-family:var(--font-mono);font-size:12px;color:var(--ink);margin-top:4px;}
 
-/* Methods — opt-card design with quali/quanti stamp */
+/* Methods */
 .methods{padding:96px 0;border-top:1px solid var(--ink-8);}
 .methods-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
 .mcard{text-align:left;border-radius:4px;padding:24px;cursor:default;transition:all 240ms var(--ease);font-family:var(--font-body);border:1px solid;position:relative;}
@@ -153,12 +151,15 @@ a:hover{color:var(--vermilion-2);}
 .rec-score{color:var(--vermilion)!important;}
 .rec-cta{font-family:var(--font-body);font-size:14px;font-weight:500;color:var(--ink);}
 .rec-card.is-front .rec-cta{color:var(--vermilion);}
+
+/* Indicator */
 .rec-indicator{display:flex;flex-direction:column;gap:4px;border-left:1px solid var(--ink-12);padding-left:20px;}
-.rec-dot{background:transparent;border:none;padding:8px 0;font-family:var(--font-mono);font-size:11px;color:var(--ink-faint);letter-spacing:0.1em;cursor:pointer;text-align:left;display:flex;align-items:center;gap:10px;transition:color 160ms var(--ease);}
+.rec-dot{background:transparent;border:none;padding:8px 0;font-family:var(--font-mono);font-size:11px;letter-spacing:0.1em;cursor:pointer;text-align:left;display:flex;align-items:center;gap:10px;transition:color 160ms var(--ease);color:var(--ink-faint);}
 .rec-dot-bullet{display:inline-block;width:6px;height:6px;border-radius:999px;background:var(--ink-12);transition:all 160ms var(--ease);flex-shrink:0;}
 .rec-dot:hover{color:var(--ink);}
 .rec-dot.on{color:var(--vermilion);}
 .rec-dot.on .rec-dot-bullet{background:var(--vermilion);width:8px;height:8px;}
+.rec-dot-n{transition:color 160ms var(--ease);}
 
 /* Team */
 .team{padding:96px 0;border-top:1px solid var(--ink-8);}
@@ -218,7 +219,6 @@ a:hover{color:var(--vermilion-2);}
 @media(max-width:600px){
   .methods-grid{grid-template-columns:1fr;}
   .nav-links{gap:12px;}
-  .nav-links a:not(:last-child){display:none;}
 }
 </style>
 </head>
@@ -281,7 +281,7 @@ function Pain() {
       <p className="overline">De ce qui bloque à ce qui a de l'impact</p>
       <div className="pain-grid">
         <div>
-          <p className="pain-col-label">Ça vous ressemble ?</p>
+          <p className="pain-col-label">Votre site génère du trafic.<br/>Mais pas assez de revenus.</p>
           <ul className="pain-list">
             <li><span className="pain-dash">—</span><span>Vos campagnes ramènent du monde, mais le taux de conversion stagne.</span></li>
             <li><span className="pain-dash">—</span><span>Vous ne savez pas exactement où ni pourquoi vous perdez vos visiteurs.</span></li>
@@ -291,22 +291,22 @@ function Pain() {
           </ul>
         </div>
         <div>
-          <p className="pain-col-label">Ce que vous repartez avec.</p>
+          <p className="pain-col-label">Ce que vous obtenez<br/>à l'issue de l'audit.</p>
           <div className="outcome-item">
-            <strong>Un backlog priorisé</strong>
-            <span>Les actions classées par impact potentiel sur votre revenu, pas par opinion.</span>
+            <strong>Une lecture claire de votre conversion</strong>
+            <span>Ce que vos données montrent, ce que vos utilisateurs font, et ce que votre business implique — enfin reliés.</span>
           </div>
           <div className="outcome-item">
-            <strong>Une lecture croisée de votre funnel</strong>
-            <span>Ce que votre data dit, ce que vos utilisateurs font, ce que votre business implique.</span>
+            <strong>Des décisions concrètes à activer</strong>
+            <span>Vous savez quoi faire, dans quel ordre, et pourquoi.</span>
           </div>
           <div className="outcome-item">
-            <strong>Des hypothèses actionnables</strong>
-            <span>Chaque recommandation est testable, avec un cadre d'expérimentation clair.</span>
+            <strong>Des pistes directement exploitables</strong>
+            <span>Chaque recommandation est pensée pour être testée, mesurée et déployée.</span>
           </div>
           <div className="outcome-item">
-            <strong>CRO Redesign</strong>
-            <span>Au besoin, redesign d'une ou plusieurs pages de votre site selon nos reco.</span>
+            <strong>Une projection concrète des améliorations</strong>
+            <span>Des solutions tangibles pour visualiser ce que votre site pourrait devenir.</span>
           </div>
         </div>
       </div>
@@ -396,7 +396,6 @@ function Methodology() {
   );
 }
 
-/* Methods */
 const METHODES=[
   {type:'quanti',stamp:'Quanti',n:'01',title:'Analytics',desc:'Review du tracking, identification des pages/produits et parcours qui convertissent — et ceux qui saignent, détection des segments qui tirent la croissance...'},
   {type:'quali',stamp:'Quali',n:'02',title:'Heatmaps & Sessions recordings',desc:'Comportements réels. Ce que les utilisateurs regardent, cliquent, ignorent — ou abandonnent.'},
@@ -428,7 +427,6 @@ function Methods() {
   );
 }
 
-/* Rec stack */
 const TAG={
   place:{bg:'rgba(200,65,58,0.10)',fg:'#8A2E29'},
   cat:{bg:'rgba(27,42,58,0.08)',fg:'#1B2A3A'},
@@ -458,6 +456,7 @@ function ImpDots({level}){
 function RecommendationStack(){
   const[order,setOrder]=useState([0,1,2,3,4,5]);
   const bringToFront=(idx)=>setOrder(prev=>[idx,...prev.filter(i=>i!==idx)]);
+  // frontIdx is order[0] — the currently visible card
   return (
     <div className="rec-wrap" id="recos">
       <div className="sec-head">
@@ -497,9 +496,13 @@ function RecommendationStack(){
           {order.map((idx,pos)=>{
             const isActive=pos===0;
             return (
-              <button key={idx} className={'rec-dot'+(isActive?' on':'')} onClick={()=>bringToFront(idx)}>
+              <button
+                key={idx}
+                className={'rec-dot'+(isActive?' on':'')}
+                onClick={()=>bringToFront(idx)}
+              >
                 <span className="rec-dot-bullet"></span>
-                <span className="rec-dot-n" style={{color:isActive?'var(--vermilion)':undefined}}>{RECS[idx].n}</span>
+                <span className="rec-dot-n">{RECS[idx].n}</span>
               </button>
             );
           })}
