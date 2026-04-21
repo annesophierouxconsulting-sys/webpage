@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chroma — Audit CRO</title>
+  <title>Nexe — Audit CRO</title>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -18,8 +18,6 @@
       --success: #5C7A5C;
       --warning: #B8860B;
       --border: #D6CFC3;
-
-      /* Japanese palette accents */
       --shikon: #7B3B6E;
       --asagi: #418AA3;
       --moegi: #5A7A3A;
@@ -97,7 +95,6 @@
     }
     .btn-ghost:hover { border-color: var(--fg-1); }
 
-    /* ─── LABELS ─── */
     .section-label {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.65rem;
@@ -132,10 +129,7 @@
       margin-bottom: 28px;
     }
 
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
 
     .hero-sub {
       font-size: 1.05rem;
@@ -190,7 +184,6 @@
       color: var(--fg-1);
     }
 
-    .outcomes { margin-top: 0; }
     .outcome-item {
       background: var(--bg-2);
       padding: 24px 28px;
@@ -203,12 +196,9 @@
       font-size: 0.95rem;
       margin-bottom: 4px;
     }
-    .outcome-item span {
-      font-size: 0.85rem;
-      color: var(--fg-3);
-    }
+    .outcome-item span { font-size: 0.85rem; color: var(--fg-3); }
 
-    /* ─── MÉTHODE (cycle) ─── */
+    /* ─── MÉTHODE ─── */
     .method-section {
       padding: 100px 56px;
       border-bottom: 1px solid var(--border);
@@ -236,17 +226,11 @@
       align-items: center;
     }
 
-    /* Donut SVG */
-    .donut-wrap {
-      position: relative;
-      width: 300px;
-      height: 300px;
-    }
+    .donut-wrap { position: relative; width: 300px; height: 300px; }
 
     .donut-center {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
     }
@@ -267,19 +251,9 @@
       line-height: 1.1;
     }
 
-    .donut-center-title em {
-      font-style: italic;
-      color: var(--accent);
-    }
+    .donut-center-title em { font-style: italic; color: var(--accent); }
+    .donut-sub { font-size: 0.65rem; color: var(--fg-3); margin-top: 4px; }
 
-    .donut-sub {
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 0.65rem;
-      color: var(--fg-3);
-      margin-top: 4px;
-    }
-
-    /* Steps */
     .method-steps { list-style: none; }
 
     .method-step {
@@ -288,7 +262,6 @@
       padding: 24px 0;
       border-bottom: 1px solid var(--border);
       cursor: pointer;
-      transition: background 0.15s;
     }
     .method-step:first-child { border-top: 1px solid var(--border); }
     .method-step.active .step-num { color: var(--accent); }
@@ -318,15 +291,7 @@
     }
     .method-step.active .step-desc { display: block; }
 
-    .step-link {
-      font-size: 0.8rem;
-      color: var(--accent);
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 6px;
-    }
-
-    /* ─── MÉTHODES / OUTILS ─── */
+    /* ─── OUTILS ─── */
     .tools-section {
       padding: 100px 56px;
       border-bottom: 1px solid var(--border);
@@ -346,11 +311,7 @@
       margin-bottom: 56px;
     }
 
-    .tools-columns {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-    }
+    .tools-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
 
     .tools-group-title {
       font-family: 'IBM Plex Mono', monospace;
@@ -361,7 +322,6 @@
       padding-bottom: 10px;
       border-bottom: 2px solid;
     }
-
     .tools-group-title.quanti { color: var(--asagi); border-color: var(--asagi); }
     .tools-group-title.quali  { color: var(--shikon); border-color: var(--shikon); }
 
@@ -375,26 +335,15 @@
 
     .tool-card-dot {
       position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 8px;
-      height: 8px;
+      top: 20px; right: 20px;
+      width: 8px; height: 8px;
       border-radius: 50%;
     }
     .tool-card-dot.quanti { background: var(--asagi); }
     .tool-card-dot.quali  { background: var(--shikon); }
 
-    .tool-card-name {
-      font-weight: 500;
-      font-size: 0.9rem;
-      margin-bottom: 4px;
-    }
-
-    .tool-card-desc {
-      font-size: 0.8rem;
-      color: var(--fg-3);
-      line-height: 1.5;
-    }
+    .tool-card-name { font-weight: 500; font-size: 0.9rem; margin-bottom: 4px; }
+    .tool-card-desc { font-size: 0.8rem; color: var(--fg-3); line-height: 1.5; }
 
     /* ─── BACKLOG ─── */
     .backlog-section {
@@ -416,17 +365,13 @@
       margin-bottom: 48px;
     }
 
-    .backlog-stack {
-      position: relative;
-      max-width: 720px;
-    }
-
     .backlog-card {
       background: var(--bg-2);
       border: 1px solid var(--border);
       padding: 28px 32px;
       margin-bottom: 2px;
       transition: transform 0.2s;
+      max-width: 720px;
     }
     .backlog-card:hover { transform: translateX(4px); }
 
@@ -453,13 +398,11 @@
       border-radius: 2px;
     }
 
-    .badge-critique    { background: #fde8e6; color: var(--accent); }
-    .badge-test        { background: #e6f0f8; color: var(--asagi); }
-    .badge-hypothese   { background: #f0eaf8; color: var(--shikon); }
-    .badge-modif       { background: #e8f0e8; color: var(--moegi); }
-    .badge-recherche   { background: #fef6e0; color: var(--tsuchi); }
-    .badge-medium      { background: #fef6e0; color: var(--tsuchi); }
-    .badge-faible      { background: #edf4ed; color: var(--moegi); }
+    .badge-critique  { background: #fde8e6; color: var(--accent); }
+    .badge-test      { background: #e6f0f8; color: var(--asagi); }
+    .badge-hypothese { background: #f0eaf8; color: var(--shikon); }
+    .badge-modif     { background: #e8f0e8; color: var(--moegi); }
+    .badge-recherche { background: #fef6e0; color: var(--tsuchi); }
 
     .card-title {
       font-family: 'Instrument Serif', serif;
@@ -475,11 +418,7 @@
       margin-bottom: 14px;
     }
 
-    .card-meta {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+    .card-meta { display: flex; gap: 16px; flex-wrap: wrap; }
 
     .card-meta-item {
       font-family: 'IBM Plex Mono', monospace;
@@ -557,12 +496,7 @@
       margin-bottom: 20px;
     }
 
-    .team-card-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
+    .team-card-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
 
     .team-tag {
       font-family: 'IBM Plex Mono', monospace;
@@ -577,9 +511,6 @@
       font-size: 0.8rem;
       color: var(--accent);
       text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
     .team-link:hover { text-decoration: underline; }
 
@@ -631,7 +562,7 @@
       margin-bottom: 36px;
     }
 
-    .booking-points { list-style: none; margin-bottom: 0; }
+    .booking-points { list-style: none; }
     .booking-points li {
       padding: 10px 0;
       font-size: 0.9rem;
@@ -640,17 +571,9 @@
       display: flex;
       gap: 12px;
     }
-    .booking-points li::before {
-      content: "→";
-      color: var(--accent);
-      font-size: 0.8rem;
-      margin-top: 2px;
-    }
+    .booking-points li::before { content: "→"; color: var(--accent); font-size: 0.8rem; margin-top: 2px; }
 
-    .booking-form {
-      background: var(--bg-2);
-      padding: 36px 32px;
-    }
+    .booking-form { background: var(--bg-2); padding: 36px 32px; }
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
     .form-group { margin-bottom: 12px; }
@@ -686,23 +609,11 @@
 
     .form-group textarea { resize: vertical; min-height: 90px; }
 
-    .form-footer {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-top: 16px;
-    }
-
-    .form-note {
-      font-size: 0.78rem;
-      color: var(--fg-3);
-      line-height: 1.4;
-    }
+    .form-footer { display: flex; align-items: center; gap: 16px; margin-top: 16px; }
+    .form-note { font-size: 0.78rem; color: var(--fg-3); line-height: 1.4; }
 
     /* ─── FOOTER ─── */
-    footer {
-      padding: 64px 56px 32px;
-    }
+    footer { padding: 64px 56px 32px; }
 
     .footer-top {
       display: grid;
@@ -718,7 +629,18 @@
       font-size: 0.85rem;
       color: var(--fg-3);
       line-height: 1.6;
-      max-width: 240px;
+      max-width: 260px;
+    }
+
+    .footer-brand .footer-origin {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--fg-3);
+      line-height: 1.65;
+      font-style: italic;
+      max-width: 280px;
     }
 
     .footer-col h4 {
@@ -767,7 +689,7 @@
 
   <!-- NAV -->
   <nav>
-    <a class="logo" href="#">chroma<span>.</span></a>
+    <a class="logo" href="#">nexe<span>.</span></a>
     <ul class="nav-links">
       <li><a href="#methode">Méthodologie</a></li>
       <li><a href="#backlog">Cas</a></li>
@@ -800,7 +722,7 @@
           <li><span class="pain-icon">—</span><span>Vous optimisez dans le vide, sans cadre pour mesurer ce qui fonctionne vraiment.</span></li>
         </ul>
       </div>
-      <div class="outcomes">
+      <div>
         <p class="pain-title">Ce que vous obtenez<br>à l'issue de l'audit</p>
         <div class="outcome-item">
           <strong>Un backlog priorisé</strong>
@@ -831,27 +753,13 @@
     <div class="method-layout">
       <div class="donut-wrap">
         <svg viewBox="0 0 300 300" width="300" height="300">
-          <!-- Segment 1: Lecture business — vermilion -->
           <path d="M150,150 L150,30 A120,120 0 0,1 253.9,90 Z" fill="#C0392B" opacity="0.92"/>
-          <!-- Segment 2: Recherche — asagi -->
           <path d="M150,150 L253.9,90 A120,120 0 0,1 253.9,210 Z" fill="#418AA3" opacity="0.88"/>
-          <!-- Segment 3: Priorisation — shikon -->
           <path d="M150,150 L253.9,210 A120,120 0 0,1 150,270 Z" fill="#7B3B6E" opacity="0.88"/>
-          <!-- Segment 4: Conversion Redesign — moegi -->
           <path d="M150,150 L150,270 A120,120 0 0,1 46.1,210 Z" fill="#5A7A3A" opacity="0.88"/>
-          <!-- Segment 5: unused arc back -->
           <path d="M150,150 L46.1,210 A120,120 0 0,1 46.1,90 Z" fill="#B8860B" opacity="0.7"/>
-          <!-- Segment 6 -->
           <path d="M150,150 L46.1,90 A120,120 0 0,1 150,30 Z" fill="#1C2B3A" opacity="0.7"/>
-          <!-- Inner circle -->
           <circle cx="150" cy="150" r="75" fill="#F5F0E8"/>
-          <!-- Icons on segments (simple circles) -->
-          <circle cx="215" cy="75" r="10" fill="white" opacity="0.3"/>
-          <circle cx="260" cy="150" r="10" fill="white" opacity="0.3"/>
-          <circle cx="215" cy="225" r="10" fill="white" opacity="0.3"/>
-          <circle cx="85" cy="225" r="10" fill="white" opacity="0.3"/>
-          <circle cx="40" cy="150" r="10" fill="white" opacity="0.3"/>
-          <circle cx="85" cy="75" r="10" fill="white" opacity="0.3"/>
         </svg>
         <div class="donut-center">
           <span class="donut-center-label">Notre démarche</span>
@@ -865,10 +773,7 @@
           <span class="step-num">01</span>
           <div>
             <div class="step-title">Lecture business</div>
-            <div class="step-desc">
-              Comprendre votre contexte, vos objectifs, vos personas, leurs besoins et leurs contraintes réelles.
-              <a href="#" class="step-link">→ Poser le bon cadre d'analyse</a>
-            </div>
+            <div class="step-desc">Comprendre votre contexte, vos objectifs, vos personas, leurs besoins et leurs contraintes réelles. Poser le bon cadre d'analyse avant toute chose.</div>
           </div>
         </li>
         <li class="method-step" onclick="toggleStep(this)">
@@ -896,7 +801,7 @@
     </div>
   </section>
 
-  <!-- OUTILS / MÉTHODES -->
+  <!-- OUTILS -->
   <section class="tools-section">
     <p class="section-label">Ce que nous livrons</p>
     <h2>Les méthodes qui alimentent<br>cette démarche.</h2>
@@ -911,7 +816,6 @@
           <div class="tool-card-desc">Lecture des flux, taux de drop, comportements agrégés. On sait où ça coince — avant même d'aller voir pourquoi.</div>
         </div>
       </div>
-
       <div>
         <div class="tools-group-title quali">Recherches qualitatives</div>
         <div class="tool-card">
@@ -949,107 +853,104 @@
     <h2>De l'insight à l'action.</h2>
     <p class="sub">Voici comment on structure un backlog — chaque recommandation est typée, sourcée et priorisée.</p>
 
-    <div class="backlog-stack">
-
-      <div class="backlog-card">
-        <div class="card-top">
-          <span class="card-num"># 01</span>
-          <div class="card-badges">
-            <span class="badge badge-critique">Critique</span>
-            <span class="badge badge-modif">Modification directe</span>
-          </div>
-        </div>
-        <div class="card-title">Retirer les champs « société » et « TVA » de l'étape 3</div>
-        <div class="card-desc">Seulement 8% des clients remplissent ces champs. Drop-off de 34% sur l'étape 3. Source : analytics + sondage onsite.</div>
-        <div class="card-meta">
-          <div class="card-meta-item">Emplacement <span>Checkout — Étape 3</span></div>
-          <div class="card-meta-item">Impact <span>Élevé</span></div>
-          <div class="card-meta-item">Effort <span>Faible</span></div>
+    <div class="backlog-card">
+      <div class="card-top">
+        <span class="card-num"># 01</span>
+        <div class="card-badges">
+          <span class="badge badge-critique">Critique</span>
+          <span class="badge badge-modif">Modification directe</span>
         </div>
       </div>
-
-      <div class="backlog-card">
-        <div class="card-top">
-          <span class="card-num"># 02</span>
-          <div class="card-badges">
-            <span class="badge badge-critique">Critique</span>
-            <span class="badge badge-test">Test A/B</span>
-          </div>
-        </div>
-        <div class="card-title">Remonter les avis clients au-dessus du fold sur la fiche produit</div>
-        <div class="card-desc">Les heatmaps montrent que 73% des visiteurs ne scrollent pas jusqu'aux avis. Les sessions recordings révèlent un pattern de sortie juste avant l'ajout au panier.</div>
-        <div class="card-meta">
-          <div class="card-meta-item">Emplacement <span>Fiche produit</span></div>
-          <div class="card-meta-item">Impact <span>Élevé</span></div>
-          <div class="card-meta-item">Effort <span>Faible</span></div>
-        </div>
+      <div class="card-title">Retirer les champs « société » et « TVA » de l'étape 3</div>
+      <div class="card-desc">Seulement 8% des clients remplissent ces champs. Drop-off de 34% sur l'étape 3. Source : analytics + sondage onsite.</div>
+      <div class="card-meta">
+        <div class="card-meta-item">Emplacement <span>Checkout — Étape 3</span></div>
+        <div class="card-meta-item">Impact <span>Élevé</span></div>
+        <div class="card-meta-item">Effort <span>Faible</span></div>
       </div>
-
-      <div class="backlog-card">
-        <div class="card-top">
-          <span class="card-num"># 03</span>
-          <div class="card-badges">
-            <span class="badge badge-hypothese">Hypothétiser</span>
-          </div>
-        </div>
-        <div class="card-title">Reformuler le hero autour du résultat client, pas du produit</div>
-        <div class="card-desc">Les interviews clients révèlent que la promesse principale n'est pas comprise avant la 3ème page visitée. Le message d'entrée parle du produit, pas du bénéfice.</div>
-        <div class="card-meta">
-          <div class="card-meta-item">Emplacement <span>Homepage — Hero</span></div>
-          <div class="card-meta-item">Impact <span>Élevé</span></div>
-          <div class="card-meta-item">Effort <span>Moyen</span></div>
-        </div>
-      </div>
-
-      <div class="backlog-card">
-        <div class="card-top">
-          <span class="card-num"># 04</span>
-          <div class="card-badges">
-            <span class="badge badge-recherche">Recherche</span>
-          </div>
-        </div>
-        <div class="card-title">Comprendre pourquoi le taux de retour est 2× la moyenne secteur</div>
-        <div class="card-desc">Signal fort dans les données, mais cause inconnue. À investiguer via tests utilisateurs sur la compréhension des fiches produit avant achat.</div>
-        <div class="card-meta">
-          <div class="card-meta-item">Emplacement <span>Post-achat</span></div>
-          <div class="card-meta-item">Impact <span>Élevé</span></div>
-          <div class="card-meta-item">Effort <span>Moyen</span></div>
-        </div>
-      </div>
-
-      <div class="backlog-card">
-        <div class="card-top">
-          <span class="card-num"># 05</span>
-          <div class="card-badges">
-            <span class="badge badge-modif">Modification directe</span>
-          </div>
-        </div>
-        <div class="card-title">Réduire le poids des images produit — LCP au-dessus de 4s sur mobile</div>
-        <div class="card-desc">LCP moyen : 4,2s. Objectif e-commerce : sous 1,5s. Chaque seconde supplémentaire augmente le taux de rebond de ~7%. Source : analytics mobile.</div>
-        <div class="card-meta">
-          <div class="card-meta-item">Emplacement <span>Global — Mobile</span></div>
-          <div class="card-meta-item">Impact <span>Moyen</span></div>
-          <div class="card-meta-item">Effort <span>Faible</span></div>
-        </div>
-      </div>
-
-      <div class="backlog-card">
-        <div class="card-top">
-          <span class="card-num"># 06</span>
-          <div class="card-badges">
-            <span class="badge badge-test">Test A/B</span>
-          </div>
-        </div>
-        <div class="card-title">Tester un pricing en 3 tiers avec ancrage sur l'offre premium</div>
-        <div class="card-desc">Les sondages onsite révèlent une hésitation forte sur le rapport qualité/prix. Un ancrage visuel avec 3 niveaux pourrait repositionner l'offre principale comme évidente.</div>
-        <div class="card-meta">
-          <div class="card-meta-item">Emplacement <span>Page pricing</span></div>
-          <div class="card-meta-item">Impact <span>Moyen</span></div>
-          <div class="card-meta-item">Effort <span>Moyen</span></div>
-        </div>
-      </div>
-
     </div>
+
+    <div class="backlog-card">
+      <div class="card-top">
+        <span class="card-num"># 02</span>
+        <div class="card-badges">
+          <span class="badge badge-critique">Critique</span>
+          <span class="badge badge-test">Test A/B</span>
+        </div>
+      </div>
+      <div class="card-title">Remonter les avis clients au-dessus du fold sur la fiche produit</div>
+      <div class="card-desc">Les heatmaps montrent que 73% des visiteurs ne scrollent pas jusqu'aux avis. Les sessions recordings révèlent un pattern de sortie juste avant l'ajout au panier.</div>
+      <div class="card-meta">
+        <div class="card-meta-item">Emplacement <span>Fiche produit</span></div>
+        <div class="card-meta-item">Impact <span>Élevé</span></div>
+        <div class="card-meta-item">Effort <span>Faible</span></div>
+      </div>
+    </div>
+
+    <div class="backlog-card">
+      <div class="card-top">
+        <span class="card-num"># 03</span>
+        <div class="card-badges">
+          <span class="badge badge-hypothese">Hypothétiser</span>
+        </div>
+      </div>
+      <div class="card-title">Reformuler le hero autour du résultat client, pas du produit</div>
+      <div class="card-desc">Les interviews clients révèlent que la promesse principale n'est pas comprise avant la 3ème page visitée. Le message d'entrée parle du produit, pas du bénéfice.</div>
+      <div class="card-meta">
+        <div class="card-meta-item">Emplacement <span>Homepage — Hero</span></div>
+        <div class="card-meta-item">Impact <span>Élevé</span></div>
+        <div class="card-meta-item">Effort <span>Moyen</span></div>
+      </div>
+    </div>
+
+    <div class="backlog-card">
+      <div class="card-top">
+        <span class="card-num"># 04</span>
+        <div class="card-badges">
+          <span class="badge badge-recherche">Recherche</span>
+        </div>
+      </div>
+      <div class="card-title">Comprendre pourquoi le taux de retour est 2× la moyenne secteur</div>
+      <div class="card-desc">Signal fort dans les données, mais cause inconnue. À investiguer via tests utilisateurs sur la compréhension des fiches produit avant achat.</div>
+      <div class="card-meta">
+        <div class="card-meta-item">Emplacement <span>Post-achat</span></div>
+        <div class="card-meta-item">Impact <span>Élevé</span></div>
+        <div class="card-meta-item">Effort <span>Moyen</span></div>
+      </div>
+    </div>
+
+    <div class="backlog-card">
+      <div class="card-top">
+        <span class="card-num"># 05</span>
+        <div class="card-badges">
+          <span class="badge badge-modif">Modification directe</span>
+        </div>
+      </div>
+      <div class="card-title">Réduire le poids des images produit — LCP au-dessus de 4s sur mobile</div>
+      <div class="card-desc">LCP moyen : 4,2s. Objectif e-commerce : sous 1,5s. Chaque seconde supplémentaire augmente le taux de rebond de ~7%. Source : analytics mobile.</div>
+      <div class="card-meta">
+        <div class="card-meta-item">Emplacement <span>Global — Mobile</span></div>
+        <div class="card-meta-item">Impact <span>Moyen</span></div>
+        <div class="card-meta-item">Effort <span>Faible</span></div>
+      </div>
+    </div>
+
+    <div class="backlog-card">
+      <div class="card-top">
+        <span class="card-num"># 06</span>
+        <div class="card-badges">
+          <span class="badge badge-test">Test A/B</span>
+        </div>
+      </div>
+      <div class="card-title">Tester un pricing en 3 tiers avec ancrage sur l'offre premium</div>
+      <div class="card-desc">Les sondages onsite révèlent une hésitation forte sur le rapport qualité/prix. Un ancrage visuel avec 3 niveaux pourrait repositionner l'offre principale comme évidente.</div>
+      <div class="card-meta">
+        <div class="card-meta-item">Emplacement <span>Page pricing</span></div>
+        <div class="card-meta-item">Impact <span>Moyen</span></div>
+        <div class="card-meta-item">Effort <span>Moyen</span></div>
+      </div>
+    </div>
+
   </section>
 
   <!-- ÉQUIPE -->
@@ -1062,9 +963,7 @@
       <div class="team-card">
         <div class="team-card-role">Profil Growth &amp; Acquisition · CRO</div>
         <div class="team-card-name">Anne-Sophie Roux</div>
-        <div class="team-card-desc">
-          Une lecture du funnel depuis l'acquisition : là où le trafic entre, comment il se comporte, pourquoi il ne convertit pas. Une vision transversale qui relie campagnes, messages et parcours.
-        </div>
+        <div class="team-card-desc">Une lecture du funnel depuis l'acquisition : là où le trafic entre, comment il se comporte, pourquoi il ne convertit pas. Une vision transversale qui relie campagnes, messages et parcours.</div>
         <div class="team-card-tags">
           <span class="team-tag">Growth</span>
           <span class="team-tag">Acquisition</span>
@@ -1076,9 +975,7 @@
       <div class="team-card">
         <div class="team-card-role">Profil CRO pur · Références clients</div>
         <div class="team-card-name">[Prénom Nom]</div>
-        <div class="team-card-desc">
-          Spécialiste CRO avec un historique de missions sur des sites e-commerce à fort trafic. Il apporte la rigueur méthodologique, les benchmarks sectoriels et les références qui rassurent.
-        </div>
+        <div class="team-card-desc">Spécialiste CRO avec un historique de missions sur des sites e-commerce à fort trafic. Il apporte la rigueur méthodologique, les benchmarks sectoriels et les références qui rassurent.</div>
         <div class="team-card-tags">
           <span class="team-tag">CRO</span>
           <span class="team-tag">UX Research</span>
@@ -1150,8 +1047,9 @@
   <footer>
     <div class="footer-top">
       <div class="footer-brand">
-        <a class="logo" href="#">chroma<span style="color:var(--accent)">.</span></a>
+        <a class="logo" href="#">nexe<span style="color:var(--accent)">.</span></a>
         <p>Audits de conversion pour les marques qui ont mieux à faire que deviner.</p>
+        <p class="footer-origin">Nexe vient du latin <em>nexus</em> — le lien, le nœud qui tient ensemble ce qui semblerait séparé. Ce que nous faisons, c'est exactement ça : relier ce que votre business sait, ce que vos utilisateurs font, et ce que votre data révèle — pour trouver l'endroit précis où quelque chose se défait.</p>
       </div>
       <div class="footer-col">
         <h4>Studio</h4>
@@ -1165,12 +1063,12 @@
         <h4>Contact</h4>
         <ul>
           <li><a href="#booking">Réserver un call</a></li>
-          <li><a href="mailto:hello@chroma.studio">hello@chroma.studio</a></li>
+          <li><a href="mailto:hello@nexe.studio">hello@nexe.studio</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Chroma · Paris · Basé sur <a href="#">A Dictionary of Color Combinations</a></span>
+      <span>© 2026 Nexe · Paris · Basé sur <a href="#">A Dictionary of Color Combinations</a></span>
     </div>
   </footer>
 
