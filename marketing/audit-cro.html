@@ -73,15 +73,7 @@ a:hover{color:var(--vermilion-2);}
 
 /* Pain */
 .pain{padding:96px 0;border-top:1px solid var(--ink-8);}
-.pain-section-label{
-  font-family:var(--font-display);
-  font-size:clamp(28px,3vw,40px);
-  font-weight:400;
-  line-height:1.1;
-  letter-spacing:-0.01em;
-  margin-bottom:48px;
-  color:var(--ink);
-}
+.pain-section-label{font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:400;line-height:1.1;letter-spacing:-0.01em;margin-bottom:48px;color:var(--ink);}
 .pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
 .pain-col-label{font-family:var(--font-display);font-size:clamp(22px,2.5vw,28px);font-weight:400;line-height:1.15;margin-bottom:24px;color:var(--ink);}
 .pain-list{list-style:none;}
@@ -92,18 +84,18 @@ a:hover{color:var(--vermilion-2);}
 .outcome-item strong{display:block;font-weight:500;font-size:15px;margin-bottom:4px;}
 .outcome-item span{font-size:13px;color:var(--ink-faint);}
 
+/* Modulable banner */
+.modulable{padding:48px 0;border-top:1px solid var(--ink-8);border-bottom:1px solid var(--ink-8);}
+.modulable-inner{display:flex;align-items:center;gap:48px;max-width:900px;}
+.modulable-icon{flex-shrink:0;width:48px;height:48px;border-radius:4px;background:rgba(200,65,58,0.08);border:1px solid rgba(200,65,58,0.2);display:flex;align-items:center;justify-content:center;color:var(--vermilion);}
+.modulable-text{}
+.modulable-label{font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink-faint);margin-bottom:6px;}
+.modulable-body{font-size:17px;line-height:1.6;color:var(--ink-soft);}
+.modulable-body strong{color:var(--ink);font-weight:500;}
+
 /* Sec head */
 .sec-head{max-width:760px;margin:0 auto 64px;text-align:center;}
-.sec-head .sec-overline{
-  font-family:var(--font-display);
-  font-size:clamp(28px,3vw,40px);
-  font-weight:400;
-  letter-spacing:-0.01em;
-  line-height:1.1;
-  color:var(--ink);
-  display:block;
-  margin-bottom:20px;
-}
+.sec-head .sec-overline{font-family:var(--font-display);font-size:clamp(28px,3vw,40px);font-weight:400;letter-spacing:-0.01em;line-height:1.1;color:var(--ink);display:block;margin-bottom:20px;}
 .sec-head h3{font-family:var(--font-display);font-size:clamp(32px,4vw,44px);line-height:1.1;letter-spacing:-0.01em;margin:0 0 16px;}
 .sec-head .lead{color:var(--ink-soft);font-size:18px;margin:0;}
 .sec-head .hook{font-size:16px;color:var(--ink);font-style:italic;margin-top:12px;max-width:52ch;margin-left:auto;margin-right:auto;line-height:1.55;}
@@ -227,6 +219,7 @@ a:hover{color:var(--vermilion-2);}
   .rec-deck{height:580px;max-width:100%;}
   .rec-indicator{flex-direction:row;border-left:none;border-top:1px solid var(--ink-12);padding-left:0;padding-top:20px;justify-content:center;}
   .nav-menu{gap:16px;}
+  .modulable-inner{flex-direction:column;gap:24px;}
 }
 @media(max-width:600px){
   .methods-grid{grid-template-columns:1fr;}
@@ -302,6 +295,7 @@ function Pain() {
         <div>
           <p className="pain-col-label">Votre site génère du trafic.<br/>Mais pas assez de revenus.</p>
           <ul className="pain-list">
+            <li><span className="pain-dash">—</span><span>Vous avez créé votre site et souhaitez vous assurer qu'il est optimisé pour convertir — avant d'investir davantage en acquisition.</span></li>
             <li><span className="pain-dash">—</span><span>Vos campagnes ramènent du monde, mais le taux de conversion stagne.</span></li>
             <li><span className="pain-dash">—</span><span>Vous ne savez pas exactement où ni pourquoi vous perdez vos visiteurs.</span></li>
             <li><span className="pain-dash">—</span><span>Vos équipes ont des hypothèses, mais rien de priorisé ni de testé.</span></li>
@@ -327,6 +321,27 @@ function Pain() {
             <strong>Une projection concrète des améliorations</strong>
             <span>Des solutions tangibles pour visualiser ce que votre site pourrait devenir.</span>
           </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Modulable() {
+  return (
+    <section className="modulable">
+      <div className="modulable-inner">
+        <div className="modulable-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 3v18M3 12h18"/>
+            <circle cx="12" cy="12" r="9"/>
+          </svg>
+        </div>
+        <div className="modulable-text">
+          <div className="modulable-label">Audit modulable</div>
+          <p className="modulable-body">
+            <strong>Pas un format unique.</strong> On construit l'audit avec vous — en choisissant les méthodes qui ont le plus de sens pour votre situation, votre budget, vos objectifs.
+          </p>
         </div>
       </div>
     </section>
@@ -641,7 +656,7 @@ function Footer(){
 function App(){
   return(
     <>
-      <Nav/><Hero/><Pain/><Methodology/><Methods/><RecommendationStack/><Team/><BookingForm/><Footer/>
+      <Nav/><Hero/><Pain/><Modulable/><Methodology/><Methods/><RecommendationStack/><Team/><BookingForm/><Footer/>
     </>
   );
 }
