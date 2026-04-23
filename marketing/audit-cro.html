@@ -72,8 +72,6 @@ a:hover{color:var(--vermilion-2);}
 .nav-hamburger.is-open span:nth-child(3){transform:translateY(-8.25px) rotate(-45deg);}
 .nav-drawer{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--paper);z-index:190;padding:80px 24px 40px;overflow-y:auto;flex-direction:column;gap:8px;}
 .nav-drawer.is-open{display:flex;}
-.nav-drawer-item{font-family:var(--font-display);font-size:32px;font-weight:400;color:var(--ink);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--ink-8);display:block;line-height:1.1;}
-.nav-drawer-item:hover{color:var(--vermilion);}
 .nav-drawer-sub{font-family:var(--font-body);font-size:15px;color:var(--ink-soft);text-decoration:none;padding:8px 0 8px 16px;display:block;border-bottom:1px solid var(--ink-4);}
 .nav-drawer-sub:hover{color:var(--vermilion);}
 .nav-drawer-cta{margin-top:24px;}
@@ -109,29 +107,10 @@ a:hover{color:var(--vermilion-2);}
 .modulable-body{font-size:clamp(15px,1.8vw,17px);line-height:1.6;color:var(--ink-soft);}
 .modulable-body strong{color:var(--ink);font-weight:500;}
 
-/* ── SEC-HEAD
-   .sec-label  = petit titre Instrument Serif (Notre démarche, etc.)
-   .sec-title  = grand titre sous le label (Comprendre. Croiser…, etc.)
-── */
+/* SEC-HEAD */
 .sec-head{max-width:760px;margin:0 auto 48px;text-align:center;}
-.sec-label{
-  font-family:var(--font-display);
-  font-size:clamp(2rem,3.5vw,2.75rem);
-  font-weight:400;
-  line-height:1.1;
-  color:var(--ink);
-  display:block;
-  margin-bottom:10px;
-}
-.sec-title{
-  font-family:var(--font-display);
-  font-size:clamp(26px,4vw,44px);
-  font-weight:400;
-  line-height:1.1;
-  letter-spacing:-0.01em;
-  color:var(--ink);
-  margin:0 0 16px;
-}
+.sec-head .overline{display:block;margin-bottom:16px;}
+.sec-title{font-family:var(--font-display);font-size:clamp(26px,4vw,44px);font-weight:400;line-height:1.1;letter-spacing:-0.01em;color:var(--ink);margin:0 0 16px;}
 .sec-head .lead{color:var(--ink-soft);font-size:clamp(16px,1.8vw,18px);margin:0;}
 .sec-head .hook{font-size:15px;color:var(--ink);font-style:italic;margin-top:12px;max-width:52ch;margin-left:auto;margin-right:auto;line-height:1.55;}
 
@@ -203,8 +182,7 @@ a:hover{color:var(--vermilion-2);}
 
 /* TEAM */
 .team{padding:clamp(48px,7vw,96px) 0;border-top:1px solid var(--ink-8);}
-.team-sec-label{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,2.75rem);font-weight:400;line-height:1.1;margin-bottom:10px;color:var(--ink);}
-.team-sec-title{font-family:var(--font-display);font-size:clamp(26px,4vw,44px);font-weight:400;line-height:1.1;letter-spacing:-0.01em;margin-bottom:12px;color:var(--ink);}
+.team-sec-title{font-family:var(--font-display);font-size:clamp(26px,4vw,44px);font-weight:400;line-height:1.1;letter-spacing:-0.01em;margin:16px 0 12px;color:var(--ink);}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:900px;margin-top:40px;}
 .team-card{background:var(--bone);padding:clamp(20px,3vw,32px) clamp(18px,2.5vw,28px);border-radius:4px;border:1px solid var(--ink-8);border-top:3px solid var(--ink-12);transition:border-top-color 160ms var(--ease),box-shadow 160ms var(--ease);}
 .team-card:hover{border-top-color:var(--vermilion);box-shadow:var(--shadow-card);}
@@ -481,7 +459,7 @@ function Methodology() {
   return (
     <section className="methodology" id="methodology">
       <div className="sec-head">
-        <span className="sec-label">Notre démarche.</span>
+        <span className="overline">Notre démarche</span>
         <h3 className="sec-title">Comprendre. Croiser.<br/>Prioriser. Agir.</h3>
         <p className="lead">Une approche qui relie ce que vous savez… à ce que font réellement vos utilisateurs.</p>
         <p className="hook">On ne regarde pas seulement ce qui ne marche pas : on comprend pourquoi ça ne marche pas dans votre business.</p>
@@ -504,7 +482,7 @@ function Methods() {
   return (
     <section className="methods" id="methods">
       <div className="sec-head">
-        <span className="sec-label">Ce que nous faisons.</span>
+        <span className="overline">Ce que nous faisons</span>
         <h3 className="sec-title">Les méthodes qui alimentent<br/>cette démarche.</h3>
         <p className="lead">Chaque analyse s'appuie sur des méthodes complémentaires — quantitatives et qualitatives.</p>
       </div>
@@ -554,7 +532,7 @@ function RecommendationStack(){
   return (
     <div className="rec-wrap" id="recos">
       <div className="sec-head">
-        <span className="sec-label">Ce que nous livrons.</span>
+        <span className="overline">Ce que nous livrons</span>
         <h3 className="sec-title">De l'insight à l'action.</h3>
         <p className="lead">Chaque recommandation est structurée, priorisée et mise en perspective — pour passer de l'insight à des décisions claires et des actions concrètes.</p>
       </div>
@@ -605,7 +583,7 @@ function RecommendationStack(){
 function Team(){
   return (
     <section className="team" id="equipe">
-      <span className="team-sec-label">Qui sommes-nous.</span>
+      <span className="overline">Qui sommes-nous</span>
       <h2 className="team-sec-title">Un audit fait en binôme.<br/>Un double regard.</h2>
       <p className="lead" style={{maxWidth:'560px',marginTop:'4px'}}>L'audit CRO gagne en profondeur quand deux expertises complémentaires se croisent sur le même funnel.</p>
       <div className="team-grid">
