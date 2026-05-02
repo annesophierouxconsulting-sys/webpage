@@ -201,6 +201,14 @@ h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:400;letter-spacing
 .mcycle-legend-foot span{display:inline-flex;align-items:center;gap:7px;}
 .mcycle-legend-foot .dot{width:8px;height:8px;border-radius:999px;}
 
+/* DIFFERENCE */
+.difference {padding: clamp(28px, 4vw, 48px) 0; border-top: 1px solid var(--ink-8); border-bottom: 1px solid var(--ink-8);}
+.difference-inner { display: flex; align-items: center; gap: clamp(20px, 4vw, 48px); max-width: 900px;}
+.difference-icon { flex-shrink: 0; width: 44px; height: 44px; border-radius: 4px; background: rgba(200,65,58,0.08); border: 1px solid rgba(200,65,58,0.2); display: flex; align-items: center; justify-content: center; color: var(--vermilion);}
+.difference-label { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase;letter-spacing: 0.12em; color: var(--ink-faint); margin-bottom: 6px;}
+.difference-body { font-size: clamp(15px, 1.8vw, 17px); line-height: 1.6; color: var(--ink-soft);}
+.difference-body strong { color: var(--ink); font-weight: 500;}
+  
 /* quanti/quali tags */
 .mcycle-key{display:flex;gap:18px;padding-bottom:14px;border-bottom:1px solid var(--ink-12);margin-bottom:6px;}
 .mcycle-key-item{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:11px;color:var(--ink-soft);letter-spacing:0.06em;}
@@ -768,9 +776,23 @@ function MethodsCycle() {
           })}
         </div>
       </div>
-      <div className="methods-pq">
-        <blockquote className="methods-pq-text">On ne regarde pas seulement ce qui ne marche pas : <em className="methods-pq-em">on comprend pourquoi ça ne marche pas</em> dans votre business.</blockquote>
-      </div>
+      <div className="difference">
+        <div className="difference-inner">
+          <div className="difference-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 3v18M3 12h18" />
+              <circle cx="12" cy="12" r="9" />
+            </svg>
+          </div>
+
+          <div>
+            <div className="difference-label">Difference</div>
+            <p className="difference-body">
+              <strong>Pas un format unique.</strong> On construit l'audit avec vous — en choisissant les méthodes qui ont le plus de sens pour votre situation, votre budget, vos objectifs.
+            </p>
+           </div>
+          </div>
+        </div>
     </section>
   );
 }
