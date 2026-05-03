@@ -6,26 +6,6 @@
 <title>Nexe · Audit CRO</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-@font-face {
-  font-family: 'Futura';
-  src: url('/fonts/Futura-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Futura';
-  src: url('/fonts/Futura-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Futura';
-  src: url('/fonts/Futura-Light.woff2') format('woff2');
-  font-weight: 300;
-  font-display: swap;
-}
 
 :root {
   --paper:#F4EDE0; --paper-2:#EFE6D4; --bone:#E8DFCE;
@@ -35,7 +15,7 @@
   --asagi:#418AA3; --shikon:#7B3B6E;
   --ink-4:rgba(27,42,58,0.04); --ink-8:rgba(27,42,58,0.08);
   --ink-12:rgba(27,42,58,0.12); --ink-32:rgba(27,42,58,0.32);
-  --font-display:'Futura','IMB Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-display:'Instrument Serif','Times New Roman',Georgia,serif;
   --font-body:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   --font-mono:'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace;
   --shadow-card:0 1px 0 rgba(27,42,58,.06),0 12px 32px -16px rgba(27,42,58,.18);
@@ -54,9 +34,9 @@ a:hover{color:var(--vermilion-2);}
 :focus-visible{outline:2px solid var(--vermilion);outline-offset:3px;}
 
 /* ========== TYPO SYSTEM (harmonisé) ========== */
-h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:700;letter-spacing:-0.015em;line-height:1.05;margin:0;color:var(--ink);}
+h1,h2,h3,h4,h5,h6{font-family:var(--font-display);font-weight:400;letter-spacing:-0.015em;line-height:1.05;margin:0;color:var(--ink);}
 .h-display{font-family:var(--font-display);font-weight:400;font-size:clamp(40px,7vw,104px);line-height:1.0;letter-spacing:-0.02em;}
-.h-section{font-family:var(--font-display);font-weight:700;font-size:clamp(32px,4.5vw,52px);line-height:1.05;letter-spacing:-0.015em;}
+.h-section{font-family:var(--font-display);font-weight:400;font-size:clamp(32px,4.5vw,52px);line-height:1.05;letter-spacing:-0.015em;}
 .h-section em{font-style:italic;color:var(--vermilion);}
 .h-sub{font-family:var(--font-display);font-weight:400;font-size:clamp(22px,2.6vw,30px);line-height:1.15;letter-spacing:-0.01em;}
 .overline{font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:0.16em;color:var(--ink-soft);font-weight:500;}
@@ -945,7 +925,7 @@ function Team(){
         <div className="double-regard">
           <div className="double-regard-head">
             <div className="double-regard-label">Ce que le binôme apporte</div>
-            <h2 className="double-regard-title">Un double regard sur votre conversion.</h2>
+            <h3 className="double-regard-title">Un double regard sur votre conversion.</h3>
           </div>
           <div className="double-regard-body">
             <div className="dr-item">
