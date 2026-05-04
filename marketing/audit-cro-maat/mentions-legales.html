@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Mentions légales — Maat</title>
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .legal-wrap{max-width:760px;margin:0 auto;padding:clamp(56px,8vw,96px) 0 clamp(56px,8vw,96px);}
+    .legal-overline{font-family:var(--font-mono);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-soft);display:inline-flex;align-items:center;gap:8px;padding-bottom:5px;border-bottom:1px solid var(--ink-32);font-weight:500;margin-bottom:clamp(28px,4vw,40px);}
+    .legal-overline-feather{width:10px;height:14px;color:var(--pompeian);margin-right:2px;}
+    .legal-title{font-family:var(--font-display);font-weight:500;font-size:clamp(40px,7vw,72px);line-height:1.0;letter-spacing:-0.024em;margin-bottom:clamp(20px,3vw,28px);font-variation-settings:'opsz' 64;color:var(--ink);}
+    .legal-title em{font-family:var(--font-italic);font-style:italic;color:var(--pompeian);font-weight:500;font-variation-settings:'opsz' 64;}
+    .legal-lead{font-family:var(--font-text);font-size:clamp(16px,2vw,18px);line-height:1.55;color:var(--ink-soft);max-width:54ch;margin-bottom:clamp(40px,5vw,56px);font-variation-settings:'opsz' 17;letter-spacing:-0.003em;}
+    .legal-section{padding:clamp(24px,3vw,32px) 0;border-top:1px solid var(--ink-08);}
+    .legal-section:first-of-type{border-top:1px solid var(--ink-12);}
+    .legal-section-num{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--pompeian);font-weight:500;display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;}
+    .legal-section-num::before{content:'';width:6px;height:6px;border-radius:999px;background:var(--pompeian);}
+    .legal-section h2{font-family:var(--font-display);font-weight:500;font-size:clamp(22px,2.6vw,30px);line-height:1.15;color:var(--ink);letter-spacing:-0.014em;margin-bottom:18px;font-variation-settings:'opsz' 28;}
+    .legal-section p,.legal-section li{font-family:var(--font-text);font-size:clamp(15px,1.8vw,16.5px);line-height:1.65;color:var(--ink-soft);font-variation-settings:'opsz' 16;letter-spacing:-0.003em;}
+    .legal-section p+p{margin-top:14px;}
+    .legal-section ul{list-style:none;padding:0;margin-top:12px;}
+    .legal-section li{padding:9px 0 9px 22px;position:relative;}
+    .legal-section li::before{content:'';position:absolute;left:0;top:18px;width:12px;height:1px;background:var(--pompeian);}
+    .legal-section a{color:var(--pompeian);}
+    .legal-section a:hover{color:var(--pompeian-2);}
+    .legal-kv{display:grid;grid-template-columns:auto 1fr;gap:8px 24px;margin-top:16px;}
+    .legal-kv dt{font-family:var(--font-mono);font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:500;padding-top:5px;}
+    .legal-kv dd{margin:0;font-family:var(--font-text);font-size:clamp(15px,1.8vw,16.5px);line-height:1.6;color:var(--ink);font-variation-settings:'opsz' 16;}
+    .legal-back{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:14px;font-weight:500;color:var(--ink);text-decoration:none;margin-top:clamp(40px,5vw,56px);padding-top:clamp(28px,3vw,32px);border-top:1px solid var(--ink-08);transition:color 160ms var(--ease);}
+    .legal-back:hover{color:var(--pompeian);}
+    .legal-back-arrow{font-family:var(--font-body);transition:transform 160ms var(--ease);}
+    .legal-back:hover .legal-back-arrow{transform:translateX(-4px);}
+    @media(max-width:600px){
+      .legal-kv{grid-template-columns:1fr;gap:4px 0;}
+      .legal-kv dt{padding-top:12px;}
+      .legal-kv dt:first-child{padding-top:0;}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo" aria-label="Maat — accueil">
+      <span class="logo-wordmark size-md">
+        <span class="w">m</span>
+        <span class="w">a</span>
+        <span class="w-macron"><span class="macron" aria-hidden="true"></span><span>a</span></span>
+        <span class="w">t</span>
+      </span>
+    </a>
+    <div class="nav-right">
+      <a href="index.html#book" class="btn btn-primary">Réserver un call</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="legal-wrap">
+      <div class="legal-overline">
+        <svg class="legal-overline-feather" viewBox="0 0 12 32" fill="none" aria-hidden="true">
+          <g stroke="currentColor" stroke-width="0.9" stroke-linecap="round" fill="none">
+            <path d="M6 1.5 C 6.2 10, 6.2 22, 6 30.5" stroke-width="1.1"/>
+            <path d="M6 4 C 4.5 5, 3.5 6, 2.5 7.5"/><path d="M6 8 C 4 9, 2.8 10.6, 2 12.5"/>
+            <path d="M6 13 C 3.6 14, 2 16, 1.4 18.5"/><path d="M6 19 C 4 20, 2.6 22, 2.4 24"/>
+            <path d="M6 25 C 5 26, 4.6 27.5, 4.6 28.5"/>
+            <path d="M6 4 C 7.5 5, 8.5 6, 9.5 7.5"/><path d="M6 8 C 8 9, 9.2 10.6, 10 12.5"/>
+            <path d="M6 13 C 8.4 14, 10 16, 10.6 18.5"/><path d="M6 19 C 8 20, 9.4 22, 9.6 24"/>
+            <path d="M6 25 C 7 26, 7.4 27.5, 7.4 28.5"/>
+          </g>
+        </svg>
+        Informations légales
+      </div>
+      <h1 class="legal-title">Mentions <em>légales.</em></h1>
+      <p class="legal-lead">Informations relatives à l'éditeur du site, à l'hébergement et au traitement des données personnelles.</p>
+
+      <section class="legal-section">
+        <span class="legal-section-num">№ 01 · Éditeur</span>
+        <h2>Éditeur du site</h2>
+        <dl class="legal-kv">
+          <dt>Raison sociale</dt><dd>Maat — Anne-Sophie Roux</dd>
+          <dt>Statut</dt><dd>Entreprise individuelle</dd>
+          <dt>Adresse</dt><dd>Paris, France</dd>
+          <dt>Email</dt><dd><a href="mailto:annesophieroux.consulting@gmail.com">annesophieroux.consulting@gmail.com</a></dd>
+          <dt>Directrice de la publication</dt><dd>Anne-Sophie Roux</dd>
+        </dl>
+      </section>
+
+      <section class="legal-section">
+        <span class="legal-section-num">№ 02 · Hébergement</span>
+        <h2>Hébergeur</h2>
+        <p>Le site est hébergé par un prestataire technique tiers. Les coordonnées de l'hébergeur peuvent être obtenues sur simple demande à l'adresse email indiquée ci-dessus.</p>
+      </section>
+
+      <section class="legal-section">
+        <span class="legal-section-num">№ 03 · Propriété</span>
+        <h2>Propriété intellectuelle</h2>
+        <p>L'ensemble du contenu présent sur ce site (textes, images, logos, structure, graphismes) est la propriété exclusive de Maat, sauf mention contraire. Toute reproduction, représentation, modification ou exploitation, partielle ou totale, sans autorisation préalable et écrite, est interdite et constitue une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de la propriété intellectuelle.</p>
+      </section>
+
+      <section class="legal-section">
+        <span class="legal-section-num">№ 04 · Données</span>
+        <h2>Données personnelles</h2>
+        <p>Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi « Informatique et Libertés », vous disposez d'un droit d'accès, de rectification, d'effacement, de portabilité et d'opposition au traitement des données personnelles vous concernant.</p>
+        <p>Pour exercer ces droits, écrivez à <a href="mailto:annesophieroux.consulting@gmail.com">annesophieroux.consulting@gmail.com</a>.</p>
+        <ul>
+          <li>Les données collectées via le formulaire de contact sont utilisées uniquement pour répondre à votre demande.</li>
+          <li>Aucune donnée personnelle n'est cédée, vendue ou louée à des tiers.</li>
+          <li>Les données sont conservées le temps strictement nécessaire au traitement de votre demande.</li>
+        </ul>
+      </section>
+
+      <section class="legal-section">
+        <span class="legal-section-num">№ 05 · Cookies</span>
+        <h2>Cookies & mesure d'audience</h2>
+        <p>Ce site peut utiliser des cookies à des fins de mesure d'audience anonymisée. Vous pouvez à tout moment configurer votre navigateur pour refuser le dépôt de cookies.</p>
+      </section>
+
+      <section class="legal-section">
+        <span class="legal-section-num">№ 06 · Responsabilité</span>
+        <h2>Limitation de responsabilité</h2>
+        <p>Maat met tout en œuvre pour fournir des informations à jour et exactes. Toutefois, des erreurs ou omissions peuvent survenir. L'utilisateur s'assure de vérifier l'exactitude des informations auprès de Maat et signaler toute modification du site qu'il jugerait utile. Maat n'est en aucun cas responsable de l'utilisation faite de ces informations.</p>
+      </section>
+
+      <a href="index.html" class="legal-back">
+        <span class="legal-back-arrow">←</span> Retour à l'accueil
+      </a>
+    </div>
+  </main>
+</body>
+</html>

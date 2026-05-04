@@ -1,0 +1,55 @@
+/* ============================================================
+   MAÂT — Design tokens
+   Sanzo Wada · Old Lace · Aubergine · Pompeian Red · Plum
+   ============================================================ */
+:root{
+  /* ----- Paper / surface ----- */
+  --paper:        #FBF4E0;     /* Old Lace très clair — fond principal */
+  --paper-2:      #E2D5BA;     /* nuance + foncée pour cartes */
+  --paper-medium: #EAE0C5;     /* Old Lace medium — cards méthodologie/binome */
+  --paper-200:    #D4C5A4;     /* hover/state */
+  --paper-3:      #F5ECD7;     /* Old Lace clair — surfaces flottantes / cards */
+
+  /* ----- Ink / texte ----- */
+  --ink:          #14102A;     /* Aubergine plus profonde — texte principal (contraste ↑) */
+  --ink-soft:     #3A3658;     /* texte secondaire (plus contrasté) */
+  --ink-faint:    #6E6890;     /* meta / labels */
+  --aubergine-light: #DCD7E8;  /* Aubergine très clair — fonds de cards */
+  --ink-04:       rgba(20, 16, 42, 0.04);
+  --ink-08:       rgba(20, 16, 42, 0.10);
+  --ink-12:       rgba(20, 16, 42, 0.16);
+  --ink-32:       rgba(20, 16, 42, 0.36);
+
+  /* ----- Pompeian Red — accent principal (légèrement plus saturated) ----- */
+  --pompeian:     #B8362A;
+  --pompeian-2:   #952417;     /* hover, plus profond */
+  --pompeian-medium: #C85A4F;  /* Pompeian medium — fonds saturés (texte blanc) */
+  --pompeian-medium-light: #E8B8B0; /* Pompeian medium clair — fonds doux (texte ink) */
+  --pompeian-light: #F2D9D2;   /* Pompeian très clair — fonds de cards d'accent */
+  --pompeian-08:  rgba(184, 54, 42, 0.08);
+  --pompeian-12:  rgba(184, 54, 42, 0.14);
+  --pompeian-24:  rgba(184, 54, 42, 0.26);
+
+  /* ----- Plum — accent secondaire ----- */
+  --plum:         #5E3F70;
+  --plum-2:       #4A2F5A;
+  --plum-deep:    #2E1E3A;     /* Plum très foncé — fonds saturés (texte blanc) */
+  --plum-medium:  #8264A0;     /* Plum medium — pour tags, accents */
+  --plum-light:   #E2D5E6;     /* Plum très clair — fonds de cards d'accent secondaires */
+  --plum-08:      rgba(94, 63, 112, 0.10);
+  --plum-12:      rgba(94, 63, 112, 0.16);
+
+  /* ----- Type ----- */
+  --font-display: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --font-italic:  'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --font-text:    'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --font-body:    'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+  --font-mono:    'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ----- Motion ----- */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* ----- Shadows ----- */
+  --shadow-card: 0 1px 0 rgba(28, 24, 48, 0.04), 0 8px 24px -12px rgba(28, 24, 48, 0.18);
+  --shadow-deep: 0 2px 0 rgba(28, 24, 48, 0.04), 0 24px 60px -24px rgba(28, 24, 48, 0.30);
+}
