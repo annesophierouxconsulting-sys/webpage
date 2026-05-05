@@ -456,7 +456,7 @@ function Team() {
           <div className="binome-card left reveal-item">
             <div className="binome-role">CRO · Acquisition · Martech</div>
             <div className="binome-name">Anne-Sophie Roux</div>
-            <p className="binome-desc">Spécialiste CRO avec un ADN Acquisition et Martech. J'interviens à vos côtés pour cadrer des missions ancrées dans vos enjeux et faire émerger des opportunités de croissance concrètes. Mon rôle : faire dialoguer business, utilisateurs et data pour identifier des optimisations à fort impact, jusqu'à l'exécution terrain.</p>
+            <p className="binome-desc">Spécialiste CRO avec un ADN Acquisition et MarTech. J'interviens à vos côtés pour cadrer des missions ancrées dans vos enjeux et faire émerger des opportunités de croissance concrètes. Mon rôle : faire dialoguer business, utilisateurs et data pour identifier des optimisations à fort impact, jusqu'à l'exécution terrain.</p>
             <div className="binome-tags">
               <span className="binome-tag">CRO</span>
               <span className="binome-tag">Acquisition</span>
