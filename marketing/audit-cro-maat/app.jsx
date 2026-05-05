@@ -37,7 +37,7 @@ function Nav() {
   return (
     <>
       <nav className={'nav' + (scrolled ? ' is-scrolled' : '')}>
-        <a href="#" className="nav-logo" aria-label="Maât — accueil"><Logo size="md" /></a>
+        <a href="#" className="nav-logo" aria-label="Maat — accueil"><Logo size="md" /></a>
         <ul className="nav-center">
           <li className="nav-item-has-dropdown">
             <span tabIndex="0">Audit CRO <span className="nav-chevron">▾</span></span>
@@ -45,7 +45,7 @@ function Nav() {
               <a href="#methodology">Notre démarche</a>
               <a href="#methods">Les méthodes</a>
               <a href="#equipe">Collaboration</a>
-              <a href="#book">Booker un call</a>
+              <a href="#book">Réserver un échange</a>
             </div>
           </li>
           <li>
@@ -56,7 +56,7 @@ function Nav() {
           </li>
         </ul>
         <div className="nav-right">
-          <a href="#book" className="btn btn-primary">Réserver un call</a>
+          <a href="#book" className="btn btn-primary">Réserver un échange</a>
           <button
             className={'nav-hamburger' + (open ? ' is-open' : '')}
             onClick={() => setOpen(!open)}
@@ -75,7 +75,7 @@ function Nav() {
         <span className="nav-drawer-section-label" style={{ marginTop: 24 }}>Autres</span>
         <div className="nav-drawer-coming">Content & Messaging Strategy <span>À venir</span></div>
         <div className="nav-drawer-cta">
-          <a href="#book" className="btn btn-primary btn-lg" onClick={() => setOpen(false)}>Réserver un call</a>
+          <a href="#book" className="btn btn-primary btn-lg" onClick={() => setOpen(false)}>Réserver un échange</a>
         </div>
       </div>
     </>
@@ -99,7 +99,7 @@ function Hero() {
         On révèle les incohérences. On identifie les freins. On priorise les actions.
       </p>
       <div className="hero-ctas">
-        <a href="#book" className="btn btn-primary btn-lg">Réserver un call</a>
+        <a href="#book" className="btn btn-primary btn-lg">Réserver un échange</a>
         <div className="hero-cta-meta">
           <span>sans engagement</span>
           <span style={{ opacity: 0.4 }}>·</span>
@@ -456,7 +456,7 @@ function Team() {
           <div className="binome-card left reveal-item">
             <div className="binome-role">CRO · Acquisition · Martech</div>
             <div className="binome-name">Anne-Sophie Roux</div>
-            <p className="binome-desc">Spécialiste CRO avec un passif Acquisition et Martech. Je comprends votre business et j'analyse ce que la data révèle pour cadrer des optimisations à fort impact. Une lecture qui relie stratégie business et optimisation de la conversion.</p>
+            <p className="binome-desc">Spécialiste CRO avec un passif Acquisition et Martech. Je comprends votre business et j’analyse ce que la data révèle pour cadrer des optimisations à fort impact. Une lecture qui relie stratégie business et optimisation de la conversion. En lien direct avec les équipes, pour comprendre leurs enjeux et les traduire en missions claires et concrètes.</p>
             <div className="binome-tags">
               <span className="binome-tag">CRO</span>
               <span className="binome-tag">Acquisition</span>
@@ -474,7 +474,7 @@ function Team() {
           <div className="binome-card right reveal-item">
             <div className="binome-role">CRO · Formation</div>
             <div className="binome-name">Florent Kiecken</div>
-            <p className="binome-desc">Spécialiste CRO avec un historique de missions sur des sites e-commerce, SaaS et leadgen à fort trafic (+130 marques accompagnées). Expert de la recherche utilisateur et des tests, il forme également au CRO (+1200 personnes formées).</p>
+            <p className="binome-desc">Spécialiste CRO avec un historique de missions sur des sites e-commerce, SaaS et leadgen à fort trafic (+130 marques accompagnées). Expert de la recherche utilisateur et des tests, il forme également au CRO pour transmettre des méthodes éprouvées et actionnables (+1200 personnes formées).</p>
             <div className="binome-tags">
               <span className="binome-tag">CRO</span>
               <span className="binome-tag">UX Research</span>
@@ -631,7 +631,6 @@ function Booking() {
             <li>Clarification de vos objectifs</li>
             <li>Présentation de notre méthode</li>
             <li>Aucune présentation commerciale</li>
-            <li>Questions préparées à partir de votre site</li>
           </ul>
         </div>
         <Calendar selectedDate={date} selectedSlot={slot} onSelectDate={handleSelectDate} onSelectSlot={setSlot} />
