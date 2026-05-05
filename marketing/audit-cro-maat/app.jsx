@@ -474,7 +474,7 @@ function Team() {
           <div className="binome-card right reveal-item">
             <div className="binome-role">CRO · Formation</div>
             <div className="binome-name">Florent Kiecken</div>
-            <p className="binome-desc">Spécialiste CRO avec un historique de missions sur des sites e-commerce, SaaS et leadgen à fort trafic (+130 marques accompagnées). Expert en recherche utilisateur et en expérimentation, il conçoit des protocoles de test rigoureux pour transformer les opportunités en apprentissages actionnables. Il forme également au CRO et diffuse des méthodes éprouvées (+1200 personnes formées).</p>
+            <p className="binome-desc">Spécialiste CRO senior avec une forte expérience sur des environnements à fort trafic (+130 marques accompagnées). Expert en recherche utilisateur et en expérimentation, il conçoit des protocoles de test rigoureux pour générer des apprentissages fiables et actionnables. Il forme également au CRO et diffuse des méthodes éprouvées (+1200 personnes formées).</p>
             <div className="binome-tags">
               <span className="binome-tag">CRO</span>
               <span className="binome-tag">UX Research</span>
