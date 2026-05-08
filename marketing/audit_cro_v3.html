@@ -28,9 +28,15 @@
   --font-display: 'Newsreader', Georgia, serif;
   --font-body: 'Newsreader', Georgia, serif; /* Tout-serif assumé */
   --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  /* Header sticky */
+  --header-height: 100px;
+  --header-height-mobile: 64px;
 }
 
 * { box-sizing: border-box; }
+
+html { scroll-padding-top: var(--header-height); }
 
 body {
   margin: 0;
@@ -149,7 +155,7 @@ body {
 .hero {
   background: var(--hero-bg);
   color: var(--ivory);
-  padding: 7.5% 5% 5%;
+  padding: calc(var(--header-height) + 3.5%) 5% 5%;
   position: relative;
 }
 
@@ -1817,52 +1823,6 @@ body {
    RESPONSIVE
    ============================================================ */
 /* ============================================================
-   LOGO — Maa̅t (macron sur le 2e a) — header nav minimal
-   ============================================================ */
-.site-nav {
-  position: absolute;
-  top: 1.6rem; left: 5%; right: 5%;
-  display: flex; justify-content: space-between; align-items: center;
-  z-index: 5;
-}
-.logo-maat {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: 26px;
-  color: var(--ivory);
-  letter-spacing: 0.005em;
-  font-variation-settings: "opsz" 32;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: baseline;
-  line-height: 1;
-}
-.logo-maat .macron-a {
-  position: relative;
-  display: inline-block;
-}
-.logo-maat .macron-a::before {
-  content: '';
-  position: absolute;
-  left: 14%; right: 14%;
-  top: 0.18em;
-  height: 1.2px;
-  background: currentColor;
-  border-radius: 1px;
-}
-.site-nav .nav-cta {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(244, 236, 211, 0.7);
-  text-decoration: none;
-  padding-bottom: 3px;
-  border-bottom: 1px solid rgba(212, 178, 117, 0.35);
-}
-.site-nav .nav-cta:hover { color: var(--champagne); border-bottom-color: var(--champagne); }
-
-/* ============================================================
    ANIMATIONS — séquence hero + IntersectionObserver fade-up
    ============================================================ */
 .hero-inner > * {
@@ -1994,24 +1954,30 @@ body {
 /* Méthode active — dans le donut, on garde le champagne plein */
 .donut-segment.is-active { fill: rgba(212, 178, 117, 0.95) !important; transform: none !important; }
 
-/* CTA flottant mobile */
+/* CTA flottant mobile — bascule de thème selon le fond de la section traversée */
 .mobile-cta-floating {
   position: fixed;
   bottom: 16px;
   left: 50%;
   transform: translateX(-50%) translateY(20px);
-  background: var(--ink);
-  color: var(--champagne);
+  /* Thème par défaut : mode CLAIR (sur fond aubergine sombre) */
+  background: var(--champagne);
+  color: var(--hero-bg);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   padding: 14px 24px;
   border-radius: 18px;
-  box-shadow: 0 8px 24px -8px rgba(20, 16, 42, 0.30);
+  box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.40);
   text-decoration: none;
   opacity: 0;
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out,
+    background-color 280ms ease,
+    color 280ms ease,
+    box-shadow 280ms ease;
   z-index: 20;
   pointer-events: none;
 }
@@ -2019,6 +1985,12 @@ body {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
   pointer-events: auto;
+}
+/* Mode SOMBRE : actif au-dessus des sections crème (.is-on-light) */
+.mobile-cta-floating.is-on-light {
+  background: var(--hero-bg);
+  color: var(--champagne);
+  box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.30);
 }
 
 /* Tweaks-driven density */
@@ -2091,6 +2063,8 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 }
 
 @media (max-width: 900px) {
+  html { scroll-padding-top: var(--header-height-mobile); }
+  .hero { padding: calc(var(--header-height-mobile) + 4%) 5% 5%; }
   .hero-inner { max-width: 100%; }
   .band-maat-content { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .band-maat-feather { height: 70px; }
@@ -2128,9 +2102,454 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .footer-bottom { grid-template-columns: 1fr; gap: 1rem; text-align: left; }
   .footer-meta, .footer-cta { text-align: left; align-items: flex-start; }
 }
+
+/* ============================================================
+   HEADER STICKY — DA aubergine
+   Préfixe .mh- (Maat Header) — aucun conflit avec l'existant.
+   ============================================================ */
+
+.mh-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    backdrop-filter 300ms ease,
+    -webkit-backdrop-filter 300ms ease;
+}
+.mh-header.is-scrolled {
+  background: rgba(8, 4, 26, 0.95);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom-color: rgba(212, 178, 117, 0.18);
+  box-shadow: 0 1px 0 rgba(212, 178, 117, 0.06);
+}
+
+/* ─── Ligne 1 — logo / onglets / CTA ─── */
+.mh-row1 {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 22px 5% 14px;
+  transition: padding 300ms ease;
+}
+.mh-header.is-scrolled .mh-row1 {
+  padding: 14px 5% 8px;
+}
+
+/* Logo Maa̅t avec macron CSS sur le 2e a */
+.mh-logo {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 30px;
+  color: var(--ivory);
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  line-height: 1;
+  font-variation-settings: "opsz" 32;
+  transition: font-size 300ms ease;
+}
+.mh-header.is-scrolled .mh-logo { font-size: 26px; }
+.mh-logo-macron {
+  position: relative;
+  display: inline-block;
+}
+.mh-logo-macron::after {
+  content: '';
+  position: absolute;
+  top: 0.05em;
+  left: 12%;
+  width: 76%;
+  height: 0.05em;
+  background: #F4ECD3;
+}
+
+/* Onglets centre */
+.mh-tabs {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mh-tab {
+  position: relative;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 17px;
+  color: rgba(244, 236, 211, 0.6);
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 250ms ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.mh-tab::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -2px;
+  height: 1.5px;
+  background: var(--champagne);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mh-tab:hover { color: var(--ivory); }
+.mh-tab:hover::after { transform: scaleX(1); }
+.mh-tab.is-active {
+  color: var(--champagne);
+  font-weight: 500;
+}
+.mh-tab.is-active::after { transform: scaleX(1); }
+
+/* Onglet "à venir" — non cliquable, mini-tampon au hover */
+.mh-tab.is-coming {
+  color: rgba(244, 236, 211, 0.3);
+  cursor: default;
+}
+.mh-tab.is-coming:hover { color: rgba(244, 236, 211, 0.5); }
+.mh-tab.is-coming:hover::after { transform: scaleX(0); }
+.mh-tab.is-coming::before {
+  content: '— à venir';
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  background: var(--band-bg);
+  border: 1px dashed var(--champagne-fonce);
+  padding: 3px 7px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 250ms cubic-bezier(0.34, 1.4, 0.64, 1),
+    transform 250ms cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.mh-tab.is-coming:hover::before,
+.mh-tab.is-coming:focus-visible::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* CTA droite */
+.mh-cta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  background: transparent;
+  border: 1px solid var(--champagne);
+  padding: 9px 16px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.mh-cta-arrow {
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+.mh-cta:hover {
+  background: var(--champagne);
+  color: var(--hero-bg);
+}
+.mh-cta:hover .mh-cta-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* ─── Ligne 2 — sous-menu d'anchors ─── */
+/* Masqué par défaut. Révélé au hover/focus de l'onglet actif (.is-revealing)
+   ou de manière permanente au scroll au-delà du seuil (.is-pinned). */
+.mh-row2 {
+  border-top: 1px solid transparent;
+  padding: 0 5%;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition:
+    border-color 200ms ease,
+    padding 250ms ease,
+    max-height 250ms ease,
+    opacity 200ms ease;
+}
+.mh-header.is-pinned .mh-row2,
+.mh-header.is-revealing .mh-row2 {
+  border-top-color: rgba(212, 178, 117, 0.15);
+  padding: 6px 5% 14px;
+  max-height: 80px;
+  opacity: 1;
+  pointer-events: auto;
+}
+.mh-header.is-scrolled.is-pinned .mh-row2,
+.mh-header.is-scrolled.is-revealing .mh-row2 {
+  padding: 4px 5% 10px;
+}
+.mh-submenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mh-submenu-item {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.5);
+  text-decoration: none;
+  padding: 6px 14px;
+  transition: color 250ms ease;
+}
+.mh-submenu-item::after {
+  content: '';
+  position: absolute;
+  left: 14px; right: 14px;
+  bottom: 2px;
+  height: 1px;
+  background: var(--champagne);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 250ms ease;
+}
+.mh-submenu-item:hover {
+  color: var(--ivory);
+}
+.mh-submenu-item:hover::after { transform: scaleX(1); }
+.mh-submenu-item.is-active {
+  color: var(--champagne);
+}
+.mh-submenu-item.is-active::after { transform: scaleX(1); }
+.mh-submenu-sep {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(212, 178, 117, 0.3);
+  user-select: none;
+  padding: 0 2px;
+}
+
+/* ─── Mobile : toggle + drawer ─── */
+.mh-mobile-toggle {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  background: transparent;
+  border: 1px solid var(--champagne);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.mh-drawer {
+  display: none;
+  position: fixed;
+  top: var(--header-height-mobile);
+  left: 0; right: 0;
+  background: var(--hero-bg);
+  border-bottom: 1px solid rgba(212, 178, 117, 0.45);
+  box-shadow: 0 8px 24px -2px rgba(8, 4, 26, 0.6);
+  padding: 24px 24px 32px;
+  z-index: 99;
+  transform: translateY(-110%);
+  transition: transform 300ms ease;
+}
+.mh-drawer.is-open { transform: translateY(0); }
+
+.mh-drawer-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+}
+.mh-drawer-tab {
+  position: relative;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--ivory);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 6px;
+  line-height: 1.1;
+}
+.mh-drawer-tab::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--champagne);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mh-drawer-tab.is-active {
+  color: var(--champagne);
+  font-weight: 500;
+  font-size: 26px;
+}
+.mh-drawer-tab.is-active::after { transform: scaleX(1); }
+.mh-drawer-tab.is-coming {
+  color: rgba(244, 236, 211, 0.4);
+  font-size: 20px;
+  font-weight: 400;
+  cursor: default;
+}
+.mh-drawer-tab-stamp {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  border: 1px dashed var(--champagne-fonce);
+  padding: 3px 7px;
+  white-space: nowrap;
+}
+
+.mh-drawer-divider {
+  height: 1px;
+  background: rgba(212, 178, 117, 0.18);
+  margin: 0 0 18px;
+}
+
+.mh-drawer-submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 10px 0 14px;
+  padding: 0 0 0 14px;
+  list-style: none;
+  border-left: 2px solid var(--champagne);
+}
+.mh-drawer-submenu-item {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.5);
+  text-decoration: none;
+  padding: 6px 0;
+}
+.mh-drawer-submenu-item.is-active { color: var(--champagne); }
+
+.mh-drawer-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hero-bg);
+  background: var(--champagne);
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .mh-row1 { padding: 14px 5%; grid-template-columns: auto auto; }
+  .mh-header.is-scrolled .mh-row1 { padding: 10px 5%; }
+  .mh-tabs, .mh-cta { display: none; }
+  .mh-row2 { display: none; }
+  .mh-mobile-toggle { display: inline-flex; justify-self: end; }
+  .mh-drawer { display: block; }
+  .mh-logo { font-size: 26px; }
+  .mh-header.is-scrolled .mh-logo { font-size: 22px; }
+}
 </style>
 </head>
 <body data-density="regular" data-donut="D" data-livrable="magazine">
+
+<!-- ============================================================
+     HEADER STICKY — DA aubergine
+     ============================================================ -->
+<header class="mh-header" id="mh-header" aria-label="Navigation principale">
+  <div class="mh-row1">
+    <a class="mh-logo" href="#top" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
+    <nav class="mh-tabs-wrap" aria-label="Pages">
+      <ul class="mh-tabs">
+        <li>
+          <a class="mh-tab is-active" href="#top" aria-current="page">Audit CRO</a>
+        </li>
+        <li>
+          <span class="mh-tab is-coming" role="link" aria-disabled="true" tabindex="0">Content &amp; Messaging Strategy</span>
+        </li>
+      </ul>
+    </nav>
+    <a class="mh-cta" href="#booking">Réserver un échange <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
+    <button class="mh-mobile-toggle" id="mh-mobile-toggle" type="button" aria-expanded="false" aria-controls="mh-drawer">Menu</button>
+  </div>
+  <div class="mh-row2">
+    <nav aria-label="Sections de la page">
+      <ul class="mh-submenu">
+        <li><a class="mh-submenu-item is-active" href="#demarche" data-target="demarche">Notre démarche</a></li>
+        <li class="mh-submenu-sep" aria-hidden="true">·</li>
+        <li><a class="mh-submenu-item" href="#methodes" data-target="methodes">Les méthodes</a></li>
+        <li class="mh-submenu-sep" aria-hidden="true">·</li>
+        <li><a class="mh-submenu-item" href="#binome" data-target="binome">Le binôme</a></li>
+        <li class="mh-submenu-sep" aria-hidden="true">·</li>
+        <li><a class="mh-submenu-item" href="#booking" data-target="booking">Réserver un échange</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
+  <ul class="mh-drawer-tabs">
+    <li>
+      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Audit CRO</a>
+      <ul class="mh-drawer-submenu">
+        <li><a class="mh-drawer-submenu-item is-active" href="#demarche" data-target="demarche">Notre démarche</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#methodes" data-target="methodes">Les méthodes</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#binome" data-target="binome">Le binôme</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un échange</a></li>
+      </ul>
+    </li>
+    <li>
+      <span class="mh-drawer-tab is-coming" role="link" aria-disabled="true">
+        Content &amp; Messaging Strategy
+        <span class="mh-drawer-tab-stamp">— à venir</span>
+      </span>
+    </li>
+  </ul>
+  <div class="mh-drawer-divider" aria-hidden="true"></div>
+  <a class="mh-drawer-cta" href="#booking">Réserver un échange ↗</a>
+</aside>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -2161,25 +2580,21 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 </svg>
 
 <!-- 1 — HERO (pleine largeur asymétrique gauche, simple) -->
-<section class="hero">
-  <nav class="site-nav" aria-label="Navigation principale">
-    <a class="logo-maat" href="#" aria-label="Maat — accueil">Ma<span class="macron-a">a</span>t</a>
-    <a class="nav-cta" href="#booking">Prendre rendez-vous</a>
-  </nav>
+<section class="hero" id="top" data-cta-theme="dark">
   <span class="chapter-mark on-dark">/ ch.00 — entrée</span>
   <div class="hero-inner">
     <div class="hero-overline">— Audit CRO · 2026</div>
     <h1>Votre trafic ne manque pas. <em>Vos conversions, si.</em></h1>
     <p class="hero-lead">On révèle les incohérences. On identifie les freins. On priorise les actions qui paient.</p>
     <div class="hero-cta-row">
-      <a href="#booking" class="cta-mono">Prendre rendez-vous →</a>
+      <a href="#booking" class="cta-mono">Réserver un échange →</a>
       <span class="hero-cta-meta">30 min · sans engagement</span>
     </div>
   </div>
 </section>
 
 <!-- 2 — BANDEAU MAÂT (bandeau séparé sous le hero, fond aubergine claire, plume bauhaus à gauche) -->
-<section class="band-maat reveal">
+<section class="band-maat reveal" data-cta-theme="dark">
   <div class="band-maat-content">
     <svg class="feather-bauhaus band-maat-feather"><use href="#feather-bauhaus"/></svg>
     <div class="band-maat-text-block">
@@ -2190,7 +2605,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 </section>
 
 <!-- 3 — SPLIT -->
-<section class="split-section reveal">
+<section class="split-section reveal" data-cta-theme="light">
   <span class="chapter-mark">/ ch.01 — état des lieux</span>
   <div class="split-grid">
     <div class="split-block editorial-block">
@@ -2240,7 +2655,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 </section>
 
 <!-- 5 — NOTRE DÉMARCHE -->
-<section class="method-section reveal">
+<section class="method-section reveal" id="demarche" data-cta-theme="dark">
   <span class="chapter-mark on-dark">/ ch.02 — démarche</span>
   <div class="method-head">
     <div class="method-head-inner">
@@ -2315,7 +2730,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 </section>
 
 <!-- 6 — METHODS CYCLE -->
-<section class="methods-section reveal">
+<section class="methods-section reveal" id="methodes" data-cta-theme="light">
   <div class="methods-mag">
     <div class="methods-left">
       <div class="methods-intro intro-rule">
@@ -2474,7 +2889,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 </section>
 
 <!-- 7 — BANDEAU DIFFÉRENCE -->
-<section class="diff-band reveal">
+<section class="diff-band reveal" data-cta-theme="dark">
   <div class="diff-content">
     <svg class="feather-bauhaus diff-feather"><use href="#feather-bauhaus"/></svg>
     <p class="diff-text">
@@ -2484,7 +2899,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 </section>
 
 <!-- 8 — RECOMMENDATIONS -->
-<section class="rec-section reveal">
+<section class="rec-section reveal" data-cta-theme="dark">
   <span class="chapter-mark on-dark">/ ch.04 — livrables</span>
   <div class="rec-head">
     <div class="overline on-dark">— Ce que nous livrons</div>
@@ -2538,7 +2953,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 </section>
 
 <!-- 9 — TEAM -->
-<section class="team-section reveal">
+<section class="team-section reveal" id="binome" data-cta-theme="light">
   <div class="team-head intro-rule">
     <div class="overline">— Le binôme</div>
     <h2>Un audit fait <em>en binôme.</em><br/>Un double regard.</h2>
@@ -2601,7 +3016,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 </section>
 
 <!-- 10 — MODULABLE + BOOKING -->
-<section class="booking-section reveal" id="booking">
+<section class="booking-section reveal" data-cta-theme="light">
   <div class="modulable-card editorial-block">
     <div class="modulable-card-grid">
       <div class="modulable-title-block">
@@ -2616,7 +3031,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       </div>
     </div>
   </div>
-  <div class="booking-grid">
+  <div class="booking-grid" id="booking">
     <div class="book-left intro-rule">
       <div class="overline">— Call de découverte · 30 min</div>
       <h3>Voyons si nous pouvons <em>vous aider.</em></h3>
@@ -2706,12 +3121,12 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     <div class="footer-meta">© Maat 2026 · Cabinet d'analyse CRO</div>
     <div class="footer-cta">
       <span class="footer-cta-label">— Démarrer un audit</span>
-      <a href="#booking" class="footer-cta-link">Prendre rendez-vous →</a>
+      <a href="#booking" class="footer-cta-link">Réserver un échange →</a>
     </div>
   </div>
 </footer>
 
-<a href="#booking" class="mobile-cta-floating" id="mobile-cta">Prendre rendez-vous →</a>
+<a href="#booking" class="mobile-cta-floating" id="mobile-cta">Réserver un échange →</a>
 
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
@@ -2916,6 +3331,112 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       }
     });
   });
+
+  // ─── Header sticky : densification au-delà de 60px,
+  //     pin du sous-menu au-delà de 300px ───
+  const mhHeader = document.getElementById('mh-header');
+  if (mhHeader) {
+    const SUBMENU_PIN_THRESHOLD = 300;
+    const onScrollHeader = () => {
+      const y = window.scrollY;
+      mhHeader.classList.toggle('is-scrolled', y > 60);
+      mhHeader.classList.toggle('is-pinned', y > SUBMENU_PIN_THRESHOLD);
+    };
+    onScrollHeader();
+    window.addEventListener('scroll', onScrollHeader, { passive: true });
+
+    // Hover/focus sur l'onglet actif → révéler temporairement le sous-menu.
+    // Timer sur le hide pour laisser le temps de transiter vers le sous-menu.
+    const activeTab = mhHeader.querySelector('.mh-tab.is-active');
+    const row2 = mhHeader.querySelector('.mh-row2');
+    if (activeTab && row2) {
+      let hideTimer = null;
+      const reveal = () => {
+        if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+        mhHeader.classList.add('is-revealing');
+      };
+      const hide = () => {
+        if (hideTimer) clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => {
+          mhHeader.classList.remove('is-revealing');
+          hideTimer = null;
+        }, 150);
+      };
+      activeTab.addEventListener('mouseenter', reveal);
+      activeTab.addEventListener('focus', reveal);
+      activeTab.addEventListener('mouseleave', hide);
+      activeTab.addEventListener('blur', hide);
+      row2.addEventListener('mouseenter', reveal);
+      row2.addEventListener('mouseleave', hide);
+    }
+  }
+
+  // ─── Sous-menu actif : suit la section visible au scroll ───
+  const submenuTargets = ['demarche', 'methodes', 'binome', 'booking'];
+  const submenuItems = document.querySelectorAll('.mh-submenu-item, .mh-drawer-submenu-item');
+  const submenuSections = submenuTargets
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  if (submenuItems.length && submenuSections.length) {
+    const setActive = (id) => {
+      submenuItems.forEach(el => {
+        el.classList.toggle('is-active', el.dataset.target === id);
+      });
+    };
+    const submenuIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { threshold: 0.4, rootMargin: '-20% 0px -50% 0px' });
+    submenuSections.forEach(s => submenuIO.observe(s));
+  }
+
+  // ─── CTA flottant mobile : bascule de thème selon le fond ───
+  const themedSections = document.querySelectorAll('[data-cta-theme]');
+  if (floatingCta && themedSections.length) {
+    const ctaThemeIO = new IntersectionObserver((entries) => {
+      // Prend la section visible la plus en haut (la plus "active" dans le viewport)
+      let topMost = null;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const rect = entry.boundingClientRect;
+          if (!topMost || rect.top < topMost.rect.top) {
+            topMost = { el: entry.target, rect };
+          }
+        }
+      });
+      if (topMost) {
+        const theme = topMost.el.dataset.ctaTheme;
+        floatingCta.classList.toggle('is-on-light', theme === 'light');
+      }
+    }, { threshold: 0, rootMargin: '-40% 0px -40% 0px' });
+    themedSections.forEach(s => ctaThemeIO.observe(s));
+  }
+
+  // ─── Drawer mobile : toggle ouvert/fermé ───
+  const drawerToggle = document.getElementById('mh-mobile-toggle');
+  const drawer = document.getElementById('mh-drawer');
+  if (drawerToggle && drawer) {
+    const setDrawer = (open) => {
+      drawer.classList.toggle('is-open', open);
+      drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      drawerToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      drawerToggle.textContent = open ? 'Fermer' : 'Menu';
+    };
+    drawerToggle.addEventListener('click', () => {
+      setDrawer(!drawer.classList.contains('is-open'));
+    });
+    // Fermer au clic sur un lien du drawer
+    drawer.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', () => setDrawer(false));
+    });
+    // Fermer si on repasse en desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && drawer.classList.contains('is-open')) {
+        setDrawer(false);
+      }
+    });
+  }
 })();
 </script>
 
