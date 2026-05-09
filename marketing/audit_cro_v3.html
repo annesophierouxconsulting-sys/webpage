@@ -1005,9 +1005,22 @@ body {
 }
 .fiche-nav-arrow.left { left: -60px; }
 .fiche-nav-arrow.right { right: -60px; }
+/* Arc asymétrique champagne — passe par le haut, ouverture en bas-extérieur */
+.fiche-nav-arc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: rgba(212, 178, 117, 0.5);
+  transition: color 0.3s ease;
+  pointer-events: none;
+}
 .fiche-nav-arrow:hover:not(:disabled) {
   background: rgba(212, 178, 117, 0.08);
   color: var(--champagne);
+}
+.fiche-nav-arrow:hover:not(:disabled) .fiche-nav-arc {
+  color: rgba(212, 178, 117, 0.9);
 }
 .fiche-nav-arrow.left:hover:not(:disabled) {
   transform: translate(-2px, -50%);
@@ -1019,21 +1032,11 @@ body {
   display: none;
 }
 
-/* Footer prev/next disabled aux extrémités — grise + label "Première / Dernière" */
+/* Footer prev/next disabled aux extrémités — caché purement
+   (signal "fin de liste" porté par les dots et l'absence de flèche latérale) */
 .fiche-foot-prev:disabled,
 .fiche-foot-next:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-.fiche-foot-prev:disabled .fiche-foot-nav-text,
-.fiche-foot-next:disabled .fiche-foot-nav-text {
-  font-style: italic;
-  text-transform: none;
-  letter-spacing: 0.02em;
-}
-.fiche-foot-prev:disabled .fiche-foot-nav-text::before,
-.fiche-foot-next:disabled .fiche-foot-nav-text::after {
-  display: none;
+  visibility: hidden;
 }
 .fiche-num-total {
   font-family: var(--font-mono);
@@ -2990,8 +2993,18 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       <button class="fiche-progress-dot" type="button" data-fiche="4" aria-label="Recommandation 5 sur 6"></button>
       <button class="fiche-progress-dot" type="button" data-fiche="5" aria-label="Recommandation 6 sur 6"></button>
     </div>
-    <button class="fiche-nav-arrow left" type="button" aria-label="Recommandation précédente" disabled>←</button>
-    <button class="fiche-nav-arrow right" type="button" aria-label="Recommandation suivante">→</button>
+    <button class="fiche-nav-arrow left" type="button" aria-label="Recommandation précédente" disabled>
+      <svg class="fiche-nav-arc" viewBox="0 0 50 50" aria-hidden="true">
+        <path d="M 35.5 43.18 A 21 21 0 1 0 4 25" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      ←
+    </button>
+    <button class="fiche-nav-arrow right" type="button" aria-label="Recommandation suivante">
+      <svg class="fiche-nav-arc" viewBox="0 0 50 50" aria-hidden="true">
+        <path d="M 14.5 43.18 A 21 21 0 1 1 46 25" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      →
+    </button>
     <div class="fiche-doc-frame">
       <div class="fiche-content">
         <header class="fiche-header">
