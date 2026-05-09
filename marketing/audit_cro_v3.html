@@ -124,13 +124,12 @@ body {
   position: absolute;
   top: 2rem; right: 5%;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(20, 16, 42, 0.4);
+  color: var(--ink);
 }
-.hero .chapter-mark { top: auto; bottom: 1.6rem; right: 5%; }
-.chapter-mark.on-dark { color: rgba(212, 178, 117, 0.5); }
+.chapter-mark.on-dark { color: var(--champagne); }
 
 /* CTA mono soulignée */
 .cta-mono {
@@ -619,6 +618,7 @@ body {
 .methods-section {
   background: var(--paper);
   padding: 4.5% 5%;
+  position: relative;
 }
 .methods-mag {
   display: grid;
@@ -749,28 +749,6 @@ body {
   padding: 0.5rem 0;
   display: flex; flex-direction: column;
 }
-.legend-block-header {
-  display: flex; justify-content: space-between; align-items: baseline;
-  padding-bottom: 1rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(140, 106, 44, 0.2);
-}
-.legend-block-title {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  font-weight: 500;
-}
-.legend-block-meta {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(20, 16, 42, 0.4);
-}
-
 .lphase {
   display: grid;
   grid-template-columns: auto 1fr auto;
@@ -1202,215 +1180,191 @@ body {
    9 — TEAM avec anneaux entrelacés et tags aubergine pleins
    ============================================================ */
 .team-section {
-  background: var(--paper);
+  background: var(--hero-bg);
+  color: var(--ivory);
   padding: 5% 5%;
+  position: relative;
 }
+.team-section .chapter-mark {
+  top: 24px;
+  right: 5%;
+}
+
 .team-head {
-  margin-bottom: 3rem;
-  max-width: 640px;
+  margin: 0 auto 2rem;
+  max-width: 720px;
+  text-align: center;
 }
 .team-head h2 {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(24px, 3.4vw, 38px);
+  font-size: clamp(32px, 4vw, 52px);
   line-height: 1.05;
-  margin: 0 0 0.9rem;
-  color: var(--ink);
-  font-variation-settings: "opsz" 60;
+  letter-spacing: -0.012em;
+  margin: 0 0 1rem;
+  color: var(--ivory);
+  font-variation-settings: "opsz" 96;
 }
 .team-head h2 em {
   font-style: italic;
-  color: var(--champagne-fonce);
-  font-variation-settings: "opsz" 72;
+  color: var(--champagne);
 }
 .team-head .lead {
-  font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--ink-soft);
-  font-variation-settings: "opsz" 14;
-}
-
-.binome-grid {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 2.5rem;
-  align-items: stretch;
-  margin-bottom: 3rem;
-}
-.binome-card {
-  display: flex; flex-direction: column;
-  gap: 0.9rem;
-}
-
-.binome-rings {
-  display: flex; align-items: center; justify-content: center;
-  width: 80px;
-  align-self: center;
-  position: relative;
-}
-.binome-rings svg { width: 80px; height: 50px; color: var(--champagne-fonce); }
-.binome-rings-label {
-  position: absolute;
-  bottom: -2.2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(140, 106, 44, 0.7);
-  white-space: nowrap;
-}
-
-.binome-role {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-}
-.binome-name {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(22px, 2.6vw, 28px);
-  line-height: 1.05;
-  color: var(--ink);
-  font-weight: 400;
-  font-variation-settings: "opsz" 60;
-}
-.binome-desc {
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--ink-soft);
-  margin: 0;
-  font-variation-settings: "opsz" 14;
+  font-size: 17px;
+  line-height: 1.55;
+  color: rgba(244, 236, 211, 0.65);
+  max-width: 640px;
+  margin: 0 auto;
+  font-variation-settings: "opsz" 24;
 }
 
-/* Tags aubergine pleins */
-.binome-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.4rem; }
-.binome-tag {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ivory);
-  background: var(--ink);
-  padding: 5px 10px;
-  border-radius: 1px;
-  font-weight: 500;
-}
-.binome-link {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  border-bottom: 1px solid rgba(140, 106, 44, 0.4);
-  padding-bottom: 3px;
-  margin-top: 0.6rem;
-  align-self: flex-start;
-  text-decoration: none;
-}
-
-/* Bloc Double regard — encart sombre */
-.double-regard {
-  background: var(--band-bg);
-  color: var(--ivory);
-  padding: 3rem 3rem;
-  border-radius: 1px;
-  position: relative;
-  border: 1px solid rgba(212, 178, 117, 0.3);
-}
-.double-regard::before, .double-regard::after {
-  content: '';
-  position: absolute;
-  width: 14px; height: 14px;
-  border-color: rgba(212, 178, 117, 0.7);
-  border-style: solid;
-  border-width: 0;
-}
-.double-regard::before {
-  top: -1px; left: -1px;
-  border-top-width: 1px; border-left-width: 1px;
-}
-.double-regard::after {
-  bottom: -1px; right: -1px;
-  border-bottom-width: 1px; border-right-width: 1px;
-}
-.double-regard-head {
-  margin-bottom: 2rem;
-  text-align: center;
-}
-.double-regard-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--champagne);
-  display: inline-flex;
+/* Tampon central Maa̅t × SDLV — filets latéraux dégradés signent le cachet */
+.team-stamp-row {
+  display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 0.8rem;
+  justify-content: center;
+  margin: 2.5rem auto 3rem;
 }
-.double-regard-label::before, .double-regard-label::after {
-  content: ''; display: inline-block;
-  width: 24px; height: 1px;
-  background: rgba(212, 178, 117, 0.5);
+.team-stamp-line {
+  flex: 1;
+  height: 1px;
+  max-width: calc(50% - 110px);
 }
-.double-regard-title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(20px, 2.6vw, 26px);
-  line-height: 1.1;
-  color: var(--ivory);
-  margin: 0;
-  font-variation-settings: "opsz" 60;
+.team-stamp-line.left {
+  background: linear-gradient(to right,
+    rgba(212, 178, 117, 0) 0%,
+    rgba(212, 178, 117, 0.3) 100%);
 }
-.double-regard-title em { font-style: italic; color: var(--champagne); }
-.double-regard-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
-  margin-bottom: 1.5rem;
+.team-stamp-line.right {
+  background: linear-gradient(to left,
+    rgba(212, 178, 117, 0) 0%,
+    rgba(212, 178, 117, 0.3) 100%);
 }
-.dr-item { display: flex; flex-direction: column; gap: 8px; }
-.dr-item-num {
+.team-stamp {
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
   color: var(--champagne);
+  border: 1px solid var(--champagne);
+  background: var(--hero-bg);
+  padding: 10px 20px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  white-space: nowrap;
 }
-.dr-item-title {
+.team-stamp-x {
   font-family: var(--font-display);
   font-style: italic;
   font-size: 18px;
-  line-height: 1.2;
-  color: var(--ivory);
-  font-variation-settings: "opsz" 32;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--champagne);
 }
-.dr-item-desc {
+.team-stamp-macron {
+  position: relative;
+  display: inline-block;
+}
+.team-stamp-macron::after {
+  content: '';
+  position: absolute;
+  top: 0.05em;
+  left: 12%;
+  width: 76%;
+  height: 0.05em;
+  background: var(--champagne);
+}
+
+/* Duo asymétrique grid 2 colonnes égales */
+.team-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.team-person {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+}
+.team-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  font-weight: 500;
+}
+.team-role::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--champagne);
+}
+.team-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 30px;
+  line-height: 1.05;
+  color: var(--ivory);
+  font-weight: 400;
+  font-variation-settings: "opsz" 96;
+  margin: 0;
+}
+.team-bio {
   font-family: var(--font-body);
-  font-size: 13px;
-  line-height: 1.6;
-  color: rgba(244, 236, 211, 0.75);
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(244, 236, 211, 0.78);
   margin: 0;
   font-variation-settings: "opsz" 14;
 }
-.double-regard-foot {
-  text-align: center;
+
+/* Tags : pleins champagne (Anne-Sophie) / outline champagne (Florent) */
+.team-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 0.5rem;
+}
+.team-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.team-tag.is-solid {
+  color: var(--hero-bg);
+  background: var(--champagne);
+  padding: 5px 10px;
+}
+.team-tag.is-outline {
+  color: var(--champagne);
+  background: transparent;
+  border: 1px solid var(--champagne);
+  padding: 4px 9px;
+}
+.team-link {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 15px;
-  line-height: 1.5;
-  color: rgba(244, 236, 211, 0.85);
-  font-weight: 300;
-  padding-top: 1.5rem;
-  border-top: 1px dotted rgba(212, 178, 117, 0.3);
-  max-width: 700px;
-  margin: 0 auto;
-  font-variation-settings: "opsz" 24;
+  font-size: 14px;
+  color: var(--champagne);
+  border-bottom: 1px solid var(--champagne);
+  padding-bottom: 2px;
+  margin-top: 0.4rem;
+  align-self: flex-start;
+  text-decoration: none;
 }
 
 /* ============================================================
@@ -1848,17 +1802,14 @@ body {
 }
 .reveal.is-visible { opacity: 1; transform: none; }
 
-/* Hover livrables + binôme — soulèvement subtil */
-.fiche-doc-frame, .binome-card {
+/* Hover livrables — soulèvement subtil */
+.fiche-doc-frame {
   transition: transform 0.24s ease-out, box-shadow 0.24s ease-out;
 }
 @media (hover: hover) {
   .fiche-doc-frame:hover {
     transform: translateY(-3px);
     box-shadow: 0 20px 40px -16px rgba(20, 16, 42, 0.18);
-  }
-  .binome-card:hover {
-    transform: translateY(-3px);
   }
 }
 
@@ -1881,12 +1832,12 @@ body {
 }
 .cal-confirm-btn:active { transform: translateY(1px); }
 
-/* Souligné animé — liens footer + lien SDLV */
-.footer-contact-email, .footer-cta-link, .binome-link {
+/* Souligné animé — liens footer */
+.footer-contact-email, .footer-cta-link {
   position: relative;
   border-bottom-color: transparent !important;
 }
-.footer-contact-email::after, .footer-cta-link::after, .binome-link::after {
+.footer-contact-email::after, .footer-cta-link::after {
   content: '';
   position: absolute;
   left: 0; right: 0; bottom: -1px;
@@ -1902,17 +1853,9 @@ body {
   background-repeat: no-repeat;
   background-size: 100% 1px;
 }
-.binome-link {
-  background-image: linear-gradient(to right, rgba(140, 106, 44, 0.4), rgba(140, 106, 44, 0.4));
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  background-size: 100% 1px;
-}
-.binome-link::after { background: var(--champagne-fonce); }
 @media (hover: hover) {
   .footer-contact-email:hover::after,
-  .footer-cta-link:hover::after,
-  .binome-link:hover::after { transform: scaleX(1); }
+  .footer-cta-link:hover::after { transform: scaleX(1); }
 }
 
 /* Calendrier — sélection avec ressort doux */
@@ -2091,9 +2034,9 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .fiche-foot-next { align-items: flex-start; text-align: left; }
   .fiche-foot-link { text-align: left; align-self: flex-start; }
   .fiche-meta-line { grid-template-columns: 1fr; gap: 4px; }
-  .binome-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .binome-rings { transform: rotate(90deg); }
-  .double-regard-body { grid-template-columns: 1fr; gap: 1.5rem; }
+  .team-duo { grid-template-columns: 1fr; gap: 2.5rem; }
+  .team-stamp-line { max-width: calc(50% - 90px); }
+  .team-section .chapter-mark { position: static; display: block; margin-bottom: 1.5rem; text-align: right; }
   .modulable-card-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .modulable-divider-vertical { display: none; }
   .booking-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -2582,7 +2525,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 
 <!-- 1 — HERO (pleine largeur asymétrique gauche, simple) -->
 <section class="hero" id="top" data-cta-theme="dark">
-  <span class="chapter-mark on-dark">/ ch.00 — entrée</span>
   <div class="hero-inner">
     <div class="hero-overline">— Audit CRO · 2026</div>
     <h1>Votre trafic ne manque pas. <em>Vos conversions, si.</em></h1>
@@ -2660,7 +2602,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   <span class="chapter-mark on-dark">/ ch.02 — démarche</span>
   <div class="method-head">
     <div class="method-head-inner">
-      <div class="overline on-dark">— Notre démarche</div>
       <h3>Comprendre. Croiser.<br/>Prioriser. <em>Agir.</em></h3>
       <p class="method-lead">Quatre étapes qui se répondent — pour relier ce que vous savez à ce que font réellement vos utilisateurs.</p>
     </div>
@@ -2732,10 +2673,10 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 
 <!-- 6 — METHODS CYCLE -->
 <section class="methods-section reveal" id="methodes" data-cta-theme="light">
+  <span class="chapter-mark">/ ch.03 — méthodes</span>
   <div class="methods-mag">
     <div class="methods-left">
       <div class="methods-intro intro-rule">
-        <div class="overline">— Ce que nous faisons</div>
         <h3>Les méthodes qui alimentent<br/><em>cette démarche.</em></h3>
         <p class="lead">Chaque méthode produit un signal. Ensemble, elles se complètent, se recoupent et s'affinent pour transformer le « quoi » en « pourquoi ».</p>
       </div>
@@ -2820,10 +2761,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       </div>
     </div>
     <div class="methods-legend-block">
-      <div class="legend-block-header">
-        <span class="legend-block-title">— Index des méthodes</span>
-        <span class="legend-block-meta">/ ch.03</span>
-      </div>
       <button class="lphase is-active">
         <span class="lphase-n">01</span>
         <span class="lphase-content">
@@ -2903,7 +2840,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 <section class="rec-section reveal" data-cta-theme="dark">
   <span class="chapter-mark on-dark">/ ch.04 — livrables</span>
   <div class="rec-head">
-    <div class="overline on-dark">— Ce que nous livrons</div>
     <h3>De l'insight à <em>l'action.</em></h3>
     <p class="rec-lead">Chaque recommandation est structurée, priorisée et mise en perspective — pour passer de l'insight à des décisions claires et des actions concrètes.</p>
   </div>
@@ -2954,65 +2890,45 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 </section>
 
 <!-- 9 — TEAM -->
-<section class="team-section reveal" id="binome" data-cta-theme="light">
-  <div class="team-head intro-rule">
-    <div class="overline">— Le binôme</div>
-    <h2>Un audit fait <em>en binôme.</em><br/>Un double regard.</h2>
+<section class="team-section reveal" id="binome" data-cta-theme="dark">
+  <span class="chapter-mark on-dark">/ ch.05 — L'équipe</span>
+  <div class="team-head">
+    <h2>Un audit fait <em>en collaboration.</em></h2>
     <p class="lead">L'audit CRO gagne en profondeur quand deux lectures différentes — business et utilisateurs — convergent sur les mêmes données.</p>
   </div>
-  <div class="binome-grid">
-    <div class="binome-card">
-      <div class="binome-role">CRO · Acquisition · Martech</div>
-      <div class="binome-name">Anne-Sophie Roux</div>
-      <p class="binome-desc">Spécialiste CRO avec un passif Acquisition et Martech. Je comprends votre business et j'analyse ce que la data révèle pour cadrer des optimisations à fort impact. Une lecture qui relie stratégie business et optimisation de la conversion.</p>
-      <div class="binome-tags">
-        <span class="binome-tag">CRO</span>
-        <span class="binome-tag">Acquisition</span>
-        <span class="binome-tag">Martech</span>
-        <span class="binome-tag">Data</span>
-      </div>
-    </div>
-    <div class="binome-rings">
-      <svg viewBox="0 0 80 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="28" cy="25" r="18" fill="none" stroke="currentColor" stroke-width="1.4"/>
-        <circle cx="52" cy="25" r="18" fill="none" stroke="currentColor" stroke-width="1.4"/>
-        <path d="M 39 12 A 18 18 0 0 0 39 38" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
-    
-    </div>
-    <div class="binome-card">
-      <div class="binome-role">CRO · Formation</div>
-      <div class="binome-name">Florent Kiecken</div>
-      <p class="binome-desc">Spécialiste CRO avec un historique de missions sur des sites e-commerce, SaaS et leadgen à fort trafic (+130 marques accompagnées). Expert de la recherche utilisateur et des tests, il forme également au CRO (+1200 personnes formées).</p>
-      <div class="binome-tags">
-        <span class="binome-tag">CRO</span>
-        <span class="binome-tag">UX Research</span>
-        <span class="binome-tag">A/B test</span>
-        <span class="binome-tag">Formation</span>
-      </div>
-      <a href="#" class="binome-link">Voir son site — SDLV →</a>
-    </div>
+
+  <div class="team-stamp-row" aria-hidden="true">
+    <span class="team-stamp-line left"></span>
+    <span class="team-stamp">
+      <span>Ma<span class="team-stamp-macron">a</span>t</span>
+      <span class="team-stamp-x">×</span>
+      <span>SDLV</span>
+    </span>
+    <span class="team-stamp-line right"></span>
   </div>
-  <div class="double-regard">
-    <div class="double-regard-head">
-      <div class="double-regard-label">Ce que le binôme apporte</div>
-      <h3 class="double-regard-title">Un double regard sur <em>votre conversion.</em></h3>
-    </div>
-    <div class="double-regard-body">
-      <div class="dr-item">
-        <div class="dr-item-num">№ 01 · Le recul</div>
-        <div class="dr-item-title">Garder le lien avec votre business.</div>
-        <p class="dr-item-desc">Sur chaque insight, on prend de la hauteur : est-ce que ça compte vraiment ? pour quel segment ? avec quel impact ? Une lecture qui ramène l'optimisation à vos enjeux.</p>
+
+  <div class="team-duo">
+    <article class="team-person">
+      <div class="team-role">Fondatrice de Maat</div>
+      <h3 class="team-name">Anne-Sophie Roux</h3>
+      <p class="team-bio">Spécialiste CRO avec un ADN Acquisition et MarTech. J'interviens à vos côtés pour cadrer des missions ancrées dans vos enjeux et faire émerger des opportunités de croissance concrètes. Mon rôle : faire dialoguer business, utilisateurs et data pour identifier des optimisations à fort impact, jusqu'à l'exécution terrain.</p>
+      <div class="team-tags">
+        <span class="team-tag is-solid">CRO</span>
+        <span class="team-tag is-solid">Acquisition</span>
+        <span class="team-tag is-solid">Data</span>
       </div>
-      <div class="dr-item">
-        <div class="dr-item-num">№ 02 · La proximité</div>
-        <div class="dr-item-title">Rester au plus près de vos utilisateurs.</div>
-        <p class="dr-item-desc">Sur les mêmes signaux, on regarde de très près : pourquoi cette hésitation, ce clic, cet abandon ? Une lecture fine du comportement réel.</p>
+    </article>
+    <article class="team-person">
+      <div class="team-role">Fondateur de SDLV</div>
+      <h3 class="team-name">Florent Kiecken</h3>
+      <p class="team-bio">Spécialiste CRO et UX avec un historique de missions sur des sites e-commerce, SaaS et leadgen à fort trafic (+130 marques accompagnées, +1200 personnes formées). Expert en recherche utilisateur et en expérimentation, il forme également au CRO et diffuse des méthodes éprouvées.</p>
+      <div class="team-tags">
+        <span class="team-tag is-outline">CRO</span>
+        <span class="team-tag is-outline">UX</span>
+        <span class="team-tag is-outline">Formation</span>
       </div>
-    </div>
-    <div class="double-regard-foot">
-      La valeur n'est pas dans chaque regard séparément — elle est dans leur croisement, et dans ce qu'on en fait pour votre business.
-    </div>
+      <a href="https://www.sdlv.fr/" class="team-link" target="_blank" rel="noopener noreferrer">Voir SDLV ↗</a>
+    </article>
   </div>
 </section>
 
