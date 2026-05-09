@@ -626,7 +626,7 @@ body {
 }
 .methods-mag {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: 1.2fr 1fr;
   gap: 4rem;
   align-items: end;
 }
@@ -673,7 +673,7 @@ body {
 /* Nouvelle constellation des méthodes — 6 nœuds autour d'un cercle, arc actif champagne */
 .donut-svg {
   width: 100%;
-  max-width: 320px;
+  max-width: 460px;
 }
 .constellation-ring {
   fill: none;
@@ -697,9 +697,14 @@ body {
 }
 .constellation-node circle {
   fill: var(--paper);
-  stroke: rgba(140, 106, 44, 0.55);
-  stroke-width: 1.2;
+  stroke: rgba(212, 178, 117, 0.55);
+  stroke-width: 1.8;
   transition: fill 0.25s, stroke 0.25s;
+}
+/* Hit area invisible — étend la zone tactile sans changer l'esthétique */
+.constellation-node .constellation-hit {
+  fill: transparent;
+  stroke: none;
 }
 .constellation-node text {
   font-family: var(--font-mono);
@@ -711,7 +716,10 @@ body {
   letter-spacing: 0.05em;
   transition: fill 0.25s;
 }
-.constellation-node:hover circle { stroke: var(--champagne-fonce); }
+.constellation-node:hover circle {
+  stroke: var(--champagne-fonce);
+  fill: rgba(212, 178, 117, 0.08);
+}
 .constellation-node.is-active circle {
   fill: var(--ink);
   stroke: var(--ink);
@@ -773,6 +781,18 @@ body {
   background: rgba(140, 106, 44, 0.06);
   border-left: 2px solid var(--champagne-fonce);
   border-bottom: 1px solid rgba(140, 106, 44, 0.15);
+  animation: lphaseActiveIn 240ms ease;
+}
+@keyframes lphaseActiveIn {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+.lphase-desc {
+  animation: lphaseDescIn 240ms ease;
+}
+@keyframes lphaseDescIn {
+  from { opacity: 0; transform: translateY(-2px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .lphase:hover:not(.is-active) {
   background: rgba(140, 106, 44, 0.025);
@@ -2023,9 +2043,25 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .method-detail::before, .method-detail::after { display: none; }
   .method-detail-pointer { display: none; }
   .method-detail-left { border-right: none; border-bottom: 1px solid rgba(212, 178, 117, 0.15); padding-right: 0; padding-bottom: 1rem; }
+  .methods-section { padding: 3% 5%; }
   .methods-mag { grid-template-columns: 1fr; gap: 2rem; }
-  .methods-left { gap: 2rem; }
+  .methods-left { gap: 1.25rem; }
   .methods-stage { justify-content: center; padding-left: 0; }
+  /* Roue plein largeur sur mobile pour zone tactile généreuse */
+  .donut-svg { max-width: 90vw; }
+  /* Marker remis en flow au-dessus du titre (évite le chevauchement absolute) */
+  .methods-section .chapter-mark {
+    position: static;
+    display: block;
+    text-align: right;
+    margin-bottom: 1rem;
+  }
+  /* Affiche uniquement la méthode active sous la roue ; les autres sont masquées */
+  .methods-legend-block .lphase:not(.is-active) { display: none; }
+  .methods-legend-block .lphase.is-active {
+    border-bottom: none;
+    padding-top: 0.5rem;
+  }
   .diff-content { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .fiche-doc-frame { padding: 2rem 1.75rem 0; }
   .fiche-foot {
@@ -2755,12 +2791,12 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
           <text x="180" y="168" text-anchor="middle" font-family="Newsreader, serif" font-weight="400" font-size="26" fill="#14102A">Démarche</text>
           <text x="180" y="200" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-weight="400" font-size="26" fill="#8C6A2C">CRO.</text>
           <text x="180" y="226" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" fill="#6E6890" letter-spacing="1.5">— 06 méthodes —</text>
-          <g class="constellation-node is-active" data-i="0"><circle cx="180" cy="50" r="18"/><text x="180" y="50">01</text></g>
-          <g class="constellation-node" data-i="1"><circle cx="292.58" cy="115" r="18"/><text x="292.58" y="115">02</text></g>
-          <g class="constellation-node" data-i="2"><circle cx="292.58" cy="245" r="18"/><text x="292.58" y="245">03</text></g>
-          <g class="constellation-node" data-i="3"><circle cx="180" cy="310" r="18"/><text x="180" y="310">04</text></g>
-          <g class="constellation-node" data-i="4"><circle cx="67.42" cy="245" r="18"/><text x="67.42" y="245">05</text></g>
-          <g class="constellation-node" data-i="5"><circle cx="67.42" cy="115" r="18"/><text x="67.42" y="115">06</text></g>
+          <g class="constellation-node is-active" data-i="0"><circle class="constellation-hit" cx="180" cy="50" r="28" fill="transparent" pointer-events="all"/><circle cx="180" cy="50" r="18"/><text x="180" y="50">01</text></g>
+          <g class="constellation-node" data-i="1"><circle class="constellation-hit" cx="292.58" cy="115" r="28" fill="transparent" pointer-events="all"/><circle cx="292.58" cy="115" r="18"/><text x="292.58" y="115">02</text></g>
+          <g class="constellation-node" data-i="2"><circle class="constellation-hit" cx="292.58" cy="245" r="28" fill="transparent" pointer-events="all"/><circle cx="292.58" cy="245" r="18"/><text x="292.58" y="245">03</text></g>
+          <g class="constellation-node" data-i="3"><circle class="constellation-hit" cx="180" cy="310" r="28" fill="transparent" pointer-events="all"/><circle cx="180" cy="310" r="18"/><text x="180" y="310">04</text></g>
+          <g class="constellation-node" data-i="4"><circle class="constellation-hit" cx="67.42" cy="245" r="28" fill="transparent" pointer-events="all"/><circle cx="67.42" cy="245" r="18"/><text x="67.42" y="245">05</text></g>
+          <g class="constellation-node" data-i="5"><circle class="constellation-hit" cx="67.42" cy="115" r="28" fill="transparent" pointer-events="all"/><circle cx="67.42" cy="115" r="18"/><text x="67.42" y="115">06</text></g>
         </svg>
       </div>
     </div>
