@@ -445,17 +445,21 @@ body {
   position: absolute;
   top: 38px; left: 12%; right: 12%;
   height: 1px;
-  background-image: linear-gradient(to right, rgba(244, 236, 211, 0.3) 50%, transparent 50%);
-  background-size: 8px 1px;
-  background-repeat: repeat-x;
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(212, 178, 117, 0.4) 12%,
+    rgba(212, 178, 117, 0.4) 88%,
+    transparent 100%);
   z-index: 1;
 }
 .method-arrow {
-  position: absolute; top: 33px;
+  position: absolute; top: 31px;
   font-family: var(--font-mono);
-  font-size: 12px;
-  color: rgba(244, 236, 211, 0.4);
-  z-index: 1;
+  font-size: 14px;
+  color: rgba(212, 178, 117, 0.5);
+  background: var(--hero-bg);
+  padding: 0 5px;
+  z-index: 2;
 }
 .method-grid {
   display: grid;
