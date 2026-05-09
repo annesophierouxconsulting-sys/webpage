@@ -2049,8 +2049,9 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .methods-stage { justify-content: center; padding-left: 0; }
   /* Roue plein largeur sur mobile pour zone tactile généreuse */
   .donut-svg { max-width: 90vw; }
-  /* Marker remis en flow au-dessus du titre (évite le chevauchement absolute) */
-  .methods-section .chapter-mark {
+  /* Markers chapter remis en flow au-dessus du titre sur toutes les sections
+     (évite le chevauchement avec les titres sur viewports étroits) */
+  .chapter-mark {
     position: static;
     display: block;
     text-align: right;
@@ -2076,7 +2077,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .fiche-meta-line { grid-template-columns: 1fr; gap: 4px; }
   .team-duo { grid-template-columns: 1fr; gap: 2.5rem; }
   .team-stamp-line { max-width: calc(50% - 90px); }
-  .team-section .chapter-mark { position: static; display: block; margin-bottom: 1.5rem; text-align: right; }
   .modulable-card-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .modulable-divider-vertical { display: none; }
   .booking-grid { grid-template-columns: 1fr; gap: 2rem; }
