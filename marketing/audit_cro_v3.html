@@ -794,6 +794,14 @@ body {
   from { opacity: 0; transform: translateY(-2px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* Fade-in du contenu de la fiche livrable au changement prev/next */
+.fiche-content.is-fresh {
+  animation: ficheContentFadeIn 240ms ease;
+}
+@keyframes ficheContentFadeIn {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
 .lphase:hover:not(.is-active) {
   background: rgba(140, 106, 44, 0.025);
   padding-left: 4px;
@@ -942,8 +950,91 @@ body {
 }
 
 .fiche-doc-layout {
-  max-width: 900px;
+  max-width: 1040px;
   margin: 0 auto;
+  position: relative;
+}
+
+/* Indicateur de progression — 6 points au-dessus de la fiche */
+.fiche-progress-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 2rem;
+}
+.fiche-progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 178, 117, 0.5);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.fiche-progress-dot:hover:not(.is-active) {
+  background: rgba(212, 178, 117, 0.3);
+  border-color: rgba(212, 178, 117, 0.8);
+}
+.fiche-progress-dot.is-active {
+  width: 24px;
+  border-radius: 4px;
+  background: var(--champagne);
+  border-color: var(--champagne);
+}
+
+/* Flèches latérales discrètes — débordent dans le fond de section */
+.fiche-nav-arrow {
+  position: absolute;
+  top: calc(50% + 1rem);
+  transform: translateY(-50%);
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: rgba(212, 178, 117, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+  z-index: 2;
+}
+.fiche-nav-arrow.left { left: -60px; }
+.fiche-nav-arrow.right { right: -60px; }
+.fiche-nav-arrow:hover:not(:disabled) {
+  background: rgba(212, 178, 117, 0.08);
+  color: var(--champagne);
+}
+.fiche-nav-arrow.left:hover:not(:disabled) {
+  transform: translate(-2px, -50%);
+}
+.fiche-nav-arrow.right:hover:not(:disabled) {
+  transform: translate(2px, -50%);
+}
+.fiche-nav-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Footer prev/next disabled aux extrémités — grise + label "Première / Dernière" */
+.fiche-foot-prev:disabled,
+.fiche-foot-next:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.fiche-foot-prev:disabled .fiche-foot-nav-text,
+.fiche-foot-next:disabled .fiche-foot-nav-text {
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+.fiche-foot-prev:disabled .fiche-foot-nav-text::before,
+.fiche-foot-next:disabled .fiche-foot-nav-text::after {
+  display: none;
 }
 .fiche-num-total {
   font-family: var(--font-mono);
@@ -2065,6 +2156,10 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   }
   .diff-content { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .fiche-doc-frame { padding: 2rem 1.75rem 0; }
+  .fiche-doc-layout { max-width: 100%; }
+  .fiche-nav-arrow { width: 40px; height: 40px; font-size: 16px; }
+  .fiche-nav-arrow.left { left: 8px; }
+  .fiche-nav-arrow.right { right: 8px; }
   .fiche-foot {
     grid-template-columns: 1fr;
     margin: 1.5rem -1.75rem 0;
@@ -2085,6 +2180,10 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .footer-top { flex-direction: column; gap: 1.5rem; }
   .footer-bottom { grid-template-columns: 1fr; gap: 1rem; text-align: left; }
   .footer-meta, .footer-cta { text-align: left; align-items: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .fiche-nav-arrow { display: none; }
 }
 
 /* ============================================================
@@ -2884,6 +2983,16 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     <p class="rec-lead">Chaque recommandation est structurée, priorisée et mise en perspective — pour passer de l'insight à des décisions claires et des actions concrètes.</p>
   </div>
   <div class="fiche-doc-layout">
+    <div class="fiche-progress-dots" role="tablist" aria-label="Progression entre les recommandations">
+      <button class="fiche-progress-dot is-active" type="button" data-fiche="0" aria-label="Recommandation 1 sur 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="1" aria-label="Recommandation 2 sur 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="2" aria-label="Recommandation 3 sur 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="3" aria-label="Recommandation 4 sur 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="4" aria-label="Recommandation 5 sur 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="5" aria-label="Recommandation 6 sur 6"></button>
+    </div>
+    <button class="fiche-nav-arrow left" type="button" aria-label="Recommandation précédente" disabled>←</button>
+    <button class="fiche-nav-arrow right" type="button" aria-label="Recommandation suivante">→</button>
     <div class="fiche-doc-frame">
       <div class="fiche-content">
         <header class="fiche-header">
@@ -3274,6 +3383,99 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   }
   window.addEventListener('scroll', updateFloatingCta, { passive: true });
   window.addEventListener('resize', updateFloatingCta);
+
+  // ─── Fiches livrables — navigation Précédente / Suivante ───
+  const FICHES = [
+    { n: '01', short: 'Champs société & TVA', title: "Retirer les champs « société » et « TVA » de l'étape 3.", importance: 'Critique', place: 'Tunnel checkout — étape 3', cat: 'Utilisabilité', action: 'Modification directe', research: ['Analytics', 'Sessions recordings'], diagnostic: "Seulement 8% des clients remplissent ces champs. Drop-off mesuré de 34% sur l'étape 3 du tunnel — la friction n'est pas justifiée par le volume B2B observé sur le segment." },
+    { n: '02', short: 'Avis au-dessus du fold', title: 'Remonter les avis clients au-dessus du fold sur la fiche produit.', importance: 'Élevée', place: 'Page produit', cat: 'Confiance', action: 'Modification directe', research: ['Heatmaps', 'Sessions recordings'], diagnostic: "73% des visiteurs ne scrollent pas jusqu'aux avis. Pattern de sortie observé avant l'ajout au panier — la preuve sociale n'a pas le temps d'opérer." },
+    { n: '03', short: 'Hero orienté résultat', title: 'Reformuler le hero autour du résultat client, pas du produit.', importance: 'Élevée', place: 'Homepage', cat: 'Motivation', action: 'Test A/B', research: ['Interviews clients', 'Évaluation heuristique'], diagnostic: "Les interviews révèlent que la promesse principale n'est pas comprise avant la 3ème page visitée. Le hero parle du produit, pas de l'effet attendu." },
+    { n: '04', short: 'Livraison dès le produit', title: 'Clarifier les options de livraison dès la page produit.', importance: 'Moyenne', place: 'Page produit', cat: 'Compréhension', action: 'Modification directe', research: ['Tests utilisateurs', 'Analytics'], diagnostic: "Signal fort sur l'abandon panier lié à la découverte tardive des frais de livraison. À expliciter en amont du tunnel." },
+    { n: '05', short: 'Preuve sociale inline', title: 'Ajouter la preuve sociale dans le flow, pas en bas de page.', importance: 'Moyenne', place: 'Panier', cat: 'Confiance', action: 'Modification directe', research: ['Tests utilisateurs', 'Sessions recordings'], diagnostic: "Avis clients enfouis en footer : invisibles au moment où la décision se joue. Repositionnement inline pendant l'ajout au panier." },
+    { n: '06', short: 'Pricing en 3 tiers', title: "Tester un pricing en 3 tiers avec ancrage sur l'offre premium.", importance: 'Basse', place: 'Global / multi-pages', cat: 'Coût', action: 'Test A/B', research: ['Sondages onsite', 'Analytics'], diagnostic: "Hésitation forte sur le rapport qualité/prix exprimée dans les sondages. Un tier premium visible sert d'ancrage et redirige vers l'offre principale." }
+  ];
+  const ficheLayout = document.querySelector('.fiche-doc-layout');
+  const ficheFrame = ficheLayout?.querySelector('.fiche-doc-frame');
+  if (ficheFrame && FICHES.length) {
+    const ficheContent = ficheFrame.querySelector('.fiche-content');
+    const numEl = ficheFrame.querySelector('.fiche-num-value');
+    const classifEl = ficheFrame.querySelector('.fiche-classification');
+    const titleEl = ficheFrame.querySelector('.fiche-title');
+    const diagEl = ficheFrame.querySelector('.fiche-diagnostic');
+    const metaLines = ficheFrame.querySelectorAll('.fiche-meta-line');
+    const prevBtn = ficheFrame.querySelector('.fiche-foot-prev');
+    const nextBtn = ficheFrame.querySelector('.fiche-foot-next');
+    const prevText = prevBtn?.querySelector('.fiche-foot-nav-text');
+    const nextText = nextBtn?.querySelector('.fiche-foot-nav-text');
+    const dots = ficheLayout.querySelectorAll('.fiche-progress-dot');
+    const arrowLeft = ficheLayout.querySelector('.fiche-nav-arrow.left');
+    const arrowRight = ficheLayout.querySelector('.fiche-nav-arrow.right');
+    const total = FICHES.length;
+    let currentIdx = 0;
+    function setFiche(idx) {
+      // Pas de wrap : on clamp aux extrémités (parcours narratif borné)
+      currentIdx = Math.max(0, Math.min(total - 1, idx));
+      const f = FICHES[currentIdx];
+      numEl.innerHTML = `№ ${f.n} <span class="fiche-num-total">· sur 0${total}</span>`;
+      classifEl.textContent = `Importance — ${f.importance}`;
+      titleEl.textContent = f.title;
+      diagEl.textContent = f.diagnostic;
+      metaLines[0].querySelector('.fiche-meta-val').textContent = f.place;
+      metaLines[1].querySelector('.fiche-meta-val').textContent = f.cat;
+      metaLines[2].querySelector('.fiche-meta-val').textContent = f.action;
+      const sourcesVal = metaLines[3].querySelector('.fiche-meta-val');
+      sourcesVal.innerHTML = f.research.map(r => `<span>${r}</span>`).join('');
+      // Footer prev/next : disabled aux extrémités, label "Première / Dernière"
+      const isFirst = currentIdx === 0;
+      const isLast = currentIdx === total - 1;
+      if (prevBtn) {
+        prevBtn.disabled = isFirst;
+        if (prevText) {
+          prevText.textContent = isFirst
+            ? 'Première recommandation'
+            : `№ ${FICHES[currentIdx - 1].n} — ${FICHES[currentIdx - 1].short}`;
+        }
+      }
+      if (nextBtn) {
+        nextBtn.disabled = isLast;
+        if (nextText) {
+          nextText.textContent = isLast
+            ? 'Dernière recommandation'
+            : `№ ${FICHES[currentIdx + 1].n} — ${FICHES[currentIdx + 1].short}`;
+        }
+      }
+      // Dots
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === currentIdx));
+      // Flèches latérales
+      if (arrowLeft) arrowLeft.disabled = isFirst;
+      if (arrowRight) arrowRight.disabled = isLast;
+      // Relance l'animation fade-in en retirant/réajoutant la classe (force reflow)
+      ficheContent.classList.remove('is-fresh');
+      void ficheContent.offsetWidth;
+      ficheContent.classList.add('is-fresh');
+    }
+    prevBtn?.addEventListener('click', () => setFiche(currentIdx - 1));
+    nextBtn?.addEventListener('click', () => setFiche(currentIdx + 1));
+    arrowLeft?.addEventListener('click', () => setFiche(currentIdx - 1));
+    arrowRight?.addEventListener('click', () => setFiche(currentIdx + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => setFiche(i)));
+    // Swipe horizontal sur la fiche (mobile) — seuil 60px, |dX| > |dY| pour préserver le scroll vertical
+    let touchStartX = 0, touchStartY = 0;
+    ficheFrame.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    ficheFrame.addEventListener('touchend', (e) => {
+      const dX = e.changedTouches[0].clientX - touchStartX;
+      const dY = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dX) > 60 && Math.abs(dX) > Math.abs(dY)) {
+        setFiche(currentIdx + (dX < 0 ? 1 : -1));
+      }
+    }, { passive: true });
+    // Synchronise l'état initial des 3 dispositifs (footer prev/next, dots, flèches) avec la fiche courante
+    setFiche(0);
+    // Retire la classe is-fresh à l'init pour ne pas animer au load (l'animation initiale est gérée par .reveal)
+    ficheContent.classList.remove('is-fresh');
+  }
 
   // ─── Smooth scroll pour anchor links ───
   document.querySelectorAll('a[href^="#"]').forEach(a => {
