@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentions légales — Maat</title>
+<meta name="description" content="Mentions légales et politique de confidentialité du cabinet Maat — audits CRO par Anne-Sophie Roux.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS — palette aubergine + champagne (cohérent avec audit_cro_v3.html)
+   ============================================================ */
+:root {
+  --hero-bg: #08041A;
+  --band-bg: #16102E;
+  --paper: #FBF4E0;
+  --champagne: #D4B275;
+  --champagne-fonce: #8C6A2C;
+  --ink: #14102A;
+  --ivory: #F4ECD3;
+
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Newsreader', Georgia, serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  --header-height: 100px;
+  --header-height-mobile: 70px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: var(--header-height); }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--hero-bg);
+  color: var(--ivory);
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   HEADER STICKY (copie depuis audit_cro_v3.html, sous-menu retiré)
+   ============================================================ */
+.mh-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease, backdrop-filter 300ms ease, -webkit-backdrop-filter 300ms ease;
+}
+.mh-header.is-scrolled {
+  background: rgba(8, 4, 26, 0.95);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom-color: rgba(212, 178, 117, 0.18);
+  box-shadow: 0 1px 0 rgba(212, 178, 117, 0.06);
+}
+.mh-row1 {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 22px 5% 14px;
+  transition: padding 300ms ease;
+}
+.mh-header.is-scrolled .mh-row1 { padding: 14px 5% 8px; }
+.mh-logo {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 30px;
+  color: var(--ivory);
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  line-height: 1;
+  font-variation-settings: "opsz" 32;
+  transition: font-size 300ms ease;
+}
+.mh-header.is-scrolled .mh-logo { font-size: 26px; }
+.mh-logo-macron { position: relative; display: inline-block; }
+.mh-logo-macron::after {
+  content: '';
+  position: absolute;
+  top: 0.05em; left: 12%; width: 76%; height: 0.05em;
+  background: #F4ECD3;
+}
+.mh-tabs {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0; padding: 0;
+  list-style: none;
+}
+.mh-tab {
+  position: relative;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 17px;
+  color: rgba(244, 236, 211, 0.6);
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 250ms ease;
+  cursor: pointer;
+  background: none; border: none;
+}
+.mh-tab::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -2px;
+  height: 1.5px;
+  background: var(--champagne);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mh-tab:hover { color: var(--ivory); }
+.mh-tab:hover::after { transform: scaleX(1); }
+.mh-tab.is-coming {
+  color: rgba(244, 236, 211, 0.3);
+  cursor: default;
+}
+.mh-tab.is-coming:hover { color: rgba(244, 236, 211, 0.5); }
+.mh-tab.is-coming:hover::after { transform: scaleX(0); }
+.mh-tab.is-coming::before {
+  content: '— à venir';
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  background: var(--band-bg);
+  border: 1px dashed var(--champagne-fonce);
+  padding: 3px 7px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms cubic-bezier(0.34, 1.4, 0.64, 1), transform 250ms cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.mh-tab.is-coming:hover::before,
+.mh-tab.is-coming:focus-visible::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.mh-cta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  background: transparent;
+  border: 1px solid var(--champagne);
+  padding: 9px 16px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.mh-cta-arrow { display: inline-block; transition: transform 200ms ease; }
+.mh-cta:hover { background: var(--champagne); color: var(--hero-bg); }
+.mh-cta:hover .mh-cta-arrow { transform: translate(2px, -2px); }
+
+/* Drawer mobile */
+.mh-mobile-toggle {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  background: transparent;
+  border: 1px solid var(--champagne);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.mh-drawer {
+  display: none;
+  position: fixed;
+  top: var(--header-height-mobile);
+  left: 0; right: 0;
+  background: var(--hero-bg);
+  border-bottom: 1px solid rgba(212, 178, 117, 0.45);
+  box-shadow: 0 8px 24px -2px rgba(8, 4, 26, 0.6);
+  padding: 24px 24px 32px;
+  z-index: 99;
+  transform: translateY(calc(-100% - var(--header-height-mobile) - 20px));
+  transition: transform 300ms ease;
+}
+.mh-drawer.is-open { transform: translateY(0); }
+.mh-drawer-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+}
+.mh-drawer-tab {
+  position: relative;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--ivory);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 6px;
+  line-height: 1.1;
+  font-size: 22px;
+}
+.mh-drawer-tab::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--champagne);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mh-drawer-tab.is-coming {
+  color: rgba(244, 236, 211, 0.4);
+  font-size: 20px;
+  font-weight: 400;
+  cursor: default;
+}
+.mh-drawer-tab-stamp {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  border: 1px dashed var(--champagne-fonce);
+  padding: 3px 7px;
+  white-space: nowrap;
+}
+.mh-drawer-divider {
+  height: 1px;
+  background: rgba(212, 178, 117, 0.18);
+  margin: 0 0 18px;
+}
+.mh-drawer-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hero-bg);
+  background: var(--champagne);
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .mh-row1 { padding: 14px 5%; grid-template-columns: auto auto; }
+  .mh-header.is-scrolled .mh-row1 { padding: 8px 5% 12px; }
+  .mh-tabs, .mh-tabs-wrap, .mh-cta { display: none; }
+  .mh-mobile-toggle { display: inline-flex; justify-self: end; }
+  .mh-drawer { display: block; }
+  .mh-logo { font-size: 26px; }
+  .mh-header.is-scrolled .mh-logo { font-size: 22px; }
+}
+
+/* ============================================================
+   PAGE MENTIONS LÉGALES
+   ============================================================ */
+.legal-page {
+  position: relative;
+  background: var(--hero-bg);
+  padding: calc(var(--header-height) + 4%) 5% 5%;
+  min-height: 100vh;
+}
+.legal-container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.legal-mark {
+  /* surcharge .chapter-mark.on-dark : champagne 65% */
+  color: rgba(212, 178, 117, 0.65);
+  top: calc(var(--header-height) + 1rem);
+}
+/* Atome chapter-mark hérité */
+.chapter-mark {
+  position: absolute;
+  top: 2rem; right: 5%;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.chapter-mark.on-dark { color: var(--champagne); }
+
+.legal-header {
+  margin-bottom: 4rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.2);
+}
+.legal-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.012em;
+  color: var(--ivory);
+  margin: 0 0 1rem;
+  font-variation-settings: "opsz" 96;
+}
+.legal-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(244, 236, 211, 0.6);
+  margin: 0;
+  font-variation-settings: "opsz" 24;
+}
+
+.legal-section {
+  margin-bottom: 3.25rem;
+}
+.legal-section + .legal-section {
+  padding-top: 3.25rem;
+  border-top: 1px solid rgba(212, 178, 117, 0.15);
+}
+.legal-h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.15;
+  margin: 0 0 1.5rem;
+  font-variation-settings: "opsz" 60;
+}
+.legal-num {
+  font-size: 26px;
+  color: var(--champagne);
+}
+.legal-sep {
+  font-size: 22px;
+  color: rgba(212, 178, 117, 0.6);
+  font-style: normal;
+}
+.legal-h2-text {
+  font-size: 24px;
+  color: var(--ivory);
+}
+.legal-subhead {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  font-weight: 500;
+  margin: 1.75rem 0 0.5rem;
+}
+.legal-section p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(244, 236, 211, 0.85);
+  margin: 0 0 1rem;
+  font-variation-settings: "opsz" 14;
+}
+.legal-section p:last-child { margin-bottom: 0; }
+.legal-list {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+}
+.legal-list li {
+  position: relative;
+  padding-left: 1.2em;
+  margin-bottom: 0.4em;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(244, 236, 211, 0.85);
+  font-variation-settings: "opsz" 14;
+}
+.legal-list li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--champagne);
+  font-weight: 700;
+}
+.legal-list li:last-child { margin-bottom: 0; }
+.legal-section a {
+  color: var(--champagne);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.5);
+  padding-bottom: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.legal-section a:hover {
+  color: var(--ivory);
+  border-bottom-color: var(--ivory);
+}
+.legal-section em { font-style: italic; color: var(--champagne); }
+
+/* Placeholder italique champagne pour SIRET / APE / téléphone à remplir */
+.placeholder-italic {
+  font-style: italic;
+  color: rgba(212, 178, 117, 0.5);
+  border-bottom: 1px dotted rgba(212, 178, 117, 0.3);
+}
+
+/* ============================================================
+   FOOTER (copie depuis audit_cro_v3.html)
+   ============================================================ */
+.footer {
+  background: var(--hero-bg);
+  color: var(--ivory);
+  padding: 5% 5% 3% 5%;
+}
+.footer-top {
+  display: flex; align-items: flex-start; gap: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.2);
+  margin-bottom: 2rem;
+}
+.footer-feather {
+  width: 28px; height: 100px;
+  color: var(--champagne);
+  flex: 0 0 auto;
+  margin-top: 4px;
+}
+.footer-signature {
+  flex: 1;
+  display: flex; flex-direction: column;
+  gap: 1.5rem;
+  max-width: 720px;
+}
+.footer-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.2;
+  color: var(--ivory);
+  margin: 0;
+  font-variation-settings: "opsz" 60;
+}
+.footer-tagline em { color: var(--champagne); }
+.footer-thesis {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(244, 236, 211, 0.75);
+  font-weight: 300;
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(212, 178, 117, 0.4);
+  font-variation-settings: "opsz" 24;
+}
+.footer-definition {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(244, 236, 211, 0.6);
+  margin: 0;
+  font-variation-settings: "opsz" 14;
+}
+.footer-definition strong {
+  color: var(--champagne);
+  font-weight: 500;
+  font-style: italic;
+}
+.footer-bottom {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+.footer-contact { display: flex; flex-direction: column; gap: 4px; }
+.footer-contact-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.7);
+}
+.footer-contact-email {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--champagne);
+  border-bottom: 1px solid rgba(212, 178, 117, 0.4);
+  padding-bottom: 2px;
+  align-self: flex-start;
+  text-decoration: none;
+}
+.footer-meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.4);
+  text-align: center;
+}
+.footer-legal-link {
+  color: rgba(244, 236, 211, 0.5);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.footer-legal-link:hover {
+  color: var(--ivory);
+  border-bottom-color: rgba(244, 236, 211, 0.5);
+}
+.footer-legal-link[aria-current="page"] {
+  color: var(--champagne);
+  border-bottom-color: rgba(212, 178, 117, 0.4);
+}
+.footer-cta {
+  text-align: right;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+}
+.footer-cta-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.7);
+}
+.footer-cta-link {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  border-bottom: 1px solid rgba(212, 178, 117, 0.4);
+  padding-bottom: 2px;
+  text-decoration: none;
+}
+
+/* ============================================================
+   CTA flottant mobile (mode clair, sans theme switching)
+   ============================================================ */
+.mobile-cta-floating {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--champagne);
+  color: var(--hero-bg);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.40);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  z-index: 20;
+  pointer-events: none;
+}
+.mobile-cta-floating.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+@media (max-width: 900px) {
+  html { scroll-padding-top: var(--header-height-mobile); }
+  .legal-page { padding: calc(var(--header-height-mobile) + 5%) 5% 5%; }
+  .legal-mark { top: calc(var(--header-height-mobile) + 1rem); position: static; display: block; text-align: right; font-size: 12px; margin-bottom: 1.5rem; }
+  .legal-header { margin-bottom: 3rem; padding-bottom: 2rem; }
+  .legal-section { margin-bottom: 2.5rem; }
+  .legal-section + .legal-section { padding-top: 2.5rem; }
+  .footer-top { gap: 1.5rem; }
+  .footer-feather { height: 80px; }
+  .footer-bottom { grid-template-columns: 1fr; gap: 1rem; text-align: left; }
+  .footer-meta, .footer-cta { text-align: left; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- SVG sprite : feather-bauhaus utilisé dans le footer -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="feather-bauhaus" viewBox="0 0 64 240">
+      <g fill="currentColor">
+        <line x1="32" y1="8" x2="32" y2="232" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M 32 26 L 18 38 L 32 38 Z" fill-opacity="0.7"/>
+        <path d="M 32 26 L 46 38 L 32 38 Z" fill-opacity="0.7"/>
+        <path d="M 32 48 L 14 60 L 32 60 Z" fill-opacity="0.7"/>
+        <path d="M 32 48 L 50 60 L 32 60 Z" fill-opacity="0.7"/>
+        <path d="M 32 70 L 10 82 L 32 82 Z" fill-opacity="0.75"/>
+        <path d="M 32 70 L 54 82 L 32 82 Z" fill-opacity="0.75"/>
+        <path d="M 32 92 L 8 104 L 32 104 Z" fill-opacity="0.8"/>
+        <path d="M 32 92 L 56 104 L 32 104 Z" fill-opacity="0.8"/>
+        <path d="M 32 114 L 8 126 L 32 126 Z" fill-opacity="0.8"/>
+        <path d="M 32 114 L 56 126 L 32 126 Z" fill-opacity="0.8"/>
+        <path d="M 32 136 L 10 148 L 32 148 Z" fill-opacity="0.75"/>
+        <path d="M 32 136 L 54 148 L 32 148 Z" fill-opacity="0.75"/>
+        <path d="M 32 158 L 14 170 L 32 170 Z" fill-opacity="0.7"/>
+        <path d="M 32 158 L 50 170 L 32 170 Z" fill-opacity="0.7"/>
+        <path d="M 32 180 L 18 192 L 32 192 Z" fill-opacity="0.65"/>
+        <path d="M 32 180 L 46 192 L 32 192 Z" fill-opacity="0.65"/>
+        <path d="M 32 202 L 24 212 L 32 212 Z" fill-opacity="0.6"/>
+        <path d="M 32 202 L 40 212 L 32 212 Z" fill-opacity="0.6"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- HEADER STICKY (sans sous-menu d'anchors — page utilitaire) -->
+<header class="mh-header" id="mh-header" aria-label="Navigation principale">
+  <div class="mh-row1">
+    <a class="mh-logo" href="audit_cro_v3.html" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
+    <nav class="mh-tabs-wrap" aria-label="Pages">
+      <ul class="mh-tabs">
+        <li>
+          <a class="mh-tab" href="audit_cro_v3.html">Audit CRO</a>
+        </li>
+        <li>
+          <span class="mh-tab is-coming" role="link" aria-disabled="true" tabindex="0">Content &amp; Messaging Strategy</span>
+        </li>
+      </ul>
+    </nav>
+    <a class="mh-cta" href="audit_cro_v3.html#booking">Réserver un échange <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
+    <button class="mh-mobile-toggle" id="mh-mobile-toggle" type="button" aria-expanded="false" aria-controls="mh-drawer">Menu</button>
+  </div>
+</header>
+
+<aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
+  <ul class="mh-drawer-tabs">
+    <li>
+      <a class="mh-drawer-tab" href="audit_cro_v3.html">Audit CRO</a>
+    </li>
+    <li>
+      <span class="mh-drawer-tab is-coming" role="link" aria-disabled="true">
+        Content &amp; Messaging Strategy
+        <span class="mh-drawer-tab-stamp">— à venir</span>
+      </span>
+    </li>
+  </ul>
+  <div class="mh-drawer-divider" aria-hidden="true"></div>
+  <a class="mh-drawer-cta" href="audit_cro_v3.html#booking">Réserver un échange ↗</a>
+</aside>
+
+<!-- MAIN — contenu mentions légales -->
+<main class="legal-page" id="top">
+  <div class="legal-container">
+    <span class="chapter-mark on-dark legal-mark">/ mentions légales</span>
+
+    <header class="legal-header">
+      <h1 class="legal-title">Mentions légales</h1>
+      <p class="legal-subtitle">Informations légales obligatoires et politique de confidentialité.</p>
+    </header>
+
+    <!-- № 01 -->
+    <section class="legal-section">
+      <h2 class="legal-h2"><span class="legal-num">№ 01</span><span class="legal-sep">—</span><span class="legal-h2-text">Éditeur du site</span></h2>
+      <p>Le présent site est édité par :</p>
+      <ul class="legal-list">
+        <li>Nom : Anne-Sophie Roux, Entrepreneur individuel (EI)</li>
+        <li>Ville : Paris, France</li>
+        <!-- À REMPLIR : numéro SIRET 14 chiffres -->
+        <li>SIRET : <span class="placeholder-italic">[numéro SIRET — 14 chiffres]</span></li>
+        <!-- À REMPLIR : code APE / NAF -->
+        <li>Code APE : <span class="placeholder-italic">[code APE / NAF — ex. 7022Z Conseil pour les affaires]</span></li>
+        <li>TVA : Non assujettie à la TVA — article 293 B du CGI</li>
+        <li>Email : annesophieroux.consulting (at) gmail.com</li>
+        <!-- À REMPLIR : téléphone professionnel (optionnel) -->
+        <li>Téléphone : <span class="placeholder-italic">[téléphone professionnel — optionnel]</span></li>
+      </ul>
+      <p>Activité : Conseil en optimisation de conversion (CRO) et marketing digital.</p>
+      <p>Pour toute demande administrative, une adresse complète peut être communiquée sur demande.</p>
+    </section>
+
+    <!-- № 02 -->
+    <section class="legal-section">
+      <h2 class="legal-h2"><span class="legal-num">№ 02</span><span class="legal-sep">—</span><span class="legal-h2-text">Hébergement</span></h2>
+      <p>Le site est hébergé par :</p>
+      <ul class="legal-list">
+        <li>Société : GitHub, Inc.</li>
+        <li>Adresse : 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis</li>
+        <li>Site : <a href="https://github.com" target="_blank" rel="noopener noreferrer">https://github.com</a></li>
+        <li>Service : GitHub Pages</li>
+      </ul>
+      <h3 class="legal-subhead">Transfert hors Union européenne</h3>
+      <p>L'hébergement du site implique des transferts de données vers les États-Unis, notamment concernant les données techniques de connexion (adresse IP, journaux d'accès).</p>
+      <p>Ces transferts sont encadrés conformément à la réglementation applicable, notamment via l'adhésion de Microsoft (maison mère de GitHub) au Data Privacy Framework entre l'Union européenne et les États-Unis, reconnu par la Commission européenne comme assurant un niveau de protection adéquat.</p>
+      <p>Des garanties complémentaires peuvent également être mises en œuvre afin d'assurer la sécurité et la confidentialité des données.</p>
+    </section>
+
+    <!-- № 03 -->
+    <section class="legal-section">
+      <h2 class="legal-h2"><span class="legal-num">№ 03</span><span class="legal-sep">—</span><span class="legal-h2-text">Directeur de la publication</span></h2>
+      <p>Le directeur de la publication est : Anne-Sophie Roux.</p>
+      <p>Pour toute question relative au contenu du site ou pour signaler un contenu illicite, vous pouvez écrire à : annesophieroux.consulting (at) gmail.com</p>
+    </section>
+
+    <!-- № 04 -->
+    <section class="legal-section">
+      <h2 class="legal-h2"><span class="legal-num">№ 04</span><span class="legal-sep">—</span><span class="legal-h2-text">Données personnelles</span></h2>
+      <p>Le présent site collecte des données personnelles uniquement lorsque vous remplissez le formulaire de prise de rendez-vous ou nous contactez par email. Le traitement de ces données est effectué dans le respect du Règlement général sur la protection des données (RGPD) et de la loi Informatique et Libertés.</p>
+
+      <h3 class="legal-subhead">Responsable du traitement</h3>
+      <p>Anne-Sophie Roux, joignable à : annesophieroux.consulting (at) gmail.com</p>
+
+      <h3 class="legal-subhead">Données collectées</h3>
+      <ul class="legal-list">
+        <li>Nom et prénom</li>
+        <li>Adresse email</li>
+        <li>Numéro de téléphone (optionnel)</li>
+        <li>Nom de l'entreprise et site web (optionnel)</li>
+        <li>Contenu de votre message ou demande</li>
+        <li>Date et créneau de rendez-vous choisi</li>
+      </ul>
+
+      <h3 class="legal-subhead">Finalités</h3>
+      <ul class="legal-list">
+        <li>Répondre à votre demande de contact ou de rendez-vous</li>
+        <li>Organiser et préparer le rendez-vous demandé</li>
+        <li>Assurer le suivi commercial dans le cadre de notre relation</li>
+      </ul>
+
+      <h3 class="legal-subhead">Base légale</h3>
+      <p>Le traitement repose :</p>
+      <ul class="legal-list">
+        <li>soit sur votre consentement (article 6.1.a du RGPD)</li>
+        <li>soit sur l'exécution de mesures précontractuelles (article 6.1.b) prises à votre demande</li>
+      </ul>
+
+      <h3 class="legal-subhead">Durée de conservation</h3>
+      <p>Vos données sont conservées pendant 3 ans à compter de notre dernier échange dans le cadre d'une relation commerciale, conformément aux recommandations de la CNIL.</p>
+
+      <h3 class="legal-subhead">Destinataires</h3>
+      <p>Vos données sont accessibles uniquement par Anne-Sophie Roux. Elles peuvent transiter par les outils suivants utilisés pour la gestion de la relation :</p>
+      <ul class="legal-list">
+        <li>outil de prise de rendez-vous : Calendly</li>
+        <li>outil email : Gmail</li>
+      </ul>
+      <p>Ces outils peuvent entraîner des transferts de données hors de l'Union européenne. Dans ce cas, ces transferts sont encadrés conformément à la réglementation applicable (clauses contractuelles types, Data Privacy Framework le cas échéant).</p>
+      <p>Aucune donnée n'est cédée, vendue ou louée à des tiers à des fins commerciales.</p>
+
+      <h3 class="legal-subhead">Vos droits</h3>
+      <p>Conformément aux articles 15 à 22 du RGPD, vous disposez des droits suivants :</p>
+      <ul class="legal-list">
+        <li>Droit d'accès et de copie de vos données</li>
+        <li>Droit de rectification</li>
+        <li>Droit à l'effacement</li>
+        <li>Droit d'opposition</li>
+        <li>Droit à la limitation du traitement</li>
+        <li>Droit à la portabilité</li>
+        <li>Droit de retirer votre consentement à tout moment</li>
+      </ul>
+      <p>Pour exercer ces droits, vous pouvez écrire à : annesophieroux.consulting (at) gmail.com. Une réponse vous sera apportée dans un délai d'un mois maximum.</p>
+      <p>Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL.</p>
+    </section>
+
+    <!-- № 05 -->
+    <section class="legal-section">
+      <h2 class="legal-h2"><span class="legal-num">№ 05</span><span class="legal-sep">—</span><span class="legal-h2-text">Cookies & analytics</span></h2>
+      <p>Le présent site n'utilise aucun cookie de tracking, de publicité ou de profilage. Aucun traceur soumis à consentement n'est déposé.</p>
+
+      <h3 class="legal-subhead">Mesure d'audience</h3>
+      <p>Nous utilisons Plausible Analytics, une solution de mesure d'audience respectueuse de la vie privée. Cette solution est configurée de manière à respecter les critères d'exemption de consentement définis par la CNIL.</p>
+      <p>Aucun cookie n'est utilisé et aucune donnée n'est exploitée à des fins publicitaires ou de profilage. Les données collectées sont limitées à des informations techniques agrégées (pages consultées, sources de trafic, type d'appareil, navigateur, pays) et ne permettent pas une identification directe des utilisateurs.</p>
+      <p>Ces données sont hébergées au sein de l'Union européenne et ne font l'objet d'aucun croisement avec d'autres traitements.</p>
+      <p>Cette approche s'inscrit dans une démarche de mesure de performance respectueuse des utilisateurs.</p>
+      <p>Plus d'informations : <a href="https://plausible.io/privacy" target="_blank" rel="noopener noreferrer">politique de confidentialité de Plausible Analytics</a>.</p>
+    </section>
+
+    <!-- № 06 -->
+    <section class="legal-section">
+      <h2 class="legal-h2"><span class="legal-num">№ 06</span><span class="legal-sep">—</span><span class="legal-h2-text">Propriété intellectuelle</span></h2>
+      <p>L'ensemble des éléments présents sur ce site — textes, images, illustrations, structure, graphismes, mise en page, méthode et identité visuelle — sont la propriété exclusive d'Anne-Sophie Roux et sont protégés par les lois françaises et internationales relatives à la propriété intellectuelle.</p>
+      <p>Toute reproduction, représentation, modification, publication ou adaptation, totale ou partielle, par quelque procédé que ce soit, est interdite sans autorisation écrite préalable.</p>
+      <p>Toute utilisation non autorisée est susceptible de constituer une contrefaçon.</p>
+      <p>Pour toute demande d'utilisation, contactez : annesophieroux.consulting (at) gmail.com</p>
+    </section>
+
+    <!-- № 07 -->
+    <section class="legal-section">
+      <h2 class="legal-h2"><span class="legal-num">№ 07</span><span class="legal-sep">—</span><span class="legal-h2-text">Responsabilité</span></h2>
+      <p>Le contenu du présent site est fourni à titre informatif. Anne-Sophie Roux s'efforce de fournir des informations exactes et à jour, mais ne peut garantir l'absence d'erreurs ou d'omissions, ni la disponibilité permanente du site.</p>
+      <p>Le site peut contenir des liens vers des sites tiers. Anne-Sophie Roux n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu, leur disponibilité ou leurs pratiques.</p>
+    </section>
+
+    <!-- № 08 -->
+    <section class="legal-section">
+      <h2 class="legal-h2"><span class="legal-num">№ 08</span><span class="legal-sep">—</span><span class="legal-h2-text">Droit applicable</span></h2>
+      <p>Les présentes mentions légales sont régies par le droit français.</p>
+      <p>En cas de litige, et après tentative de résolution amiable, les tribunaux compétents seront ceux du ressort de Paris.</p>
+    </section>
+
+    <!-- № 09 -->
+    <section class="legal-section">
+      <h2 class="legal-h2"><span class="legal-num">№ 09</span><span class="legal-sep">—</span><span class="legal-h2-text">Médiation de la consommation</span></h2>
+      <p>Conformément aux articles L.616-1 et R.616-1 du Code de la consommation, vous pouvez recourir gratuitement au service de médiation suivant :</p>
+      <ul class="legal-list">
+        <li>CNPM – Médiation de la consommation</li>
+        <li><a href="https://www.cnpm-mediation-consommation.eu/" target="_blank" rel="noopener noreferrer">https://www.cnpm-mediation-consommation.eu/</a></li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<!-- FOOTER (cohérent avec audit_cro_v3.html, lien Mentions légales en page actuelle) -->
+<footer class="footer">
+  <div class="footer-top">
+    <svg class="footer-feather" aria-hidden="true"><use href="#feather-bauhaus"/></svg>
+    <div class="footer-signature">
+      <p class="footer-tagline">Audits de conversion <em>pour les marques</em><br/>qui ont mieux à faire que deviner.</p>
+      <p class="footer-thesis">La conversion est une question d'alignement.</p>
+      <p class="footer-definition"><strong>Maat</strong> est le principe d'équilibre et de vérité. Nous croyons que la conversion ne se force pas : elle émerge quand promesse, expérience et attente s'accordent enfin.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-contact">
+      <span class="footer-contact-label">— Contact</span>
+      <a href="mailto:annesophieroux.consulting@gmail.com" class="footer-contact-email">annesophieroux.consulting@gmail.com</a>
+    </div>
+    <div class="footer-meta">© Maat 2026 · Cabinet d'analyse CRO · <a href="mentions-legales.html" class="footer-legal-link" aria-current="page">Mentions légales</a></div>
+    <div class="footer-cta">
+      <span class="footer-cta-label">— Démarrer un audit</span>
+      <a href="audit_cro_v3.html#booking" class="footer-cta-link">Réserver un échange →</a>
+    </div>
+  </div>
+</footer>
+
+<a href="audit_cro_v3.html#booking" class="mobile-cta-floating" id="mobile-cta">Réserver un échange →</a>
+
+<script>
+(function() {
+  // Header sticky : densification au scroll > 60px
+  const mhHeader = document.getElementById('mh-header');
+  if (mhHeader) {
+    const onScrollHeader = () => mhHeader.classList.toggle('is-scrolled', window.scrollY > 60);
+    onScrollHeader();
+    window.addEventListener('scroll', onScrollHeader, { passive: true });
+  }
+
+  // Drawer mobile : toggle
+  const drawerToggle = document.getElementById('mh-mobile-toggle');
+  const drawer = document.getElementById('mh-drawer');
+  if (drawerToggle && drawer) {
+    const setDrawer = (open) => {
+      drawer.classList.toggle('is-open', open);
+      drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      drawerToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      drawerToggle.textContent = open ? 'Fermer' : 'Menu';
+    };
+    drawerToggle.addEventListener('click', () => setDrawer(!drawer.classList.contains('is-open')));
+    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setDrawer(false)));
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && drawer.classList.contains('is-open')) setDrawer(false);
+    });
+  }
+
+  // CTA flottant mobile : visible au scroll sur mobile
+  const floatingCta = document.getElementById('mobile-cta');
+  if (floatingCta) {
+    const updateFloatingCta = () => {
+      const isMobile = window.matchMedia('(max-width: 900px)').matches;
+      const scrolled = window.scrollY > 200;
+      floatingCta.classList.toggle('is-visible', isMobile && scrolled);
+    };
+    updateFloatingCta();
+    window.addEventListener('scroll', updateFloatingCta, { passive: true });
+    window.addEventListener('resize', updateFloatingCta);
+  }
+})();
+</script>
+
+</body>
+</html>

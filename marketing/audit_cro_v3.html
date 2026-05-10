@@ -1917,6 +1917,17 @@ body {
   color: rgba(244, 236, 211, 0.4);
   text-align: center;
 }
+.footer-legal-link {
+  color: rgba(244, 236, 211, 0.5);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.footer-legal-link:hover {
+  color: var(--ivory);
+  border-bottom-color: rgba(244, 236, 211, 0.5);
+}
 .footer-cta {
   text-align: right;
   display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
@@ -3267,7 +3278,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       <span class="footer-contact-label">— Contact</span>
       <a href="mailto:annesophieroux.consulting@gmail.com" class="footer-contact-email">annesophieroux.consulting@gmail.com</a>
     </div>
-    <div class="footer-meta">© Maat 2026 · Cabinet d'analyse CRO</div>
+    <div class="footer-meta">© Maat 2026 · Cabinet d'analyse CRO · <a href="mentions-legales.html" class="footer-legal-link">Mentions légales</a></div>
     <div class="footer-cta">
       <span class="footer-cta-label">— Démarrer un audit</span>
       <a href="#booking" class="footer-cta-link">Réserver un échange →</a>
