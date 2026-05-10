@@ -2228,10 +2228,13 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .team-duo { grid-template-columns: 1fr; gap: 2.5rem; }
   .team-stamp-line { max-width: calc(50% - 90px); }
   .modulable-card-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .modulable-text-block p:last-child { display: none; }
   .modulable-divider-vertical { display: none; }
   .booking-grid { grid-template-columns: 1fr; gap: 2rem; }
   .cal-body { grid-template-columns: 1fr; }
   .cal-month { border-right: none; border-bottom: 1px solid rgba(20, 16, 42, 0.08); }
+  .cal-foot { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .cal-confirm-btn { align-self: stretch; text-align: center; }
   .footer-top { gap: 1.5rem; }
   .footer-feather { height: 80px; }
   .footer-bottom { grid-template-columns: 1fr; gap: 1rem; text-align: left; }
@@ -3174,8 +3177,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         <li>Compréhension de votre business et de vos enjeux</li>
         <li>Clarification de vos objectifs</li>
         <li>Présentation de notre méthode</li>
-        <li>Aucune présentation commerciale</li>
-        <li>Questions préparées à partir de votre site</li>
       </ul>
     </div>
     <div class="cal-card">
