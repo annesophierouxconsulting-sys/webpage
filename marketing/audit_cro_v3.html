@@ -30,7 +30,7 @@
 
   /* Header sticky */
   --header-height: 100px;
-  --header-height-mobile: 64px;
+  --header-height-mobile: 70px;
 }
 
 * { box-sizing: border-box; }
@@ -2244,6 +2244,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 @media (max-width: 600px) {
   .fiche-nav-arrow { display: none; }
   .fiche-swipe-hint { display: block; }
+  .hero-cta-row { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
 }
 
 /* ============================================================
@@ -2522,7 +2523,9 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   box-shadow: 0 8px 24px -2px rgba(8, 4, 26, 0.6);
   padding: 24px 24px 32px;
   z-index: 99;
-  transform: translateY(-110%);
+  /* Compense le top: var(--header-height-mobile) pour que le drawer soit toujours hors viewport au repos,
+     quelle que soit la hauteur du contenu */
+  transform: translateY(calc(-100% - var(--header-height-mobile) - 20px));
   transition: transform 300ms ease;
 }
 .mh-drawer.is-open { transform: translateY(0); }
@@ -2626,8 +2629,8 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 
 @media (max-width: 900px) {
   .mh-row1 { padding: 14px 5%; grid-template-columns: auto auto; }
-  .mh-header.is-scrolled .mh-row1 { padding: 10px 5%; }
-  .mh-tabs, .mh-cta { display: none; }
+  .mh-header.is-scrolled .mh-row1 { padding: 8px 5% 12px; }
+  .mh-tabs, .mh-tabs-wrap, .mh-cta { display: none; }
   .mh-row2 { display: none; }
   .mh-mobile-toggle { display: inline-flex; justify-self: end; }
   .mh-drawer { display: block; }
