@@ -3562,13 +3562,13 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         // Fade le hint au 1er swipe réussi (persistant via localStorage)
         if (swipeHint && !swipeHint.classList.contains('is-faded')) {
           swipeHint.classList.add('is-faded');
-          try { localStorage.setItem('fiche-swiped', '1'); } catch (_) {}
+          try { sessionStorage.setItem('fiche-swiped', '1'); } catch (_) {}
         }
       }
     }, { passive: true });
     // Si l'utilisateur a déjà swipé une fois, masque le hint dès le load
     try {
-      if (localStorage.getItem('fiche-swiped') && swipeHint) swipeHint.classList.add('is-faded');
+      if (sessionStorage.getItem('fiche-swiped') && swipeHint) swipeHint.classList.add('is-faded');
     } catch (_) {}
     // Wobble pédagogique au 1er montage mobile pour suggérer le swipe (1 fois par session)
     try {
