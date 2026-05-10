@@ -293,11 +293,6 @@ body {
   max-width: 760px;
   margin: 0 auto;
 }
-.legal-mark {
-  /* surcharge .chapter-mark.on-dark : champagne 65% */
-  color: rgba(212, 178, 117, 0.65);
-  top: calc(var(--header-height) + 1rem);
-}
 /* Atome chapter-mark hérité */
 .chapter-mark {
   position: absolute;
@@ -309,6 +304,16 @@ body {
   color: var(--ink);
 }
 .chapter-mark.on-dark { color: var(--champagne); }
+.legal-mark {
+  /* En flow normal au-dessus du titre H1 (évite le conflit visuel avec le CTA du header)
+     surcharge .chapter-mark : passe de absolute à static, champagne 65% */
+  position: static;
+  display: block;
+  text-align: right;
+  font-size: 12px;
+  margin-bottom: 1.5rem;
+  color: rgba(212, 178, 117, 0.65);
+}
 
 .legal-header {
   margin-bottom: 4rem;
@@ -594,7 +599,6 @@ body {
 @media (max-width: 900px) {
   html { scroll-padding-top: var(--header-height-mobile); }
   .legal-page { padding: calc(var(--header-height-mobile) + 5%) 5% 5%; }
-  .legal-mark { top: calc(var(--header-height-mobile) + 1rem); position: static; display: block; text-align: right; font-size: 12px; margin-bottom: 1.5rem; }
   .legal-header { margin-bottom: 3rem; padding-bottom: 2rem; }
   .legal-section { margin-bottom: 2.5rem; }
   .legal-section + .legal-section { padding-top: 2.5rem; }
