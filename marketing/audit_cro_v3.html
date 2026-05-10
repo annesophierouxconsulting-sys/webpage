@@ -3316,9 +3316,14 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       detailPointer.textContent = `↓ ${String(i+1).padStart(2, '0')}`;
       detailPointer.style.left = POINTER_POS[i];
       pulse.style.left = PULSE_POS[i];
-      // Mobile auto-scroll
+      // Mobile auto-scroll : on évite que le CTA flottant cache la fin du panel (livrable)
       if (window.matchMedia('(max-width: 900px)').matches) {
-        detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const rect = detail.getBoundingClientRect();
+        const reservedBottom = 100; // espace réservé pour le CTA flottant + respiration
+        const targetBottom = window.innerHeight - reservedBottom;
+        if (rect.bottom > targetBottom) {
+          window.scrollTo({ top: window.scrollY + (rect.bottom - targetBottom), behavior: 'smooth' });
+        }
       }
     });
   });
@@ -3381,7 +3386,16 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     seg.addEventListener('click', () => {
       setActiveMethod(i);
       if (window.matchMedia('(max-width: 900px)').matches) {
-        document.querySelector('.methods-legend-block').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Scroll calculé : on évite que le CTA flottant (fixed bottom) cache la fin de la lphase active
+        const activeLphase = document.querySelector('.lphase.is-active');
+        if (activeLphase) {
+          const rect = activeLphase.getBoundingClientRect();
+          const reservedBottom = 100; // espace réservé pour le CTA flottant + respiration
+          const targetBottom = window.innerHeight - reservedBottom;
+          if (rect.bottom > targetBottom) {
+            window.scrollTo({ top: window.scrollY + (rect.bottom - targetBottom), behavior: 'smooth' });
+          }
+        }
       }
     });
     seg.addEventListener('mouseenter', () => {
