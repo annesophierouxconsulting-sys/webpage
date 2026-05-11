@@ -1181,6 +1181,16 @@ body {
   margin: 0 0 1.2rem;
   font-variation-settings: "opsz" 60;
 }
+.fiche-diagnostic-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
 .fiche-diagnostic {
   font-family: var(--font-body);
   font-size: 15px;
@@ -1227,8 +1237,8 @@ body {
 
 /* Footer navigation */
 .fiche-foot {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: space-between;
   gap: 1.5rem;
   align-items: baseline;
   padding: 1.25rem 0;
@@ -1259,16 +1269,6 @@ body {
 }
 .fiche-foot-prev .fiche-foot-nav-text::before { content: '←'; font-size: 13px; }
 .fiche-foot-next .fiche-foot-nav-text::after { content: '→'; font-size: 13px; }
-.fiche-foot-link {
-  align-self: center; text-align: center;
-  color: rgba(140, 106, 44, 0.65);
-  border-bottom: 1px dotted rgba(140, 106, 44, 0.4);
-  padding-bottom: 2px;
-  font-size: 9px;
-  letter-spacing: 0.2em;
-  text-decoration: none;
-}
-
 /* Sommaire latéral */
 .fiche-summary {
   padding: 1.75rem 1.75rem;
@@ -3112,6 +3112,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
           <div class="fiche-classification">Importance — Critique</div>
         </header>
         <h4 class="fiche-title">Retirer les champs « société » et « TVA » de l'étape 3.</h4>
+        <span class="fiche-diagnostic-label">Insight :</span>
         <p class="fiche-diagnostic">Seulement 8% des clients remplissent ces champs. Drop-off mesuré de 34% sur l'étape 3 du tunnel — la friction n'est pas justifiée par le volume B2B observé sur le segment.</p>
         <div class="fiche-meta-grid">
           <div class="fiche-meta-line">
@@ -3141,7 +3142,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
           <span class="fiche-foot-nav-label">Précédente</span>
           <span class="fiche-foot-nav-text">№ 06 — Pricing en 3 tiers</span>
         </button>
-        <a href="#" class="fiche-foot-link">Insight lié</a>
         <button class="fiche-foot-next">
           <span class="fiche-foot-nav-label">Suivante</span>
           <span class="fiche-foot-nav-text">№ 02 — Avis clients</span>
@@ -3517,7 +3517,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     { n: '34', short: 'Hero orienté résultat', title: 'Reformuler le hero autour du résultat client, pas du produit.', importance: 'Élevée', place: 'Homepage', cat: 'Motivation', theme: 'Désirabilité', action: 'Test A/B', research: ['Interviews clients', 'Évaluation heuristique'], diagnostic: "Les interviews révèlent que la promesse principale n'est pas comprise avant la 3ème page visitée. Le hero parle du produit, pas de l'effet attendu." },
     { n: '67', short: 'Livraison dès le produit', title: 'Clarifier les options de livraison dès la page produit.', importance: 'Moyenne', place: 'Page produit', cat: 'Coût', theme: 'Livraison', action: 'Modification directe', research: ['Tests utilisateurs', 'Analytics'], diagnostic: "Signal fort sur l'abandon panier lié à la découverte tardive des frais de livraison. À expliciter en amont du tunnel." },
     { n: '89', short: 'Preuve sociale inline', title: 'Ajouter la preuve sociale dans le flow, pas en bas de page.', importance: 'Moyenne', place: 'Panier', cat: 'Confiance', theme: 'Attention', action: 'Modification directe', research: ['Tests utilisateurs', 'Sessions recordings'], diagnostic: "Avis clients enfouis en footer : invisibles au moment où la décision se joue. Repositionnement inline pendant l'ajout au panier." },
-    { n: '113', short: 'Pricing en 3 tiers', title: "Tester un pricing en 3 tiers avec ancrage sur l'offre premium.", importance: 'Basse', place: 'Global / multi-pages', cat: 'Coût', theme: 'Choix', action: 'Test A/B', research: ['Sondages onsite', 'Analytics'], diagnostic: "Hésitation forte sur le rapport qualité/prix exprimée dans les sondages. Un tier premium visible sert d'ancrage et redirige vers l'offre principale." }
+    { n: '113', short: 'Pricing en 3 tiers', title: "Tester un pricing en 3 tiers avec ancrage sur l'offre premium.", importance: 'Basse', place: 'Global / multi-pages', cat: 'Coût', theme: 'Choix', action: 'Test A/B', research: ['Sondages onsite', 'Analytics'], diagnostic: "Hésitation forte sur le rapport qualité/prix exprimée dans les sondages. Sans point d'ancrage tarifaire, le visiteur n'a pas de repère pour évaluer l'offre." }
   ];
   const ficheLayout = document.querySelector('.fiche-doc-layout');
   const ficheFrame = ficheLayout?.querySelector('.fiche-doc-frame');
