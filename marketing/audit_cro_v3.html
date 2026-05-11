@@ -614,6 +614,14 @@ body {
   text-decoration: none;
   border-bottom: 1px solid var(--champagne);
 }
+.method-detail-link {
+  padding-bottom: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.method-detail-link:hover {
+  color: var(--ivory);
+  border-bottom-color: var(--ivory);
+}
 
 /* ============================================================
    6 — METHODS CYCLE — composition magazine vertical décalé
@@ -2891,6 +2899,10 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
           <span class="method-detail-out-lbl">Livrable</span>
           <span class="method-detail-out-val">Cadre d'analyse partagé</span>
         </div>
+        <div class="method-detail-out method-detail-out-with" hidden>
+          <span class="method-detail-out-lbl">Avec</span>
+          <span class="method-detail-out-val">un partenaire UX dédié <a class="method-detail-link" href="#binome">→ voir l'équipe</a></span>
+        </div>
       </div>
     </div>
   </div>
@@ -3311,7 +3323,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     { name: 'Lecture business', desc: 'Comprendre votre contexte, vos objectifs, vos personas, leurs besoins et leurs contraintes. On pose le bon cadre d\u2019analyse.', livrable: 'Cadre d\u2019analyse partagé' },
     { name: 'Recherche & insights', desc: 'On croise analytics, comportements observés et paroles d\u2019utilisateurs pour révéler ce qui se passe vraiment dans le parcours.', livrable: 'Backlog d’insights sourcés' },
     { name: 'Priorisation des actions', desc: 'On hiérarchise les correctifs selon leur impact réel sur la conversion et leur coût d\u2019implémentation. Pas de score chiffré : un avis argumenté.', livrable: 'Backlog priorisé + synthèse globale' },
-    { name: 'CRO redesign', desc: 'Maquettes correctives sur les écrans à plus fort impact. Le redesign s\u2019appuie sur l\u2019audit, jamais sur l\u2019intuition seule.', livrable: 'Maquettes UX finalisées, annotées' }
+    { name: 'CRO redesign', desc: 'Selon le périmètre, maquettes correctives sur les écrans à plus fort impact. Le redesign s\u2019appuie sur l\u2019audit, jamais sur l\u2019intuition seule.', livrable: 'Maquettes UX finalisées, annotées', avec: true }
   ];
   const stepsBtns = document.querySelectorAll('.method-step');
   const detail = document.querySelector('.method-detail');
@@ -3319,6 +3331,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   const detailName = detail.querySelector('.method-detail-name');
   const detailDesc = detail.querySelector('.method-detail-desc');
   const detailVal = detail.querySelector('.method-detail-out-val');
+  const detailWithRow = detail.querySelector('.method-detail-out-with');
   const detailPointer = detail.querySelector('.method-detail-pointer');
   const timeline = document.querySelector('.method-timeline');
   // Inject pulse
@@ -3338,6 +3351,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       detailName.textContent = STEPS[i].name;
       detailDesc.textContent = STEPS[i].desc;
       detailVal.textContent = STEPS[i].livrable;
+      if (detailWithRow) detailWithRow.hidden = !STEPS[i].avec;
       detailPointer.textContent = `↓ ${String(i+1).padStart(2, '0')}`;
       detailPointer.style.left = POINTER_POS[i];
       pulse.style.left = PULSE_POS[i];
