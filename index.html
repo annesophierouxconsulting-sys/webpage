@@ -1,25 +1,3796 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mes Pages</title>
-  <style>
-    body { font-family: sans-serif; max-width: 800px; margin: 60px auto; padding: 0 20px; color: #333; }
-    h1 { font-size: 2rem; border-bottom: 2px solid #333; padding-bottom: 10px; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 12px 0; }
-    a { text-decoration: none; color: #0070f3; font-size: 1.1rem; }
-    a:hover { text-decoration: underline; }
-    p.empty { color: #999; font-style: italic; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maat — Audits CRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TOKENS — Palette aubergine + champagne, magazine sombre
+   ============================================================ */
+:root {
+  /* Couleurs */
+  --hero-bg: #08041A;          /* Aubergine très profonde — hero, sections d'emphase */
+  --band-bg: #16102E;          /* Aubergine claire — bandeaux, double regard */
+  --paper: #FBF4E0;            /* Crème — sections claires et fiches */
+  --champagne: #D4B275;        /* Or sur fond sombre */
+  --champagne-fonce: #8C6A2C;  /* Or sur fond clair */
+  --ink: #14102A;              /* Aubergine très foncée — texte sur clair */
+  --ink-soft: #3A3658;         /* Texte secondaire */
+  --ink-mute: #6E6890;         /* Texte tertiaire */
+  --ivory: #F4ECD3;            /* Crème claire — texte sur sombre */
+
+  /* Typographie */
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Newsreader', Georgia, serif; /* Tout-serif assumé */
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  /* Header sticky */
+  --header-height: 100px;
+  --header-height-mobile: 70px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-padding-top: var(--header-height); }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   ATOMES
+   ============================================================ */
+
+/* Plume bauhaus — symbole de marque récurrent (hero, différence, footer) */
+.feather-bauhaus { color: var(--champagne); }
+
+/* Filet vertical éditorial — utilisé partout sur les intros */
+.intro-rule {
+  position: relative;
+  padding-left: 1.75rem;
+}
+.intro-rule::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 4px; bottom: 4px;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    rgba(140, 106, 44, 0.4),
+    rgba(140, 106, 44, 0.7),
+    rgba(140, 106, 44, 0.4));
+}
+.intro-rule.on-dark::before {
+  background: linear-gradient(to bottom,
+    rgba(212, 178, 117, 0.4),
+    rgba(212, 178, 117, 0.75),
+    rgba(212, 178, 117, 0.4));
+}
+
+/* Encart éditorial commun — fond saturé léger + bordure + coins en équerre */
+.editorial-block {
+  background: rgba(140, 106, 44, 0.045);
+  border: 1px solid rgba(140, 106, 44, 0.18);
+  position: relative;
+  border-radius: 1px;
+}
+.editorial-block::before, .editorial-block::after {
+  content: '';
+  position: absolute;
+  width: 12px; height: 12px;
+  border-color: rgba(140, 106, 44, 0.5);
+  border-style: solid;
+  border-width: 0;
+}
+.editorial-block::before {
+  top: -1px; left: -1px;
+  border-top-width: 1px; border-left-width: 1px;
+}
+.editorial-block::after {
+  bottom: -1px; right: -1px;
+  border-bottom-width: 1px; border-right-width: 1px;
+}
+.editorial-block.on-dark {
+  background: rgba(244, 236, 211, 0.04);
+  border-color: rgba(212, 178, 117, 0.3);
+}
+.editorial-block.on-dark::before,
+.editorial-block.on-dark::after {
+  border-color: rgba(212, 178, 117, 0.7);
+  width: 14px; height: 14px;
+}
+
+/* Overline mono champagne */
+.overline {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin-bottom: 1rem;
+}
+.overline.on-dark { color: var(--champagne); }
+
+/* Marker de chapitre dans le coin */
+.chapter-mark {
+  position: absolute;
+  top: 2rem; right: 5%;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.chapter-mark.on-dark { color: var(--champagne); }
+
+/* CTA mono soulignée */
+.cta-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  border-bottom: 1px solid rgba(212, 178, 117, 0.5);
+  padding-bottom: 6px;
+  text-decoration: none;
+}
+.cta-mono.on-light {
+  color: var(--champagne-fonce);
+  border-bottom-color: rgba(140, 106, 44, 0.5);
+}
+
+/* ============================================================
+   1 — HERO MAGAZINE SOMBRE — pleine largeur asymétrique gauche
+   ============================================================ */
+.hero {
+  background: var(--hero-bg);
+  color: var(--ivory);
+  padding: calc(var(--header-height) + 3.5%) 5% 5%;
+  position: relative;
+}
+
+.hero-inner {
+  position: relative;
+  padding-left: 1.75rem;
+  max-width: 70%;
+}
+.hero-inner::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 4px; bottom: 4px;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    rgba(212, 178, 117, 0.4),
+    rgba(212, 178, 117, 0.75),
+    rgba(212, 178, 117, 0.4));
+}
+
+.hero-overline {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  margin-bottom: 1.2rem;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 60;
+  font-weight: 400;
+  font-size: clamp(28px, 4.4vw, 46px);
+  line-height: 1.0;
+  letter-spacing: -0.005em;
+  margin: 0;
+  color: var(--ivory);
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--champagne);
+  font-variation-settings: "opsz" 72;
+}
+
+.hero-lead {
+  margin-top: 1.2rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(244, 236, 211, 0.78);
+  max-width: 580px;
+  font-variation-settings: "opsz" 14;
+}
+
+.hero-cta-row {
+  margin-top: 1.5rem;
+  display: flex; align-items: center; gap: 1.2rem;
+}
+.hero-cta-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.5);
+}
+
+/* ============================================================
+   2 — BANDEAU MAÂT — bandeau séparé sous le hero, fond aubergine claire
+   ============================================================ */
+.band-maat {
+  background: var(--band-bg);
+  padding: 2.8% 5%;
+  position: relative;
+}
+.band-maat::before, .band-maat::after {
+  content: '';
+  position: absolute;
+  left: 5%; right: 5%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212, 178, 117, 0.45), transparent);
+}
+.band-maat::before { top: 0; }
+.band-maat::after { bottom: 0; }
+.band-maat-content {
+  display: flex; align-items: center; gap: 1.75rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.band-maat-feather {
+  width: 22px;
+  height: 90px;
+  flex: 0 0 auto;
+  color: var(--champagne);
+}
+.band-maat-text-block { flex: 1; }
+.band-maat-name {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  display: block;
+  margin-bottom: 14px;
+}
+.band-maat-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.55;
+  color: rgba(244, 236, 211, 0.85);
+  font-weight: 300;
+  margin: 0;
+  font-variation-settings: "opsz" 24;
+}
+.band-maat-text b { font-style: normal; font-weight: 500; color: var(--ivory); }
+
+/* ============================================================
+   3 — SPLIT — deux encarts éditoriaux côte à côte
+   "Ce que vous vivez" sans numérotation, "Ce qui va changer" avec numérotation
+   ============================================================ */
+.split-section {
+  padding: 5% 5%;
+  background: var(--paper);
+  position: relative;
+}
+.split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.split-block { padding: 2.25rem 2rem; }
+/* Override : pas d'encart, juste filets latéraux */
+.split-block.editorial-block {
+  background: none;
+  border: none;
+  padding: 0.5rem 1.75rem;
+  position: relative;
+}
+.split-block.editorial-block::before,
+.split-block.editorial-block::after {
+  display: none;
+}
+.split-block.editorial-block {
+  background: none;
+}
+.split-grid > .split-block.editorial-block {
+  border-left: 1px solid rgba(140, 106, 44, 0.32);
+  border-right: none;
+}
+/* Filets aubergine en gradient sous chaque outcome */
+.outcome-item { border-bottom: none; position: relative; padding: 16px 0; }
+.outcome-item::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: linear-gradient(to right,
+    rgba(20, 16, 42, 0.55) 0%,
+    rgba(20, 16, 42, 0.18) 60%,
+    rgba(20, 16, 42, 0) 100%);
+}
+.outcome-item:last-child::after { display: none; }
+
+.split-block-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(22px, 2.8vw, 30px);
+  line-height: 1.05;
+  margin: 0 0 1.5rem;
+  color: var(--ink);
+  font-variation-settings: "opsz" 60;
+}
+.split-block-title em {
+  font-style: italic;
+  color: var(--champagne-fonce);
+  font-variation-settings: "opsz" 72;
+}
+
+/* Liste pain — sans numérotation */
+.pain-list {
+  display: flex; flex-direction: column;
+  margin: 0; padding: 0; list-style: none;
+}
+.pain-item {
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(20, 16, 42, 0.08);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  font-variation-settings: "opsz" 14;
+}
+.pain-item:last-child { border-bottom: none; }
+.pain-item:first-child { padding-top: 0; }
+
+/* Liste outcome — numérotée */
+.outcome-list { display: flex; flex-direction: column; }
+.outcome-item {
+  padding: 14px 0;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  border-bottom: 1px solid rgba(20, 16, 42, 0.08);
+}
+.outcome-item:last-child { border-bottom: none; }
+.outcome-item:first-child { padding-top: 0; }
+.outcome-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--champagne-fonce);
+}
+.outcome-content { display: flex; flex-direction: column; gap: 2px; }
+.outcome-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--ink);
+  font-weight: 400;
+  font-variation-settings: "opsz" 32;
+}
+.outcome-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--ink-mute);
+  line-height: 1.5;
+  font-variation-settings: "opsz" 14;
+}
+
+/* ============================================================
+   5 — NOTRE DÉMARCHE — timeline horizontale aubergine + panel crème en dessous
+   ============================================================ */
+.method-section {
+  background: var(--hero-bg);
+  color: var(--ivory);
+  padding: 5% 5%;
+  position: relative;
+}
+.method-head {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.method-head-inner {
+  display: inline-block;
+  text-align: left;
+  position: relative;
+  padding-left: 1.75rem;
+  max-width: 580px;
+}
+.method-head-inner::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 4px; bottom: 4px;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    rgba(212, 178, 117, 0.4),
+    rgba(212, 178, 117, 0.75),
+    rgba(212, 178, 117, 0.4));
+}
+.method-head h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 3.4vw, 38px);
+  line-height: 1.05;
+  margin: 0 0 0.9rem;
+  color: var(--ivory);
+  font-variation-settings: "opsz" 60;
+}
+.method-head h3 em {
+  font-style: italic;
+  color: var(--champagne);
+  font-variation-settings: "opsz" 72;
+}
+.method-lead {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(244, 236, 211, 0.65);
+  max-width: 540px;
+  margin: 0;
+  font-variation-settings: "opsz" 14;
+}
+
+.method-timeline { position: relative; padding: 0 2%; }
+.method-track {
+  position: absolute;
+  top: 38px; left: 12%; right: 12%;
+  height: 1px;
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(212, 178, 117, 0.4) 12%,
+    rgba(212, 178, 117, 0.4) 88%,
+    transparent 100%);
+  z-index: 1;
+}
+.method-arrow {
+  position: absolute; top: 31px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: rgba(212, 178, 117, 0.5);
+  background: var(--hero-bg);
+  padding: 0 5px;
+  z-index: 2;
+}
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  position: relative;
+  z-index: 2;
+}
+.method-step {
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  gap: 14px;
+  cursor: pointer;
+  background: none; border: none;
+  font-family: inherit; padding: 0;
+  transition: opacity 0.3s;
+  color: inherit;
+}
+.method-step:not(.active) { opacity: 0.7; }
+.method-step:hover:not(.active) { opacity: 1; }
+
+.method-step-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(244, 236, 211, 0.5);
+  margin-bottom: -8px;
+}
+.method-step.active .method-step-num { color: var(--champagne); }
+.method-marker {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--hero-bg);
+  border: 1px solid rgba(244, 236, 211, 0.3);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(244, 236, 211, 0.6);
+  position: relative; z-index: 2;
+}
+.method-step.active .method-marker {
+  background: var(--ivory);
+  border-color: var(--ivory);
+  color: var(--ink);
+}
+.method-step-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.2;
+  color: rgba(244, 236, 211, 0.7);
+  font-weight: 400;
+  font-variation-settings: "opsz" 24;
+}
+.method-step.active .method-step-title {
+  color: var(--champagne);
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Detail panel : encart crème désaturée sur fond aubergine */
+.method-detail {
+  margin-top: 3rem;
+  padding: 2.5rem 2.75rem;
+  background: rgba(244, 236, 211, 0.06);
+  color: var(--ivory);
+  display: grid;
+  grid-template-columns: 1fr 2.2fr;
+  gap: 2.5rem;
+  border-radius: 1px;
+  position: relative;
+  border: 1px solid rgba(212, 178, 117, 0.18);
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.method-detail::before, .method-detail::after {
+  content: '';
+  position: absolute;
+  width: 16px; height: 16px;
+  border-color: var(--champagne);
+  border-style: solid;
+  border-width: 0;
+}
+.method-detail::before {
+  top: -1px; left: -1px;
+  border-top-width: 1px; border-left-width: 1px;
+}
+.method-detail::after {
+  bottom: -1px; right: -1px;
+  border-bottom-width: 1px; border-right-width: 1px;
+}
+.method-detail-pointer {
+  position: absolute;
+  top: -16px; left: 12.5%;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--ivory);
+  background: var(--hero-bg);
+  padding: 0 8px;
+}
+.method-detail-left {
+  border-right: 1px solid rgba(212, 178, 117, 0.15);
+  padding-right: 1.5rem;
+}
+.method-detail-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.6);
+  font-weight: 500;
+  display: block;
+  margin-bottom: 10px;
+}
+.method-detail-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 30px;
+  line-height: 1.05;
+  color: var(--ivory);
+  font-weight: 400;
+  font-variation-settings: "opsz" 60;
+}
+.method-detail-desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(244, 236, 211, 0.85);
+  margin: 0 0 1.2rem;
+  font-variation-settings: "opsz" 14;
+}
+.method-detail-out {
+  display: flex; align-items: baseline; gap: 14px;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(212, 178, 117, 0.15);
+}
+.method-detail-out-lbl {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.6);
+  font-weight: 500;
+}
+.method-detail-out-val {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ivory);
+}
+.method-detail a {
+  font-style: italic;
+  color: var(--champagne);
+  text-decoration: none;
+  border-bottom: 1px solid var(--champagne);
+}
+.method-detail-link {
+  padding-bottom: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.method-detail-link:hover {
+  color: var(--ivory);
+  border-bottom-color: var(--ivory);
+}
+
+/* ============================================================
+   6 — METHODS CYCLE — composition magazine vertical décalé
+   Intro + cercle à gauche, légende sur toute la hauteur droite
+   ============================================================ */
+.methods-section {
+  background: var(--paper);
+  padding: 4.5% 5%;
+  position: relative;
+}
+.methods-mag {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: end;
+}
+.methods-left {
+  display: flex; flex-direction: column;
+  gap: 2.5rem;
+}
+.methods-stage {
+  display: flex; align-items: center;
+  justify-content: center;
+  padding-left: 0;
+}
+.methods-legend-block { align-self: end; }
+.methods-intro h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.0;
+  margin: 0 0 1.4rem;
+  color: var(--ink);
+  font-variation-settings: "opsz" 60;
+  letter-spacing: -0.01em;
+}
+.methods-intro h3 em {
+  font-style: italic;
+  color: var(--champagne-fonce);
+  font-variation-settings: "opsz" 72;
+}
+.methods-intro .lead {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0;
+  max-width: 460px;
+  font-variation-settings: "opsz" 14;
+}
+.methods-stage-DEPRECATED {
+  display: flex; align-items: flex-end;
+  justify-content: flex-start;
+  padding-left: 0.5rem;
+}
+
+/* Nouvelle constellation des méthodes — 6 nœuds autour d'un cercle, arc actif champagne */
+.donut-svg {
+  width: 100%;
+  max-width: 460px;
+}
+.constellation-ring {
+  fill: none;
+  stroke: rgba(140, 106, 44, 0.22);
+  stroke-width: 1;
+}
+.constellation-arc {
+  fill: none;
+  stroke: rgba(140, 106, 44, 0.85);
+  stroke-width: 5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s cubic-bezier(0.22,1,0.36,1),
+              transform 0.5s cubic-bezier(0.22,1,0.36,1);
+  transform-origin: 180px 180px;
+}
+.constellation-node {
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.constellation-node circle {
+  fill: var(--paper);
+  stroke: rgba(212, 178, 117, 0.55);
+  stroke-width: 1.8;
+  transition: fill 0.25s, stroke 0.25s;
+}
+/* Hit area invisible — étend la zone tactile sans changer l'esthétique */
+.constellation-node .constellation-hit {
+  fill: transparent;
+  stroke: none;
+}
+.constellation-node text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  fill: rgba(20, 16, 42, 0.65);
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+  letter-spacing: 0.05em;
+  transition: fill 0.25s;
+}
+.constellation-node:hover circle {
+  stroke: var(--champagne-fonce);
+  fill: rgba(212, 178, 117, 0.08);
+}
+.constellation-node.is-active circle {
+  fill: var(--ink);
+  stroke: var(--ink);
+}
+.constellation-node.is-active text { fill: var(--ivory); }
+.constellation-node.is-hovered:not(.is-active) circle {
+  fill: rgba(140, 106, 44, 0.12);
+}
+.donut-segment {
+  cursor: pointer;
+  transition: fill 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-origin: 160px 160px;
+}
+/* Croissants en alternance — couleurs très désaturées */
+.donut-segment.tone-aubergine { fill: rgba(20, 16, 42, 0.14); }
+.donut-segment.tone-champagne { fill: rgba(140, 106, 44, 0.12); }
+
+/* Hover : croissant pousse vers l'extérieur + passe aubergine plein 70% */
+.donut-segment:hover { fill: rgba(20, 16, 42, 0.7); }
+.donut-segment.idx-0:hover { transform: translate(0, -3px); }
+.donut-segment.idx-1:hover { transform: translate(2.6px, -1.5px); }
+.donut-segment.idx-2:hover { transform: translate(2.6px, 1.5px); }
+.donut-segment.idx-3:hover { transform: translate(0, 3px); }
+.donut-segment.idx-4:hover { transform: translate(-2.6px, 1.5px); }
+.donut-segment.idx-5:hover { transform: translate(-2.6px, -1.5px); }
+
+/* Actif : champagne plein 95% */
+.donut-segment.is-active { fill: rgba(212, 178, 117, 0.95) !important; }
+
+/* Filets dorés ultra-fins entre segments */
+.donut-divider {
+  stroke: rgba(140, 106, 44, 0.3);
+  stroke-width: 1;
+  fill: none;
+}
+
+/* Légende dans encart soigné */
+.methods-legend-block {
+  padding: 0.5rem 0;
+  display: flex; flex-direction: column;
+}
+.lphase {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 14px;
+  padding: 11px 0;
+  align-items: baseline;
+  background: none; border: none;
+  border-bottom: 1px solid rgba(140, 106, 44, 0.15);
+  width: 100%; text-align: left;
+  font-family: inherit; cursor: pointer;
+  position: relative;
+  transition: background-color 0.25s, padding 0.25s;
+}
+.lphase:last-child { border-bottom: none; }
+.lphase:first-of-type { padding-top: 8px; }
+.lphase.is-active {
+  padding-left: 14px;
+  background: rgba(140, 106, 44, 0.06);
+  border-left: 2px solid var(--champagne-fonce);
+  border-bottom: 1px solid rgba(140, 106, 44, 0.15);
+  animation: lphaseActiveIn 240ms ease;
+}
+@keyframes lphaseActiveIn {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+.lphase-desc {
+  animation: lphaseDescIn 240ms ease;
+}
+@keyframes lphaseDescIn {
+  from { opacity: 0; transform: translateY(-2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Fade-in du contenu de la fiche livrable au changement prev/next */
+.fiche-content.is-fresh {
+  animation: ficheContentFadeIn 240ms ease;
+}
+@keyframes ficheContentFadeIn {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+/* Wobble pédagogique au 1er montage mobile pour suggérer le swipe horizontal */
+.fiche-doc-frame.is-wobbling {
+  animation: ficheWobble 700ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+@keyframes ficheWobble {
+  0%   { transform: translateX(0); }
+  30%  { transform: translateX(10px); }
+  60%  { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+/* Hint texte "← Glissez pour naviguer →" — visible mobile <600px uniquement,
+   caché de manière permanente après le 1er swipe (localStorage) */
+.fiche-swipe-hint {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.55);
+  text-align: center;
+  margin-top: -1.25rem;
+  margin-bottom: 1.25rem;
+  transition: opacity 0.4s ease;
+}
+.fiche-swipe-hint.is-faded {
+  opacity: 0;
+  pointer-events: none;
+}
+.lphase:hover:not(.is-active) {
+  background: rgba(140, 106, 44, 0.025);
+  padding-left: 4px;
+}
+.lphase-n {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(20, 16, 42, 0.45);
+  padding-top: 2px;
+  min-width: 22px;
+}
+.lphase.is-active .lphase-n { color: var(--champagne-fonce); }
+.lphase-content { display: flex; flex-direction: column; gap: 6px; }
+.lphase-title-row {
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+}
+.lphase-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.2;
+  color: var(--ink);
+  font-weight: 400;
+  font-variation-settings: "opsz" 32;
+}
+.lphase.is-active .lphase-title {
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--champagne-fonce);
+}
+.lphase-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin-top: 4px;
+  font-variation-settings: "opsz" 14;
+  max-width: 95%;
+}
+.lphase-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.lphase-badge .qq-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--champagne-fonce);
+}
+.lphase-badge.quali .qq-dot {
+  background: transparent;
+  border: 1px solid var(--champagne-fonce);
+}
+.lphase-arrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: rgba(140, 106, 44, 0.4);
+}
+.lphase.is-active .lphase-arrow { color: var(--champagne-fonce); }
+
+/* ============================================================
+   7 — BANDEAU DIFFÉRENCE avec plume bauhaus
+   ============================================================ */
+.diff-band {
+  background: var(--band-bg);
+  color: var(--ivory);
+  padding: 3.5% 5%;
+  position: relative;
+}
+.diff-band::before, .diff-band::after {
+  content: '';
+  position: absolute;
+  left: 5%; right: 5%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(212, 178, 117, 0.45), transparent);
+}
+.diff-band::before { top: 0; }
+.diff-band::after { bottom: 0; }
+.diff-content {
+  display: flex; align-items: center; gap: 2rem;
+  max-width: 1000px; margin: 0 auto;
+}
+.diff-feather { width: 22px; height: 70px; flex: 0 0 auto; }
+.diff-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(244, 236, 211, 0.85);
+  font-weight: 300;
+  margin: 0;
+  font-variation-settings: "opsz" 24;
+}
+.diff-text b { font-style: normal; font-weight: 500; color: var(--ivory); }
+.diff-text .accent { color: var(--champagne); font-weight: 500; font-style: normal; }
+
+/* ============================================================
+   8 — RECOMMENDATIONS — fiche document + sommaire
+   ============================================================ */
+.rec-section {
+  background: var(--band-bg);
+  color: var(--ivory);
+  padding: 5% 5%;
+  position: relative;
+}
+.rec-head {
+  margin-bottom: 3rem;
+  max-width: 600px;
+  position: relative;
+  padding-left: 1.75rem;
+}
+.rec-head::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 4px; bottom: 4px;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    rgba(212, 178, 117, 0.4),
+    rgba(212, 178, 117, 0.75),
+    rgba(212, 178, 117, 0.4));
+}
+.rec-section h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 3.4vw, 38px);
+  line-height: 1.05;
+  margin: 0 0 0.9rem;
+  color: var(--ivory);
+  font-variation-settings: "opsz" 60;
+}
+.rec-section h3 em {
+  font-style: italic;
+  color: var(--champagne);
+  font-variation-settings: "opsz" 72;
+}
+.rec-lead {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(244, 236, 211, 0.7);
+  max-width: 540px;
+  font-variation-settings: "opsz" 14;
+}
+
+.fiche-doc-layout {
+  max-width: 880px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Indicateur de progression — 6 points au-dessus de la fiche */
+.fiche-progress-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 2rem;
+}
+.fiche-progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 178, 117, 0.5);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.fiche-progress-dot:hover:not(.is-active) {
+  background: rgba(212, 178, 117, 0.3);
+  border-color: rgba(212, 178, 117, 0.8);
+}
+.fiche-progress-dot.is-active {
+  width: 24px;
+  border-radius: 4px;
+  background: var(--champagne);
+  border-color: var(--champagne);
+}
+
+/* Flèches latérales discrètes — débordent dans le fond de section */
+.fiche-nav-arrow {
+  position: absolute;
+  top: calc(50% + 1rem);
+  transform: translateY(-50%);
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: rgba(212, 178, 117, 0.45);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+  z-index: 2;
+}
+.fiche-nav-arrow.left { left: -75px; }
+.fiche-nav-arrow.right { right: -75px; }
+/* Arc asymétrique champagne — passe par le haut, ouverture en bas-extérieur */
+.fiche-nav-arc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: rgba(212, 178, 117, 0.85);
+  transition: color 0.25s ease;
+  pointer-events: none;
+}
+.fiche-nav-arrow:hover:not(:disabled) {
+  background: rgba(212, 178, 117, 0.08);
+  color: var(--champagne);
+}
+.fiche-nav-arrow:hover:not(:disabled) .fiche-nav-arc {
+  color: var(--champagne);
+}
+.fiche-nav-arrow.left:hover:not(:disabled) {
+  transform: translate(-2px, -50%);
+}
+.fiche-nav-arrow.right:hover:not(:disabled) {
+  transform: translate(2px, -50%);
+}
+.fiche-nav-arrow:disabled {
+  display: none;
+}
+
+/* Footer prev/next disabled aux extrémités — caché purement
+   (signal "fin de liste" porté par les dots et l'absence de flèche latérale) */
+.fiche-foot-prev:disabled,
+.fiche-foot-next:disabled {
+  visibility: hidden;
+}
+.fiche-num-total {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--ink-mute);
+  text-transform: uppercase;
+  font-style: normal;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+.fiche-doc-frame {
+  background: var(--paper);
+  background-image: linear-gradient(180deg,
+    rgba(20, 16, 42, 0.04) 0%,
+    rgba(20, 16, 42, 0) 10%,
+    rgba(20, 16, 42, 0) 90%,
+    rgba(20, 16, 42, 0.04) 100%);
+  box-shadow: 0 0 60px 0 rgba(8, 4, 26, 0.4);
+  color: var(--ink);
+  padding: 3rem 3.25rem 0;
+  position: relative;
+  border: 1px solid rgba(140, 106, 44, 0.4);
+}
+.fiche-doc-frame::before, .fiche-doc-frame::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  border-color: rgba(140, 106, 44, 0.7);
+  border-style: solid;
+  border-width: 0;
+}
+.fiche-doc-frame::before {
+  top: -1px; left: -1px;
+  border-top-width: 1px; border-left-width: 1px;
+}
+.fiche-doc-frame::after {
+  bottom: -1px; right: -1px;
+  border-bottom-width: 1px; border-right-width: 1px;
+}
+
+.fiche-content { padding-bottom: 1.75rem; }
+.fiche-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 2rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid rgba(20, 16, 42, 0.15);
+}
+.fiche-num-block { display: flex; flex-direction: column; gap: 2px; }
+.fiche-num-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.fiche-num-value {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--champagne-fonce);
+  font-variation-settings: "opsz" 60;
+  white-space: nowrap;
+}
+/* Tag importance — 4 variantes selon le niveau de priorité */
+.fiche-classification {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 5px 9px;
+  white-space: nowrap;
+  align-self: center;
+  border: 1px solid transparent;
+}
+.fiche-classification.is-critique {
+  color: var(--paper);
+  background: var(--champagne-fonce);
+  border-color: var(--champagne-fonce);
+}
+.fiche-classification.is-elevee {
+  color: var(--champagne-fonce);
+  border-color: var(--champagne-fonce);
+}
+.fiche-classification.is-moyenne {
+  color: var(--champagne-fonce);
+  border-style: dashed;
+  border-color: rgba(140, 106, 44, 0.6);
+}
+.fiche-classification.is-basse {
+  color: var(--champagne-fonce);
+  font-style: italic;
+  letter-spacing: 0.18em;
+  padding: 5px 0;
+}
+.fiche-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(22px, 2.8vw, 30px);
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0 0 1.2rem;
+  font-variation-settings: "opsz" 60;
+}
+.fiche-diagnostic-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.fiche-diagnostic {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0 0 2rem;
+  font-variation-settings: "opsz" 14;
+}
+.fiche-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+.fiche-meta-line {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 1.5rem;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(20, 16, 42, 0.08);
+  align-items: baseline;
+}
+.fiche-meta-line:last-child { border-bottom: none; }
+.fiche-meta-key {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.fiche-meta-val {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--ink);
+  font-style: italic;
+  font-variation-settings: "opsz" 18;
+}
+.fiche-meta-val.list { display: flex; gap: 1.5rem; flex-wrap: wrap; font-style: normal; }
+.fiche-meta-val.list span { position: relative; }
+.fiche-meta-val.list span:not(:last-child)::after {
+  content: '·';
+  margin-left: 1.5rem;
+  color: rgba(140, 106, 44, 0.5);
+}
+
+/* Footer navigation */
+.fiche-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 1.25rem 0;
+  margin: 1.75rem -3.25rem 0;
+  padding-left: 3.25rem;
+  padding-right: 3.25rem;
+  border-top: 1px solid rgba(20, 16, 42, 0.15);
+  background: rgba(140, 106, 44, 0.04);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.fiche-foot-prev, .fiche-foot-next {
+  display: flex; flex-direction: column; gap: 4px;
+  cursor: pointer; background: none; border: none;
+  font-family: inherit; padding: 0;
+}
+.fiche-foot-prev { text-align: left; }
+.fiche-foot-next { text-align: right; align-items: flex-end; }
+.fiche-foot-nav-label {
+  color: rgba(20, 16, 42, 0.45);
+  letter-spacing: 0.18em;
+}
+.fiche-foot-nav-text {
+  color: var(--champagne-fonce);
+  display: flex; align-items: baseline; gap: 8px;
+}
+.fiche-foot-prev .fiche-foot-nav-text::before { content: '←'; font-size: 13px; }
+.fiche-foot-next .fiche-foot-nav-text::after { content: '→'; font-size: 13px; }
+/* Sommaire latéral */
+.fiche-summary {
+  padding: 1.75rem 1.75rem;
+  align-self: stretch;
+  display: flex; flex-direction: column;
+}
+.fiche-summary-header {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.25);
+}
+.fiche-summary-title {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  font-weight: 500;
+}
+.fiche-summary-meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.4);
+}
+.fiche-summary-list { display: flex; flex-direction: column; }
+.fiche-sum-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(244, 236, 211, 0.08);
+  align-items: baseline;
+  cursor: pointer;
+  background: none; border: none; border-bottom: 1px solid rgba(244, 236, 211, 0.08);
+  width: 100%; text-align: left;
+  font-family: inherit;
+  transition: padding 0.2s;
+  color: inherit;
+}
+.fiche-sum-item:hover { padding-left: 4px; }
+.fiche-sum-item:last-child { border-bottom: none; }
+.fiche-sum-item:first-child { padding-top: 8px; }
+.fiche-sum-item.is-active {
+  margin: 0 -1.75rem;
+  padding-left: calc(1.75rem - 2px);
+  padding-right: 1.75rem;
+  background: rgba(212, 178, 117, 0.07);
+  border-left: 2px solid var(--champagne);
+}
+.fiche-sum-item.is-active:hover { padding-left: calc(1.75rem - 2px); }
+.fiche-sum-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(244, 236, 211, 0.5);
+}
+.fiche-sum-item.is-active .fiche-sum-num { color: var(--champagne); }
+.fiche-sum-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13.5px;
+  line-height: 1.3;
+  color: rgba(244, 236, 211, 0.75);
+  font-variation-settings: "opsz" 18;
+}
+.fiche-sum-item.is-active .fiche-sum-title {
+  color: var(--ivory);
+  font-weight: 500;
+}
+.fiche-sum-imp {
+  display: flex; gap: 2px;
+  align-self: center;
+}
+.fiche-sum-imp-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: rgba(244, 236, 211, 0.15);
+}
+.fiche-sum-imp-dot.on { background: var(--champagne); }
+
+/* ============================================================
+   9 — TEAM avec anneaux entrelacés et tags aubergine pleins
+   ============================================================ */
+.team-section {
+  background: var(--hero-bg);
+  color: var(--ivory);
+  padding: 5% 5%;
+  position: relative;
+}
+.team-section .chapter-mark {
+  top: 24px;
+  right: 5%;
+}
+
+.team-head {
+  margin: 0 auto 2rem;
+  max-width: 720px;
+  text-align: center;
+}
+.team-head h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.012em;
+  margin: 0 0 1rem;
+  color: var(--ivory);
+  font-variation-settings: "opsz" 96;
+}
+.team-head h2 em {
+  font-style: italic;
+  color: var(--champagne);
+}
+.team-head .lead {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.55;
+  color: rgba(244, 236, 211, 0.65);
+  max-width: 640px;
+  margin: 0 auto;
+  font-variation-settings: "opsz" 24;
+}
+
+/* Tampon central Maa̅t × SDLV — séparateur vertical entre les 2 colonnes en desktop,
+   bascule en horizontal au-dessus d'Anne-Sophie en mobile (cf. media query 900px) */
+.team-stamp-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  align-self: stretch;
+}
+.team-stamp-line {
+  width: 1px;
+  flex: 1;
+  background: linear-gradient(to bottom,
+    rgba(212, 178, 117, 0) 0%,
+    rgba(212, 178, 117, 0.3) 50%,
+    rgba(212, 178, 117, 0) 100%);
+}
+.team-stamp {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  border: 1px solid var(--champagne);
+  background: var(--hero-bg);
+  padding: 10px 20px;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  white-space: nowrap;
+}
+.team-stamp-x {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--champagne);
+}
+.team-stamp-macron {
+  position: relative;
+  display: inline-block;
+}
+.team-stamp-macron::after {
+  content: '';
+  position: absolute;
+  top: 0.05em;
+  left: 12%;
+  width: 76%;
+  height: 0.05em;
+  background: var(--champagne);
+}
+
+/* Duo en grid 3 cols (Anne-Sophie / tampon central / Florent) */
+.team-duo {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 3rem;
+  align-items: stretch;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.team-person {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+}
+.team-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  font-weight: 500;
+}
+.team-role::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--champagne);
+}
+.team-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 30px;
+  line-height: 1.05;
+  color: var(--ivory);
+  font-weight: 400;
+  font-variation-settings: "opsz" 96;
+  margin: 0;
+}
+.team-bio {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(244, 236, 211, 0.78);
+  margin: 0;
+  font-variation-settings: "opsz" 14;
+  text-align: justify;
+  hyphens: auto;
+}
+
+/* Tags : pleins champagne (Anne-Sophie) / outline champagne (Florent) */
+.team-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 0.5rem;
+}
+.team-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.team-tag.is-solid {
+  color: var(--hero-bg);
+  background: var(--champagne);
+  padding: 5px 10px;
+}
+.team-tag.is-outline {
+  color: var(--champagne);
+  background: transparent;
+  border: 1px solid var(--champagne);
+  padding: 4px 9px;
+}
+.team-link {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--champagne);
+  border-bottom: 1px solid var(--champagne);
+  padding-bottom: 2px;
+  margin-top: 0.4rem;
+  align-self: flex-start;
+  text-decoration: none;
+}
+
+/* ============================================================
+   10 — MODULABLE + BOOKING
+   ============================================================ */
+.booking-section {
+  background: var(--paper);
+  padding: 5% 5%;
+}
+
+.modulable-card {
+  padding: 3rem 2.75rem;
+  margin-bottom: 3rem;
+}
+.modulable-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+.modulable-title-block {
+  display: flex; flex-direction: column;
+  gap: 0;
+}
+.modulable-title-line1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(34px, 4.6vw, 52px);
+  line-height: 0.95;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144;
+}
+.modulable-title-line2 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(26px, 3.8vw, 40px);
+  line-height: 0.95;
+  color: var(--champagne-fonce);
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 72;
+  margin-top: 0.2em;
+  align-self: flex-end;
+}
+.modulable-title-line3 {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin-top: 1.5rem;
+  display: flex; align-items: center; gap: 12px;
+}
+.modulable-title-line3::before {
+  content: ''; display: inline-block;
+  width: 24px; height: 1px;
+  background: rgba(140, 106, 44, 0.6);
+}
+.modulable-divider-vertical {
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(140, 106, 44, 0.4), transparent);
+  align-self: stretch;
+}
+.modulable-text-block {
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  font-variation-settings: "opsz" 18;
+}
+.modulable-text-block p { margin: 0 0 0.9rem; }
+.modulable-text-block p:last-child { margin-bottom: 0; }
+.modulable-text-block b { color: var(--ink); font-weight: 500; font-style: italic; }
+
+.booking-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 3rem;
+  align-items: start;
+}
+.book-left { padding-top: 1rem; }
+.book-left h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 3.4vw, 36px);
+  line-height: 1.05;
+  margin: 0 0 0.9rem;
+  color: var(--ink);
+  font-variation-settings: "opsz" 60;
+}
+.book-left h3 em {
+  font-style: italic;
+  color: var(--champagne-fonce);
+  font-variation-settings: "opsz" 72;
+}
+.book-left .lead {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0 0 1.5rem;
+  font-variation-settings: "opsz" 14;
+}
+.book-points { list-style: none; margin: 0; padding: 0; }
+.book-points li {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  padding: 10px 0 10px 22px;
+  border-bottom: 1px solid rgba(20, 16, 42, 0.08);
+  position: relative;
+  font-variation-settings: "opsz" 14;
+}
+.book-points li:last-child { border-bottom: none; }
+.book-points li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 18px;
+  width: 12px; height: 1px;
+  background: var(--champagne-fonce);
+}
+
+.cal-card {
+  background: var(--paper);
+  border: 1px solid rgba(20, 16, 42, 0.12);
+  border-radius: 1px;
+}
+.cal-header {
+  padding: 1.4rem 1.6rem;
+  border-bottom: 1px solid rgba(20, 16, 42, 0.08);
+  display: flex; gap: 1rem; align-items: center;
+}
+.cal-header-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--champagne);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  flex: 0 0 auto;
+}
+.cal-header-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.cal-header-org {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+}
+.cal-header-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink);
+}
+.cal-header-meta {
+  display: flex; gap: 14px; margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-mute);
+}
+.cal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.cal-month {
+  padding: 1.4rem 1.6rem;
+  border-right: 1px solid rgba(20, 16, 42, 0.08);
+}
+.cal-month-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 1rem;
+}
+.cal-month-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink);
+}
+.cal-arrows { display: flex; gap: 4px; }
+.cal-arrow {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 1px solid rgba(20, 16, 42, 0.2);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 12px;
+  cursor: pointer;
+}
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 6px;
+}
+.cal-weekdays span {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  text-align: center;
+  color: rgba(20, 16, 42, 0.5);
+  padding: 4px 0;
+}
+.cal-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+.cal-day {
+  aspect-ratio: 1;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  color: var(--ink);
+  cursor: pointer;
+}
+.cal-day.empty { cursor: default; }
+.cal-day.disabled { color: rgba(20, 16, 42, 0.25); cursor: not-allowed; }
+.cal-day.today { color: var(--champagne-fonce); font-weight: 500; }
+.cal-day.selected { background: var(--ink); color: var(--champagne); border-color: var(--ink); }
+.cal-slots { padding: 1.4rem 1.6rem; }
+.cal-slots-head { margin-bottom: 0.9rem; }
+.cal-slots-date {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink);
+}
+.cal-slots-tz {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-mute);
+  margin-top: 2px;
+}
+.cal-slots-list {
+  display: flex; flex-direction: column;
+  gap: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+.cal-slot {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: transparent;
+  border: 1px solid rgba(20, 16, 42, 0.15);
+  color: var(--ink);
+  padding: 8px 12px;
+  cursor: pointer;
+  text-align: left;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.cal-slot.selected {
+  background: var(--ink);
+  color: var(--champagne);
+  border-color: var(--ink);
+}
+.cal-slot-confirm {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 11px;
+  color: var(--champagne);
+  text-transform: none;
+}
+.cal-foot {
+  padding: 1rem 1.6rem;
+  border-top: 1px solid rgba(20, 16, 42, 0.08);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.cal-foot-info {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--ink-mute);
+}
+.cal-confirm-btn {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+/* ============================================================
+   11 — FOOTER COLOPHON avec plume bauhaus
+   ============================================================ */
+.footer {
+  background: var(--hero-bg);
+  color: var(--ivory);
+  padding: 5% 5% 3% 5%;
+}
+.footer-top {
+  display: flex; align-items: flex-start; gap: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.2);
+  margin-bottom: 2rem;
+}
+.footer-feather {
+  width: 28px;
+  height: 100px;
+  color: var(--champagne);
+  flex: 0 0 auto;
+  margin-top: 4px;
+}
+.footer-signature {
+  flex: 1;
+  display: flex; flex-direction: column;
+  gap: 1.5rem;
+  max-width: 720px;
+}
+.footer-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.2;
+  color: var(--ivory);
+  margin: 0;
+  font-variation-settings: "opsz" 60;
+}
+.footer-tagline em { color: var(--champagne); }
+.footer-thesis {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.6;
+  color: rgba(244, 236, 211, 0.75);
+  font-weight: 300;
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(212, 178, 117, 0.4);
+  font-variation-settings: "opsz" 24;
+}
+.footer-definition {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(244, 236, 211, 0.6);
+  margin: 0;
+  font-variation-settings: "opsz" 14;
+}
+.footer-definition strong {
+  color: var(--champagne);
+  font-weight: 500;
+  font-style: italic;
+}
+.footer-bottom {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+.footer-contact { display: flex; flex-direction: column; gap: 4px; }
+.footer-contact-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.7);
+}
+.footer-contact-email {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--champagne);
+  border-bottom: 1px solid rgba(212, 178, 117, 0.4);
+  padding-bottom: 2px;
+  align-self: flex-start;
+  text-decoration: none;
+}
+.footer-meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.4);
+  text-align: center;
+}
+.footer-legal-link {
+  color: rgba(244, 236, 211, 0.5);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.footer-legal-link:hover {
+  color: var(--ivory);
+  border-bottom-color: rgba(244, 236, 211, 0.5);
+}
+.footer-cta {
+  text-align: right;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+}
+.footer-cta-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.7);
+}
+.footer-cta-link {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  border-bottom: 1px solid rgba(212, 178, 117, 0.4);
+  padding-bottom: 2px;
+  text-decoration: none;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+/* ============================================================
+   ANIMATIONS — séquence hero + IntersectionObserver fade-up
+   ============================================================ */
+.hero-inner > * {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: heroFadeUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+.hero-inner > .hero-overline { animation-delay: 0ms; transform: none; animation-duration: 0.4s; }
+.hero-inner > h1 { animation-delay: 150ms; }
+.hero-inner > .hero-lead { animation-delay: 800ms; }
+.hero-inner > .hero-cta-row { animation-delay: 1100ms; }
+@keyframes heroFadeUp {
+  to { opacity: 1; transform: none; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* Hover livrables — soulèvement subtil */
+.fiche-doc-frame {
+  transition: transform 0.24s ease-out, box-shadow 0.24s ease-out;
+}
+@media (hover: hover) {
+  .fiche-doc-frame:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -16px rgba(20, 16, 42, 0.18);
+  }
+}
+
+/* CTA mono — micro-réaction */
+.cta-mono { display: inline-block; transition: border-color 0.2s ease-out; }
+.cta-mono::after {
+  content: ''; display: inline-block;
+}
+.cta-mono { position: relative; }
+@media (hover: hover) {
+  .cta-mono:hover { border-bottom-color: rgba(212, 178, 117, 1) !important; }
+  .cta-mono.on-light:hover { border-bottom-color: rgba(140, 106, 44, 1) !important; }
+}
+.cta-mono:active { transform: translateY(1px); }
+
+/* Bouton confirm calendrier */
+.cal-confirm-btn { transition: background-color 0.2s ease-out, transform 0.1s; }
+@media (hover: hover) {
+  .cal-confirm-btn:hover { background: var(--ink-soft); border-color: var(--ink-soft); }
+}
+.cal-confirm-btn:active { transform: translateY(1px); }
+
+/* Souligné animé — liens footer */
+.footer-contact-email, .footer-cta-link {
+  position: relative;
+  border-bottom-color: transparent !important;
+}
+.footer-contact-email::after, .footer-cta-link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: var(--champagne);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease-out;
+}
+.footer-contact-email, .footer-cta-link {
+  background-image: linear-gradient(to right, rgba(212, 178, 117, 0.35), rgba(212, 178, 117, 0.35));
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+}
+@media (hover: hover) {
+  .footer-contact-email:hover::after,
+  .footer-cta-link:hover::after { transform: scaleX(1); }
+}
+
+/* Calendrier — sélection avec ressort doux */
+.cal-day, .cal-slot {
+  transition: background-color 0.2s ease-out, color 0.2s ease-out,
+              transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.cal-day.selected, .cal-slot.selected {
+  animation: calSelect 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes calSelect {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+/* Point lumineux qui glisse sur la timeline démarche */
+.method-pulse {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--champagne);
+  box-shadow: 0 0 12px 2px rgba(212, 178, 117, 0.4);
+  top: 34px;
+  left: 12%;
+  transform: translateX(-50%);
+  transition: left 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Donut hover — pousser la ligne correspondante */
+.lphase.is-hovered:not(.is-active) {
+  background: rgba(140, 106, 44, 0.045);
+}
+.donut-segment.is-hovered:not(.is-active) {
+  fill: rgba(20, 16, 42, 0.55);
+}
+
+/* Méthode active — dans le donut, on garde le champagne plein */
+.donut-segment.is-active { fill: rgba(212, 178, 117, 0.95) !important; transform: none !important; }
+
+/* CTA flottant mobile — bascule de thème selon le fond de la section traversée */
+.mobile-cta-floating {
+  position: fixed;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  /* Thème par défaut : mode CLAIR (sur fond aubergine sombre) */
+  background: var(--champagne);
+  color: var(--hero-bg);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.40);
+  text-decoration: none;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease-out,
+    transform 0.3s ease-out,
+    background-color 280ms ease,
+    color 280ms ease,
+    box-shadow 280ms ease;
+  z-index: 20;
+  pointer-events: none;
+}
+.mobile-cta-floating.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+/* Mode SOMBRE : actif au-dessus des sections crème (.is-on-light) */
+.mobile-cta-floating.is-on-light {
+  background: var(--hero-bg);
+  color: var(--champagne);
+  box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.30);
+}
+
+/* Tweaks-driven density */
+body[data-density="compact"] .hero { padding: 3.5% 5%; }
+body[data-density="compact"] .split-section,
+body[data-density="compact"] .method-section,
+body[data-density="compact"] .methods-section,
+body[data-density="compact"] .rec-section,
+body[data-density="compact"] .team-section,
+body[data-density="compact"] .booking-section { padding: 3.5% 5%; }
+body[data-density="compact"] .split-block { padding: 1.6rem 1.5rem; }
+body[data-density="compact"] .modulable-card { padding: 2rem 2rem; }
+body[data-density="compact"] .fiche-doc-frame { padding: 2rem 2.25rem 0; }
+body[data-density="compact"] .footer { padding: 3.5% 5% 2.5% 5%; }
+body[data-density="compact"] .method-detail { padding: 1.75rem 2rem; }
+
+body[data-density="airy"] .hero { padding: 7% 5%; }
+body[data-density="airy"] .split-section,
+body[data-density="airy"] .method-section,
+body[data-density="airy"] .methods-section,
+body[data-density="airy"] .rec-section,
+body[data-density="airy"] .team-section,
+body[data-density="airy"] .booking-section { padding: 7% 5%; }
+body[data-density="airy"] .split-block { padding: 3rem 2.75rem; }
+body[data-density="airy"] .modulable-card { padding: 4rem 3.5rem; }
+body[data-density="airy"] .fiche-doc-frame { padding: 4rem 4rem 0; }
+body[data-density="airy"] .method-detail { padding: 3.5rem 3.5rem; }
+
+/* Direction du camembert (cf. Tweaks) */
+body[data-donut="A"] .donut-segment.tone-aubergine { fill: rgba(20, 16, 42, 0.10); }
+body[data-donut="A"] .donut-segment.tone-champagne { fill: rgba(140, 106, 44, 0.10); }
+body[data-donut="A"] .donut-segment.is-active { fill: rgba(212, 178, 117, 0.85) !important; }
+
+body[data-donut="B"] .donut-segment.tone-aubergine,
+body[data-donut="B"] .donut-segment.tone-champagne { fill: rgba(20, 16, 42, 0.06); }
+body[data-donut="B"] .donut-segment.is-active { fill: rgba(20, 16, 42, 0.85) !important; }
+
+body[data-donut="C"] .donut-segment.tone-aubergine { fill: rgba(140, 106, 44, 0.04); }
+body[data-donut="C"] .donut-segment.tone-champagne { fill: rgba(140, 106, 44, 0.18); }
+body[data-donut="C"] .donut-segment.is-active { fill: rgba(140, 106, 44, 0.7) !important; }
+
+/* Variantes Livrable (cf. Tweaks) */
+body[data-livrable="notion"] .fiche-doc-frame { background: #ffffff; border-color: rgba(20, 16, 42, 0.12); }
+body[data-livrable="notion"] .fiche-title {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+body[data-livrable="notion"] .fiche-classification {
+  border: none;
+  background: rgba(140, 106, 44, 0.12);
+  color: var(--champagne-fonce);
+}
+body[data-livrable="notion"] .fiche-num-value { color: var(--ink); }
+body[data-livrable="notion"] .fiche-foot { background: #fafaf7; }
+
+body[data-livrable="mixte"] .fiche-doc-frame::after {
+  content: 'Livré dans Notion · ~30-50 fiches selon mission';
+  position: absolute;
+  bottom: -28px; right: 4px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.55);
+  border: none;
+  width: auto; height: auto;
+  background: none;
+}
+
+@media (max-width: 900px) {
+  html { scroll-padding-top: var(--header-height-mobile); }
+  .hero { padding: calc(var(--header-height-mobile) + 4%) 5% 5%; }
+  .hero-inner { max-width: 100%; }
+  .band-maat { display: none; }
+  .split-grid { grid-template-columns: 1fr; gap: 1rem; margin-top: 0; }
+  .method-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .method-track, .method-arrow { display: none; }
+  .method-detail { grid-template-columns: 1fr; gap: 1rem; padding: 1.75rem; }
+  .method-detail::before, .method-detail::after { display: none; }
+  .method-detail-pointer { display: none; }
+  .method-detail-left { border-right: none; border-bottom: 1px solid rgba(212, 178, 117, 0.15); padding-right: 0; padding-bottom: 1rem; }
+  .methods-section { padding: 5% 5%; }
+  .methods-mag { grid-template-columns: 1fr; gap: 2rem; }
+  .methods-left { gap: 1.25rem; }
+  .methods-stage { justify-content: center; padding-left: 0; }
+  /* Roue plein largeur sur mobile pour zone tactile généreuse */
+  .donut-svg { max-width: 90vw; }
+  /* Markers chapter remis en flow au-dessus du titre sur toutes les sections
+     (évite le chevauchement avec les titres sur viewports étroits) */
+  .chapter-mark {
+    position: static;
+    display: block;
+    text-align: right;
+    font-size: 12px;
+    margin-bottom: 1.5rem;
+  }
+  /* Affiche uniquement la méthode active sous la roue ; les autres sont masquées */
+  .methods-legend-block .lphase:not(.is-active) { display: none; }
+  .methods-legend-block .lphase.is-active {
+    border-bottom: none;
+    padding-top: 0.5rem;
+  }
+  .diff-content { gap: 1.25rem; }
+  .fiche-doc-frame { padding: 1.25rem 1.5rem 0; }
+  .fiche-content { padding-bottom: 1.25rem; }
+  .fiche-foot { display: none; }
+  .fiche-num-label { display: none; }
+  .fiche-doc-layout { max-width: 100%; }
+  .fiche-nav-arrow { width: 40px; height: 40px; font-size: 16px; }
+  .fiche-nav-arrow.left { left: 8px; }
+  .fiche-nav-arrow.right { right: 8px; }
+  .fiche-foot {
+    grid-template-columns: 1fr;
+    margin: 1.5rem -1.75rem 0;
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
+    gap: 1rem;
+  }
+  .fiche-foot-next { align-items: flex-start; text-align: left; }
+  .fiche-foot-link { text-align: left; align-self: flex-start; }
+  .fiche-meta-line { grid-template-columns: 1fr; gap: 4px; }
+  /* Mobile : tampon repassé en haut des 2 blocs (comportement original),
+     bios non justifiées (lecture plus naturelle sur viewport étroit) */
+  .team-duo { display: flex; flex-direction: column; gap: 2.5rem; }
+  .team-stamp-divider { flex-direction: row; gap: 1rem; order: -1; }
+  .team-stamp-line {
+    width: auto;
+    height: 1px;
+    flex: 1;
+    max-width: calc(50% - 90px);
+    background: linear-gradient(to right,
+      rgba(212, 178, 117, 0) 0%,
+      rgba(212, 178, 117, 0.3) 50%,
+      rgba(212, 178, 117, 0) 100%);
+  }
+  .team-bio { text-align: left; hyphens: none; }
+  .modulable-card-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .modulable-text-block p:last-child { display: none; }
+  .modulable-divider-vertical { display: none; }
+  .booking-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .cal-body { grid-template-columns: 1fr; }
+  .cal-month { border-right: none; border-bottom: 1px solid rgba(20, 16, 42, 0.08); }
+  .cal-foot { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .cal-confirm-btn { align-self: stretch; text-align: center; }
+  .footer-top { gap: 1.5rem; }
+  .footer-feather { height: 80px; }
+  .footer-bottom { grid-template-columns: 1fr; gap: 1rem; text-align: left; }
+  .footer-meta, .footer-cta { text-align: left; align-items: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .fiche-nav-arrow { display: none; }
+  .fiche-swipe-hint { display: block; }
+  .hero-cta-row { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .fiche-classification { font-size: 8px; letter-spacing: 0.18em; padding: 5px 7px; }
+}
+
+/* ============================================================
+   HEADER STICKY — DA aubergine
+   Préfixe .mh- (Maat Header) — aucun conflit avec l'existant.
+   ============================================================ */
+
+.mh-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 300ms ease,
+    backdrop-filter 300ms ease,
+    -webkit-backdrop-filter 300ms ease;
+}
+.mh-header.is-scrolled {
+  background: rgba(8, 4, 26, 0.95);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom-color: rgba(212, 178, 117, 0.18);
+  box-shadow: 0 1px 0 rgba(212, 178, 117, 0.06);
+}
+
+/* ─── Ligne 1 — logo / onglets / CTA ─── */
+.mh-row1 {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  padding: 22px 5% 14px;
+  transition: padding 300ms ease;
+}
+.mh-header.is-scrolled .mh-row1 {
+  padding: 14px 5% 8px;
+}
+
+/* Logo Maa̅t avec macron CSS sur le 2e a */
+.mh-logo {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 30px;
+  color: var(--ivory);
+  letter-spacing: 0.005em;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  line-height: 1;
+  font-variation-settings: "opsz" 32;
+  transition: font-size 300ms ease;
+}
+.mh-header.is-scrolled .mh-logo { font-size: 26px; }
+.mh-logo-macron {
+  position: relative;
+  display: inline-block;
+}
+.mh-logo-macron::after {
+  content: '';
+  position: absolute;
+  top: 0.05em;
+  left: 12%;
+  width: 76%;
+  height: 0.05em;
+  background: #F4ECD3;
+}
+
+/* Onglets centre */
+.mh-tabs {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mh-tab {
+  position: relative;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 17px;
+  color: rgba(244, 236, 211, 0.6);
+  text-decoration: none;
+  padding: 4px 0;
+  transition: color 250ms ease;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.mh-tab::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -2px;
+  height: 1.5px;
+  background: var(--champagne);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mh-tab:hover { color: var(--ivory); }
+.mh-tab:hover::after { transform: scaleX(1); }
+.mh-tab.is-active {
+  color: var(--champagne);
+  font-weight: 500;
+}
+.mh-tab.is-active::after { transform: scaleX(1); }
+
+/* Onglet "à venir" — non cliquable, mini-tampon au hover */
+.mh-tab.is-coming {
+  color: rgba(244, 236, 211, 0.3);
+  cursor: default;
+}
+.mh-tab.is-coming:hover { color: rgba(244, 236, 211, 0.5); }
+.mh-tab.is-coming:hover::after { transform: scaleX(0); }
+.mh-tab.is-coming::before {
+  content: '— à venir';
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  background: var(--band-bg);
+  border: 1px dashed var(--champagne-fonce);
+  padding: 3px 7px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 250ms cubic-bezier(0.34, 1.4, 0.64, 1),
+    transform 250ms cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.mh-tab.is-coming:hover::before,
+.mh-tab.is-coming:focus-visible::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* CTA droite */
+.mh-cta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  background: transparent;
+  border: 1px solid var(--champagne);
+  padding: 9px 16px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.mh-cta-arrow {
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+.mh-cta:hover {
+  background: var(--champagne);
+  color: var(--hero-bg);
+}
+.mh-cta:hover .mh-cta-arrow {
+  transform: translate(2px, -2px);
+}
+
+/* ─── Ligne 2 — sous-menu d'anchors ─── */
+/* Masqué par défaut. Révélé au hover/focus de l'onglet actif (.is-revealing)
+   ou de manière permanente au scroll au-delà du seuil (.is-pinned). */
+.mh-row2 {
+  border-top: 1px solid transparent;
+  padding: 0 5%;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition:
+    border-color 200ms ease,
+    padding 250ms ease,
+    max-height 250ms ease,
+    opacity 200ms ease;
+}
+.mh-header.is-pinned .mh-row2,
+.mh-header.is-revealing .mh-row2 {
+  border-top-color: rgba(212, 178, 117, 0.15);
+  padding: 6px 5% 14px;
+  max-height: 80px;
+  opacity: 1;
+  pointer-events: auto;
+}
+.mh-header.is-scrolled.is-pinned .mh-row2,
+.mh-header.is-scrolled.is-revealing .mh-row2 {
+  padding: 4px 5% 10px;
+}
+.mh-submenu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mh-submenu-item {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.5);
+  text-decoration: none;
+  padding: 6px 14px;
+  transition: color 250ms ease;
+}
+.mh-submenu-item::after {
+  content: '';
+  position: absolute;
+  left: 14px; right: 14px;
+  bottom: 2px;
+  height: 1px;
+  background: var(--champagne);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 250ms ease;
+}
+.mh-submenu-item:hover {
+  color: var(--ivory);
+}
+.mh-submenu-item:hover::after { transform: scaleX(1); }
+.mh-submenu-item.is-active {
+  color: var(--champagne);
+}
+.mh-submenu-item.is-active::after { transform: scaleX(1); }
+.mh-submenu-sep {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(212, 178, 117, 0.3);
+  user-select: none;
+  padding: 0 2px;
+}
+
+/* ─── Mobile : toggle + drawer ─── */
+.mh-mobile-toggle {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  background: transparent;
+  border: 1px solid var(--champagne);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.mh-drawer {
+  display: none;
+  position: fixed;
+  top: var(--header-height-mobile);
+  left: 0; right: 0;
+  background: var(--hero-bg);
+  border-bottom: 1px solid rgba(212, 178, 117, 0.45);
+  box-shadow: 0 8px 24px -2px rgba(8, 4, 26, 0.6);
+  padding: 24px 24px 32px;
+  z-index: 99;
+  /* Compense le top: var(--header-height-mobile) pour que le drawer soit toujours hors viewport au repos,
+     quelle que soit la hauteur du contenu */
+  transform: translateY(calc(-100% - var(--header-height-mobile) - 20px));
+  transition: transform 300ms ease;
+}
+.mh-drawer.is-open { transform: translateY(0); }
+
+.mh-drawer-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+}
+.mh-drawer-tab {
+  position: relative;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--ivory);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 6px;
+  line-height: 1.1;
+}
+.mh-drawer-tab::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 0;
+  height: 1.5px;
+  background: var(--champagne);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mh-drawer-tab.is-active {
+  color: var(--champagne);
+  font-weight: 500;
+  font-size: 26px;
+}
+.mh-drawer-tab.is-active::after { transform: scaleX(1); }
+.mh-drawer-tab.is-coming {
+  color: rgba(244, 236, 211, 0.4);
+  font-size: 20px;
+  font-weight: 400;
+  cursor: default;
+}
+.mh-drawer-tab-stamp {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  border: 1px dashed var(--champagne-fonce);
+  padding: 3px 7px;
+  white-space: nowrap;
+}
+
+.mh-drawer-divider {
+  height: 1px;
+  background: rgba(212, 178, 117, 0.18);
+  margin: 0 0 18px;
+}
+
+.mh-drawer-submenu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 10px 0 14px;
+  padding: 0 0 0 14px;
+  list-style: none;
+  border-left: 2px solid var(--champagne);
+}
+.mh-drawer-submenu-item {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.5);
+  text-decoration: none;
+  padding: 6px 0;
+}
+.mh-drawer-submenu-item.is-active { color: var(--champagne); }
+
+.mh-drawer-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hero-bg);
+  background: var(--champagne);
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .mh-row1 { padding: 14px 5%; grid-template-columns: auto auto; }
+  .mh-header.is-scrolled .mh-row1 { padding: 8px 5% 12px; }
+  .mh-tabs, .mh-tabs-wrap, .mh-cta { display: none; }
+  .mh-row2 { display: none; }
+  .mh-mobile-toggle { display: inline-flex; justify-self: end; }
+  .mh-drawer { display: block; }
+  .mh-logo { font-size: 26px; }
+  .mh-header.is-scrolled .mh-logo { font-size: 22px; }
+}
+</style>
 </head>
-<body>
-  <h1>📄 Mes Pages</h1>
-  <p>Liste de toutes mes pages indexées :</p>
-  <ul id="pages">
-    <!-- Ajouter les liens ici au fur et à mesure -->
-    <li><p class="empty">Aucune page pour l'instant.</p></li>
+<body data-density="regular" data-donut="D" data-livrable="magazine">
+
+<!-- ============================================================
+     HEADER STICKY — DA aubergine
+     ============================================================ -->
+<header class="mh-header" id="mh-header" aria-label="Navigation principale">
+  <div class="mh-row1">
+    <a class="mh-logo" href="#top" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
+    <nav class="mh-tabs-wrap" aria-label="Pages">
+      <ul class="mh-tabs">
+        <li>
+          <a class="mh-tab is-active" href="#top" aria-current="page">Audit CRO</a>
+        </li>
+        <li>
+          <span class="mh-tab is-coming" role="link" aria-disabled="true" tabindex="0">Content &amp; Messaging Strategy</span>
+        </li>
+      </ul>
+    </nav>
+    <a class="mh-cta" href="#booking">Réserver un échange <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
+    <button class="mh-mobile-toggle" id="mh-mobile-toggle" type="button" aria-expanded="false" aria-controls="mh-drawer">Menu</button>
+  </div>
+  <div class="mh-row2">
+    <nav aria-label="Sections de la page">
+      <ul class="mh-submenu">
+        <li><a class="mh-submenu-item is-active" href="#demarche" data-target="demarche">Notre démarche</a></li>
+        <li class="mh-submenu-sep" aria-hidden="true">·</li>
+        <li><a class="mh-submenu-item" href="#methodes" data-target="methodes">Les méthodes</a></li>
+        <li class="mh-submenu-sep" aria-hidden="true">·</li>
+        <li><a class="mh-submenu-item" href="#binome" data-target="binome">Le binôme</a></li>
+        <li class="mh-submenu-sep" aria-hidden="true">·</li>
+        <li><a class="mh-submenu-item" href="#booking" data-target="booking">Réserver un échange</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
+  <ul class="mh-drawer-tabs">
+    <li>
+      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Audit CRO</a>
+      <ul class="mh-drawer-submenu">
+        <li><a class="mh-drawer-submenu-item is-active" href="#demarche" data-target="demarche">Notre démarche</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#methodes" data-target="methodes">Les méthodes</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#binome" data-target="binome">Le binôme</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un échange</a></li>
+      </ul>
+    </li>
+    <li>
+      <span class="mh-drawer-tab is-coming" role="link" aria-disabled="true">
+        Content &amp; Messaging Strategy
+        <span class="mh-drawer-tab-stamp">— à venir</span>
+      </span>
+    </li>
   </ul>
+  <div class="mh-drawer-divider" aria-hidden="true"></div>
+  <a class="mh-drawer-cta" href="#booking">Réserver un échange ↗</a>
+</aside>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="feather-bauhaus" viewBox="0 0 64 240">
+      <g fill="currentColor">
+        <line x1="32" y1="8" x2="32" y2="232" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M 32 26 L 18 38 L 32 38 Z" fill-opacity="0.7"/>
+        <path d="M 32 26 L 46 38 L 32 38 Z" fill-opacity="0.7"/>
+        <path d="M 32 48 L 14 60 L 32 60 Z" fill-opacity="0.7"/>
+        <path d="M 32 48 L 50 60 L 32 60 Z" fill-opacity="0.7"/>
+        <path d="M 32 70 L 10 82 L 32 82 Z" fill-opacity="0.75"/>
+        <path d="M 32 70 L 54 82 L 32 82 Z" fill-opacity="0.75"/>
+        <path d="M 32 92 L 8 104 L 32 104 Z" fill-opacity="0.8"/>
+        <path d="M 32 92 L 56 104 L 32 104 Z" fill-opacity="0.8"/>
+        <path d="M 32 114 L 8 126 L 32 126 Z" fill-opacity="0.8"/>
+        <path d="M 32 114 L 56 126 L 32 126 Z" fill-opacity="0.8"/>
+        <path d="M 32 136 L 10 148 L 32 148 Z" fill-opacity="0.75"/>
+        <path d="M 32 136 L 54 148 L 32 148 Z" fill-opacity="0.75"/>
+        <path d="M 32 158 L 14 170 L 32 170 Z" fill-opacity="0.7"/>
+        <path d="M 32 158 L 50 170 L 32 170 Z" fill-opacity="0.7"/>
+        <path d="M 32 180 L 18 192 L 32 192 Z" fill-opacity="0.65"/>
+        <path d="M 32 180 L 46 192 L 32 192 Z" fill-opacity="0.65"/>
+        <path d="M 32 202 L 24 212 L 32 212 Z" fill-opacity="0.6"/>
+        <path d="M 32 202 L 40 212 L 32 212 Z" fill-opacity="0.6"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- 1 — HERO (pleine largeur asymétrique gauche, simple) -->
+<section class="hero" id="top" data-cta-theme="dark">
+  <div class="hero-inner">
+    <div class="hero-overline">— Audit CRO · 2026</div>
+    <h1>Votre trafic ne manque pas. <em>Vos conversions, si.</em></h1>
+    <p class="hero-lead">On révèle les incohérences. On identifie les freins. On priorise les actions qui paient.</p>
+    <div class="hero-cta-row">
+      <a href="#booking" class="cta-mono">Réserver un échange →</a>
+      <span class="hero-cta-meta">30 min · sans engagement</span>
+    </div>
+  </div>
+</section>
+
+<!-- 2 — BANDEAU MAÂT (bandeau séparé sous le hero, fond aubergine claire, plume bauhaus à gauche) -->
+<section class="band-maat reveal" data-cta-theme="dark">
+  <div class="band-maat-content">
+    <svg class="feather-bauhaus band-maat-feather"><use href="#feather-bauhaus"/></svg>
+    <div class="band-maat-text-block">
+      <span class="band-maat-name">— Le principe Maat</span>
+      <p class="band-maat-text"><b>La conversion est une question d'alignement.</b> Elle ne se force pas — elle émerge quand promesse, expérience et attente s'accordent enfin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 — SPLIT -->
+<section class="split-section reveal" data-cta-theme="light">
+  <span class="chapter-mark">/ ch.01 — état des lieux</span>
+  <div class="split-grid">
+    <div class="split-block editorial-block">
+      <h2 class="split-block-title">Ce que vous vivez<em>.</em></h2>
+      <ul class="pain-list">
+        <li class="pain-item">Vous venez de lancer votre site et voulez vous assurer qu'il convertit bien — avant d'investir en acquisition.</li>
+        <li class="pain-item">Votre site tourne, vous investissez en acquisition — mais les ventes ou leads ne suivent pas votre trafic.</li>
+        <li class="pain-item">Vous avez des données mais ne savez pas quoi en faire ni par où commencer.</li>
+        <li class="pain-item">Vous avez essayé des choses : A/B tests, redesigns — sans savoir ce qui a marché.</li>
+        <li class="pain-item">Quelque chose bloque dans votre parcours mais vous ne savez pas quoi exactement.</li>
+      </ul>
+    </div>
+    <div class="split-block editorial-block">
+      <h2 class="split-block-title">Ce qui va changer<em>.</em></h2>
+      <div class="outcome-list">
+        <div class="outcome-item">
+          <span class="outcome-num">01</span>
+          <div class="outcome-content">
+            <div class="outcome-title">Vous comprenez enfin ce qui bloque</div>
+            <div class="outcome-desc">dans votre message, vos pages et vos parcours</div>
+          </div>
+        </div>
+        <div class="outcome-item">
+          <span class="outcome-num">02</span>
+          <div class="outcome-content">
+            <div class="outcome-title">Vous savez comment lever les hésitations</div>
+            <div class="outcome-desc">quoi clarifier, quoi prouver, quoi ajuster</div>
+          </div>
+        </div>
+        <div class="outcome-item">
+          <span class="outcome-num">03</span>
+          <div class="outcome-content">
+            <div class="outcome-title">Vous savez comment mieux guider</div>
+            <div class="outcome-desc">sans rupture, sans confusion</div>
+          </div>
+        </div>
+        <div class="outcome-item">
+          <span class="outcome-num">04</span>
+          <div class="outcome-content">
+            <div class="outcome-title">Vous ne testez plus au hasard</div>
+            <div class="outcome-desc">vous améliorez avec méthode</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 — NOTRE DÉMARCHE -->
+<section class="method-section reveal" id="demarche" data-cta-theme="dark">
+  <span class="chapter-mark on-dark">/ ch.02 — démarche</span>
+  <div class="method-head">
+    <div class="method-head-inner">
+      <h3>Comprendre. Croiser.<br/>Prioriser. <em>Agir.</em></h3>
+      <p class="method-lead">Quatre étapes qui se répondent — pour relier ce que vous savez à ce que font réellement vos utilisateurs.</p>
+    </div>
+  </div>
+  <div class="method-timeline">
+    <div class="method-track"></div>
+    <div class="method-arrow" style="left: 27%;">→</div>
+    <div class="method-arrow" style="left: 52%;">→</div>
+    <div class="method-arrow" style="left: 77%;">→</div>
+    <div class="method-grid">
+      <button class="method-step active">
+        <div class="method-step-num">01</div>
+        <div class="method-marker">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12h4l3-8 4 16 3-8h4"/>
+          </svg>
+        </div>
+        <div class="method-step-title">Lecture business</div>
+      </button>
+      <button class="method-step">
+        <div class="method-step-num">02</div>
+        <div class="method-marker">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="6"/>
+            <path d="m19.5 19.5-3.5-3.5"/>
+          </svg>
+        </div>
+        <div class="method-step-title">Recherche & insights</div>
+      </button>
+      <button class="method-step">
+        <div class="method-step-num">03</div>
+        <div class="method-marker">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="3" rx="0.5"/>
+            <rect x="3" y="10.5" width="13" height="3" rx="0.5"/>
+            <rect x="3" y="17" width="8" height="3" rx="0.5"/>
+          </svg>
+        </div>
+        <div class="method-step-title">Priorisation des actions</div>
+      </button>
+      <button class="method-step">
+        <div class="method-step-num">04</div>
+        <div class="method-marker">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="14" rx="2"/>
+            <path d="M3 9h18"/>
+            <path d="M8 14h8"/>
+          </svg>
+        </div>
+        <div class="method-step-title">CRO redesign</div>
+      </button>
+    </div>
+    <div class="method-detail">
+      <span class="method-detail-pointer">↓ 01</span>
+      <div class="method-detail-left">
+        <span class="method-detail-num">Étape 01 · sur 04</span>
+        <span class="method-detail-name">Lecture business</span>
+      </div>
+      <div>
+        <p class="method-detail-desc">Comprendre votre contexte, vos objectifs, vos personas, leurs besoins et leurs contraintes. On pose le bon cadre d'analyse.</p>
+        <div class="method-detail-out">
+          <span class="method-detail-out-lbl">Livrable</span>
+          <span class="method-detail-out-val">Cadre d'analyse partagé</span>
+        </div>
+        <div class="method-detail-out method-detail-out-with" hidden>
+          <span class="method-detail-out-lbl">Avec</span>
+          <span class="method-detail-out-val">un partenaire UX dédié <a class="method-detail-link" href="#binome">→ voir l'équipe</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 — METHODS CYCLE -->
+<section class="methods-section reveal" id="methodes" data-cta-theme="light">
+  <span class="chapter-mark">/ ch.03 — méthodes</span>
+  <div class="methods-mag">
+    <div class="methods-left">
+      <div class="methods-intro intro-rule">
+        <h3>Les méthodes qui alimentent<br/><em>cette démarche.</em></h3>
+        <p class="lead">Chaque méthode produit un signal. Ensemble, elles se complètent, se recoupent et s'affinent pour transformer le « quoi » en « pourquoi ».</p>
+      </div>
+      <div class="methods-stage">
+        <svg class="donut-svg" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" id="constellation-svg" style="display:none">
+          <!-- 6 croissants de 60° chacun, depuis 12h dans le sens horaire.
+               Idx 0 : 12h → 2h  (Évaluation heuristique - active par défaut)
+               Idx 1 : 2h → 4h   (Analytics)
+               Idx 2 : 4h → 6h   (Heatmaps & sessions)
+               Idx 3 : 6h → 8h   (Tests utilisateurs)
+               Idx 4 : 8h → 10h  (Sondages onsite)
+               Idx 5 : 10h → 12h (Interviews clients) -->
+
+          <!-- Idx 0 — Évaluation heuristique (active) -->
+          <path class="donut-segment is-active idx-0"
+            d="M 160 30
+               A 130 130 0 0 1 272.58 95
+               L 220.62 125
+               A 70 70 0 0 0 160 90 Z"/>
+
+          <!-- Idx 1 — Analytics -->
+          <path class="donut-segment tone-aubergine idx-1"
+            d="M 272.58 95
+               A 130 130 0 0 1 272.58 225
+               L 220.62 195
+               A 70 70 0 0 0 220.62 125 Z"/>
+
+          <!-- Idx 2 — Heatmaps & sessions -->
+          <path class="donut-segment tone-champagne idx-2"
+            d="M 272.58 225
+               A 130 130 0 0 1 160 290
+               L 160 230
+               A 70 70 0 0 0 220.62 195 Z"/>
+
+          <!-- Idx 3 — Tests utilisateurs -->
+          <path class="donut-segment tone-aubergine idx-3"
+            d="M 160 290
+               A 130 130 0 0 1 47.42 225
+               L 99.38 195
+               A 70 70 0 0 0 160 230 Z"/>
+
+          <!-- Idx 4 — Sondages onsite -->
+          <path class="donut-segment tone-champagne idx-4"
+            d="M 47.42 225
+               A 130 130 0 0 1 47.42 95
+               L 99.38 125
+               A 70 70 0 0 0 99.38 195 Z"/>
+
+          <!-- Idx 5 — Interviews clients -->
+          <path class="donut-segment tone-aubergine idx-5"
+            d="M 47.42 95
+               A 130 130 0 0 1 160 30
+               L 160 90
+               A 70 70 0 0 0 99.38 125 Z"/>
+
+          <!-- Filets dorés ultra-fins entre segments (radial) -->
+          <line class="donut-divider" x1="160" y1="30"  x2="160" y2="90"/>
+          <line class="donut-divider" x1="272.58" y1="95"  x2="220.62" y2="125"/>
+          <line class="donut-divider" x1="272.58" y1="225" x2="220.62" y2="195"/>
+          <line class="donut-divider" x1="160" y1="290" x2="160" y2="230"/>
+          <line class="donut-divider" x1="47.42" y1="225" x2="99.38" y2="195"/>
+          <line class="donut-divider" x1="47.42" y1="95"  x2="99.38" y2="125"/>
+
+          <!-- Centre -->
+          <text x="160" y="155" text-anchor="middle" font-family="Newsreader, serif" font-weight="400" font-size="22" fill="#14102A">Démarche</text>
+          <text x="160" y="183" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-weight="400" font-size="22" fill="#8C6A2C">CRO.</text>
+          <text x="160" y="206" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" fill="#6E6890" letter-spacing="2">— 06 méthodes —</text>
+        </svg>
+        <svg class="donut-svg" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" id="constellation">
+          <circle class="constellation-ring" cx="180" cy="180" r="130"/>
+          <path class="constellation-arc" id="cArc" d="M 180 50 A 130 130 0 0 1 309.39 175.21" pathLength="100" stroke-dasharray="22 100" stroke-dashoffset="0"/>
+          <text x="180" y="168" text-anchor="middle" font-family="Newsreader, serif" font-weight="400" font-size="26" fill="#14102A">Démarche</text>
+          <text x="180" y="200" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-weight="400" font-size="26" fill="#8C6A2C">CRO.</text>
+          <text x="180" y="226" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" fill="#6E6890" letter-spacing="1.5">— 06 méthodes —</text>
+          <g class="constellation-node is-active" data-i="0"><circle class="constellation-hit" cx="180" cy="50" r="28" fill="transparent" pointer-events="all"/><circle cx="180" cy="50" r="18"/><text x="180" y="50">01</text></g>
+          <g class="constellation-node" data-i="1"><circle class="constellation-hit" cx="292.58" cy="115" r="28" fill="transparent" pointer-events="all"/><circle cx="292.58" cy="115" r="18"/><text x="292.58" y="115">02</text></g>
+          <g class="constellation-node" data-i="2"><circle class="constellation-hit" cx="292.58" cy="245" r="28" fill="transparent" pointer-events="all"/><circle cx="292.58" cy="245" r="18"/><text x="292.58" y="245">03</text></g>
+          <g class="constellation-node" data-i="3"><circle class="constellation-hit" cx="180" cy="310" r="28" fill="transparent" pointer-events="all"/><circle cx="180" cy="310" r="18"/><text x="180" y="310">04</text></g>
+          <g class="constellation-node" data-i="4"><circle class="constellation-hit" cx="67.42" cy="245" r="28" fill="transparent" pointer-events="all"/><circle cx="67.42" cy="245" r="18"/><text x="67.42" y="245">05</text></g>
+          <g class="constellation-node" data-i="5"><circle class="constellation-hit" cx="67.42" cy="115" r="28" fill="transparent" pointer-events="all"/><circle cx="67.42" cy="115" r="18"/><text x="67.42" y="115">06</text></g>
+        </svg>
+      </div>
+    </div>
+    <div class="methods-legend-block">
+      <button class="lphase is-active">
+        <span class="lphase-n">01</span>
+        <span class="lphase-content">
+          <span class="lphase-title-row">
+            <span class="lphase-title">Évaluation heuristique</span>
+            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
+          </span>
+          <span class="lphase-desc">Audit des bonnes pratiques UX et sectorielles. Ce que l'oeil expert repère avant même les données.</span>
+        </span>
+        <span class="lphase-arrow">→</span>
+      </button>
+      <button class="lphase">
+        <span class="lphase-n">02</span>
+        <span class="lphase-content">
+          <span class="lphase-title-row">
+            <span class="lphase-title">Analytics</span>
+            <span class="lphase-badge"><span class="qq-dot"></span>Quantitatif</span>
+          </span>
+        </span>
+        <span class="lphase-arrow">→</span>
+      </button>
+      <button class="lphase">
+        <span class="lphase-n">03</span>
+        <span class="lphase-content">
+          <span class="lphase-title-row">
+            <span class="lphase-title">Heatmaps & sessions recordings</span>
+            <span class="lphase-badge"><span class="qq-dot"></span>Mixte</span>
+          </span>
+        </span>
+        <span class="lphase-arrow">→</span>
+      </button>
+      <button class="lphase">
+        <span class="lphase-n">04</span>
+        <span class="lphase-content">
+          <span class="lphase-title-row">
+            <span class="lphase-title">Tests utilisateurs</span>
+            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
+          </span>
+        </span>
+        <span class="lphase-arrow">→</span>
+      </button>
+      <button class="lphase">
+        <span class="lphase-n">05</span>
+        <span class="lphase-content">
+          <span class="lphase-title-row">
+            <span class="lphase-title">Sondages onsite</span>
+            <span class="lphase-badge"><span class="qq-dot"></span>Mixte</span>
+          </span>
+        </span>
+        <span class="lphase-arrow">→</span>
+      </button>
+      <button class="lphase">
+        <span class="lphase-n">06</span>
+        <span class="lphase-content">
+          <span class="lphase-title-row">
+            <span class="lphase-title">Interviews clients</span>
+            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
+          </span>
+        </span>
+        <span class="lphase-arrow">→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- 7 — BANDEAU DIFFÉRENCE -->
+<section class="diff-band reveal" data-cta-theme="dark">
+  <div class="diff-content">
+    <svg class="feather-bauhaus diff-feather"><use href="#feather-bauhaus"/></svg>
+    <p class="diff-text">
+      On ne regarde pas seulement ce qui ne marche pas : on comprend <b>pourquoi</b> ça ne marche pas dans <span class="accent">votre business</span>.
+    </p>
+  </div>
+</section>
+
+<!-- 8 — RECOMMENDATIONS -->
+<section class="rec-section reveal" data-cta-theme="dark">
+  <span class="chapter-mark on-dark">/ ch.04 — livrables</span>
+  <div class="rec-head">
+    <h3>De l'insight à <em>l'action.</em></h3>
+    <p class="rec-lead">Chaque recommandation est structurée, priorisée et mise en perspective — pour passer de l'insight à des décisions claires et des actions concrètes.</p>
+  </div>
+  <div class="fiche-doc-layout">
+    <div class="fiche-progress-dots" role="tablist" aria-label="Progression entre les recommandations">
+      <button class="fiche-progress-dot is-active" type="button" data-fiche="0" aria-label="Recommandation 1 sur 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="1" aria-label="Recommandation 2 sur 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="2" aria-label="Recommandation 3 sur 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="3" aria-label="Recommandation 4 sur 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="4" aria-label="Recommandation 5 sur 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="5" aria-label="Recommandation 6 sur 6"></button>
+    </div>
+    <div class="fiche-swipe-hint" aria-hidden="true">← Glissez pour naviguer →</div>
+    <button class="fiche-nav-arrow left" type="button" aria-label="Recommandation précédente" disabled>
+      <svg class="fiche-nav-arc" viewBox="0 0 50 50" aria-hidden="true">
+        <path d="M 6.82 14.5 A 21 21 0 1 1 35.5 43.18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      ←
+    </button>
+    <button class="fiche-nav-arrow right" type="button" aria-label="Recommandation suivante">
+      <svg class="fiche-nav-arc" viewBox="0 0 50 50" aria-hidden="true">
+        <path d="M 14.5 43.18 A 21 21 0 1 1 43.18 14.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      →
+    </button>
+    <div class="fiche-doc-frame">
+      <div class="fiche-content">
+        <header class="fiche-header">
+          <div class="fiche-num-block">
+            <span class="fiche-num-label">Recommandation</span>
+            <span class="fiche-num-value">№ 01 <span class="fiche-num-total">· sur 120</span></span>
+          </div>
+          <div class="fiche-classification">Importance — Critique</div>
+        </header>
+        <h4 class="fiche-title">Retirer les champs « société » et « TVA » de l'étape 3.</h4>
+        <span class="fiche-diagnostic-label">Insight :</span>
+        <p class="fiche-diagnostic">Seulement 8% des clients remplissent ces champs. Drop-off mesuré de 34% sur l'étape 3 du tunnel — la friction n'est pas justifiée par le volume B2B observé sur le segment.</p>
+        <div class="fiche-meta-grid">
+          <div class="fiche-meta-line">
+            <span class="fiche-meta-key">Emplacement</span>
+            <span class="fiche-meta-val">Tunnel checkout — étape 3</span>
+          </div>
+          <div class="fiche-meta-line">
+            <span class="fiche-meta-key">Catégorie</span>
+            <span class="fiche-meta-val">Utilisabilité</span>
+          </div>
+          <div class="fiche-meta-line">
+            <span class="fiche-meta-key">Thème</span>
+            <span class="fiche-meta-val">Effort</span>
+          </div>
+          <div class="fiche-meta-line">
+            <span class="fiche-meta-key">Action</span>
+            <span class="fiche-meta-val">Modification directe</span>
+          </div>
+          <div class="fiche-meta-line">
+            <span class="fiche-meta-key">Sources</span>
+            <span class="fiche-meta-val list"><span>Analytics</span><span>Sessions recordings</span></span>
+          </div>
+        </div>
+      </div>
+      <footer class="fiche-foot">
+        <button class="fiche-foot-prev">
+          <span class="fiche-foot-nav-label">Précédente</span>
+          <span class="fiche-foot-nav-text">№ 06 — Pricing en 3 tiers</span>
+        </button>
+        <button class="fiche-foot-next">
+          <span class="fiche-foot-nav-label">Suivante</span>
+          <span class="fiche-foot-nav-text">№ 02 — Avis clients</span>
+        </button>
+      </footer>
+    </div>
+  </div>
+</section>
+
+<!-- 9 — TEAM -->
+<section class="team-section reveal" id="binome" data-cta-theme="dark">
+  <span class="chapter-mark on-dark">/ ch.05 — L'équipe</span>
+  <div class="team-head">
+    <h2>Un audit fait <em>en collaboration.</em></h2>
+    <p class="lead">Un audit CRO gagne en profondeur quand deux lectures différentes se rejoignent sur les mêmes signaux.</p>
+  </div>
+
+  <div class="team-duo">
+    <article class="team-person">
+      <div class="team-role">Fondatrice de Maat</div>
+      <h3 class="team-name">Anne-Sophie Roux</h3>
+      <p class="team-bio">Spécialiste CRO avec un ADN Acquisition et MarTech. J'interviens à vos côtés pour cadrer des missions ancrées dans vos enjeux et faire émerger des opportunités de croissance concrètes. Mon rôle : faire dialoguer business, utilisateurs et data pour identifier des optimisations à fort impact, jusqu'à l'exécution terrain.</p>
+      <div class="team-tags">
+        <span class="team-tag is-solid">CRO</span>
+        <span class="team-tag is-solid">Acquisition</span>
+        <span class="team-tag is-solid">Data</span>
+      </div>
+    </article>
+    <div class="team-stamp-divider" aria-hidden="true">
+      <span class="team-stamp-line"></span>
+      <span class="team-stamp">
+        <span>Ma<span class="team-stamp-macron">a</span>t</span>
+        <span class="team-stamp-x">×</span>
+        <span>SDLV</span>
+      </span>
+      <span class="team-stamp-line"></span>
+    </div>
+    <article class="team-person">
+      <div class="team-role">Fondateur de SDLV</div>
+      <h3 class="team-name">Florent Kiecken</h3>
+      <p class="team-bio">Spécialiste CRO et UX avec un historique de missions sur des sites e-commerce, SaaS et leadgen à fort trafic (+130 marques accompagnées, +1200 personnes formées). Expert en recherche utilisateur et en expérimentation, il forme également au CRO et diffuse des méthodes éprouvées.</p>
+      <div class="team-tags">
+        <span class="team-tag is-outline">CRO</span>
+        <span class="team-tag is-outline">UX</span>
+        <span class="team-tag is-outline">Formation</span>
+      </div>
+      <a href="https://www.sdlv.fr/" class="team-link" target="_blank" rel="noopener noreferrer">Voir SDLV ↗</a>
+    </article>
+  </div>
+</section>
+
+<!-- 10 — MODULABLE + BOOKING -->
+<section class="booking-section reveal" data-cta-theme="light">
+  <div class="modulable-card editorial-block">
+    <div class="modulable-card-grid">
+      <div class="modulable-title-block">
+        <span class="modulable-title-line1">Audit modulable</span>
+        <span class="modulable-title-line2">à la carte.</span>
+        <span class="modulable-title-line3">Pas de format unique</span>
+      </div>
+      <div class="modulable-divider-vertical"></div>
+      <div class="modulable-text-block">
+        <p>On construit l'audit <b>avec vous</b> — en choisissant les méthodes qui ont le plus de sens pour votre situation, votre budget et vos objectifs.</p>
+        <p>Une mission ne ressemble jamais à la précédente : on adapte la profondeur, le périmètre et les livrables à ce que votre business demande vraiment.</p>
+      </div>
+    </div>
+  </div>
+  <div class="booking-grid" id="booking">
+    <div class="book-left intro-rule">
+      <div class="overline">— Call de découverte · 30 min</div>
+      <h3>Voyons si nous pouvons <em>vous aider.</em></h3>
+      <p class="lead">Un premier échange pour comprendre votre situation et voir si notre approche correspond à vos enjeux.</p>
+      <ul class="book-points">
+        <li>Compréhension de votre business et de vos enjeux</li>
+        <li>Clarification de vos objectifs</li>
+        <li>Présentation de notre méthode</li>
+      </ul>
+    </div>
+    <div class="cal-card">
+      <div class="cal-header">
+        <div class="cal-header-avatar">M</div>
+        <div class="cal-header-info">
+          <div class="cal-header-org">Maat · Audit CRO</div>
+          <div class="cal-header-title">Call de découverte</div>
+          <div class="cal-header-meta">
+            <span>○ 30 min</span><span>◊ Visio</span><span>⌖ Europe/Paris</span>
+          </div>
+        </div>
+      </div>
+      <div class="cal-body">
+        <div class="cal-month">
+          <div class="cal-month-nav">
+            <span class="cal-month-name">Mai 2026</span>
+            <div class="cal-arrows">
+              <button class="cal-arrow">‹</button>
+              <button class="cal-arrow">›</button>
+            </div>
+          </div>
+          <div class="cal-weekdays">
+            <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+          </div>
+          <div class="cal-days">
+            <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div>
+            <div class="cal-day disabled">1</div><div class="cal-day disabled">2</div><div class="cal-day disabled">3</div><div class="cal-day disabled">4</div>
+            <div class="cal-day disabled">5</div><div class="cal-day today">6</div><div class="cal-day">7</div><div class="cal-day">8</div>
+            <div class="cal-day disabled">9</div><div class="cal-day disabled">10</div><div class="cal-day">11</div><div class="cal-day selected">12</div>
+            <div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div>
+            <div class="cal-day disabled">16</div><div class="cal-day disabled">17</div>
+            <div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div>
+            <div class="cal-day disabled">23</div><div class="cal-day disabled">24</div>
+            <div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
+            <div class="cal-day disabled">30</div><div class="cal-day disabled">31</div>
+          </div>
+        </div>
+        <div class="cal-slots">
+          <div class="cal-slots-head">
+            <div class="cal-slots-date">Mardi 12 mai</div>
+            <div class="cal-slots-tz">Créneaux disponibles · 30 min</div>
+          </div>
+          <div class="cal-slots-list">
+            <button class="cal-slot">9:30</button>
+            <button class="cal-slot">10:30</button>
+            <button class="cal-slot selected"><span>14:00</span><span class="cal-slot-confirm">Sélectionné</span></button>
+            <button class="cal-slot">15:00</button>
+            <button class="cal-slot">16:00</button>
+            <button class="cal-slot">17:00</button>
+          </div>
+        </div>
+      </div>
+      <div class="cal-foot">
+        <span class="cal-foot-info">Confirmé : Mardi 12 mai · 14:00</span>
+        <button class="cal-confirm-btn">Confirmer →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 — FOOTER -->
+<footer class="footer reveal">
+  <div class="footer-top">
+    <svg class="feather-bauhaus footer-feather"><use href="#feather-bauhaus"/></svg>
+    <div class="footer-signature">
+      <p class="footer-tagline">Audits de conversion <em>pour les marques</em><br/>qui ont mieux à faire que deviner.</p>
+      <p class="footer-thesis">La conversion est une question d'alignement.</p>
+      <p class="footer-definition"><strong>«&nbsp;Maât&nbsp;»</strong> est le principe d'équilibre et de vérité. Nous croyons que la conversion ne se force pas : elle émerge quand promesse, expérience et attente s'accordent enfin.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-contact">
+      <span class="footer-contact-label">— Contact</span>
+      <a href="mailto:annesophieroux.consulting@gmail.com" class="footer-contact-email">annesophieroux.consulting@gmail.com</a>
+    </div>
+    <div class="footer-meta">© Maat 2026 · Cabinet d'analyse CRO · <a href="mentions-legales.html" class="footer-legal-link">Mentions légales</a></div>
+    <div class="footer-cta">
+      <span class="footer-cta-label">— Démarrer un audit</span>
+      <a href="#booking" class="footer-cta-link">Réserver un échange →</a>
+    </div>
+  </div>
+</footer>
+
+<a href="#booking" class="mobile-cta-floating" id="mobile-cta">Réserver un échange →</a>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+
+<script>
+(function() {
+  // ─── A2 IntersectionObserver fade-up sur sections .reveal ───
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('is-visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ─── Démarche timeline interactions ───
+  const STEPS = [
+    { name: 'Lecture business', desc: 'Comprendre votre contexte, vos objectifs, vos personas, leurs besoins et leurs contraintes. On pose le bon cadre d\u2019analyse.', livrable: 'Cadre d\u2019analyse partagé' },
+    { name: 'Recherche & insights', desc: 'Recherche utilisateur basée sur des méthodes qualitatives et quantitatives. On observe, on interroge, on mesure - pour comprendre les comportements et identifier les points de friction réels et opportunités manquées.', livrable: 'Backlog d’insights sourcés' },
+    { name: 'Priorisation des actions', desc: 'Croiser ces insights pour faire émerger les leviers d\u2019actions les plus pertinents à activer. Selon scoring Impact, Confiance, Effort.', livrable: 'Backlog priorisé + synthèse globale' },
+    { name: 'CRO redesign', desc: 'Selon le périmètre, maquettes correctives sur les écrans à plus fort impact. Le redesign s\u2019appuie sur l\u2019audit, jamais sur l\u2019intuition seule.', livrable: 'Maquettes UX finalisées, annotées', avec: true }
+  ];
+  const stepsBtns = document.querySelectorAll('.method-step');
+  const detail = document.querySelector('.method-detail');
+  const detailNum = detail.querySelector('.method-detail-num');
+  const detailName = detail.querySelector('.method-detail-name');
+  const detailDesc = detail.querySelector('.method-detail-desc');
+  const detailVal = detail.querySelector('.method-detail-out-val');
+  const detailWithRow = detail.querySelector('.method-detail-out-with');
+  const detailPointer = detail.querySelector('.method-detail-pointer');
+  const timeline = document.querySelector('.method-timeline');
+  // Inject pulse
+  const pulse = document.createElement('div');
+  pulse.className = 'method-pulse';
+  timeline.appendChild(pulse);
+  // 4 steps positioned at 12.5%, 37.5%, 62.5%, 87.5% of the timeline width
+  const PULSE_POS = ['12.5%', '37.5%', '62.5%', '87.5%'];
+  const POINTER_POS = ['12.5%', '37.5%', '62.5%', '87.5%'];
+  pulse.style.left = PULSE_POS[0];
+
+  stepsBtns.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      stepsBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      detailNum.textContent = `Étape ${String(i+1).padStart(2, '0')} · sur 04`;
+      detailName.textContent = STEPS[i].name;
+      detailDesc.textContent = STEPS[i].desc;
+      detailVal.textContent = STEPS[i].livrable;
+      if (detailWithRow) detailWithRow.hidden = !STEPS[i].avec;
+      detailPointer.textContent = `↓ ${String(i+1).padStart(2, '0')}`;
+      detailPointer.style.left = POINTER_POS[i];
+      pulse.style.left = PULSE_POS[i];
+      // Mobile auto-scroll : on évite que le CTA flottant cache la fin du panel (livrable)
+      if (window.matchMedia('(max-width: 900px)').matches) {
+        const rect = detail.getBoundingClientRect();
+        const reservedBottom = 100; // espace réservé pour le CTA flottant + respiration
+        const targetBottom = window.innerHeight - reservedBottom;
+        if (rect.bottom > targetBottom) {
+          window.scrollTo({ top: window.scrollY + (rect.bottom - targetBottom), behavior: 'smooth' });
+        }
+      }
+    });
+  });
+
+  // ─── Methods cycle interactions (donut ↔ list) ───
+  const METHODS = [
+    { title: 'Évaluation heuristique', kind: 'quali', label: 'Qualitatif', desc: 'Lecture experte du parcours utilisateur sur les principes d\u2019utilisabilité reconnus. Première détection des frictions évidentes — avant même de regarder la data.' },
+    { title: 'Analytics', kind: 'quanti', label: 'Quantitatif', desc: 'Review du tracking + lecture des comportements agrégés (entonnoirs, drop-offs, segments). On identifie les points où le trafic perd le plus, les parcours et pages qui convertissent, et où chercher les “pourquoi”.' },
+    { title: 'Heatmaps & sessions recordings', kind: 'mixte', label: 'Mixte', desc: 'On observe les clics, les scroll, les hésitations. Une lecture fine du comportement réel, écran par écran, qui révèle les frictions invisibles dans la data agrégée.' },
+    { title: 'Tests utilisateurs', kind: 'quali', label: 'Qualitatif', desc: 'On confronte le parcours à de vrais utilisateurs. Les blocages, les incompréhensions, les hésitations apparaissent en clair — on entend les mots, on voit les gestes.' },
+    { title: 'Sondages onsite', kind: 'mixte', label: 'Mixte', desc: 'Quelques questions ciblées, posées aux moments clés du parcours. On identifie les freins, les hésitations et les déclencheurs de conversion pour comprendre ce qui pousse — ou bloque — le passage à l’action.' },
+    { title: 'Interviews clients', kind: 'quali', label: 'Qualitatif', desc: 'Conversations approfondies avec vos clients, sur leur expérience d\u2019achat. Pour comprendre les motivations, les émotions et la perception de valeur - et faire émerger des insights parfois innatendus, souvent invisibles dans les données.' }
+  ];
+  const segments = document.querySelectorAll('.constellation-node');
+  const phases = document.querySelectorAll('.lphase');
+  const arc = document.getElementById('cArc');
+  // 6 nodes around circle: angles starting at -90° (top), every 60° clockwise
+  // Arc spans 60° centered on the active node (so it sits between active node and neighbors)
+  function setArcAt(i) {
+    if (!arc) return;
+    const cx = 180, cy = 180, r = 130;
+    const angles = [-90, -30, 30, 90, 150, 210];
+    const a = angles[i];
+    // Arc from a-30° to a+30°
+    const a1 = (a - 30) * Math.PI / 180;
+    const a2 = (a + 30) * Math.PI / 180;
+    const x1 = cx + r * Math.cos(a1);
+    const y1 = cy + r * Math.sin(a1);
+    const x2 = cx + r * Math.cos(a2);
+    const y2 = cy + r * Math.sin(a2);
+    arc.setAttribute('d', `M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`);
+    arc.removeAttribute('stroke-dasharray');
+    arc.removeAttribute('stroke-dashoffset');
+  }
+  setArcAt(0);
+
+  function setActiveMethod(i) {
+    segments.forEach((s, j) => s.classList.toggle('is-active', j === i));
+    setArcAt(i);
+    phases.forEach((p, j) => {
+      p.classList.toggle('is-active', j === i);
+      // Reset content on inactive: keep static; only refill the active one
+      const desc = p.querySelector('.lphase-desc');
+      const m = METHODS[j];
+      if (j === i) {
+        if (!desc) {
+          const newDesc = document.createElement('span');
+          newDesc.className = 'lphase-desc';
+          newDesc.textContent = m.desc;
+          p.querySelector('.lphase-content').appendChild(newDesc);
+        } else {
+          desc.textContent = m.desc;
+        }
+      } else if (desc) {
+        desc.remove();
+      }
+    });
+  }
+  segments.forEach((seg, i) => {
+    seg.addEventListener('click', () => {
+      setActiveMethod(i);
+      if (window.matchMedia('(max-width: 900px)').matches) {
+        // Scroll calculé : on évite que le CTA flottant (fixed bottom) cache la fin de la lphase active
+        const activeLphase = document.querySelector('.lphase.is-active');
+        if (activeLphase) {
+          const rect = activeLphase.getBoundingClientRect();
+          const reservedBottom = 100; // espace réservé pour le CTA flottant + respiration
+          const targetBottom = window.innerHeight - reservedBottom;
+          if (rect.bottom > targetBottom) {
+            window.scrollTo({ top: window.scrollY + (rect.bottom - targetBottom), behavior: 'smooth' });
+          }
+        }
+      }
+    });
+    seg.addEventListener('mouseenter', () => {
+      phases[i].classList.add('is-hovered');
+    });
+    seg.addEventListener('mouseleave', () => {
+      phases[i].classList.remove('is-hovered');
+    });
+  });
+  phases.forEach((ph, i) => {
+    ph.addEventListener('click', () => setActiveMethod(i));
+    ph.addEventListener('mouseenter', () => {
+      segments[i].classList.add('is-hovered');
+    });
+    ph.addEventListener('mouseleave', () => {
+      segments[i].classList.remove('is-hovered');
+    });
+  });
+
+  // ─── Calendar interactions ───
+  const days = document.querySelectorAll('.cal-day:not(.empty):not(.disabled)');
+  days.forEach(d => {
+    d.addEventListener('click', () => {
+      days.forEach(x => x.classList.remove('selected'));
+      d.classList.add('selected');
+      const dayNum = d.textContent.trim();
+      const slotsDate = document.querySelector('.cal-slots-date');
+      if (slotsDate) slotsDate.textContent = `${['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'][new Date(2026, 4, parseInt(dayNum)).getDay()]} ${dayNum} mai`;
+    });
+  });
+  const slots = document.querySelectorAll('.cal-slot');
+  slots.forEach(s => {
+    s.addEventListener('click', () => {
+      slots.forEach(x => {
+        x.classList.remove('selected');
+        const conf = x.querySelector('.cal-slot-confirm');
+        if (conf) conf.remove();
+        // Restore plain text if was wrapped
+        if (x.children.length === 0) {} // no-op
+      });
+      s.classList.add('selected');
+      // Wrap content + add Sélectionné
+      const time = s.textContent.trim();
+      s.innerHTML = `<span>${time}</span><span class="cal-slot-confirm">Sélectionné</span>`;
+      const selectedDay = document.querySelector('.cal-day.selected');
+      const dayN = selectedDay ? selectedDay.textContent.trim() : '12';
+      const dow = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'][new Date(2026, 4, parseInt(dayN)).getDay()];
+      const info = document.querySelector('.cal-foot-info');
+      if (info) info.textContent = `Confirmé : ${dow} ${dayN} mai · ${time}`;
+    });
+  });
+
+  // ─── Mobile floating CTA ───
+  const floatingCta = document.getElementById('mobile-cta');
+  const booking = document.getElementById('booking');
+  let bookingVisible = false;
+  if (booking) {
+    const bookingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { bookingVisible = e.isIntersecting; updateFloatingCta(); });
+    }, { threshold: 0.05 });
+    bookingObserver.observe(booking);
+  }
+  function updateFloatingCta() {
+    const isMobile = window.matchMedia('(max-width: 900px)').matches;
+    const scrolled = window.scrollY > 300;
+    const show = isMobile && scrolled && !bookingVisible;
+    floatingCta.classList.toggle('is-visible', show);
+  }
+  window.addEventListener('scroll', updateFloatingCta, { passive: true });
+  window.addEventListener('resize', updateFloatingCta);
+
+  // ─── Fiches livrables — navigation Précédente / Suivante ───
+  const FICHES = [
+    { n: '01', short: 'Champs société & TVA', title: "Retirer les champs « société » et « TVA » de l'étape 3.", importance: 'Critique', place: 'Tunnel checkout — étape 3', cat: 'Utilisabilité', theme: 'Effort', action: 'Modification directe', research: ['Analytics', 'Sessions recordings'], diagnostic: "Seulement 8% des clients remplissent ces champs. Drop-off mesuré de 34% sur l'étape 3 du tunnel — la friction n'est pas justifiée par le volume B2B observé sur le segment." },
+    { n: '12', short: 'Avis au-dessus du fold', title: 'Remonter les avis clients au-dessus du fold sur la fiche produit.', importance: 'Élevée', place: 'Page produit', cat: 'Confiance', theme: 'Crédibilité', action: 'Modification directe', research: ['Heatmaps', 'Sessions recordings'], diagnostic: "73% des visiteurs ne scrollent pas jusqu'aux avis. Pattern de sortie observé avant l'ajout au panier — la preuve sociale n'a pas le temps d'opérer." },
+    { n: '34', short: 'Hero orienté résultat', title: 'Reformuler le hero autour du résultat client, pas du produit.', importance: 'Élevée', place: 'Homepage', cat: 'Motivation', theme: 'Désirabilité', action: 'Test A/B', research: ['Interviews clients', 'Évaluation heuristique'], diagnostic: "Les interviews révèlent que la promesse principale n'est pas comprise avant la 3ème page visitée. Le hero parle du produit, pas de l'effet attendu." },
+    { n: '67', short: 'Livraison dès le produit', title: 'Clarifier les options de livraison dès la page produit.', importance: 'Moyenne', place: 'Page produit', cat: 'Coût', theme: 'Livraison', action: 'Modification directe', research: ['Tests utilisateurs', 'Analytics'], diagnostic: "Signal fort sur l'abandon panier lié à la découverte tardive des frais de livraison. À expliciter en amont du tunnel." },
+    { n: '89', short: 'Preuve sociale inline', title: 'Ajouter la preuve sociale dans le flow, pas en bas de page.', importance: 'Moyenne', place: 'Panier', cat: 'Confiance', theme: 'Attention', action: 'Modification directe', research: ['Tests utilisateurs', 'Sessions recordings'], diagnostic: "Avis clients enfouis en footer : invisibles au moment où la décision se joue. Repositionnement inline pendant l'ajout au panier." },
+    { n: '113', short: 'Pricing en 3 tiers', title: "Tester un pricing en 3 tiers avec ancrage sur l'offre premium.", importance: 'Basse', place: 'Global / multi-pages', cat: 'Coût', theme: 'Choix', action: 'Test A/B', research: ['Sondages onsite', 'Analytics'], diagnostic: "Hésitation forte sur le rapport qualité/prix exprimée dans les sondages. Sans point d'ancrage tarifaire, le visiteur n'a pas de repère pour évaluer l'offre." }
+  ];
+  const ficheLayout = document.querySelector('.fiche-doc-layout');
+  const ficheFrame = ficheLayout?.querySelector('.fiche-doc-frame');
+  if (ficheFrame && FICHES.length) {
+    const ficheContent = ficheFrame.querySelector('.fiche-content');
+    const numEl = ficheFrame.querySelector('.fiche-num-value');
+    const classifEl = ficheFrame.querySelector('.fiche-classification');
+    const titleEl = ficheFrame.querySelector('.fiche-title');
+    const diagEl = ficheFrame.querySelector('.fiche-diagnostic');
+    const metaLines = ficheFrame.querySelectorAll('.fiche-meta-line');
+    const prevBtn = ficheFrame.querySelector('.fiche-foot-prev');
+    const nextBtn = ficheFrame.querySelector('.fiche-foot-next');
+    const prevText = prevBtn?.querySelector('.fiche-foot-nav-text');
+    const nextText = nextBtn?.querySelector('.fiche-foot-nav-text');
+    const dots = ficheLayout.querySelectorAll('.fiche-progress-dot');
+    const arrowLeft = ficheLayout.querySelector('.fiche-nav-arrow.left');
+    const arrowRight = ficheLayout.querySelector('.fiche-nav-arrow.right');
+    const total = FICHES.length;
+    let currentIdx = 0;
+    const IMPORTANCE_SLUGS = { 'Critique': 'critique', 'Élevée': 'elevee', 'Moyenne': 'moyenne', 'Basse': 'basse' };
+    function setFiche(idx) {
+      // Pas de wrap : on clamp aux extrémités (parcours narratif borné)
+      currentIdx = Math.max(0, Math.min(total - 1, idx));
+      const f = FICHES[currentIdx];
+      numEl.innerHTML = `№ ${f.n} <span class="fiche-num-total">· sur 120</span>`;
+      classifEl.textContent = `Importance — ${f.importance}`;
+      classifEl.className = 'fiche-classification is-' + (IMPORTANCE_SLUGS[f.importance] || 'elevee');
+      titleEl.textContent = f.title;
+      diagEl.textContent = f.diagnostic;
+      metaLines[0].querySelector('.fiche-meta-val').textContent = f.place;
+      metaLines[1].querySelector('.fiche-meta-val').textContent = f.cat;
+      metaLines[2].querySelector('.fiche-meta-val').textContent = f.theme;
+      metaLines[3].querySelector('.fiche-meta-val').textContent = f.action;
+      const sourcesVal = metaLines[4].querySelector('.fiche-meta-val');
+      sourcesVal.innerHTML = f.research.map(r => `<span>${r}</span>`).join('');
+      // Footer prev/next : disabled aux extrémités, label "Première / Dernière"
+      const isFirst = currentIdx === 0;
+      const isLast = currentIdx === total - 1;
+      if (prevBtn) {
+        prevBtn.disabled = isFirst;
+        if (prevText) {
+          prevText.textContent = isFirst
+            ? 'Première recommandation'
+            : `№ ${FICHES[currentIdx - 1].n} — ${FICHES[currentIdx - 1].short}`;
+        }
+      }
+      if (nextBtn) {
+        nextBtn.disabled = isLast;
+        if (nextText) {
+          nextText.textContent = isLast
+            ? 'Dernière recommandation'
+            : `№ ${FICHES[currentIdx + 1].n} — ${FICHES[currentIdx + 1].short}`;
+        }
+      }
+      // Dots
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === currentIdx));
+      // Flèches latérales
+      if (arrowLeft) arrowLeft.disabled = isFirst;
+      if (arrowRight) arrowRight.disabled = isLast;
+      // Relance l'animation fade-in en retirant/réajoutant la classe (force reflow)
+      ficheContent.classList.remove('is-fresh');
+      void ficheContent.offsetWidth;
+      ficheContent.classList.add('is-fresh');
+    }
+    prevBtn?.addEventListener('click', () => setFiche(currentIdx - 1));
+    nextBtn?.addEventListener('click', () => setFiche(currentIdx + 1));
+    arrowLeft?.addEventListener('click', () => setFiche(currentIdx - 1));
+    arrowRight?.addEventListener('click', () => setFiche(currentIdx + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => setFiche(i)));
+    // Swipe horizontal sur la fiche (mobile) — seuil 60px, |dX| > |dY| pour préserver le scroll vertical
+    let touchStartX = 0, touchStartY = 0;
+    ficheFrame.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    const swipeHint = ficheLayout.querySelector('.fiche-swipe-hint');
+    ficheFrame.addEventListener('touchend', (e) => {
+      const dX = e.changedTouches[0].clientX - touchStartX;
+      const dY = e.changedTouches[0].clientY - touchStartY;
+      if (Math.abs(dX) > 60 && Math.abs(dX) > Math.abs(dY)) {
+        setFiche(currentIdx + (dX < 0 ? 1 : -1));
+        // Fade le hint au 1er swipe réussi (persistant via localStorage)
+        if (swipeHint && !swipeHint.classList.contains('is-faded')) {
+          swipeHint.classList.add('is-faded');
+          try { sessionStorage.setItem('fiche-swiped', '1'); } catch (_) {}
+        }
+      }
+    }, { passive: true });
+    // Si l'utilisateur a déjà swipé une fois, masque le hint dès le load
+    try {
+      if (sessionStorage.getItem('fiche-swiped') && swipeHint) swipeHint.classList.add('is-faded');
+    } catch (_) {}
+    // Wobble pédagogique au 1er montage mobile pour suggérer le swipe (1 fois par session)
+    try {
+      if (window.innerWidth <= 900 && !sessionStorage.getItem('fiche-wobbled')) {
+        setTimeout(() => {
+          ficheFrame.classList.add('is-wobbling');
+          try { sessionStorage.setItem('fiche-wobbled', '1'); } catch (_) {}
+        }, 1200);
+      }
+    } catch (_) {}
+    // Synchronise l'état initial des 3 dispositifs (footer prev/next, dots, flèches) avec la fiche courante
+    setFiche(0);
+    // Retire la classe is-fresh à l'init pour ne pas animer au load (l'animation initiale est gérée par .reveal)
+    ficheContent.classList.remove('is-fresh');
+  }
+
+  // ─── Smooth scroll pour anchor links ───
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+
+  // ─── Header sticky : densification au-delà de 60px,
+  //     pin du sous-menu au-delà de 300px ───
+  const mhHeader = document.getElementById('mh-header');
+  if (mhHeader) {
+    const SUBMENU_PIN_THRESHOLD = 300;
+    const onScrollHeader = () => {
+      const y = window.scrollY;
+      mhHeader.classList.toggle('is-scrolled', y > 60);
+      mhHeader.classList.toggle('is-pinned', y > SUBMENU_PIN_THRESHOLD);
+    };
+    onScrollHeader();
+    window.addEventListener('scroll', onScrollHeader, { passive: true });
+
+    // Hover/focus sur l'onglet actif → révéler temporairement le sous-menu.
+    // Timer sur le hide pour laisser le temps de transiter vers le sous-menu.
+    const activeTab = mhHeader.querySelector('.mh-tab.is-active');
+    const row2 = mhHeader.querySelector('.mh-row2');
+    if (activeTab && row2) {
+      let hideTimer = null;
+      const reveal = () => {
+        if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+        mhHeader.classList.add('is-revealing');
+      };
+      const hide = () => {
+        if (hideTimer) clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => {
+          mhHeader.classList.remove('is-revealing');
+          hideTimer = null;
+        }, 150);
+      };
+      activeTab.addEventListener('mouseenter', reveal);
+      activeTab.addEventListener('focus', reveal);
+      activeTab.addEventListener('mouseleave', hide);
+      activeTab.addEventListener('blur', hide);
+      row2.addEventListener('mouseenter', reveal);
+      row2.addEventListener('mouseleave', hide);
+    }
+  }
+
+  // ─── Sous-menu actif : suit la section visible au scroll ───
+  const submenuTargets = ['demarche', 'methodes', 'binome', 'booking'];
+  const submenuItems = document.querySelectorAll('.mh-submenu-item, .mh-drawer-submenu-item');
+  const submenuSections = submenuTargets
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  if (submenuItems.length && submenuSections.length) {
+    const setActive = (id) => {
+      submenuItems.forEach(el => {
+        el.classList.toggle('is-active', el.dataset.target === id);
+      });
+    };
+    const submenuIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { threshold: 0.4, rootMargin: '-20% 0px -50% 0px' });
+    submenuSections.forEach(s => submenuIO.observe(s));
+  }
+
+  // ─── CTA flottant mobile : bascule de thème selon le fond ───
+  const themedSections = document.querySelectorAll('[data-cta-theme]');
+  if (floatingCta && themedSections.length) {
+    const ctaThemeIO = new IntersectionObserver((entries) => {
+      // Prend la section visible la plus en haut (la plus "active" dans le viewport)
+      let topMost = null;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const rect = entry.boundingClientRect;
+          if (!topMost || rect.top < topMost.rect.top) {
+            topMost = { el: entry.target, rect };
+          }
+        }
+      });
+      if (topMost) {
+        const theme = topMost.el.dataset.ctaTheme;
+        floatingCta.classList.toggle('is-on-light', theme === 'light');
+      }
+    }, { threshold: 0, rootMargin: '-40% 0px -40% 0px' });
+    themedSections.forEach(s => ctaThemeIO.observe(s));
+  }
+
+  // ─── Drawer mobile : toggle ouvert/fermé ───
+  const drawerToggle = document.getElementById('mh-mobile-toggle');
+  const drawer = document.getElementById('mh-drawer');
+  if (drawerToggle && drawer) {
+    const setDrawer = (open) => {
+      drawer.classList.toggle('is-open', open);
+      drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      drawerToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      drawerToggle.textContent = open ? 'Fermer' : 'Menu';
+    };
+    drawerToggle.addEventListener('click', () => {
+      setDrawer(!drawer.classList.contains('is-open'));
+    });
+    // Fermer au clic sur un lien du drawer
+    drawer.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', () => setDrawer(false));
+    });
+    // Fermer si on repasse en desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && drawer.classList.contains('is-open')) {
+        setDrawer(false);
+      }
+    });
+  }
+})();
+</script>
+
+<script type="text/babel" data-presets="react">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "density": "regular",
+  "donut": "C",
+  "livrable": "magazine"
+}/*EDITMODE-END*/;
+
+function MaatTweaks() {
+  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  React.useEffect(() => {
+    document.body.dataset.density = t.density;
+    document.body.dataset.donut = t.donut;
+    document.body.dataset.livrable = t.livrable;
+  }, [t.density, t.donut, t.livrable]);
+  return (
+    <TweaksPanel title="Tweaks">
+      <TweakSection label="Densité de la page" />
+      <TweakRadio label="Rythme" value={t.density} options={["compact", "regular", "airy"]}
+                  onChange={(v) => setTweak('density', v)} />
+      <TweakSection label="Camembert — direction" />
+      <TweakRadio label="Variante" value={t.donut} options={["A", "B", "C", "D"]}
+                  onChange={(v) => setTweak('donut', v)} />
+      <div style={{fontSize: 10, color: 'rgba(41,38,27,0.5)', lineHeight: 1.4, marginTop: -4}}>
+        A · pastel doux<br/>
+        B · monochrome aubergine<br/>
+        C · champagne décliné<br/>
+        D · alterné aubergine/champagne
+      </div>
+      <TweakSection label="Fiche livrable — variante" />
+      <TweakRadio label="Style" value={t.livrable} options={["magazine", "notion", "mixte"]}
+                  onChange={(v) => setTweak('livrable', v)} />
+      <div style={{fontSize: 10, color: 'rgba(41,38,27,0.5)', lineHeight: 1.4, marginTop: -4}}>
+        magazine · page de rapport<br/>
+        notion · aperçu Notion-like<br/>
+        mixte · magazine + mention « livré dans Notion »
+      </div>
+    </TweaksPanel>
+  );
+}
+
+const tRoot = document.createElement('div');
+document.body.appendChild(tRoot);
+ReactDOM.createRoot(tRoot).render(<MaatTweaks />);
+</script>
+
 </body>
 </html>
