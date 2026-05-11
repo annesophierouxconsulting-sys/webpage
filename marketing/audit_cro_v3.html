@@ -3123,6 +3123,10 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
             <span class="fiche-meta-val">Utilisabilité</span>
           </div>
           <div class="fiche-meta-line">
+            <span class="fiche-meta-key">Thème</span>
+            <span class="fiche-meta-val">Effort</span>
+          </div>
+          <div class="fiche-meta-line">
             <span class="fiche-meta-key">Action</span>
             <span class="fiche-meta-val">Modification directe</span>
           </div>
@@ -3508,12 +3512,12 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 
   // ─── Fiches livrables — navigation Précédente / Suivante ───
   const FICHES = [
-    { n: '01', short: 'Champs société & TVA', title: "Retirer les champs « société » et « TVA » de l'étape 3.", importance: 'Critique', place: 'Tunnel checkout — étape 3', cat: 'Utilisabilité', action: 'Modification directe', research: ['Analytics', 'Sessions recordings'], diagnostic: "Seulement 8% des clients remplissent ces champs. Drop-off mesuré de 34% sur l'étape 3 du tunnel — la friction n'est pas justifiée par le volume B2B observé sur le segment." },
-    { n: '12', short: 'Avis au-dessus du fold', title: 'Remonter les avis clients au-dessus du fold sur la fiche produit.', importance: 'Élevée', place: 'Page produit', cat: 'Confiance', action: 'Modification directe', research: ['Heatmaps', 'Sessions recordings'], diagnostic: "73% des visiteurs ne scrollent pas jusqu'aux avis. Pattern de sortie observé avant l'ajout au panier — la preuve sociale n'a pas le temps d'opérer." },
-    { n: '34', short: 'Hero orienté résultat', title: 'Reformuler le hero autour du résultat client, pas du produit.', importance: 'Élevée', place: 'Homepage', cat: 'Motivation', action: 'Test A/B', research: ['Interviews clients', 'Évaluation heuristique'], diagnostic: "Les interviews révèlent que la promesse principale n'est pas comprise avant la 3ème page visitée. Le hero parle du produit, pas de l'effet attendu." },
-    { n: '67', short: 'Livraison dès le produit', title: 'Clarifier les options de livraison dès la page produit.', importance: 'Moyenne', place: 'Page produit', cat: 'Compréhension', action: 'Modification directe', research: ['Tests utilisateurs', 'Analytics'], diagnostic: "Signal fort sur l'abandon panier lié à la découverte tardive des frais de livraison. À expliciter en amont du tunnel." },
-    { n: '89', short: 'Preuve sociale inline', title: 'Ajouter la preuve sociale dans le flow, pas en bas de page.', importance: 'Moyenne', place: 'Panier', cat: 'Confiance', action: 'Modification directe', research: ['Tests utilisateurs', 'Sessions recordings'], diagnostic: "Avis clients enfouis en footer : invisibles au moment où la décision se joue. Repositionnement inline pendant l'ajout au panier." },
-    { n: '113', short: 'Pricing en 3 tiers', title: "Tester un pricing en 3 tiers avec ancrage sur l'offre premium.", importance: 'Basse', place: 'Global / multi-pages', cat: 'Coût', action: 'Test A/B', research: ['Sondages onsite', 'Analytics'], diagnostic: "Hésitation forte sur le rapport qualité/prix exprimée dans les sondages. Un tier premium visible sert d'ancrage et redirige vers l'offre principale." }
+    { n: '01', short: 'Champs société & TVA', title: "Retirer les champs « société » et « TVA » de l'étape 3.", importance: 'Critique', place: 'Tunnel checkout — étape 3', cat: 'Utilisabilité', theme: 'Effort', action: 'Modification directe', research: ['Analytics', 'Sessions recordings'], diagnostic: "Seulement 8% des clients remplissent ces champs. Drop-off mesuré de 34% sur l'étape 3 du tunnel — la friction n'est pas justifiée par le volume B2B observé sur le segment." },
+    { n: '12', short: 'Avis au-dessus du fold', title: 'Remonter les avis clients au-dessus du fold sur la fiche produit.', importance: 'Élevée', place: 'Page produit', cat: 'Confiance', theme: 'Crédibilité', action: 'Modification directe', research: ['Heatmaps', 'Sessions recordings'], diagnostic: "73% des visiteurs ne scrollent pas jusqu'aux avis. Pattern de sortie observé avant l'ajout au panier — la preuve sociale n'a pas le temps d'opérer." },
+    { n: '34', short: 'Hero orienté résultat', title: 'Reformuler le hero autour du résultat client, pas du produit.', importance: 'Élevée', place: 'Homepage', cat: 'Motivation', theme: 'Désirabilité', action: 'Test A/B', research: ['Interviews clients', 'Évaluation heuristique'], diagnostic: "Les interviews révèlent que la promesse principale n'est pas comprise avant la 3ème page visitée. Le hero parle du produit, pas de l'effet attendu." },
+    { n: '67', short: 'Livraison dès le produit', title: 'Clarifier les options de livraison dès la page produit.', importance: 'Moyenne', place: 'Page produit', cat: 'Coût', theme: 'Livraison', action: 'Modification directe', research: ['Tests utilisateurs', 'Analytics'], diagnostic: "Signal fort sur l'abandon panier lié à la découverte tardive des frais de livraison. À expliciter en amont du tunnel." },
+    { n: '89', short: 'Preuve sociale inline', title: 'Ajouter la preuve sociale dans le flow, pas en bas de page.', importance: 'Moyenne', place: 'Panier', cat: 'Confiance', theme: 'Attention', action: 'Modification directe', research: ['Tests utilisateurs', 'Sessions recordings'], diagnostic: "Avis clients enfouis en footer : invisibles au moment où la décision se joue. Repositionnement inline pendant l'ajout au panier." },
+    { n: '113', short: 'Pricing en 3 tiers', title: "Tester un pricing en 3 tiers avec ancrage sur l'offre premium.", importance: 'Basse', place: 'Global / multi-pages', cat: 'Coût', theme: 'Choix', action: 'Test A/B', research: ['Sondages onsite', 'Analytics'], diagnostic: "Hésitation forte sur le rapport qualité/prix exprimée dans les sondages. Un tier premium visible sert d'ancrage et redirige vers l'offre principale." }
   ];
   const ficheLayout = document.querySelector('.fiche-doc-layout');
   const ficheFrame = ficheLayout?.querySelector('.fiche-doc-frame');
@@ -3545,8 +3549,9 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       diagEl.textContent = f.diagnostic;
       metaLines[0].querySelector('.fiche-meta-val').textContent = f.place;
       metaLines[1].querySelector('.fiche-meta-val').textContent = f.cat;
-      metaLines[2].querySelector('.fiche-meta-val').textContent = f.action;
-      const sourcesVal = metaLines[3].querySelector('.fiche-meta-val');
+      metaLines[2].querySelector('.fiche-meta-val').textContent = f.theme;
+      metaLines[3].querySelector('.fiche-meta-val').textContent = f.action;
+      const sourcesVal = metaLines[4].querySelector('.fiche-meta-val');
       sourcesVal.innerHTML = f.research.map(r => `<span>${r}</span>`).join('');
       // Footer prev/next : disabled aux extrémités, label "Première / Dernière"
       const isFirst = currentIdx === 0;
