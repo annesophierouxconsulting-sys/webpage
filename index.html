@@ -35,6 +35,10 @@
 
 * { box-sizing: border-box; }
 
+/* View Transitions API : crossfade automatique entre index.html ↔ mentions-legales.html
+   (Chrome 126+, Edge 126+, Safari 18+ ; fallback gracieux : navigation normale sans transition) */
+@view-transition { navigation: auto; }
+
 html { scroll-padding-top: var(--header-height); }
 
 body {
@@ -811,6 +815,21 @@ body {
 @keyframes ficheContentFadeIn {
   from { opacity: 0.4; }
   to { opacity: 1; }
+}
+/* Slide horizontal directionnel quand le changement vient d'un swipe ou d'une flèche prev/next */
+.fiche-content.is-fresh-from-right {
+  animation: ficheContentSlideFromRight 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fiche-content.is-fresh-from-left {
+  animation: ficheContentSlideFromLeft 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes ficheContentSlideFromRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes ficheContentSlideFromLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 /* Wobble pédagogique au 1er montage mobile pour suggérer le swipe horizontal */
 .fiche-doc-frame.is-wobbling {
@@ -1987,6 +2006,33 @@ body {
   will-change: opacity, transform;
 }
 .reveal.is-visible { opacity: 1; transform: none; }
+
+/* Marker chapter "/ ch.XX" qui se pose : fade + slide depuis +8px à droite au reveal */
+.reveal:not(.is-visible) .chapter-mark {
+  opacity: 0;
+  transform: translateX(8px);
+}
+.chapter-mark {
+  transition: opacity 500ms ease 100ms, transform 500ms cubic-bezier(0.22, 1, 0.36, 1) 100ms;
+}
+
+/* Tactile press : feedback visuel au tap (simule le "press" iOS/Android natif) */
+.mh-cta:active, .mh-mobile-toggle:active, .mh-drawer-cta:active,
+.fiche-progress-dot:active, .fiche-nav-arrow:active,
+.fiche-foot-prev:active, .fiche-foot-next:active,
+.cta-mono:active, .method-step:active,
+.cal-day:not(.empty):not(.disabled):active, .cal-confirm-btn:active,
+.team-link:active {
+  transform: scale(0.97);
+  opacity: 0.85;
+  transition: transform 80ms ease, opacity 80ms ease;
+}
+/* Cas spécial du CTA flottant qui a déjà translateX(-50%) — préserver le centrage */
+.mobile-cta-floating.is-visible:active {
+  transform: translateX(-50%) scale(0.97);
+  opacity: 0.85;
+  transition: transform 80ms ease, opacity 80ms ease;
+}
 
 /* Hover livrables — soulèvement subtil */
 .fiche-doc-frame {
@@ -3541,9 +3587,15 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     const total = FICHES.length;
     let currentIdx = 0;
     const IMPORTANCE_SLUGS = { 'Critique': 'critique', 'Élevée': 'elevee', 'Moyenne': 'moyenne', 'Basse': 'basse' };
-    function setFiche(idx) {
+    function setFiche(idx, direction) {
+      // direction : 'next' (slide depuis la droite), 'prev' (slide depuis la gauche), undefined (fade simple)
       // Pas de wrap : on clamp aux extrémités (parcours narratif borné)
+      const previousIdx = currentIdx;
       currentIdx = Math.max(0, Math.min(total - 1, idx));
+      // Si aucune direction explicite, déduit de la variation d'index (clic sur dot lointain)
+      if (!direction && currentIdx !== previousIdx) {
+        direction = currentIdx > previousIdx ? 'next' : 'prev';
+      }
       const f = FICHES[currentIdx];
       numEl.innerHTML = `№ ${f.n} <span class="fiche-num-total">· sur 120</span>`;
       classifEl.textContent = `Importance — ${f.importance}`;
@@ -3580,15 +3632,17 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       // Flèches latérales
       if (arrowLeft) arrowLeft.disabled = isFirst;
       if (arrowRight) arrowRight.disabled = isLast;
-      // Relance l'animation fade-in en retirant/réajoutant la classe (force reflow)
-      ficheContent.classList.remove('is-fresh');
+      // Relance l'animation : slide directionnel si direction connue, sinon fade simple
+      ficheContent.classList.remove('is-fresh', 'is-fresh-from-right', 'is-fresh-from-left');
       void ficheContent.offsetWidth;
-      ficheContent.classList.add('is-fresh');
+      if (direction === 'next') ficheContent.classList.add('is-fresh-from-right');
+      else if (direction === 'prev') ficheContent.classList.add('is-fresh-from-left');
+      else ficheContent.classList.add('is-fresh');
     }
-    prevBtn?.addEventListener('click', () => setFiche(currentIdx - 1));
-    nextBtn?.addEventListener('click', () => setFiche(currentIdx + 1));
-    arrowLeft?.addEventListener('click', () => setFiche(currentIdx - 1));
-    arrowRight?.addEventListener('click', () => setFiche(currentIdx + 1));
+    prevBtn?.addEventListener('click', () => setFiche(currentIdx - 1, 'prev'));
+    nextBtn?.addEventListener('click', () => setFiche(currentIdx + 1, 'next'));
+    arrowLeft?.addEventListener('click', () => setFiche(currentIdx - 1, 'prev'));
+    arrowRight?.addEventListener('click', () => setFiche(currentIdx + 1, 'next'));
     dots.forEach((d, i) => d.addEventListener('click', () => setFiche(i)));
     // Swipe horizontal sur la fiche (mobile) — seuil 60px, |dX| > |dY| pour préserver le scroll vertical
     let touchStartX = 0, touchStartY = 0;
@@ -3601,7 +3655,10 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       const dX = e.changedTouches[0].clientX - touchStartX;
       const dY = e.changedTouches[0].clientY - touchStartY;
       if (Math.abs(dX) > 60 && Math.abs(dX) > Math.abs(dY)) {
-        setFiche(currentIdx + (dX < 0 ? 1 : -1));
+        const dir = dX < 0 ? 'next' : 'prev';
+        setFiche(currentIdx + (dX < 0 ? 1 : -1), dir);
+        // Haptic feedback léger au swipe réussi (Chrome Android — fallback silencieux sur Safari iOS)
+        try { navigator.vibrate?.(15); } catch (_) {}
         // Fade le hint au 1er swipe réussi (persistant via localStorage)
         if (swipeHint && !swipeHint.classList.contains('is-faded')) {
           swipeHint.classList.add('is-faded');
