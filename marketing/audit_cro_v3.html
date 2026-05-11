@@ -3005,7 +3005,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
             <span class="lphase-title">Évaluation heuristique</span>
             <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
           </span>
-          <span class="lphase-desc">Lecture experte du parcours utilisateur sur les principes d'utilisabilité reconnus. Première détection des frictions évidentes — avant même de regarder la data.</span>
+          <span class="lphase-desc">Audit des bonnes pratiques UX et sectorielles. Ce que l\u2019oeil expert repère avant même les données.</span>
         </span>
         <span class="lphase-arrow">→</span>
       </button>
@@ -3370,11 +3370,11 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   // ─── Methods cycle interactions (donut ↔ list) ───
   const METHODS = [
     { title: 'Évaluation heuristique', kind: 'quali', label: 'Qualitatif', desc: 'Lecture experte du parcours utilisateur sur les principes d\u2019utilisabilité reconnus. Première détection des frictions évidentes — avant même de regarder la data.' },
-    { title: 'Analytics', kind: 'quanti', label: 'Quantitatif', desc: 'Lecture des comportements agrégés : entonnoirs, drop-off, segments. On identifie les points où le trafic perd le plus, et où chercher les pourquoi.' },
+    { title: 'Analytics', kind: 'quanti', label: 'Quantitatif', desc: 'Review du tracking + lecture des comportements agrégés (entonnoirs, drop-offs, segments). On identifie les points où le trafic perd le plus, les parcours et pages qui convertissent, et où chercher les “pourquoi”.' },
     { title: 'Heatmaps & sessions recordings', kind: 'mixte', label: 'Mixte', desc: 'On observe les clics, les scroll, les hésitations. Une lecture fine du comportement réel, écran par écran, qui révèle les frictions invisibles dans la data agrégée.' },
     { title: 'Tests utilisateurs', kind: 'quali', label: 'Qualitatif', desc: 'On confronte le parcours à de vrais utilisateurs. Les blocages, les incompréhensions, les hésitations apparaissent en clair — on entend les mots, on voit les gestes.' },
-    { title: 'Sondages onsite', kind: 'mixte', label: 'Mixte', desc: 'Quelques questions courtes, posées au bon moment. On capte les freins exprimés et on enrichit la lecture quanti par les motivations réelles des visiteurs.' },
-    { title: 'Interviews clients', kind: 'quali', label: 'Qualitatif', desc: 'Conversations approfondies avec vos clients. On cerne le contexte d\u2019achat, les hésitations, le langage qu\u2019ils emploient — pour ajuster votre message à leur réalité.' }
+    { title: 'Sondages onsite', kind: 'mixte', label: 'Mixte', desc: 'Quelques questions ciblées, posées aux moments clés du parcours. On identifie les freins, les hésitations et les déclencheurs de conversion pour comprendre ce qui pousse — ou bloque — le passage à l’action.' },
+    { title: 'Interviews clients', kind: 'quali', label: 'Qualitatif', desc: 'Conversations approfondies avec vos clients, sur leur expérience d\u2019achat. Pour comprendre les motivations, les émotions et la perception de valeur - et faire émerger des insights parfois innatendus, souvent invisibles dans les données.' }
   ];
   const segments = document.querySelectorAll('.constellation-node');
   const phases = document.querySelectorAll('.lphase');
