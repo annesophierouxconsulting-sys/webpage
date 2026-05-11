@@ -594,6 +594,8 @@ body {
   padding: 1rem 0;
   border-top: 1px solid rgba(212, 178, 117, 0.15);
 }
+/* Le display: flex ci-dessus override l'effet user-agent de l'attribut HTML hidden. Force le masquage. */
+.method-detail-out[hidden] { display: none; }
 .method-detail-out-lbl {
   font-family: var(--font-mono);
   font-size: 9px;
