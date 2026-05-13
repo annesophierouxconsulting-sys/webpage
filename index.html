@@ -1614,8 +1614,43 @@ body {
   font-variation-settings: "opsz" 18;
 }
 .modulable-text-block p { margin: 0 0 0.9rem; }
-.modulable-text-block p:last-child { margin-bottom: 0; }
+.modulable-text-block p:last-of-type { margin-bottom: 0; }
 .modulable-text-block b { color: var(--ink); font-weight: 500; font-style: italic; }
+
+/* Modalités (durée + investissement) — variante meta-line adaptée au fond crème */
+.modulable-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(140, 106, 44, 0.2);
+}
+.modulable-meta-line {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.5rem;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(140, 106, 44, 0.15);
+  align-items: baseline;
+}
+.modulable-meta-line:last-child { border-bottom: none; }
+.modulable-meta-key {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--champagne-fonce);
+}
+.modulable-meta-val {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink);
+  font-variation-settings: "opsz" 18;
+}
 
 .booking-grid {
   display: grid;
@@ -2289,8 +2324,9 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   }
   .team-bio { text-align: left; hyphens: none; }
   .modulable-card-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-  .modulable-text-block p:last-child { display: none; }
+  .modulable-text-block p:last-of-type { display: none; }
   .modulable-divider-vertical { display: none; }
+  .modulable-meta-line { grid-template-columns: 1fr; gap: 4px; }
   .booking-grid { grid-template-columns: 1fr; gap: 2rem; }
   .cal-body { grid-template-columns: 1fr; }
   .cal-month { border-right: none; border-bottom: 1px solid rgba(20, 16, 42, 0.08); }
@@ -3240,6 +3276,16 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       <div class="modulable-text-block">
         <p>On construit l'audit <b>avec vous</b> — en choisissant les méthodes qui ont le plus de sens pour votre situation, votre budget et vos objectifs.</p>
         <p>Une mission ne ressemble jamais à la précédente : on adapte la profondeur, le périmètre et les livrables à ce que votre business demande vraiment.</p>
+        <div class="modulable-meta-grid">
+          <div class="modulable-meta-line">
+            <span class="modulable-meta-key">Durée</span>
+            <span class="modulable-meta-val">1 à 6 semaines selon le périmètre</span>
+          </div>
+          <div class="modulable-meta-line">
+            <span class="modulable-meta-key">Investissement</span>
+            <span class="modulable-meta-val">À partir de 1 000 € (évaluation heuristique + backlog priorisé)</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
