@@ -276,6 +276,107 @@ body {
 .band-maat-text b { font-style: normal; font-weight: 500; color: var(--ivory); }
 
 /* ============================================================
+   2bis — SYNTHÈSE DE L'OFFRE — mini-section sous le hero,
+   fond hero continu (#08041A), composition centrée et factuelle :
+   marker + filets latéraux, bandeau 3 chiffres, description, tag.
+   ============================================================ */
+.synth-section {
+  background: var(--hero-bg);
+  color: var(--ivory);
+  padding: 75px 5%;
+  text-align: center;
+}
+.synth-marker-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.synth-marker-line {
+  flex: 1;
+  height: 1px;
+  max-width: 260px;
+}
+.synth-marker-line.left {
+  background: linear-gradient(to right, transparent, rgba(212, 178, 117, 0.4));
+}
+.synth-marker-line.right {
+  background: linear-gradient(to left, transparent, rgba(212, 178, 117, 0.4));
+}
+.synth-marker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.synth-stats {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin: 2.5rem 0 2rem;
+}
+.synth-stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.synth-stat-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--ivory);
+  font-weight: 400;
+  font-variation-settings: "opsz" 32;
+}
+.synth-stat-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.7);
+  font-weight: 500;
+}
+.synth-stat-sep {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: rgba(212, 178, 117, 0.3);
+  user-select: none;
+}
+.synth-desc {
+  font-family: var(--font-display);
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(244, 236, 211, 0.85);
+  max-width: 620px;
+  margin: 0 auto 1rem;
+  font-variation-settings: "opsz" 24;
+}
+.synth-tag {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  color: rgba(212, 178, 117, 0.7);
+  margin: 0;
+}
+.synth-closing-line {
+  width: 100%;
+  max-width: 200px;
+  height: 1px;
+  margin: 2.5rem auto 0;
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(212, 178, 117, 0.3) 50%,
+    transparent 100%);
+}
+
+/* ============================================================
    3 — SPLIT — deux encarts éditoriaux côte à côte
    "Ce que vous vivez" sans numérotation, "Ce qui va changer" avec numérotation
    ============================================================ */
@@ -2295,7 +2396,17 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   html { scroll-padding-top: var(--header-height-mobile); }
   .hero { padding: calc(var(--header-height-mobile) + 4%) 5% 5%; }
   .hero-inner { max-width: 100%; }
-  .band-maat { display: none; }
+  /* .band-maat repositionnée entre état des lieux et démarche : reste visible mobile */
+  .synth-section { padding: 45px 24px; }
+  .synth-marker { font-size: 9px; letter-spacing: 0.18em; }
+  .synth-marker-row { gap: 12px; }
+  .synth-stats { flex-direction: column; gap: 10px; margin: 1.75rem 0 1.5rem; }
+  .synth-stat-num { font-size: 18px; }
+  .synth-stat-label { font-size: 9px; }
+  .synth-stat-sep { display: none; }
+  .synth-desc { font-size: 15px; padding: 0 8px; }
+  .synth-tag { font-size: 13px; padding: 0 8px; }
+  .synth-closing-line { max-width: 140px; margin-top: 1.75rem; }
   .split-grid { grid-template-columns: 1fr; gap: 1rem; margin-top: 0; }
   .method-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
   .method-track, .method-arrow { display: none; }
@@ -2875,15 +2986,32 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   </div>
 </section>
 
-<!-- 2 — BANDEAU MAÂT (bandeau séparé sous le hero, fond aubergine claire, plume bauhaus à gauche) -->
-<section class="band-maat reveal" data-cta-theme="dark">
-  <div class="band-maat-content">
-    <svg class="feather-bauhaus band-maat-feather"><use href="#feather-bauhaus"/></svg>
-    <div class="band-maat-text-block">
-      <span class="band-maat-name">— Le principe Maat</span>
-      <p class="band-maat-text"><b>La conversion est une question d'alignement.</b> Elle ne se force pas — elle émerge quand promesse, expérience et attente s'accordent enfin.</p>
-    </div>
+<!-- 2 — SYNTHÈSE DE L'OFFRE (continuité chromatique avec le hero, composition centrée factuelle) -->
+<section class="synth-section reveal" data-cta-theme="dark">
+  <div class="synth-marker-row">
+    <span class="synth-marker-line left" aria-hidden="true"></span>
+    <span class="synth-marker">— L'audit CRO Maat</span>
+    <span class="synth-marker-line right" aria-hidden="true"></span>
   </div>
+  <div class="synth-stats">
+    <span class="synth-stat">
+      <span class="synth-stat-num">4</span>
+      <span class="synth-stat-label">étapes</span>
+    </span>
+    <span class="synth-stat-sep" aria-hidden="true">·</span>
+    <span class="synth-stat">
+      <span class="synth-stat-num">6</span>
+      <span class="synth-stat-label">méthodes</span>
+    </span>
+    <span class="synth-stat-sep" aria-hidden="true">·</span>
+    <span class="synth-stat">
+      <span class="synth-stat-num">1 à 6</span>
+      <span class="synth-stat-label">semaines</span>
+    </span>
+  </div>
+  <p class="synth-desc">Analyse business, recherche utilisateur et data croisées pour transformer vos visiteurs en clients.</p>
+  <p class="synth-tag">— Sur-mesure selon votre périmètre.</p>
+  <div class="synth-closing-line" aria-hidden="true"></div>
 </section>
 
 <!-- 3 — SPLIT -->
@@ -2932,6 +3060,17 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 — BANDEAU MAÂT (transition narrative entre état des lieux et démarche) -->
+<section class="band-maat reveal" data-cta-theme="dark">
+  <div class="band-maat-content">
+    <svg class="feather-bauhaus band-maat-feather"><use href="#feather-bauhaus"/></svg>
+    <div class="band-maat-text-block">
+      <span class="band-maat-name">— Le principe Maat</span>
+      <p class="band-maat-text"><b>La conversion est une question d'alignement.</b> Elle ne se force pas — elle émerge quand promesse, expérience et attente s'accordent enfin.</p>
     </div>
   </div>
 </section>
