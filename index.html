@@ -2481,12 +2481,15 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   /* Roue plein largeur sur mobile pour zone tactile généreuse */
   .donut-svg { max-width: 90vw; }
   /* Markers chapter remis en flow au-dessus du titre sur toutes les sections
-     (évite le chevauchement avec les titres sur viewports étroits) */
+     (évite le chevauchement avec les titres sur viewports étroits).
+     Taille réduite à 10px (était 12px) + letter-spacing resserré pour s'aligner
+     sur la grammaire micro-typo mobile (synth marker 9px / stat labels 9px). */
   .chapter-mark {
     position: static;
     display: block;
     text-align: right;
-    font-size: 12px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
     margin-bottom: 1.5rem;
   }
   /* Affiche uniquement la méthode active sous la roue ; les autres sont masquées */
