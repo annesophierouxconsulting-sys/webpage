@@ -3636,6 +3636,10 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 (function() {
   // ─── A2 IntersectionObserver fade-up sur sections .reveal ───
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const PAGE_LOAD_TIME = performance.now();
+  // Cascade hero : 4 éléments avec delays max 1100ms + duration 600ms ≈ 1700ms.
+  // On marge à 1800ms pour un léger souffle entre fin du hero et démarrage synth.
+  const HERO_ANIM_END = 1800;
 
   // Anime un nombre 0 → target avec ease-out cubic. Cale le démarrage sur le
   // delay du fade-in CSS des stats (150ms) pour synchroniser l'effet.
@@ -3654,21 +3658,33 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     requestAnimationFrame(tick);
   }
 
+  function triggerSynthCounters(section) {
+    const counters = section.querySelectorAll('.synth-stat-num[data-count]');
+    counters.forEach(c => {
+      const target = parseInt(c.dataset.count, 10);
+      if (prefersReducedMotion) { c.textContent = target; return; }
+      animateCounter(c, target, 1000, 150);
+    });
+  }
+
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('is-visible');
-        // Compteurs synthèse : animation 0 → valeur cible sur les .synth-stat-num[data-count]
-        if (e.target.classList.contains('synth-section')) {
-          const counters = e.target.querySelectorAll('.synth-stat-num[data-count]');
-          counters.forEach(c => {
-            const target = parseInt(c.dataset.count, 10);
-            if (prefersReducedMotion) { c.textContent = target; return; }
-            animateCounter(c, target, 1000, 150);
-          });
-        }
-        io.unobserve(e.target);
-      }
+      if (!e.isIntersecting) return;
+      const target = e.target;
+      const isSynth = target.classList.contains('synth-section');
+
+      // Sur petits viewports, la synth peut intersecter dès le chargement initial
+      // (avant que la cascade hero ne soit terminée) → ses animations se joueraient
+      // en parallèle du hero, sans logique narrative. Si on est encore dans la
+      // fenêtre du hero, on diffère l'activation de la synth.
+      const elapsed = performance.now() - PAGE_LOAD_TIME;
+      const delay = (isSynth && elapsed < HERO_ANIM_END) ? HERO_ANIM_END - elapsed : 0;
+
+      setTimeout(() => {
+        target.classList.add('is-visible');
+        if (isSynth) triggerSynthCounters(target);
+      }, delay);
+      io.unobserve(target);
     });
   }, { threshold: 0.15 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
