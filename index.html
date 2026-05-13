@@ -151,6 +151,20 @@ body {
   border-bottom-color: rgba(140, 106, 44, 0.5);
 }
 
+/* Équilibrage typographique des paragraphes narratifs courts —
+   évite les orphelins (dernier mot seul sur sa ligne) en redistribuant
+   les coupures automatiquement. Appliqué aux leads + paragraphes synth.
+   Support : Chrome/Edge 114+, Safari 17.4+, Firefox 121+. Fallback gracieux. */
+.hero-lead,
+.lead,
+.method-lead,
+.rec-lead,
+.band-maat-text,
+.synth-desc,
+.synth-tag {
+  text-wrap: balance;
+}
+
 /* ============================================================
    1 — HERO MAGAZINE SOMBRE — pleine largeur asymétrique gauche
    ============================================================ */
