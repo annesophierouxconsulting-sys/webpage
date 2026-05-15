@@ -669,15 +669,31 @@ body {
   width: 56px; height: 56px;
   border-radius: 50%;
   background: var(--hero-bg);
-  border: 1px solid rgba(244, 236, 211, 0.3);
+  border: 1.5px solid rgba(244, 236, 211, 0.5);
   display: flex; align-items: center; justify-content: center;
   color: rgba(244, 236, 211, 0.6);
   position: relative; z-index: 2;
+  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+}
+.method-step:hover:not(.active) .method-marker {
+  border-color: var(--champagne);
+  color: var(--champagne);
 }
 .method-step.active .method-marker {
   background: var(--ivory);
   border-color: var(--ivory);
   color: var(--ink);
+}
+
+/* Hint d'interaction : signale la cliquabilité des 4 étapes (affordance) */
+.method-hint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.6);
+  text-align: center;
+  margin: 1.5rem 0 0.5rem;
 }
 .method-step-title {
   font-family: var(--font-display);
@@ -2536,6 +2552,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .split-grid { grid-template-columns: 1fr; gap: 1rem; margin-top: 0; }
   .method-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
   .method-track, .method-arrow, .method-pulse { display: none; }
+  .method-hint { font-size: 9px; letter-spacing: 0.18em; margin: 1rem 0 1.25rem; }
   .method-detail { grid-template-columns: 1fr; gap: 1rem; padding: 1.75rem; }
   .method-detail::before, .method-detail::after { display: none; }
   .method-detail-pointer { display: none; }
@@ -3215,6 +3232,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       <p class="method-lead">Quatre étapes qui se répondent — pour relier ce que vous savez à ce que font réellement vos utilisateurs.</p>
     </div>
   </div>
+  <p class="method-hint">— Cliquez une étape pour en voir le détail</p>
   <div class="method-timeline">
     <div class="method-track"></div>
     <div class="method-arrow" style="left: 27%;">→</div>
