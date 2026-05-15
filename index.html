@@ -2421,6 +2421,7 @@ body {
   border-radius: 18px;
   box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.40);
   text-decoration: none;
+  white-space: nowrap;
   opacity: 0;
   transition:
     opacity 0.3s ease-out,
@@ -3930,19 +3931,31 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   });
 
   // ─── Mobile floating CTA ───
+  // Affiché sur mobile au-delà de 300px de scroll, MAIS masqué quand la section
+  // booking OU le footer entre dans le viewport — éviter (1) la redondance avec
+  // le CTA in-page #booking, (2) le chevauchement avec le contenu du footer
+  // (© Maat, sitemap, footer-cta) qui se passait sur petits viewports.
   const floatingCta = document.getElementById('mobile-cta');
   const booking = document.getElementById('booking');
+  const footer = document.querySelector('.footer');
   let bookingVisible = false;
+  let footerVisible = false;
   if (booking) {
     const bookingObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => { bookingVisible = e.isIntersecting; updateFloatingCta(); });
     }, { threshold: 0.05 });
     bookingObserver.observe(booking);
   }
+  if (footer) {
+    const footerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { footerVisible = e.isIntersecting; updateFloatingCta(); });
+    }, { threshold: 0.05 });
+    footerObserver.observe(footer);
+  }
   function updateFloatingCta() {
     const isMobile = window.matchMedia('(max-width: 900px)').matches;
     const scrolled = window.scrollY > 300;
-    const show = isMobile && scrolled && !bookingVisible;
+    const show = isMobile && scrolled && !bookingVisible && !footerVisible;
     floatingCta.classList.toggle('is-visible', show);
   }
   window.addEventListener('scroll', updateFloatingCta, { passive: true });
