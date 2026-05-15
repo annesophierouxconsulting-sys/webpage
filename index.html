@@ -3634,11 +3634,6 @@ pour faire émerger les leviers de croissance prioritaires
 
 <a href="#booking" class="mobile-cta-floating" id="mobile-cta">Réserver un échange →</a>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="tweaks-panel.jsx"></script>
-
 <script>
 (function() {
   // ─── A2 IntersectionObserver fade-up sur sections .reveal ───
@@ -4130,51 +4125,6 @@ pour faire émerger les leviers de croissance prioritaires
     });
   }
 })();
-</script>
-
-<script type="text/babel" data-presets="react">
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "density": "regular",
-  "donut": "C",
-  "livrable": "magazine"
-}/*EDITMODE-END*/;
-
-function MaatTweaks() {
-  const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  React.useEffect(() => {
-    document.body.dataset.density = t.density;
-    document.body.dataset.donut = t.donut;
-    document.body.dataset.livrable = t.livrable;
-  }, [t.density, t.donut, t.livrable]);
-  return (
-    <TweaksPanel title="Tweaks">
-      <TweakSection label="Densité de la page" />
-      <TweakRadio label="Rythme" value={t.density} options={["compact", "regular", "airy"]}
-                  onChange={(v) => setTweak('density', v)} />
-      <TweakSection label="Camembert — direction" />
-      <TweakRadio label="Variante" value={t.donut} options={["A", "B", "C", "D"]}
-                  onChange={(v) => setTweak('donut', v)} />
-      <div style={{fontSize: 10, color: 'rgba(41,38,27,0.5)', lineHeight: 1.4, marginTop: -4}}>
-        A · pastel doux<br/>
-        B · monochrome aubergine<br/>
-        C · champagne décliné<br/>
-        D · alterné aubergine/champagne
-      </div>
-      <TweakSection label="Fiche livrable — variante" />
-      <TweakRadio label="Style" value={t.livrable} options={["magazine", "notion", "mixte"]}
-                  onChange={(v) => setTweak('livrable', v)} />
-      <div style={{fontSize: 10, color: 'rgba(41,38,27,0.5)', lineHeight: 1.4, marginTop: -4}}>
-        magazine · page de rapport<br/>
-        notion · aperçu Notion-like<br/>
-        mixte · magazine + mention « livré dans Notion »
-      </div>
-    </TweaksPanel>
-  );
-}
-
-const tRoot = document.createElement('div');
-document.body.appendChild(tRoot);
-ReactDOM.createRoot(tRoot).render(<MaatTweaks />);
 </script>
 
 </body>
