@@ -866,6 +866,14 @@ body {
   max-width: 460px;
   font-variation-settings: "opsz" 14;
 }
+.methods-hint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(140, 106, 44, 0.7);
+  margin: 1.5rem 0 0;
+}
 .methods-stage-DEPRECATED {
   display: flex; align-items: flex-end;
   justify-content: flex-start;
@@ -2558,6 +2566,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .method-detail-pointer { display: none; }
   .method-detail-left { border-right: none; border-bottom: 1px solid rgba(212, 178, 117, 0.15); padding-right: 0; padding-bottom: 1rem; }
   .methods-section { padding: 5% 5%; }
+  .methods-hint { font-size: 9px; letter-spacing: 0.18em; margin-top: 1rem; }
   .methods-mag { grid-template-columns: 1fr; gap: 2rem; }
   .methods-left { gap: 1.25rem; }
   .methods-stage { justify-content: center; padding-left: 0; }
@@ -3310,6 +3319,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       <div class="methods-intro intro-rule">
         <h3>Les méthodes qui alimentent<br/><em>cette démarche.</em></h3>
         <p class="lead">Chaque méthode produit un signal. Ensemble, elles se complètent, se recoupent et s'affinent pour transformer le « quoi » en « pourquoi ».</p>
+        <p class="methods-hint">— Cliquez une méthode pour en voir le détail</p>
       </div>
       <div class="methods-stage">
         <svg class="donut-svg" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" id="constellation-svg" style="display:none">
