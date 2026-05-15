@@ -6,7 +6,15 @@
 <title>Maat — Audits CRO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Chargement non-bloquant des polices via le pattern media=print → onload swap.
+     Évite le render-blocking de ~3s estimé par PageSpeed. Le browser peint avec
+     Georgia/Courier New (fallback), puis swap vers Newsreader/DM Mono une fois
+     chargées (display=swap déjà dans l'URL). Poids 600 retiré (non utilisé). -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Mono:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Mono:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Mono:wght@300;400;500&display=swap">
+</noscript>
 <style>
 /* ============================================================
    TOKENS — Palette aubergine + champagne, magazine sombre
