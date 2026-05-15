@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Maāt favicon — "Mā" italique champagne sur aubergine
+  Couleurs : --hero-bg #08041A (fond), --champagne #D4B275 (texte)
+  Police : Newsreader italic 400, fallback Georgia italic (universellement disponible)
+  Le macron sur le 'ā' est la signature distinctive du nom Maat.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#08041A"/>
+  <text x="32" y="48"
+        text-anchor="middle"
+        font-family="Newsreader, 'Source Serif 4', Georgia, 'Times New Roman', serif"
+        font-style="italic"
+        font-weight="400"
+        font-size="46"
+        fill="#D4B275">Mā</text>
+</svg>
