@@ -2160,6 +2160,58 @@ body {
   align-self: flex-start;
   text-decoration: none;
 }
+.footer-contact-meta {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.4);
+  margin-top: 4px;
+}
+.footer-contact-linkedin {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.7);
+  text-decoration: none;
+  margin-top: 10px;
+  align-self: flex-start;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.3);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.footer-contact-linkedin:hover {
+  color: var(--champagne);
+  border-bottom-color: rgba(212, 178, 117, 0.6);
+}
+
+/* Mini-sitemap interne — entre signature et bottom bar */
+.footer-sitemap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 1.5rem 0 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.15);
+}
+.footer-sitemap a {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.7);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.footer-sitemap a:hover {
+  color: var(--champagne);
+  border-bottom-color: rgba(212, 178, 117, 0.4);
+}
 .footer-meta {
   font-family: var(--font-mono);
   font-size: 9px;
@@ -2553,8 +2605,10 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .cal-foot { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
   .cal-confirm-btn { align-self: stretch; text-align: center; }
   .footer { padding: 5% 7% 4% 7%; }
-  .footer-top { gap: 1.5rem; }
+  .footer-top { flex-direction: column; align-items: center; gap: 1.5rem; }
   .footer-feather { height: 80px; }
+  .footer-signature { width: 100%; max-width: 100%; }
+  .footer-sitemap { gap: 0.9rem 1.5rem; padding: 1.25rem 0 1.75rem; margin-bottom: 1.5rem; font-size: 9px; }
   .footer-bottom { grid-template-columns: 1fr; gap: 1rem; text-align: left; }
   .footer-meta, .footer-cta { text-align: left; align-items: flex-start; }
   .fiche-classification { font-size: 8px; letter-spacing: 0.18em; padding: 5px 7px; align-self: flex-start; }
@@ -3402,7 +3456,7 @@ pour faire émerger les leviers de croissance prioritaires
 </section>
 
 <!-- 8 — RECOMMENDATIONS -->
-<section class="rec-section reveal" data-cta-theme="dark">
+<section class="rec-section reveal" id="livrables" data-cta-theme="dark">
   <span class="chapter-mark on-dark">/ ch.04 — livrables</span>
   <div class="rec-head">
     <h3>De l'insight à <em>l'action.</em></h3>
@@ -3627,12 +3681,21 @@ pour faire émerger les leviers de croissance prioritaires
       <p class="footer-definition"><strong>«&nbsp;Maât&nbsp;»</strong> est le principe d'équilibre et de vérité. Nous croyons que la conversion ne se force pas : elle émerge quand promesse, expérience et attente s'accordent enfin.</p>
     </div>
   </div>
+  <nav class="footer-sitemap" aria-label="Navigation interne du site">
+    <a href="#demarche">Démarche</a>
+    <a href="#methodes">Méthodes</a>
+    <a href="#livrables">Livrables</a>
+    <a href="#binome">Équipe</a>
+    <a href="#booking">Réserver</a>
+  </nav>
   <div class="footer-bottom">
     <div class="footer-contact">
       <span class="footer-contact-label">— Contact</span>
       <a href="mailto:annesophieroux.consulting@gmail.com" class="footer-contact-email">annesophieroux.consulting@gmail.com</a>
+      <span class="footer-contact-meta">Réponse sous 24h ouvrées</span>
+      <a href="https://www.linkedin.com/in/anne-sophie-roux" class="footer-contact-linkedin" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
     </div>
-    <div class="footer-meta">© Maat 2026 · Cabinet d'analyse CRO · <a href="mentions-legales.html" class="footer-legal-link">Mentions légales</a></div>
+    <div class="footer-meta">© Maat 2026 — <a href="mentions-legales.html" class="footer-legal-link">Mentions légales</a></div>
     <div class="footer-cta">
       <span class="footer-cta-label">— Démarrer un audit</span>
       <a href="#booking" class="footer-cta-link">Réserver un échange →</a>
