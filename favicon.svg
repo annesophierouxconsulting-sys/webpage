@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Maat favicon : "Ma" avec macron, italique champagne sur aubergine.
-  Couleurs : aubergine #08041A (fond), champagne #D4B275 (texte).
-  Police : Newsreader italic 400, fallback Georgia italic (universel).
-  Le macron sur le 'a' est la signature distinctive du nom Maat.
+  Maat favicon : plume bauhaus condensée, signature graphique du site.
+  Couleurs : aubergine #08041A (fond), champagne #D4B275 (plume).
+  Reprend la grammaire du symbol #feather-bauhaus (hero / band-maat / footer)
+  en version compacte adaptée au format carré : rachis central + 4 paires de
+  barbes triangulaires symétriques, plus larges au centre pour évoquer la
+  forme caractéristique d'une plume.
 -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" fill="#08041A"/>
-  <text x="32" y="48"
-        text-anchor="middle"
-        font-family="Newsreader, 'Source Serif 4', Georgia, 'Times New Roman', serif"
-        font-style="italic"
-        font-weight="400"
-        font-size="46"
-        fill="#D4B275">Mā</text>
+  <g fill="#D4B275">
+    <line x1="32" y1="6" x2="32" y2="58" stroke="#D4B275" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 32 12 L 18 20 L 32 20 Z" fill-opacity="0.7"/>
+    <path d="M 32 12 L 46 20 L 32 20 Z" fill-opacity="0.7"/>
+    <path d="M 32 24 L 12 32 L 32 32 Z" fill-opacity="0.85"/>
+    <path d="M 32 24 L 52 32 L 32 32 Z" fill-opacity="0.85"/>
+    <path d="M 32 36 L 12 44 L 32 44 Z" fill-opacity="0.85"/>
+    <path d="M 32 36 L 52 44 L 32 44 Z" fill-opacity="0.85"/>
+    <path d="M 32 48 L 18 56 L 32 56 Z" fill-opacity="0.7"/>
+    <path d="M 32 48 L 46 56 L 32 56 Z" fill-opacity="0.7"/>
+  </g>
 </svg>
