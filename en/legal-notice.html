@@ -163,6 +163,29 @@ body {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+/* Toggle langue FR · EN */
+.mh-lang-toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  margin-right: 18px;
+}
+.mh-lang-current { color: var(--champagne); font-weight: 500; }
+.mh-lang-sep { color: rgba(212, 178, 117, 0.35); user-select: none; }
+.mh-lang-link {
+  color: rgba(212, 178, 117, 0.55); text-decoration: none;
+  border-bottom: 1px solid transparent; padding-bottom: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.mh-lang-link:hover { color: var(--champagne); border-bottom-color: rgba(212, 178, 117, 0.5); }
+.mh-drawer-lang {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 1.25rem 0 0; margin-top: 0.5rem;
+  border-top: 1px solid rgba(212, 178, 117, 0.12);
+}
+
 .mh-cta {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -283,7 +306,7 @@ body {
 @media (max-width: 900px) {
   .mh-row1 { padding: 14px 5%; grid-template-columns: auto auto; }
   .mh-header.is-scrolled .mh-row1 { padding: 8px 5% 12px; }
-  .mh-tabs, .mh-tabs-wrap, .mh-cta { display: none; }
+  .mh-tabs, .mh-tabs-wrap, .mh-cta, .mh-lang-toggle { display: none; }
   .mh-mobile-toggle { display: inline-flex; justify-self: end; }
   .mh-drawer { display: block; }
   .mh-logo { font-size: 26px; }
@@ -658,6 +681,11 @@ body {
         </li>
       </ul>
     </nav>
+    <span class="mh-lang-toggle" aria-label="Langue / Language">
+      <a class="mh-lang-link" href="/mentions-legales.html" lang="fr" hreflang="fr">FR</a>
+      <span class="mh-lang-sep" aria-hidden="true">·</span>
+      <span class="mh-lang-current" aria-current="true">EN</span>
+    </span>
     <a class="mh-cta" href="index.html#booking">Book a call <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
     <button class="mh-mobile-toggle" id="mh-mobile-toggle" type="button" aria-expanded="false" aria-controls="mh-drawer">Menu</button>
   </div>
@@ -677,6 +705,11 @@ body {
   </ul>
   <div class="mh-drawer-divider" aria-hidden="true"></div>
   <a class="mh-drawer-cta" href="index.html#booking">Book a call ↗</a>
+  <div class="mh-drawer-lang" aria-label="Langue / Language">
+    <a class="mh-lang-link" href="/mentions-legales.html" lang="fr" hreflang="fr">FR</a>
+    <span class="mh-lang-sep" aria-hidden="true">·</span>
+    <span class="mh-lang-current" aria-current="true">EN</span>
+  </div>
 </aside>
 
 <!-- MAIN — contenu mentions légales -->

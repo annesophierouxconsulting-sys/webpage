@@ -2801,6 +2801,50 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   transform: translateX(-50%) translateY(0);
 }
 
+/* Toggle langue FR · EN — mono champagne, langue active en plein, autre en lien */
+.mh-lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-right: 18px;
+}
+.mh-lang-current {
+  color: var(--champagne);
+  font-weight: 500;
+}
+.mh-lang-sep {
+  color: rgba(212, 178, 117, 0.35);
+  user-select: none;
+}
+.mh-lang-link {
+  color: rgba(212, 178, 117, 0.55);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.mh-lang-link:hover {
+  color: var(--champagne);
+  border-bottom-color: rgba(212, 178, 117, 0.5);
+}
+/* Variante drawer mobile : ligne dédiée, plus aérée */
+.mh-drawer-lang {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 1.25rem 0 0;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(212, 178, 117, 0.12);
+}
+
 /* CTA droite */
 .mh-cta {
   font-family: var(--font-mono);
@@ -3038,7 +3082,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 @media (max-width: 900px) {
   .mh-row1 { padding: 14px 5%; grid-template-columns: auto auto; }
   .mh-header.is-scrolled .mh-row1 { padding: 14px 5% 12px; }
-  .mh-tabs, .mh-tabs-wrap, .mh-cta { display: none; }
+  .mh-tabs, .mh-tabs-wrap, .mh-cta, .mh-lang-toggle { display: none; }
   .mh-row2 { display: none; }
   .mh-mobile-toggle { display: inline-flex; justify-self: end; }
   .mh-drawer { display: block; }
@@ -3065,6 +3109,11 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         </li>
       </ul>
     </nav>
+    <span class="mh-lang-toggle" aria-label="Langue / Language">
+      <span class="mh-lang-current" aria-current="true">FR</span>
+      <span class="mh-lang-sep" aria-hidden="true">·</span>
+      <a class="mh-lang-link" href="/en/" lang="en" hreflang="en">EN</a>
+    </span>
     <a class="mh-cta" href="#booking">Réserver un échange <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
     <button class="mh-mobile-toggle" id="mh-mobile-toggle" type="button" aria-expanded="false" aria-controls="mh-drawer">Menu</button>
   </div>
@@ -3103,6 +3152,11 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   </ul>
   <div class="mh-drawer-divider" aria-hidden="true"></div>
   <a class="mh-drawer-cta" href="#booking">Réserver un échange ↗</a>
+  <div class="mh-drawer-lang" aria-label="Langue / Language">
+    <span class="mh-lang-current" aria-current="true">FR</span>
+    <span class="mh-lang-sep" aria-hidden="true">·</span>
+    <a class="mh-lang-link" href="/en/" lang="en" hreflang="en">EN</a>
+  </div>
 </aside>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
