@@ -2774,7 +2774,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 .mh-tab.is-coming:hover { color: rgba(244, 236, 211, 0.5); }
 .mh-tab.is-coming:hover::after { transform: scaleX(0); }
 .mh-tab.is-coming::before {
-  content: '— à venir';
+  content: '— coming soon';
   position: absolute;
   top: calc(100% + 6px);
   left: 50%;
@@ -3053,32 +3053,32 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 <!-- ============================================================
      HEADER STICKY — DA aubergine
      ============================================================ -->
-<header class="mh-header" id="mh-header" aria-label="Navigation principale">
+<header class="mh-header" id="mh-header" aria-label="Main navigation">
   <div class="mh-row1">
-    <a class="mh-logo" href="#top" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
+    <a class="mh-logo" href="#top" aria-label="Maat — home">Ma<span class="mh-logo-macron">a</span>t</a>
     <nav class="mh-tabs-wrap" aria-label="Pages">
       <ul class="mh-tabs">
         <li>
-          <a class="mh-tab is-active" href="#top" aria-current="page">Audit CRO</a>
+          <a class="mh-tab is-active" href="#top" aria-current="page">CRO Audit</a>
         </li>
         <li>
           <span class="mh-tab is-coming" role="link" aria-disabled="true" tabindex="0">Content &amp; Messaging Strategy</span>
         </li>
       </ul>
     </nav>
-    <a class="mh-cta" href="#booking">Réserver un échange <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
+    <a class="mh-cta" href="#booking">Book a call <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
     <button class="mh-mobile-toggle" id="mh-mobile-toggle" type="button" aria-expanded="false" aria-controls="mh-drawer">Menu</button>
   </div>
   <div class="mh-row2">
-    <nav aria-label="Sections de la page">
+    <nav aria-label="Page sections">
       <ul class="mh-submenu">
-        <li><a class="mh-submenu-item is-active" href="#demarche" data-target="demarche">Notre démarche</a></li>
+        <li><a class="mh-submenu-item is-active" href="#demarche" data-target="demarche">Our approach</a></li>
         <li class="mh-submenu-sep" aria-hidden="true">·</li>
-        <li><a class="mh-submenu-item" href="#methodes" data-target="methodes">Les méthodes</a></li>
+        <li><a class="mh-submenu-item" href="#methodes" data-target="methodes">Methods</a></li>
         <li class="mh-submenu-sep" aria-hidden="true">·</li>
-        <li><a class="mh-submenu-item" href="#binome" data-target="binome">Le binôme</a></li>
+        <li><a class="mh-submenu-item" href="#binome" data-target="binome">The duo</a></li>
         <li class="mh-submenu-sep" aria-hidden="true">·</li>
-        <li><a class="mh-submenu-item" href="#booking" data-target="booking">Réserver un échange</a></li>
+        <li><a class="mh-submenu-item" href="#booking" data-target="booking">Book a call</a></li>
       </ul>
     </nav>
   </div>
@@ -3087,23 +3087,23 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 <aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
   <ul class="mh-drawer-tabs">
     <li>
-      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Audit CRO</a>
+      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">CRO Audit</a>
       <ul class="mh-drawer-submenu">
-        <li><a class="mh-drawer-submenu-item is-active" href="#demarche" data-target="demarche">Notre démarche</a></li>
-        <li><a class="mh-drawer-submenu-item" href="#methodes" data-target="methodes">Les méthodes</a></li>
-        <li><a class="mh-drawer-submenu-item" href="#binome" data-target="binome">Le binôme</a></li>
-        <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un échange</a></li>
+        <li><a class="mh-drawer-submenu-item is-active" href="#demarche" data-target="demarche">Our approach</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#methodes" data-target="methodes">Methods</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#binome" data-target="binome">The duo</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Book a call</a></li>
       </ul>
     </li>
     <li>
       <span class="mh-drawer-tab is-coming" role="link" aria-disabled="true">
         Content &amp; Messaging Strategy
-        <span class="mh-drawer-tab-stamp">— à venir</span>
+        <span class="mh-drawer-tab-stamp">— coming soon</span>
       </span>
     </li>
   </ul>
   <div class="mh-drawer-divider" aria-hidden="true"></div>
-  <a class="mh-drawer-cta" href="#booking">Réserver un échange ↗</a>
+  <a class="mh-drawer-cta" href="#booking">Book a call ↗</a>
 </aside>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -3134,90 +3134,90 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   </defs>
 </svg>
 
-<!-- 1 — HERO (pleine largeur asymétrique gauche, simple) -->
+<!-- 1 — HERO -->
 <section class="hero" id="top" data-cta-theme="dark">
   <div class="hero-inner">
-    <div class="hero-overline">— Audit CRO · 2026</div>
-    <h1>Votre trafic ne manque pas. <em>Vos conversions, si.</em></h1>
-    <p class="hero-lead">On révèle les incohérences. On identifie les freins. On priorise les actions qui paient.</p>
+    <div class="hero-overline">— CRO Audit · 2026</div>
+    <h1>You don't lack traffic. <em>You lack conversions.</em></h1>
+    <p class="hero-lead">We reveal inconsistencies. We identify friction. We prioritize the actions that pay.</p>
     <div class="hero-cta-row">
-      <a href="#booking" class="cta-mono">Réserver un échange →</a>
-      <span class="hero-cta-meta">30 min · sans engagement</span>
+      <a href="#booking" class="cta-mono">Book a call →</a>
+      <span class="hero-cta-meta">30 min · no commitment</span>
     </div>
   </div>
 </section>
 
-<!-- 2 — SYNTHÈSE DE L'OFFRE (continuité chromatique avec le hero, composition centrée factuelle) -->
+<!-- 2 — OFFER SYNTHESIS -->
 <section class="synth-section reveal" data-cta-theme="dark">
   <div class="synth-marker-row">
     <span class="synth-marker-line left" aria-hidden="true"></span>
-    <span class="synth-marker">— L'audit · en bref</span>
+    <span class="synth-marker">— The audit · in brief</span>
     <span class="synth-marker-line right" aria-hidden="true"></span>
   </div>
   <div class="synth-stats">
     <span class="synth-stat">
       <span class="synth-stat-num" data-count="4">4</span>
-      <span class="synth-stat-label">étapes</span>
+      <span class="synth-stat-label">steps</span>
     </span>
     <span class="synth-stat-sep" aria-hidden="true">·</span>
     <span class="synth-stat">
       <span class="synth-stat-num" data-count="6">6</span>
-      <span class="synth-stat-label">méthodes</span>
+      <span class="synth-stat-label">methods</span>
     </span>
     <span class="synth-stat-sep" aria-hidden="true">·</span>
     <span class="synth-stat">
-      <span class="synth-stat-num">1 à 6</span>
-      <span class="synth-stat-label">semaines</span>
+      <span class="synth-stat-num">1 to 6</span>
+      <span class="synth-stat-label">weeks</span>
     </span>
   </div>
-  <p class="synth-desc">Vous repartez avec une feuille de route CRO pensée pour transformer plus de visiteurs en clients.</p>
-  <p class="synth-tag">— Sur-mesure selon votre périmètre.</p>
+  <p class="synth-desc">You leave with a CRO roadmap designed to turn more visitors into customers.</p>
+  <p class="synth-tag">— Tailored to your scope.</p>
   <div class="synth-closing-line" aria-hidden="true"></div>
 </section>
 
 <!-- 3 — SPLIT -->
 <section class="split-section reveal" data-cta-theme="light">
-  <span class="chapter-mark">/ ch.01 — état des lieux</span>
+  <span class="chapter-mark">/ ch.01 — where you stand</span>
   <div class="split-grid">
     <div class="split-block editorial-block">
-      <h2 class="split-block-title">Ce que vous vivez<em>.</em></h2>
+      <h2 class="split-block-title">What you're facing<em>.</em></h2>
       <ul class="pain-list">
-        <li class="pain-item">Vous venez de lancer votre site et voulez vous assurer qu'il convertit bien — avant d'investir en acquisition.</li>
-        <li class="pain-item">Votre site tourne, vous investissez en acquisition — mais les ventes ou leads ne suivent pas votre trafic.</li>
-        <li class="pain-item">Vous avez des données mais ne savez pas quoi en faire ni par où commencer.</li>
-        <li class="pain-item">Vous avez essayé des choses : A/B tests, redesigns — sans savoir ce qui a marché.</li>
-        <li class="pain-item">Quelque chose bloque dans votre parcours mais vous ne savez pas quoi exactement.</li>
+        <li class="pain-item">You just launched your site and want to make sure it converts well — before investing in acquisition.</li>
+        <li class="pain-item">Your site is live, you're investing in acquisition — but sales or leads aren't following the traffic.</li>
+        <li class="pain-item">You have data but don't know what to do with it or where to start.</li>
+        <li class="pain-item">You've tried things: A/B tests, redesigns — without knowing what worked.</li>
+        <li class="pain-item">Something is blocking in your funnel but you don't know exactly what.</li>
       </ul>
     </div>
     <div class="split-block editorial-block">
-      <h2 class="split-block-title">Ce qui va changer<em>.</em></h2>
+      <h2 class="split-block-title">What will change<em>.</em></h2>
       <div class="outcome-list">
         <div class="outcome-item">
           <span class="outcome-num" aria-hidden="true">▸</span>
           <div class="outcome-content">
-            <div class="outcome-title">Vous comprenez enfin ce qui bloque</div>
-            <div class="outcome-desc">dans votre message, vos pages et vos parcours</div>
+            <div class="outcome-title">You finally understand what's blocking</div>
+            <div class="outcome-desc">in your messaging, your pages, your journeys</div>
           </div>
         </div>
         <div class="outcome-item">
           <span class="outcome-num" aria-hidden="true">▸</span>
           <div class="outcome-content">
-            <div class="outcome-title">Vous savez comment lever les hésitations de vos visiteurs</div>
-            <div class="outcome-desc">quoi clarifier, quoi prouver, quoi ajuster</div>
+            <div class="outcome-title">You know how to dispel your visitors' hesitations</div>
+            <div class="outcome-desc">what to clarify, what to prove, what to adjust</div>
           </div>
         </div>
         <div class="outcome-item">
           <span class="outcome-num" aria-hidden="true">▸</span>
           <div class="outcome-content">
-            <div class="outcome-title">Vous savez comment mieux les guider</div>
-            <div class="outcome-desc">sans rupture, sans confusion</div>
+            <div class="outcome-title">You know how to guide them better</div>
+            <div class="outcome-desc">no breaks, no confusion</div>
           </div>
         </div>
         <div class="outcome-item">
           <span class="outcome-num" aria-hidden="true">▸</span>
           <div class="outcome-content">
-            <div class="outcome-title">Vous ne testez plus au hasard</div>
-            <div class="outcome-desc">vous améliorez avec méthode</div>
+            <div class="outcome-title">You no longer test at random</div>
+            <div class="outcome-desc">you improve with method</div>
           </div>
         </div>
       </div>
@@ -3225,27 +3225,27 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   </div>
 </section>
 
-<!-- 4 — BANDEAU MAÂT (transition narrative entre état des lieux et démarche) -->
+<!-- 4 — MAAT BAND (narrative pivot between state of play and approach) -->
 <section class="band-maat reveal" data-cta-theme="dark">
   <div class="band-maat-content">
     <svg class="feather-bauhaus band-maat-feather"><use href="#feather-bauhaus"/></svg>
     <div class="band-maat-text-block">
-      <span class="band-maat-name">— Le principe Maat</span>
-      <p class="band-maat-text"><b>La conversion est une question d'alignement.</b> Elle ne se force pas — elle émerge quand promesse, expérience et attente s'accordent enfin.</p>
+      <span class="band-maat-name">— The Maat principle</span>
+      <p class="band-maat-text"><b>Conversion is a matter of alignment.</b> It can't be forced — it emerges when promise, experience and expectation finally align.</p>
     </div>
   </div>
 </section>
 
-<!-- 5 — NOTRE DÉMARCHE -->
+<!-- 5 — OUR APPROACH -->
 <section class="method-section reveal" id="demarche" data-cta-theme="dark">
-  <span class="chapter-mark on-dark">/ ch.02 — démarche</span>
+  <span class="chapter-mark on-dark">/ ch.02 — approach</span>
   <div class="method-head">
     <div class="method-head-inner">
-      <h3>Comprendre. Croiser.<br/>Prioriser. <em>Agir.</em></h3>
-      <p class="method-lead">Quatre étapes qui se répondent — pour relier ce que vous savez à ce que font réellement vos utilisateurs.</p>
+      <h3>Understand. Cross-reference.<br/>Prioritize. <em>Act.</em></h3>
+      <p class="method-lead">Four steps that answer each other — to connect what you know to what your users actually do.</p>
     </div>
   </div>
-  <p class="method-hint">— Cliquez une étape pour en voir le détail</p>
+  <p class="method-hint">— Click a step to see the detail</p>
   <div class="method-timeline">
     <div class="method-track"></div>
     <div class="method-arrow" style="left: 27%;">→</div>
@@ -3259,7 +3259,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
             <path d="M3 12h4l3-8 4 16 3-8h4"/>
           </svg>
         </div>
-        <div class="method-step-title">Lecture business</div>
+        <div class="method-step-title">Business reading</div>
       </button>
       <button class="method-step">
         <div class="method-step-num">02</div>
@@ -3269,7 +3269,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
             <path d="m19.5 19.5-3.5-3.5"/>
           </svg>
         </div>
-        <div class="method-step-title">Recherche & insights</div>
+        <div class="method-step-title">Research & insights</div>
       </button>
       <button class="method-step">
         <div class="method-step-num">03</div>
@@ -3280,7 +3280,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
             <rect x="3" y="17" width="8" height="3" rx="0.5"/>
           </svg>
         </div>
-        <div class="method-step-title">Priorisation des actions</div>
+        <div class="method-step-title">Action prioritization</div>
       </button>
       <button class="method-step">
         <div class="method-step-num">04</div>
@@ -3297,18 +3297,18 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     <div class="method-detail">
       <span class="method-detail-pointer">↓ 01</span>
       <div class="method-detail-left">
-        <span class="method-detail-num">Étape 01 · sur 04</span>
-        <span class="method-detail-name">Lecture business</span>
+        <span class="method-detail-num">Step 01 · of 04</span>
+        <span class="method-detail-name">Business reading</span>
       </div>
       <div>
-        <p class="method-detail-desc">Comprendre votre contexte, vos objectifs, vos personas, leurs besoins et leurs contraintes. On pose le bon cadre d'analyse.</p>
+        <p class="method-detail-desc">Understanding your context, your goals, your personas, their needs and constraints. We set the right analytical frame.</p>
         <div class="method-detail-out">
-          <span class="method-detail-out-lbl">Livrable</span>
-          <span class="method-detail-out-val">Cadre d'analyse partagé</span>
+          <span class="method-detail-out-lbl">Deliverable</span>
+          <span class="method-detail-out-val">Shared analytical frame</span>
         </div>
         <div class="method-detail-out method-detail-out-with" hidden>
-          <span class="method-detail-out-lbl">Fait par</span>
-          <span class="method-detail-out-val">un partenaire UX dédié <a class="method-detail-link" href="#binome">→ voir l'équipe</a></span>
+          <span class="method-detail-out-lbl">Done by</span>
+          <span class="method-detail-out-val">a dedicated UX partner <a class="method-detail-link" href="#binome">→ see the team</a></span>
         </div>
       </div>
     </div>
@@ -3317,13 +3317,13 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 
 <!-- 6 — METHODS CYCLE -->
 <section class="methods-section reveal" id="methodes" data-cta-theme="light">
-  <span class="chapter-mark">/ ch.03 — méthodes</span>
+  <span class="chapter-mark">/ ch.03 — methods</span>
   <div class="methods-mag">
     <div class="methods-left">
       <div class="methods-intro intro-rule">
-        <h3>Les méthodes qui alimentent<br/><em>cette démarche.</em></h3>
-        <p class="lead">Chaque méthode produit un signal. Ensemble, elles se complètent, se recoupent et s'affinent pour transformer le « quoi » en « pourquoi ».</p>
-        <p class="methods-hint">— Cliquez une méthode pour en voir le détail</p>
+        <h3>The methods behind<br/><em>this approach.</em></h3>
+        <p class="lead">Each method produces a signal. Together, they complement, intersect and refine — turning the "what" into the "why".</p>
+        <p class="methods-hint">— Click a method to see the detail</p>
       </div>
       <div class="methods-stage">
         <svg class="donut-svg" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" id="constellation-svg" style="display:none">
@@ -3386,16 +3386,16 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
           <line class="donut-divider" x1="47.42" y1="95"  x2="99.38" y2="125"/>
 
           <!-- Centre -->
-          <text x="160" y="155" text-anchor="middle" font-family="Newsreader, serif" font-weight="400" font-size="22" fill="#14102A">Démarche</text>
+          <text x="160" y="155" text-anchor="middle" font-family="Newsreader, serif" font-weight="400" font-size="22" fill="#14102A">Approach</text>
           <text x="160" y="183" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-weight="400" font-size="22" fill="#8C6A2C">CRO.</text>
-          <text x="160" y="206" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" fill="#6E6890" letter-spacing="2">— 06 méthodes —</text>
+          <text x="160" y="206" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" fill="#6E6890" letter-spacing="2">— 06 methods —</text>
         </svg>
         <svg class="donut-svg" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" id="constellation">
           <circle class="constellation-ring" cx="180" cy="180" r="130"/>
           <path class="constellation-arc" id="cArc" d="M 180 50 A 130 130 0 0 1 309.39 175.21" pathLength="100" stroke-dasharray="22 100" stroke-dashoffset="0"/>
-          <text x="180" y="168" text-anchor="middle" font-family="Newsreader, serif" font-weight="400" font-size="26" fill="#14102A">Démarche</text>
+          <text x="180" y="168" text-anchor="middle" font-family="Newsreader, serif" font-weight="400" font-size="26" fill="#14102A">Approach</text>
           <text x="180" y="200" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-weight="400" font-size="26" fill="#8C6A2C">CRO.</text>
-          <text x="180" y="226" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" fill="#6E6890" letter-spacing="1.5">— 06 méthodes —</text>
+          <text x="180" y="226" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" fill="#6E6890" letter-spacing="1.5">— 06 methods —</text>
           <g class="constellation-node is-active" data-i="0"><circle class="constellation-hit" cx="180" cy="50" r="28" fill="transparent" pointer-events="all"/><circle cx="180" cy="50" r="18"/><text x="180" y="50">01</text></g>
           <g class="constellation-node" data-i="1"><circle class="constellation-hit" cx="292.58" cy="115" r="28" fill="transparent" pointer-events="all"/><circle cx="292.58" cy="115" r="18"/><text x="292.58" y="115">02</text></g>
           <g class="constellation-node" data-i="2"><circle class="constellation-hit" cx="292.58" cy="245" r="28" fill="transparent" pointer-events="all"/><circle cx="292.58" cy="245" r="18"/><text x="292.58" y="245">03</text></g>
@@ -3410,16 +3410,16 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         <span class="lphase-n">01</span>
         <span class="lphase-content">
           <span class="lphase-title-row">
-            <span class="lphase-title">Évaluation heuristique</span>
-            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
+            <span class="lphase-title">Heuristic evaluation</span>
+            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitative</span>
           </span>
-          <span class="lphase-desc">Audit des bonnes pratiques UX et sectorielles. Ce que l'oeil expert repère avant même les données.</span>
+          <span class="lphase-desc">Audit of UX and industry best practices. What the expert eye spots before the data even speaks.</span>
           <span class="lphase-meta">
-            <span class="lphase-meta-key">S'appuie sur</span>
+            <span class="lphase-meta-key">Based on</span>
             <span class="lphase-meta-val">
-              <span>Baymard (130 000 h de recherche UX)</span>
-              <span>GoodUI (+500 A/B tests de grandes entreprises analysés)</span>
-              <span>CXL (formation référence mondiale du CRO)</span>
+              <span>Baymard (130,000 h of UX research)</span>
+              <span>GoodUI (+500 A/B tests from major companies analyzed)</span>
+              <span>CXL (world-reference CRO training)</span>
             </span>
           </span>
         </span>
@@ -3430,7 +3430,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         <span class="lphase-content">
           <span class="lphase-title-row">
             <span class="lphase-title">Analytics</span>
-            <span class="lphase-badge"><span class="qq-dot"></span>Quantitatif</span>
+            <span class="lphase-badge"><span class="qq-dot"></span>Quantitative</span>
           </span>
         </span>
         <span class="lphase-arrow">→</span>
@@ -3439,8 +3439,8 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         <span class="lphase-n">03</span>
         <span class="lphase-content">
           <span class="lphase-title-row">
-            <span class="lphase-title">Heatmaps & sessions recordings</span>
-            <span class="lphase-badge"><span class="qq-dot"></span>Mixte</span>
+            <span class="lphase-title">Heatmaps & session recordings</span>
+            <span class="lphase-badge"><span class="qq-dot"></span>Mixed</span>
           </span>
         </span>
         <span class="lphase-arrow">→</span>
@@ -3449,8 +3449,8 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         <span class="lphase-n">04</span>
         <span class="lphase-content">
           <span class="lphase-title-row">
-            <span class="lphase-title">Tests utilisateurs</span>
-            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
+            <span class="lphase-title">User testing</span>
+            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitative</span>
           </span>
         </span>
         <span class="lphase-arrow">→</span>
@@ -3459,8 +3459,8 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         <span class="lphase-n">05</span>
         <span class="lphase-content">
           <span class="lphase-title-row">
-            <span class="lphase-title">Sondages onsite</span>
-            <span class="lphase-badge"><span class="qq-dot"></span>Mixte</span>
+            <span class="lphase-title">Onsite surveys</span>
+            <span class="lphase-badge"><span class="qq-dot"></span>Mixed</span>
           </span>
         </span>
         <span class="lphase-arrow">→</span>
@@ -3469,8 +3469,8 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         <span class="lphase-n">06</span>
         <span class="lphase-content">
           <span class="lphase-title-row">
-            <span class="lphase-title">Interviews clients</span>
-            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
+            <span class="lphase-title">Customer interviews</span>
+            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitative</span>
           </span>
         </span>
         <span class="lphase-arrow">→</span>
@@ -3484,35 +3484,35 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   <div class="diff-content">
     <svg class="feather-bauhaus diff-feather"><use href="#feather-bauhaus"/></svg>
     <p class="diff-text">
-      On ne regarde pas seulement ce qui ne marche pas : on comprend <b>pourquoi</b> ça ne marche pas dans <span class="accent">votre business</span>.
+      We don't just look at what isn't working: we understand <b>why</b> it isn't working in <span class="accent">your business</span>.
     </p>
   </div>
 </section>
 
 <!-- 8 — RECOMMENDATIONS -->
 <section class="rec-section reveal" id="livrables" data-cta-theme="dark">
-  <span class="chapter-mark on-dark">/ ch.04 — livrables</span>
+  <span class="chapter-mark on-dark">/ ch.04 — deliverables</span>
   <div class="rec-head">
-    <h3>De l'insight à <em>l'action.</em></h3>
-    <p class="rec-lead">Chaque recommandation est structurée, priorisée et mise en perspective — pour passer de l'insight à des décisions claires et des actions concrètes.</p>
+    <h3>From insight to <em>action.</em></h3>
+    <p class="rec-lead">Each recommendation is structured, prioritized, and put in perspective — to move from insight to clear decisions and concrete actions.</p>
   </div>
   <div class="fiche-doc-layout">
-    <div class="fiche-progress-dots" role="tablist" aria-label="Progression entre les recommandations">
-      <button class="fiche-progress-dot is-active" type="button" data-fiche="0" aria-label="Recommandation 1 sur 6"></button>
-      <button class="fiche-progress-dot" type="button" data-fiche="1" aria-label="Recommandation 2 sur 6"></button>
-      <button class="fiche-progress-dot" type="button" data-fiche="2" aria-label="Recommandation 3 sur 6"></button>
-      <button class="fiche-progress-dot" type="button" data-fiche="3" aria-label="Recommandation 4 sur 6"></button>
-      <button class="fiche-progress-dot" type="button" data-fiche="4" aria-label="Recommandation 5 sur 6"></button>
-      <button class="fiche-progress-dot" type="button" data-fiche="5" aria-label="Recommandation 6 sur 6"></button>
+    <div class="fiche-progress-dots" role="tablist" aria-label="Progression between recommendations">
+      <button class="fiche-progress-dot is-active" type="button" data-fiche="0" aria-label="Recommendation 1 of 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="1" aria-label="Recommendation 2 of 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="2" aria-label="Recommendation 3 of 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="3" aria-label="Recommendation 4 of 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="4" aria-label="Recommendation 5 of 6"></button>
+      <button class="fiche-progress-dot" type="button" data-fiche="5" aria-label="Recommendation 6 of 6"></button>
     </div>
-    <div class="fiche-swipe-hint" aria-hidden="true">← Glissez pour naviguer →</div>
-    <button class="fiche-nav-arrow left" type="button" aria-label="Recommandation précédente" disabled>
+    <div class="fiche-swipe-hint" aria-hidden="true">← Swipe to navigate →</div>
+    <button class="fiche-nav-arrow left" type="button" aria-label="Previous recommendation" disabled>
       <svg class="fiche-nav-arc" viewBox="0 0 50 50" aria-hidden="true">
         <path d="M 6.82 14.5 A 21 21 0 1 1 35.5 43.18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
       ←
     </button>
-    <button class="fiche-nav-arrow right" type="button" aria-label="Recommandation suivante">
+    <button class="fiche-nav-arrow right" type="button" aria-label="Next recommendation">
       <svg class="fiche-nav-arc" viewBox="0 0 50 50" aria-hidden="true">
         <path d="M 14.5 43.18 A 21 21 0 1 1 43.18 14.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
@@ -3522,45 +3522,45 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       <div class="fiche-content">
         <header class="fiche-header">
           <div class="fiche-num-block">
-            <span class="fiche-num-label">Recommandation</span>
-            <span class="fiche-num-value">№ 01 <span class="fiche-num-total">· sur 120</span></span>
+            <span class="fiche-num-label">Recommendation</span>
+            <span class="fiche-num-value">№ 01 <span class="fiche-num-total">· of 120</span></span>
           </div>
-          <div class="fiche-classification">Importance — Critique</div>
+          <div class="fiche-classification">Importance — Critical</div>
         </header>
-        <h4 class="fiche-title">Retirer les champs « société » et « TVA » de l'étape 3.</h4>
-        <span class="fiche-diagnostic-label">Insight :</span>
-        <p class="fiche-diagnostic">Seulement 8% des clients remplissent ces champs. Drop-off mesuré de 34% sur l'étape 3 du tunnel — la friction n'est pas justifiée par le volume B2B observé sur le segment.</p>
+        <h4 class="fiche-title">Remove the "company" and "VAT" fields from step 3.</h4>
+        <span class="fiche-diagnostic-label">Insight:</span>
+        <p class="fiche-diagnostic">Only 8% of customers fill in these fields. Measured 34% drop-off on step 3 of the funnel — the friction isn't justified by the B2B volume observed on the segment.</p>
         <div class="fiche-meta-grid">
           <div class="fiche-meta-line">
-            <span class="fiche-meta-key">Emplacement</span>
-            <span class="fiche-meta-val">Tunnel checkout — étape 3</span>
+            <span class="fiche-meta-key">Location</span>
+            <span class="fiche-meta-val">Checkout funnel — step 3</span>
           </div>
           <div class="fiche-meta-line">
-            <span class="fiche-meta-key">Catégorie</span>
-            <span class="fiche-meta-val">Utilisabilité</span>
+            <span class="fiche-meta-key">Category</span>
+            <span class="fiche-meta-val">Usability</span>
           </div>
           <div class="fiche-meta-line">
-            <span class="fiche-meta-key">Thème</span>
+            <span class="fiche-meta-key">Theme</span>
             <span class="fiche-meta-val">Effort</span>
           </div>
           <div class="fiche-meta-line">
             <span class="fiche-meta-key">Action</span>
-            <span class="fiche-meta-val">Modification directe</span>
+            <span class="fiche-meta-val">Direct change</span>
           </div>
           <div class="fiche-meta-line">
             <span class="fiche-meta-key">Sources</span>
-            <span class="fiche-meta-val list"><span>Analytics</span><span>Sessions recordings</span></span>
+            <span class="fiche-meta-val list"><span>Analytics</span><span>Session recordings</span></span>
           </div>
         </div>
       </div>
       <footer class="fiche-foot">
         <button class="fiche-foot-prev">
-          <span class="fiche-foot-nav-label">Précédente</span>
-          <span class="fiche-foot-nav-text">№ 06 — Pricing en 3 tiers</span>
+          <span class="fiche-foot-nav-label">Previous</span>
+          <span class="fiche-foot-nav-text">№ 06 — 3-tier pricing</span>
         </button>
         <button class="fiche-foot-next">
-          <span class="fiche-foot-nav-label">Suivante</span>
-          <span class="fiche-foot-nav-text">№ 02 — Avis clients</span>
+          <span class="fiche-foot-nav-label">Next</span>
+          <span class="fiche-foot-nav-text">№ 02 — Customer reviews</span>
         </button>
       </footer>
     </div>
@@ -3569,17 +3569,17 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 
 <!-- 9 — TEAM -->
 <section class="team-section reveal" id="binome" data-cta-theme="dark">
-  <span class="chapter-mark on-dark">/ ch.05 — L'équipe</span>
+  <span class="chapter-mark on-dark">/ ch.05 — The team</span>
   <div class="team-head">
-    <h2>Un audit fait <em>en collaboration.</em></h2>
-    <p class="lead">Un audit CRO gagne en profondeur quand deux lectures différentes se rejoignent sur les mêmes signaux.</p>
+    <h2>An audit done <em>in collaboration.</em></h2>
+    <p class="lead">A CRO audit gains depth when two different readings meet on the same signals.</p>
   </div>
 
   <div class="team-duo">
     <article class="team-person">
-      <div class="team-role">Fondatrice de Maat</div>
+      <div class="team-role">Founder of Maat</div>
       <h3 class="team-name">Anne-Sophie Roux</h3>
-      <p class="team-bio">10 ans en marketing digital, du SEO au CRO. 5 ans passés chez l'annonceur comme Responsable Acquisition / Digital, avec une forte culture data et MarTech. Je cadre des missions ancrées dans vos enjeux et transforme les signaux en opportunités concrètes. Dans l'audit, j'apporte une lecture CRO à l'intersection de l'acquisition, du business et de la data pour identifier les leviers de croissance prioritaires et structurer les recommandations à fort impact.</p>
+      <p class="team-bio">10 years in digital marketing, from SEO to CRO. 5 years spent in-house as Head of Acquisition / Digital, with a strong data and MarTech background. I frame missions anchored in your business stakes and turn signals into concrete opportunities. In the audit, I bring a CRO reading at the intersection of acquisition, business and data — to identify priority growth levers and structure high-impact recommendations.</p>
       <div class="team-tags">
         <span class="team-tag is-solid">CRO</span>
         <span class="team-tag is-solid">Acquisition</span>
@@ -3596,15 +3596,15 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       <span class="team-stamp-line"></span>
     </div>
     <article class="team-person">
-      <div class="team-role">Fondateur de SDLV</div>
+      <div class="team-role">Founder of SDLV</div>
       <h3 class="team-name">Florent Kiecken</h3>
-      <p class="team-bio">6+ ans à accompagner des marques en CRO et UX sur des sites e-commerce, SaaS et leadgen à fort trafic (+130 marques accompagnées). Expert en recherche utilisateur et expérimentation, il forme également au CRO et partage des méthodes éprouvées (+1200 personnes formées, +3500 abonnés à la plus grande newsletter CRO francophone). Dans l’audit, il apporte une lecture CRO orientée UX et expérimentation pour structurer les hypothèses et prioriser les tests à plus fort potentiel.</p>
+      <p class="team-bio">6+ years supporting brands in CRO and UX on high-traffic e-commerce, SaaS and leadgen sites (+130 brands supported). Expert in user research and experimentation, he also trains in CRO and shares proven methods (+1,200 people trained, +3,500 subscribers to the largest French-speaking CRO newsletter). In the audit, he brings a CRO reading oriented around UX and experimentation — to structure hypotheses and prioritize the tests with the highest potential.</p>
       <div class="team-tags">
         <span class="team-tag is-outline">CRO</span>
         <span class="team-tag is-outline">UX</span>
-        <span class="team-tag is-outline">Formation</span>
+        <span class="team-tag is-outline">Training</span>
       </div>
-      <a href="https://www.sdlv.fr/" class="team-link" target="_blank" rel="noopener noreferrer">Voir SDLV ↗</a>
+      <a href="https://www.sdlv.fr/" class="team-link" target="_blank" rel="noopener noreferrer">See SDLV ↗</a>
     </article>
   </div>
 </section>
@@ -3614,22 +3614,22 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   <div class="modulable-card editorial-block">
     <div class="modulable-card-grid">
       <div class="modulable-title-block">
-        <span class="modulable-title-line1">Audit modulable</span>
+        <span class="modulable-title-line1">Modular audit</span>
         <span class="modulable-title-line2">à la carte.</span>
-        <span class="modulable-title-line3">Pas de format unique</span>
+        <span class="modulable-title-line3">No one-size-fits-all</span>
       </div>
       <div class="modulable-divider-vertical"></div>
       <div class="modulable-text-block">
-        <p>On construit l'audit <b>avec vous</b> — en choisissant les méthodes qui ont le plus de sens pour votre situation, votre budget et vos objectifs.</p>
-        <p>Une mission ne ressemble jamais à la précédente : on adapte la profondeur, le périmètre et les livrables à ce que votre business demande vraiment.</p>
+        <p>We build the audit <b>with you</b> — choosing the methods that make the most sense for your situation, your budget and your goals.</p>
+        <p>No two missions ever look alike: we adapt the depth, the scope and the deliverables to what your business actually needs.</p>
         <div class="modulable-meta-grid">
           <div class="modulable-meta-line">
-            <span class="modulable-meta-key">Durée</span>
-            <span class="modulable-meta-val">1 à 6 semaines selon le périmètre</span>
+            <span class="modulable-meta-key">Duration</span>
+            <span class="modulable-meta-val">1 to 6 weeks depending on scope</span>
           </div>
           <div class="modulable-meta-line">
-            <span class="modulable-meta-key">Investissement</span>
-            <span class="modulable-meta-val">À partir de 1 000 € (évaluation heuristique + backlog priorisé)</span>
+            <span class="modulable-meta-key">Investment</span>
+            <span class="modulable-meta-val">From €1,000 (heuristic evaluation + prioritized backlog)</span>
           </div>
         </div>
       </div>
@@ -3637,37 +3637,37 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   </div>
   <div class="booking-grid" id="booking">
     <div class="book-left intro-rule">
-      <div class="overline">— Call de découverte · 30 min</div>
-      <h3>Voyons si nous pouvons <em>vous aider.</em></h3>
-      <p class="lead">Un premier échange pour comprendre votre situation et voir si notre approche correspond à vos enjeux.</p>
+      <div class="overline">— Discovery call · 30 min</div>
+      <h3>Let's see if we can <em>help you.</em></h3>
+      <p class="lead">A first conversation to understand your situation and see if our approach matches your stakes.</p>
       <ul class="book-points">
-        <li>Compréhension de votre business et de vos enjeux</li>
-        <li>Clarification de vos objectifs</li>
-        <li>Présentation de notre méthode</li>
+        <li>Understanding your business and your stakes</li>
+        <li>Clarifying your goals</li>
+        <li>Presenting our method</li>
       </ul>
     </div>
     <div class="cal-card">
       <div class="cal-header">
         <div class="cal-header-avatar">M</div>
         <div class="cal-header-info">
-          <div class="cal-header-org">Maat · Audit CRO</div>
-          <div class="cal-header-title">Call de découverte</div>
+          <div class="cal-header-org">Maat · CRO Audit</div>
+          <div class="cal-header-title">Discovery call</div>
           <div class="cal-header-meta">
-            <span>○ 30 min</span><span>◊ Visio</span><span>⌖ Europe/Paris</span>
+            <span>○ 30 min</span><span>◊ Video call</span><span>⌖ Europe/Paris</span>
           </div>
         </div>
       </div>
       <div class="cal-body">
         <div class="cal-month">
           <div class="cal-month-nav">
-            <span class="cal-month-name">Mai 2026</span>
+            <span class="cal-month-name">May 2026</span>
             <div class="cal-arrows">
               <button class="cal-arrow">‹</button>
               <button class="cal-arrow">›</button>
             </div>
           </div>
           <div class="cal-weekdays">
-            <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+            <span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>
           </div>
           <div class="cal-days">
             <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div>
@@ -3684,13 +3684,13 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         </div>
         <div class="cal-slots">
           <div class="cal-slots-head">
-            <div class="cal-slots-date">Mardi 12 mai</div>
-            <div class="cal-slots-tz">Créneaux disponibles · 30 min</div>
+            <div class="cal-slots-date">Tuesday, May 12</div>
+            <div class="cal-slots-tz">Available slots · 30 min</div>
           </div>
           <div class="cal-slots-list">
             <button class="cal-slot">9:30</button>
             <button class="cal-slot">10:30</button>
-            <button class="cal-slot selected"><span>14:00</span><span class="cal-slot-confirm">Sélectionné</span></button>
+            <button class="cal-slot selected"><span>14:00</span><span class="cal-slot-confirm">Selected</span></button>
             <button class="cal-slot">15:00</button>
             <button class="cal-slot">16:00</button>
             <button class="cal-slot">17:00</button>
@@ -3698,8 +3698,8 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         </div>
       </div>
       <div class="cal-foot">
-        <span class="cal-foot-info">Confirmé : Mardi 12 mai · 14:00</span>
-        <button class="cal-confirm-btn">Confirmer →</button>
+        <span class="cal-foot-info">Confirmed: Tuesday, May 12 · 14:00</span>
+        <button class="cal-confirm-btn">Confirm →</button>
       </div>
     </div>
   </div>
@@ -3710,34 +3710,34 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   <div class="footer-top">
     <svg class="feather-bauhaus footer-feather"><use href="#feather-bauhaus"/></svg>
     <div class="footer-signature">
-      <p class="footer-tagline">Audits de conversion <em>pour les marques</em><br/>qui ont mieux à faire que deviner.</p>
-      <p class="footer-thesis">La conversion est une question d'alignement.</p>
-      <p class="footer-definition"><strong>«&nbsp;Maât&nbsp;»</strong> est le principe d'équilibre et de vérité. Nous croyons que la conversion ne se force pas : elle émerge quand promesse, expérience et attente s'accordent enfin.</p>
+      <p class="footer-tagline">Conversion audits <em>for brands</em><br/>with better things to do than guess.</p>
+      <p class="footer-thesis">Conversion is a matter of alignment.</p>
+      <p class="footer-definition"><strong>"Maât"</strong> is the principle of balance and truth. We believe conversion can't be forced: it emerges when promise, experience and expectation finally align.</p>
     </div>
   </div>
-  <nav class="footer-sitemap" aria-label="Navigation interne du site">
-    <a href="#demarche">Démarche</a>
-    <a href="#methodes">Méthodes</a>
-    <a href="#livrables">Livrables</a>
-    <a href="#binome">Équipe</a>
-    <a href="#booking">Réserver</a>
+  <nav class="footer-sitemap" aria-label="Internal site navigation">
+    <a href="#demarche">Approach</a>
+    <a href="#methodes">Methods</a>
+    <a href="#livrables">Deliverables</a>
+    <a href="#binome">Team</a>
+    <a href="#booking">Book</a>
   </nav>
   <div class="footer-bottom">
     <div class="footer-contact">
       <span class="footer-contact-label">— Contact</span>
       <a href="mailto:annesophieroux.consulting@gmail.com" class="footer-contact-email">annesophieroux.consulting@gmail.com</a>
-      <span class="footer-contact-meta">Réponse sous 24h ouvrées</span>
+      <span class="footer-contact-meta">Reply within 24 business hours</span>
       <a href="https://www.linkedin.com/in/anne-sophie-roux" class="footer-contact-linkedin" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
     </div>
     <div class="footer-meta">© Maat 2026 — <a href="legal-notice.html" class="footer-legal-link">Legal notice</a></div>
     <div class="footer-cta">
-      <span class="footer-cta-label">— Démarrer un audit</span>
-      <a href="#booking" class="footer-cta-link">Réserver un échange →</a>
+      <span class="footer-cta-label">— Start an audit</span>
+      <a href="#booking" class="footer-cta-link">Book a call →</a>
     </div>
   </div>
 </footer>
 
-<a href="#booking" class="mobile-cta-floating" id="mobile-cta">Réserver un échange →</a>
+<a href="#booking" class="mobile-cta-floating" id="mobile-cta">Book a call →</a>
 
 <script>
 (function() {
@@ -3798,10 +3798,10 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 
   // ─── Démarche timeline interactions ───
   const STEPS = [
-    { name: 'Lecture business', desc: 'Comprendre votre contexte, vos objectifs, vos personas, leurs besoins et leurs contraintes. On pose le bon cadre d\u2019analyse.', livrable: 'Cadre d\u2019analyse partagé' },
-    { name: 'Recherche & insights', desc: 'Recherche utilisateur basée sur des méthodes qualitatives et quantitatives. On observe, on interroge, on mesure - pour comprendre les comportements et identifier les points de friction réels et opportunités manquées.', livrable: 'Backlog d’insights sourcés' },
-    { name: 'Priorisation des actions', desc: 'Croiser ces insights pour faire émerger les leviers d\u2019actions les plus pertinents à activer. Selon scoring Impact, Confiance, Effort.', livrable: 'Backlog priorisé + synthèse globale' },
-    { name: 'CRO redesign', desc: 'Selon le périmètre, maquettes correctives sur les écrans à plus fort impact. Le redesign s\u2019appuie sur l\u2019audit, jamais sur l\u2019intuition seule.', livrable: 'Maquettes UX finalisées, annotées', avec: true }
+    { name: 'Business reading', desc: 'Understanding your context, your goals, your personas, their needs and constraints. We set the right analytical frame.', livrable: 'Shared analytical frame' },
+    { name: 'Research & insights', desc: 'User research based on qualitative and quantitative methods. We observe, we ask, we measure — to understand behaviors and identify real friction points and missed opportunities.', livrable: 'Sourced insights backlog' },
+    { name: 'Action prioritization', desc: 'Cross-referencing these insights to surface the most relevant action levers to activate. Based on Impact, Confidence, Effort scoring.', livrable: 'Prioritized backlog + overall synthesis' },
+    { name: 'CRO redesign', desc: 'Depending on scope, corrective mockups on the highest-impact screens. The redesign builds on the audit, never on intuition alone.', livrable: 'Finalized, annotated UX mockups', avec: true }
   ];
   const stepsBtns = document.querySelectorAll('.method-step');
   const detail = document.querySelector('.method-detail');
@@ -3825,7 +3825,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     btn.addEventListener('click', () => {
       stepsBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      detailNum.textContent = `Étape ${String(i+1).padStart(2, '0')} · sur 04`;
+      detailNum.textContent = `Step ${String(i+1).padStart(2, '0')} · of 04`;
       detailName.textContent = STEPS[i].name;
       detailDesc.textContent = STEPS[i].desc;
       detailVal.textContent = STEPS[i].livrable;
@@ -3847,12 +3847,12 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 
   // ─── Methods cycle interactions (donut ↔ list) ───
   const METHODS = [
-    { title: 'Évaluation heuristique', kind: 'quali', label: 'Qualitatif', desc: 'Lecture experte du parcours utilisateur sur les principes d\u2019utilisabilité reconnus. Première détection des frictions évidentes — avant même de regarder la data.' },
-    { title: 'Analytics', kind: 'quanti', label: 'Quantitatif', desc: 'Review du tracking + lecture des comportements agrégés (entonnoirs, drop-offs, segments). On identifie les points où le trafic perd le plus, les parcours et pages qui convertissent, et où chercher les “pourquoi”.' },
-    { title: 'Heatmaps & sessions recordings', kind: 'mixte', label: 'Mixte', desc: 'On observe les clics, les scroll, les hésitations. Une lecture fine du comportement réel, écran par écran, qui révèle les frictions invisibles dans la data agrégée.' },
-    { title: 'Tests utilisateurs', kind: 'quali', label: 'Qualitatif', desc: 'On confronte le parcours à de vrais utilisateurs. Les blocages, les incompréhensions, les hésitations apparaissent en clair — on entend les mots, on voit les gestes.' },
-    { title: 'Sondages onsite', kind: 'mixte', label: 'Mixte', desc: 'Quelques questions ciblées, posées aux moments clés du parcours. On identifie les freins, les hésitations et les déclencheurs de conversion pour comprendre ce qui pousse — ou bloque — le passage à l’action.' },
-    { title: 'Interviews clients', kind: 'quali', label: 'Qualitatif', desc: 'Conversations approfondies avec vos clients, sur leur expérience d\u2019achat. Pour comprendre les motivations, les émotions et la perception de valeur - et faire émerger des insights parfois innatendus, souvent invisibles dans les données.' }
+    { title: 'Heuristic evaluation', kind: 'quali', label: 'Qualitative', desc: 'Expert reading of the user journey against recognized usability principles. First detection of obvious friction — before even looking at the data.' },
+    { title: 'Analytics', kind: 'quanti', label: 'Quantitative', desc: 'Tracking review + aggregate behavior reading (funnels, drop-offs, segments). We identify where traffic drops most, which journeys and pages convert, and where to look for the "why".' },
+    { title: 'Heatmaps & session recordings', kind: 'mixte', label: 'Mixed', desc: 'We observe clicks, scrolls, hesitations. A fine-grained reading of real behavior, screen by screen, that reveals friction invisible in aggregate data.' },
+    { title: 'User testing', kind: 'quali', label: 'Qualitative', desc: 'We confront the journey with real users. Blockers, misunderstandings, hesitations appear in plain sight — we hear the words, we see the gestures.' },
+    { title: 'Onsite surveys', kind: 'mixte', label: 'Mixed', desc: 'A few targeted questions, asked at key moments of the journey. We identify barriers, hesitations and conversion triggers to understand what drives — or blocks — the move to action.' },
+    { title: 'Customer interviews', kind: 'quali', label: 'Qualitative', desc: 'In-depth conversations with your customers, on their purchase experience. To understand motivations, emotions and perceived value — and surface insights sometimes unexpected, often invisible in the data.' }
   ];
   const segments = document.querySelectorAll('.constellation-node');
   const phases = document.querySelectorAll('.lphase');
@@ -3940,7 +3940,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       d.classList.add('selected');
       const dayNum = d.textContent.trim();
       const slotsDate = document.querySelector('.cal-slots-date');
-      if (slotsDate) slotsDate.textContent = `${['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'][new Date(2026, 4, parseInt(dayNum)).getDay()]} ${dayNum} mai`;
+      if (slotsDate) slotsDate.textContent = `${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date(2026, 4, parseInt(dayNum)).getDay()]}, May ${dayNum}`;
     });
   });
   const slots = document.querySelectorAll('.cal-slot');
@@ -3956,12 +3956,12 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       s.classList.add('selected');
       // Wrap content + add Sélectionné
       const time = s.textContent.trim();
-      s.innerHTML = `<span>${time}</span><span class="cal-slot-confirm">Sélectionné</span>`;
+      s.innerHTML = `<span>${time}</span><span class="cal-slot-confirm">Selected</span>`;
       const selectedDay = document.querySelector('.cal-day.selected');
       const dayN = selectedDay ? selectedDay.textContent.trim() : '12';
-      const dow = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'][new Date(2026, 4, parseInt(dayN)).getDay()];
+      const dow = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date(2026, 4, parseInt(dayN)).getDay()];
       const info = document.querySelector('.cal-foot-info');
-      if (info) info.textContent = `Confirmé : ${dow} ${dayN} mai · ${time}`;
+      if (info) info.textContent = `Confirmed: ${dow}, May ${dayN} · ${time}`;
     });
   });
 
@@ -3998,12 +3998,12 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 
   // ─── Fiches livrables — navigation Précédente / Suivante ───
   const FICHES = [
-    { n: '01', short: 'Champs société & TVA', title: "Retirer les champs « société » et « TVA » de l'étape 3.", importance: 'Critique', place: 'Tunnel checkout — étape 3', cat: 'Utilisabilité', theme: 'Effort', action: 'Modification directe', research: ['Analytics', 'Sessions recordings'], diagnostic: "Seulement 8% des clients remplissent ces champs. Drop-off mesuré de 34% sur l'étape 3 du tunnel — la friction n'est pas justifiée par le volume B2B observé sur le segment." },
-    { n: '12', short: 'Avis au-dessus du fold', title: 'Remonter les avis clients au-dessus du fold sur la fiche produit.', importance: 'Élevée', place: 'Page produit', cat: 'Confiance', theme: 'Crédibilité', action: 'Modification directe', research: ['Heatmaps', 'Sessions recordings'], diagnostic: "73% des visiteurs ne scrollent pas jusqu'aux avis. Pattern de sortie observé avant l'ajout au panier — la preuve sociale n'a pas le temps d'opérer." },
-    { n: '34', short: 'Hero orienté résultat', title: 'Reformuler le hero autour du résultat client, pas du produit.', importance: 'Élevée', place: 'Homepage', cat: 'Motivation', theme: 'Désirabilité', action: 'Test A/B', research: ['Interviews clients', 'Évaluation heuristique'], diagnostic: "Les interviews révèlent que la promesse principale n'est pas comprise avant la 3ème page visitée. Le hero parle du produit, pas de l'effet attendu." },
-    { n: '67', short: 'Livraison dès le produit', title: 'Clarifier les options de livraison dès la page produit.', importance: 'Moyenne', place: 'Page produit', cat: 'Coût', theme: 'Livraison', action: 'Modification directe', research: ['Tests utilisateurs', 'Analytics'], diagnostic: "Signal fort sur l'abandon panier lié à la découverte tardive des frais de livraison. À expliciter en amont du tunnel." },
-    { n: '89', short: 'Preuve sociale inline', title: 'Ajouter la preuve sociale dans le flow, pas en bas de page.', importance: 'Moyenne', place: 'Panier', cat: 'Confiance', theme: 'Attention', action: 'Modification directe', research: ['Tests utilisateurs', 'Sessions recordings'], diagnostic: "Avis clients enfouis en footer : invisibles au moment où la décision se joue. Repositionnement inline pendant l'ajout au panier." },
-    { n: '113', short: 'Pricing en 3 tiers', title: "Tester un pricing en 3 tiers avec ancrage sur l'offre premium.", importance: 'Basse', place: 'Global / multi-pages', cat: 'Coût', theme: 'Choix', action: 'Test A/B', research: ['Sondages onsite', 'Analytics'], diagnostic: "Hésitation forte sur le rapport qualité/prix exprimée dans les sondages. Sans point d'ancrage tarifaire, le visiteur n'a pas de repère pour évaluer l'offre." }
+    { n: '01', short: 'Company & VAT fields', title: 'Remove the "company" and "VAT" fields from step 3.', importance: 'Critical', place: 'Checkout funnel — step 3', cat: 'Usability', theme: 'Effort', action: 'Direct change', research: ['Analytics', 'Session recordings'], diagnostic: "Only 8% of customers fill in these fields. Measured 34% drop-off on step 3 of the funnel — the friction isn't justified by the B2B volume observed on the segment." },
+    { n: '12', short: 'Reviews above the fold', title: 'Move customer reviews above the fold on the product page.', importance: 'High', place: 'Product page', cat: 'Trust', theme: 'Credibility', action: 'Direct change', research: ['Heatmaps', 'Session recordings'], diagnostic: "73% of visitors don't scroll to the reviews. Exit pattern observed before add-to-cart — social proof doesn't have time to operate." },
+    { n: '34', short: 'Outcome-driven hero', title: 'Rewrite the hero around the customer outcome, not the product.', importance: 'High', place: 'Homepage', cat: 'Motivation', theme: 'Desirability', action: 'A/B test', research: ['Customer interviews', 'Heuristic evaluation'], diagnostic: "Interviews reveal that the main promise isn't understood before the 3rd page visited. The hero talks about the product, not the expected effect." },
+    { n: '67', short: 'Shipping from the product', title: 'Clarify shipping options from the product page.', importance: 'Medium', place: 'Product page', cat: 'Cost', theme: 'Shipping', action: 'Direct change', research: ['User testing', 'Analytics'], diagnostic: "Strong signal on cart abandonment linked to late discovery of shipping costs. To be made explicit upstream of the funnel." },
+    { n: '89', short: 'Inline social proof', title: 'Add social proof inside the flow, not at the bottom of the page.', importance: 'Medium', place: 'Cart', cat: 'Trust', theme: 'Attention', action: 'Direct change', research: ['User testing', 'Session recordings'], diagnostic: "Customer reviews buried in the footer: invisible at the moment the decision happens. Repositioning inline during add-to-cart." },
+    { n: '113', short: '3-tier pricing', title: "Test a 3-tier pricing with anchoring on the premium offer.", importance: 'Low', place: 'Global / multi-pages', cat: 'Cost', theme: 'Choice', action: 'A/B test', research: ['Onsite surveys', 'Analytics'], diagnostic: "Strong hesitation on the quality/price ratio expressed in surveys. Without a tariff anchor, the visitor has no reference to evaluate the offer." }
   ];
   const ficheLayout = document.querySelector('.fiche-doc-layout');
   const ficheFrame = ficheLayout?.querySelector('.fiche-doc-frame');
@@ -4023,7 +4023,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     const arrowRight = ficheLayout.querySelector('.fiche-nav-arrow.right');
     const total = FICHES.length;
     let currentIdx = 0;
-    const IMPORTANCE_SLUGS = { 'Critique': 'critique', 'Élevée': 'elevee', 'Moyenne': 'moyenne', 'Basse': 'basse' };
+    const IMPORTANCE_SLUGS = { 'Critical': 'critique', 'High': 'elevee', 'Medium': 'moyenne', 'Low': 'basse' };
     function setFiche(idx, direction) {
       // direction : 'next' (slide depuis la droite), 'prev' (slide depuis la gauche), undefined (fade simple)
       // Pas de wrap : on clamp aux extrémités (parcours narratif borné)
@@ -4034,7 +4034,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         direction = currentIdx > previousIdx ? 'next' : 'prev';
       }
       const f = FICHES[currentIdx];
-      numEl.innerHTML = `№ ${f.n} <span class="fiche-num-total">· sur 120</span>`;
+      numEl.innerHTML = `№ ${f.n} <span class="fiche-num-total">· of 120</span>`;
       classifEl.textContent = `Importance — ${f.importance}`;
       classifEl.className = 'fiche-classification is-' + (IMPORTANCE_SLUGS[f.importance] || 'elevee');
       titleEl.textContent = f.title;
@@ -4052,7 +4052,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         prevBtn.disabled = isFirst;
         if (prevText) {
           prevText.textContent = isFirst
-            ? 'Première recommandation'
+            ? 'First recommendation'
             : `№ ${FICHES[currentIdx - 1].n} — ${FICHES[currentIdx - 1].short}`;
         }
       }
@@ -4060,7 +4060,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         nextBtn.disabled = isLast;
         if (nextText) {
           nextText.textContent = isLast
-            ? 'Dernière recommandation'
+            ? 'Last recommendation'
             : `№ ${FICHES[currentIdx + 1].n} — ${FICHES[currentIdx + 1].short}`;
         }
       }
