@@ -10,6 +10,7 @@
 <link rel="alternate" hreflang="x-default" href="https://maat.so/mentions-legales.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="favicon.svg">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
@@ -895,6 +896,21 @@ body {
 
 <script>
 (function() {
+  // ─── Calendly popup : tous les CTAs "Réserver un échange" l'ouvrent ───
+  const CALENDLY_URL = 'https://calendly.com/annesophieroux-consulting/30min?primary_color=D4B275&background_color=08041A&text_color=F4ECD3&hide_event_type_details=1&hide_gdpr_banner=1';
+  function openCalendly(e) {
+    e.preventDefault();
+    if (typeof Calendly !== 'undefined' && Calendly.initPopupWidget) {
+      Calendly.initPopupWidget({ url: CALENDLY_URL });
+    } else {
+      window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
+    }
+    return false;
+  }
+  document.querySelectorAll(
+    'a[href="#booking"], a[href="index.html#booking"], .cal-confirm-btn'
+  ).forEach(el => el.addEventListener('click', openCalendly));
+
   // Header sticky : densification au scroll > 60px
   const mhHeader = document.getElementById('mh-header');
   if (mhHeader) {
@@ -934,6 +950,8 @@ body {
   }
 })();
 </script>
+
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 </body>
 </html>
