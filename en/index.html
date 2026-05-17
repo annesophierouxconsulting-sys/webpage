@@ -1980,12 +1980,11 @@ body {
 }
 .cal-body {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 0;
 }
 .cal-month {
   padding: 1.4rem 1.6rem;
-  border-right: 1px solid rgba(20, 16, 42, 0.08);
 }
 .cal-month-nav {
   display: flex; justify-content: space-between; align-items: center;
@@ -2406,9 +2405,8 @@ body {
    dans le popup Calendly (déclenché en bas via le bouton).
    Hover sur desktop (CSS pur, @media hover:hover), tap sur mobile (classe
    .is-hint ajoutée par JS pendant 1.8s, auto-removed). */
-.cal-day:not(.empty):not(.disabled), .cal-slot { position: relative; }
-.cal-day:not(.empty):not(.disabled)::after,
-.cal-slot::after {
+.cal-day:not(.empty):not(.disabled) { position: relative; }
+.cal-day:not(.empty):not(.disabled)::after {
   content: 'See real slots ↓';
   position: absolute;
   bottom: calc(100% + 6px);
@@ -2428,13 +2426,12 @@ body {
   z-index: 5;
 }
 @media (hover: hover) {
-  .cal-day:not(.empty):not(.disabled):hover::after,
-  .cal-slot:hover::after {
+  .cal-day:not(.empty):not(.disabled):hover::after {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
   }
 }
-.cal-day.is-hint::after, .cal-slot.is-hint::after {
+.cal-day.is-hint::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
@@ -2673,7 +2670,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .modulable-meta-line { grid-template-columns: 1fr; gap: 4px; }
   .booking-grid { grid-template-columns: 1fr; gap: 2rem; }
   .cal-body { grid-template-columns: 1fr; }
-  .cal-month { border-right: none; border-bottom: 1px solid rgba(20, 16, 42, 0.08); }
   .cal-foot { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
   .cal-confirm-btn { align-self: stretch; text-align: center; }
   .footer { padding: 5% 7% 4% 7%; }
@@ -3788,20 +3784,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
             <div class="cal-day disabled">30</div><div class="cal-day disabled">31</div>
           </div>
         </div>
-        <div class="cal-slots">
-          <div class="cal-slots-head">
-            <div class="cal-slots-date">Tuesday, May 12</div>
-            <div class="cal-slots-tz">Available slots · 30 min</div>
-          </div>
-          <div class="cal-slots-list">
-            <button class="cal-slot">9:30</button>
-            <button class="cal-slot">10:30</button>
-            <button class="cal-slot">14:00</button>
-            <button class="cal-slot">15:00</button>
-            <button class="cal-slot">16:00</button>
-            <button class="cal-slot">17:00</button>
-          </div>
-        </div>
       </div>
       <div class="cal-foot">
         <span class="cal-foot-info">Preview — real availability on click</span>
@@ -4059,7 +4041,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   // The mock is read-only. Clicking a day or slot shows a "See real slots ↓"
   // tooltip for 1.8s — useful on mobile where :hover doesn't work. On
   // desktop, :hover handles it via CSS.
-  document.querySelectorAll('.cal-day:not(.empty):not(.disabled), .cal-slot')
+  document.querySelectorAll('.cal-day:not(.empty):not(.disabled)')
     .forEach(el => {
       el.addEventListener('click', () => {
         el.classList.add('is-hint');
