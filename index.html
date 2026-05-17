@@ -2105,6 +2105,26 @@ body {
   opacity: 0.65;
   cursor: progress;
 }
+/* Mobile : sticky CTA quand on est dans la zone booking-grid (mock calendar)
+   — visible jusqu'à ce qu'on sorte de #booking. Coordonné avec le
+   .mobile-cta-floating qui se cache quand on est dans #booking → handoff
+   sans recouvrement ni double affichage. */
+@media (max-width: 900px) {
+  .cal-confirm-btn.is-sticky {
+    position: fixed;
+    bottom: 16px;
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    z-index: 25;
+    box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.40);
+    animation: stickyBtnIn 0.3s ease-out;
+  }
+  @keyframes stickyBtnIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
 
 /* ============================================================
    11 — FOOTER COLOPHON avec plume bauhaus
@@ -4062,6 +4082,21 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         }
       });
     });
+
+  // ─── Sticky cal-confirm-btn sur mobile dans la zone #booking ───
+  // Quand l'utilisateur entre dans la zone du mock calendar sur mobile, le
+  // bouton "Voir les créneaux disponibles" se détache du flux et reste collé
+  // en bas du viewport. Coordonné avec .mobile-cta-floating qui se cache
+  // exactement à ce moment (handoff sans double affichage).
+  const stickyBookingGrid = document.getElementById('booking');
+  const stickyCalBtn = document.querySelector('.cal-confirm-btn');
+  if (stickyBookingGrid && stickyCalBtn) {
+    const stickyObserver = new IntersectionObserver((entries) => {
+      const isMobile = window.matchMedia('(max-width: 900px)').matches;
+      stickyCalBtn.classList.toggle('is-sticky', isMobile && entries[0].isIntersecting);
+    }, { threshold: 0 });
+    stickyObserver.observe(stickyBookingGrid);
+  }
 
   // ─── Mobile floating CTA ───
   // Affiché sur mobile au-delà de 300px de scroll, MAIS masqué quand la section
