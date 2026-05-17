@@ -2401,6 +2401,43 @@ body {
   transition: background-color 0.2s ease-out, color 0.2s ease-out,
               transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
+/* Tooltip pédagogique sur le mock : signale que la vraie sélection se fait
+   dans le popup Calendly (déclenché en bas via le bouton).
+   Hover sur desktop (CSS pur, @media hover:hover), tap sur mobile (classe
+   .is-hint ajoutée par JS pendant 1.8s, auto-removed). */
+.cal-day:not(.empty):not(.disabled), .cal-slot { position: relative; }
+.cal-day:not(.empty):not(.disabled)::after,
+.cal-slot::after {
+  content: 'See real slots ↓';
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(2px);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 5px 8px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 5;
+}
+@media (hover: hover) {
+  .cal-day:not(.empty):not(.disabled):hover::after,
+  .cal-slot:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+.cal-day.is-hint::after, .cal-slot.is-hint::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 .cal-day.selected, .cal-slot.selected {
   animation: calSelect 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -4018,11 +4055,17 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     });
   });
 
-  // ─── Mock calendar : interactions removed ───
-  // The mock is now read-only (decorative preview). Real selection happens
-  // in the Calendly popup when clicking "See available slots". Avoids the
-  // "I already picked, now I have to redo it" frustration since Calendly
-  // doesn't allow pre-selecting a specific date+time slot via URL params.
+  // ─── Mock calendar : interactions removed, pedagogical tooltip added ───
+  // The mock is read-only. Clicking a day or slot shows a "See real slots ↓"
+  // tooltip for 1.8s — useful on mobile where :hover doesn't work. On
+  // desktop, :hover handles it via CSS.
+  document.querySelectorAll('.cal-day:not(.empty):not(.disabled), .cal-slot')
+    .forEach(el => {
+      el.addEventListener('click', () => {
+        el.classList.add('is-hint');
+        setTimeout(() => el.classList.remove('is-hint'), 1800);
+      });
+    });
 
   // ─── Mobile floating CTA ───
   // Affiché sur mobile au-delà de 300px de scroll, MAIS masqué quand la section
