@@ -2107,10 +2107,10 @@ body {
   cursor: progress;
 }
 
-/* Sticky CTA mobile in the booking zone — separate element at body level
-   (not inside .booking-section which has a containing block due to
-   .reveal/transform). Coordinated with .mobile-cta-floating which hides
-   when #booking is visible. */
+/* Sticky CTA mobile in the booking zone — glassmorphism: semi-transparent
+   CTA centered on viewport, backdrop-filter blur on dates behind.
+   Separate element at body level (not inside .booking-section which has
+   a containing block due to .reveal/transform). */
 .cal-sticky-cta {
   display: none;
 }
@@ -2118,33 +2118,34 @@ body {
   .cal-sticky-cta {
     display: block;
     position: fixed;
-    bottom: 16px;
-    left: 5%;
-    right: 5%;
-    background: var(--ink);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(20, 16, 42, 0.72);
+    backdrop-filter: blur(8px) saturate(110%);
+    -webkit-backdrop-filter: blur(8px) saturate(110%);
     color: var(--paper);
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
+    font-size: 12px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     text-align: center;
-    padding: 14px;
-    border: 1px solid var(--ink);
+    padding: 18px 28px;
+    border: 1px solid rgba(212, 178, 117, 0.45);
     text-decoration: none;
     z-index: 25;
-    box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.40);
+    box-shadow: 0 12px 40px -12px rgba(8, 4, 26, 0.55);
     opacity: 0;
     pointer-events: none;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transition: opacity 0.4s ease-out;
+    white-space: nowrap;
   }
   .cal-sticky-cta.is-visible {
     opacity: 1;
     pointer-events: auto;
-    transform: translateY(0);
   }
   .cal-sticky-cta[aria-busy="true"] {
-    opacity: 0.65;
+    opacity: 0.7;
     cursor: progress;
   }
   /* Hide the in-page button (.cal-confirm-btn in cal-foot) on mobile —
