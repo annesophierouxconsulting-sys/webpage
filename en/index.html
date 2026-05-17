@@ -2106,25 +2106,50 @@ body {
   opacity: 0.65;
   cursor: progress;
 }
-/* Mobile : sticky CTA quand on est dans la zone booking-grid (mock calendar)
-   — visible jusqu'à ce qu'on sorte de #booking. Coordonné avec le
-   .mobile-cta-floating qui se cache quand on est dans #booking → handoff
-   sans recouvrement ni double affichage. */
+
+/* Sticky CTA mobile in the booking zone — separate element at body level
+   (not inside .booking-section which has a containing block due to
+   .reveal/transform). Coordinated with .mobile-cta-floating which hides
+   when #booking is visible. */
+.cal-sticky-cta {
+  display: none;
+}
 @media (max-width: 900px) {
-  .cal-confirm-btn.is-sticky {
+  .cal-sticky-cta {
+    display: block;
     position: fixed;
     bottom: 16px;
     left: 5%;
     right: 5%;
-    width: 90%;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 14px;
+    border: 1px solid var(--ink);
+    text-decoration: none;
     z-index: 25;
     box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.40);
-    animation: stickyBtnIn 0.3s ease-out;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   }
-  @keyframes stickyBtnIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .cal-sticky-cta.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
+  .cal-sticky-cta[aria-busy="true"] {
+    opacity: 0.65;
+    cursor: progress;
+  }
+  /* Hide the in-page button (.cal-confirm-btn in cal-foot) on mobile —
+     avoids duplication with the sticky CTA that takes over. */
+  .cal-foot { display: none; }
 }
 
 /* ============================================================
@@ -3845,6 +3870,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 </footer>
 
 <a href="#booking" class="mobile-cta-floating" id="mobile-cta">Book a call →</a>
+<a href="#booking" class="cal-sticky-cta" id="cal-sticky-cta">See available slots →</a>
 
 <script>
 (function() {
@@ -4082,17 +4108,19 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       });
     });
 
-  // ─── Sticky cal-confirm-btn on mobile inside #booking zone ───
-  // When the user enters the mock calendar zone on mobile, the
-  // "See available slots" button detaches from flow and sticks at the
-  // bottom of the viewport. Coordinated with .mobile-cta-floating which
-  // hides exactly at this moment (handoff without overlap).
+  // ─── Sticky CTA on mobile inside #booking zone ───
+  // The .cal-sticky-cta element lives at body level (not inside
+  // .booking-section which has a containing block due to
+  // .reveal/will-change/transform). Toggle .is-visible based on #booking
+  // intersection on mobile.
+  // The .mobile-cta-floating "Book a call" hides at this moment (logic
+  // already in bookingObserver) → handoff without overlap.
   const stickyBookingGrid = document.getElementById('booking');
-  const stickyCalBtn = document.querySelector('.cal-confirm-btn');
-  if (stickyBookingGrid && stickyCalBtn) {
+  const calStickyCta = document.getElementById('cal-sticky-cta');
+  if (stickyBookingGrid && calStickyCta) {
     const stickyObserver = new IntersectionObserver((entries) => {
       const isMobile = window.matchMedia('(max-width: 900px)').matches;
-      stickyCalBtn.classList.toggle('is-sticky', isMobile && entries[0].isIntersecting);
+      calStickyCta.classList.toggle('is-visible', isMobile && entries[0].isIntersecting);
     }, { threshold: 0 });
     stickyObserver.observe(stickyBookingGrid);
   }
