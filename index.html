@@ -1942,6 +1942,7 @@ body {
   background: var(--paper);
   border: 1px solid rgba(20, 16, 42, 0.12);
   border-radius: 1px;
+  position: relative;
 }
 .cal-header {
   padding: 1.4rem 1.6rem;
@@ -2106,17 +2107,18 @@ body {
   cursor: progress;
 }
 
-/* Sticky CTA mobile dans la zone booking — glassmorphism : CTA semi-transparent
-   centré sur le viewport, backdrop-filter blur sur les dates derrière.
-   Élément séparé au niveau du body (pas dans .booking-section qui a un
-   containing block dû à .reveal/transform). */
+/* Sticky CTA mobile dans le cal-card — glassmorphism : CTA semi-transparent
+   absolutely positionné au-dessus des dates, blur léger sur le calendrier
+   en dessous. Élément placé INSIDE .cal-card (avec position: relative)
+   donc absolute se calcule par rapport à cal-card et non au viewport.
+   Le CTA scroll avec le calendrier (pas fixe-viewport). */
 .cal-sticky-cta {
   display: none;
 }
 @media (max-width: 900px) {
   .cal-sticky-cta {
     display: block;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -2132,23 +2134,16 @@ body {
     padding: 18px 28px;
     border: 1px solid rgba(212, 178, 117, 0.45);
     text-decoration: none;
-    z-index: 25;
+    z-index: 10;
     box-shadow: 0 12px 40px -12px rgba(8, 4, 26, 0.55);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease-out;
     white-space: nowrap;
-  }
-  .cal-sticky-cta.is-visible {
-    opacity: 1;
-    pointer-events: auto;
   }
   .cal-sticky-cta[aria-busy="true"] {
     opacity: 0.7;
     cursor: progress;
   }
   /* Cache le bouton in-page (.cal-confirm-btn dans cal-foot) sur mobile —
-     évite le doublon avec le sticky qui prend le relais. */
+     évite le doublon avec le CTA glass qui prend le relais. */
   .cal-foot { display: none; }
 }
 
@@ -3833,6 +3828,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       <div class="cal-foot">
         <button class="cal-confirm-btn">Voir les créneaux disponibles →</button>
       </div>
+      <a href="#booking" class="cal-sticky-cta" id="cal-sticky-cta">Voir les créneaux disponibles →</a>
     </div>
   </div>
 </section>
@@ -3870,7 +3866,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 </footer>
 
 <a href="#booking" class="mobile-cta-floating" id="mobile-cta">Réserver un échange →</a>
-<a href="#booking" class="cal-sticky-cta" id="cal-sticky-cta">Voir les créneaux disponibles →</a>
 
 <script>
 (function() {
@@ -4110,21 +4105,13 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
       });
     });
 
-  // ─── Sticky CTA mobile dans la zone #booking ───
-  // L'élément .cal-sticky-cta vit au niveau du body (pas dans .booking-section
-  // qui a un containing block dû à .reveal/will-change/transform). Toggle de
-  // .is-visible selon l'intersection de #booking sur mobile.
-  // Le mobile-cta-floating ("Réserver un échange") se cache à ce moment-là
-  // (logique déjà en place dans bookingObserver) → handoff sans recouvrement.
-  const stickyBookingGrid = document.getElementById('booking');
-  const calStickyCta = document.getElementById('cal-sticky-cta');
-  if (stickyBookingGrid && calStickyCta) {
-    const stickyObserver = new IntersectionObserver((entries) => {
-      const isMobile = window.matchMedia('(max-width: 900px)').matches;
-      calStickyCta.classList.toggle('is-visible', isMobile && entries[0].isIntersecting);
-    }, { threshold: 0 });
-    stickyObserver.observe(stickyBookingGrid);
-  }
+  // ─── Sticky CTA mobile : géré en pur CSS ───
+  // .cal-sticky-cta est positionné absolutely DANS .cal-card (position: relative).
+  // Visible uniquement <900px (mobile), scroll avec le calendrier. Pas besoin
+  // d'IntersectionObserver — la position absolute gère naturellement la
+  // visibilité (sort du viewport avec le calendrier).
+  // Note : le click handler openCalendly se déclenche automatiquement car
+  // l'élément <a href="#booking"> matche le selector du handler existant.
 
   // ─── Mobile floating CTA ───
   // Affiché sur mobile au-delà de 300px de scroll, MAIS masqué quand la section
