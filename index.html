@@ -2034,7 +2034,7 @@ body {
   border: 1px solid transparent;
   border-radius: 50%;
   color: var(--ink);
-  cursor: pointer;
+  cursor: default;
 }
 .cal-day.empty { cursor: default; }
 .cal-day.disabled { color: rgba(20, 16, 42, 0.25); cursor: not-allowed; }
@@ -2067,7 +2067,7 @@ body {
   border: 1px solid rgba(20, 16, 42, 0.15);
   color: var(--ink);
   padding: 8px 12px;
-  cursor: pointer;
+  cursor: default;
   text-align: left;
   display: flex; justify-content: space-between; align-items: center;
 }
@@ -3766,8 +3766,8 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         </div>
       </div>
       <div class="cal-foot">
-        <span class="cal-foot-info">Confirmé : Mardi 12 mai · 14:00</span>
-        <button class="cal-confirm-btn">Confirmer →</button>
+        <span class="cal-foot-info">Aperçu — disponibilités réelles au clic</span>
+        <button class="cal-confirm-btn">Voir les créneaux disponibles →</button>
       </div>
     </div>
   </div>
@@ -4018,38 +4018,11 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     });
   });
 
-  // ─── Calendar interactions ───
-  const days = document.querySelectorAll('.cal-day:not(.empty):not(.disabled)');
-  days.forEach(d => {
-    d.addEventListener('click', () => {
-      days.forEach(x => x.classList.remove('selected'));
-      d.classList.add('selected');
-      const dayNum = d.textContent.trim();
-      const slotsDate = document.querySelector('.cal-slots-date');
-      if (slotsDate) slotsDate.textContent = `${['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'][new Date(2026, 4, parseInt(dayNum)).getDay()]} ${dayNum} mai`;
-    });
-  });
-  const slots = document.querySelectorAll('.cal-slot');
-  slots.forEach(s => {
-    s.addEventListener('click', () => {
-      slots.forEach(x => {
-        x.classList.remove('selected');
-        const conf = x.querySelector('.cal-slot-confirm');
-        if (conf) conf.remove();
-        // Restore plain text if was wrapped
-        if (x.children.length === 0) {} // no-op
-      });
-      s.classList.add('selected');
-      // Wrap content + add Sélectionné
-      const time = s.textContent.trim();
-      s.innerHTML = `<span>${time}</span><span class="cal-slot-confirm">Sélectionné</span>`;
-      const selectedDay = document.querySelector('.cal-day.selected');
-      const dayN = selectedDay ? selectedDay.textContent.trim() : '12';
-      const dow = ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'][new Date(2026, 4, parseInt(dayN)).getDay()];
-      const info = document.querySelector('.cal-foot-info');
-      if (info) info.textContent = `Confirmé : ${dow} ${dayN} mai · ${time}`;
-    });
-  });
+  // ─── Mock calendar : interactions retirées ───
+  // Le mock est désormais en lecture seule (aperçu décoratif). La vraie sélection
+  // se fait dans le popup Calendly au clic sur "Voir les créneaux disponibles".
+  // Évite la frustration "j'ai choisi, je dois recommencer" puisque Calendly ne
+  // permet pas de pré-sélectionner un slot date+heure via URL.
 
   // ─── Mobile floating CTA ───
   // Affiché sur mobile au-delà de 300px de scroll, MAIS masqué quand la section
