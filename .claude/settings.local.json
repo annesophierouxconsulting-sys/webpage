@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git fetch *)",
+      "Bash(git stash *)",
+      "Bash(git pull *)",
+      "Bash(git -C \"C:/Users/annso/OneDrive/Dokument/GitHub/webpage\" log --oneline -3 main)",
+      "Bash(git -C \"C:/Users/annso/OneDrive/Dokument/GitHub/webpage\" status)"
+    ]
+  }
+}
