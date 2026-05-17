@@ -10,6 +10,8 @@
 <link rel="alternate" hreflang="x-default" href="https://maat.so/">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="preconnect" href="https://calendly.com">
+<link rel="preconnect" href="https://assets.calendly.com">
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -2100,6 +2102,10 @@ body {
   width: 100%;
   text-align: center;
 }
+.cal-confirm-btn[aria-busy="true"] {
+  opacity: 0.65;
+  cursor: progress;
+}
 
 /* ============================================================
    11 — FOOTER COLOPHON avec plume bauhaus
@@ -3828,6 +3834,13 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   const CALENDLY_URL = 'https://calendly.com/annesophieroux-maat/30min?primary_color=D4B275&background_color=08041A&text_color=F4ECD3&hide_event_type_details=1&hide_gdpr_banner=1';
   function openCalendly(e) {
     e.preventDefault();
+    // Immediate visual feedback on the trigger button (aria-busy dims it +
+    // cursor progress for ~1.5s, while the Calendly popup is loading).
+    const trigger = e.currentTarget;
+    if (trigger && trigger.setAttribute) {
+      trigger.setAttribute('aria-busy', 'true');
+      setTimeout(() => trigger.removeAttribute('aria-busy'), 1500);
+    }
     if (typeof Calendly !== 'undefined' && Calendly.initPopupWidget) {
       Calendly.initPopupWidget({ url: CALENDLY_URL });
     } else {

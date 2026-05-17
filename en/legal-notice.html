@@ -10,6 +10,8 @@
 <link rel="alternate" hreflang="x-default" href="https://maat.so/mentions-legales.html">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="preconnect" href="https://calendly.com">
+<link rel="preconnect" href="https://assets.calendly.com">
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -962,6 +964,11 @@ body {
   const CALENDLY_URL = 'https://calendly.com/annesophieroux-maat/30min?primary_color=D4B275&background_color=08041A&text_color=F4ECD3&hide_event_type_details=1&hide_gdpr_banner=1';
   function openCalendly(e) {
     e.preventDefault();
+    const trigger = e.currentTarget;
+    if (trigger && trigger.setAttribute) {
+      trigger.setAttribute('aria-busy', 'true');
+      setTimeout(() => trigger.removeAttribute('aria-busy'), 1500);
+    }
     if (typeof Calendly !== 'undefined' && Calendly.initPopupWidget) {
       Calendly.initPopupWidget({ url: CALENDLY_URL });
     } else {
