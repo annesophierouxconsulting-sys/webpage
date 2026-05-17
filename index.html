@@ -2041,50 +2041,6 @@ body {
 .cal-day.empty { cursor: default; }
 .cal-day.disabled { color: rgba(20, 16, 42, 0.25); cursor: not-allowed; }
 .cal-day.today { color: var(--champagne-fonce); font-weight: 500; }
-.cal-day.selected { background: var(--ink); color: var(--champagne); border-color: var(--ink); }
-.cal-slots { padding: 1.4rem 1.6rem; }
-.cal-slots-head { margin-bottom: 0.9rem; }
-.cal-slots-date {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 14px;
-  color: var(--ink);
-}
-.cal-slots-tz {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--ink-mute);
-  margin-top: 2px;
-}
-.cal-slots-list {
-  display: flex; flex-direction: column;
-  gap: 4px;
-  max-height: 220px;
-  overflow-y: auto;
-}
-.cal-slot {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  background: transparent;
-  border: 1px solid rgba(20, 16, 42, 0.15);
-  color: var(--ink);
-  padding: 8px 12px;
-  cursor: default;
-  text-align: left;
-  display: flex; justify-content: space-between; align-items: center;
-}
-.cal-slot.selected {
-  background: var(--ink);
-  color: var(--champagne);
-  border-color: var(--ink);
-}
-.cal-slot-confirm {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 11px;
-  color: var(--champagne);
-  text-transform: none;
-}
 .cal-foot {
   padding: 1rem 1.6rem;
   border-top: 1px solid rgba(20, 16, 42, 0.08);
@@ -2437,12 +2393,6 @@ body {
   .footer-cta-link:hover::after { transform: scaleX(1); }
 }
 
-/* Calendrier — sélection avec ressort doux */
-.cal-day, .cal-slot {
-  transition: background-color 0.2s ease-out, color 0.2s ease-out,
-              transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 /* Tooltip pédagogique sur le mock : signale que la vraie sélection se fait
    dans le popup Calendly (déclenché en bas via le bouton).
    Hover sur desktop (CSS pur, @media hover:hover), tap sur mobile (classe
@@ -2476,14 +2426,6 @@ body {
 .cal-day.is-hint::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
-}
-.cal-day.selected, .cal-slot.selected {
-  animation: calSelect 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-}
-@keyframes calSelect {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.04); }
-  100% { transform: scale(1); }
 }
 
 /* Point lumineux qui glisse sur la timeline démarche */
@@ -2550,75 +2492,6 @@ body {
   background: var(--hero-bg);
   color: var(--champagne);
   box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.30);
-}
-
-/* Tweaks-driven density */
-body[data-density="compact"] .hero { padding: 3.5% 5%; }
-body[data-density="compact"] .split-section,
-body[data-density="compact"] .method-section,
-body[data-density="compact"] .methods-section,
-body[data-density="compact"] .rec-section,
-body[data-density="compact"] .team-section,
-body[data-density="compact"] .booking-section { padding: 3.5% 5%; }
-body[data-density="compact"] .split-block { padding: 1.6rem 1.5rem; }
-body[data-density="compact"] .modulable-card { padding: 2rem 2rem; }
-body[data-density="compact"] .fiche-doc-frame { padding: 2rem 2.25rem 0; }
-body[data-density="compact"] .footer { padding: 3.5% 5% 2.5% 5%; }
-body[data-density="compact"] .method-detail { padding: 1.75rem 2rem; }
-
-body[data-density="airy"] .hero { padding: 7% 5%; }
-body[data-density="airy"] .split-section,
-body[data-density="airy"] .method-section,
-body[data-density="airy"] .methods-section,
-body[data-density="airy"] .rec-section,
-body[data-density="airy"] .team-section,
-body[data-density="airy"] .booking-section { padding: 7% 5%; }
-body[data-density="airy"] .split-block { padding: 3rem 2.75rem; }
-body[data-density="airy"] .modulable-card { padding: 4rem 3.5rem; }
-body[data-density="airy"] .fiche-doc-frame { padding: 4rem 4rem 0; }
-body[data-density="airy"] .method-detail { padding: 3.5rem 3.5rem; }
-
-/* Direction du camembert (cf. Tweaks) */
-body[data-donut="A"] .donut-segment.tone-aubergine { fill: rgba(20, 16, 42, 0.10); }
-body[data-donut="A"] .donut-segment.tone-champagne { fill: rgba(140, 106, 44, 0.10); }
-body[data-donut="A"] .donut-segment.is-active { fill: rgba(212, 178, 117, 0.85) !important; }
-
-body[data-donut="B"] .donut-segment.tone-aubergine,
-body[data-donut="B"] .donut-segment.tone-champagne { fill: rgba(20, 16, 42, 0.06); }
-body[data-donut="B"] .donut-segment.is-active { fill: rgba(20, 16, 42, 0.85) !important; }
-
-body[data-donut="C"] .donut-segment.tone-aubergine { fill: rgba(140, 106, 44, 0.04); }
-body[data-donut="C"] .donut-segment.tone-champagne { fill: rgba(140, 106, 44, 0.18); }
-body[data-donut="C"] .donut-segment.is-active { fill: rgba(140, 106, 44, 0.7) !important; }
-
-/* Variantes Livrable (cf. Tweaks) */
-body[data-livrable="notion"] .fiche-doc-frame { background: #ffffff; border-color: rgba(20, 16, 42, 0.12); }
-body[data-livrable="notion"] .fiche-title {
-  font-family: var(--font-display);
-  font-style: normal;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
-body[data-livrable="notion"] .fiche-classification {
-  border: none;
-  background: rgba(140, 106, 44, 0.12);
-  color: var(--champagne-fonce);
-}
-body[data-livrable="notion"] .fiche-num-value { color: var(--ink); }
-body[data-livrable="notion"] .fiche-foot { background: #fafaf7; }
-
-body[data-livrable="mixte"] .fiche-doc-frame::after {
-  content: 'Livré dans Notion · ~30-50 fiches selon mission';
-  position: absolute;
-  bottom: -28px; right: 4px;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(212, 178, 117, 0.55);
-  border: none;
-  width: auto; height: auto;
-  background: none;
 }
 
 @media (max-width: 900px) {
@@ -3166,7 +3039,7 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
 }
 </style>
 </head>
-<body data-density="regular" data-donut="D" data-livrable="magazine">
+<body>
 
 <!-- ============================================================
      HEADER STICKY — DA aubergine
@@ -4086,19 +3959,15 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     });
   });
 
-  // ─── Mock calendar : interactions retirées, redirection pédagogique ───
-  // Mock en lecture seule. Comportement au clic sur un jour :
-  // - Mobile (<900px) : scroll smooth vers le bouton .cal-confirm-btn,
-  //   plus efficace que tooltip qui sortirait du viewport
-  // - Desktop : tooltip "Réservez ci-dessous ↓" affiché 1.8s (en plus
-  //   du :hover géré par CSS)
+  // ─── Mock calendar : tooltip pédagogique desktop au clic ───
+  // Mock en lecture seule. Sur desktop, clic sur un jour affiche le tooltip
+  // "Réservez ci-dessous ↓" 1.8s (en plus du :hover géré par CSS).
+  // Sur mobile, pas d'action — le CTA glassmorphism .cal-sticky-cta est
+  // déjà visible centré sur le cal-card, l'utilisateur tape dessus directement.
   document.querySelectorAll('.cal-day:not(.empty):not(.disabled)')
     .forEach(el => {
       el.addEventListener('click', () => {
-        if (window.matchMedia('(max-width: 900px)').matches) {
-          document.querySelector('.cal-confirm-btn')
-            ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
+        if (!window.matchMedia('(max-width: 900px)').matches) {
           el.classList.add('is-hint');
           setTimeout(() => el.classList.remove('is-hint'), 1800);
         }
