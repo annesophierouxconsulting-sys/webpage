@@ -1890,7 +1890,7 @@ body {
 
 .booking-grid {
   display: grid;
-  grid-template-columns: 1fr minmax(0, 360px);
+  grid-template-columns: 1fr minmax(0, 460px);
   gap: 3rem;
   align-items: start;
 }
@@ -2086,12 +2086,6 @@ body {
 .cal-foot {
   padding: 1rem 1.6rem;
   border-top: 1px solid rgba(20, 16, 42, 0.08);
-  display: flex; justify-content: space-between; align-items: center;
-}
-.cal-foot-info {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--ink-mute);
 }
 .cal-confirm-btn {
   font-family: var(--font-mono);
@@ -2101,8 +2095,10 @@ body {
   color: var(--paper);
   background: var(--ink);
   border: 1px solid var(--ink);
-  padding: 8px 14px;
+  padding: 10px 14px;
   cursor: pointer;
+  width: 100%;
+  text-align: center;
 }
 
 /* ============================================================
@@ -2407,7 +2403,7 @@ body {
    .is-hint ajoutée par JS pendant 1.8s, auto-removed). */
 .cal-day:not(.empty):not(.disabled) { position: relative; }
 .cal-day:not(.empty):not(.disabled)::after {
-  content: 'See real slots ↓';
+  content: 'Book below ↓';
   position: absolute;
   bottom: calc(100% + 6px);
   left: 50%;
@@ -2670,8 +2666,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .modulable-meta-line { grid-template-columns: 1fr; gap: 4px; }
   .booking-grid { grid-template-columns: 1fr; gap: 2rem; }
   .cal-body { grid-template-columns: 1fr; }
-  .cal-foot { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-  .cal-confirm-btn { align-self: stretch; text-align: center; }
   .footer { padding: 5% 7% 4% 7%; }
   .footer-top { flex-direction: column; align-items: center; gap: 1.5rem; }
   .footer-feather { height: 80px; }
@@ -3786,7 +3780,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         </div>
       </div>
       <div class="cal-foot">
-        <span class="cal-foot-info">Preview — real availability on click</span>
         <button class="cal-confirm-btn">See available slots →</button>
       </div>
     </div>
@@ -4037,15 +4030,22 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     });
   });
 
-  // ─── Mock calendar : interactions removed, pedagogical tooltip added ───
-  // The mock is read-only. Clicking a day or slot shows a "See real slots ↓"
-  // tooltip for 1.8s — useful on mobile where :hover doesn't work. On
-  // desktop, :hover handles it via CSS.
+  // ─── Mock calendar : interactions removed, pedagogical redirect ───
+  // Mock is read-only. Click behavior on a day:
+  // - Mobile (<900px): smooth scroll to .cal-confirm-btn — more useful than
+  //   a tooltip that would scroll out of view
+  // - Desktop: "Book below ↓" tooltip shown for 1.8s (in addition to the
+  //   CSS :hover tooltip)
   document.querySelectorAll('.cal-day:not(.empty):not(.disabled)')
     .forEach(el => {
       el.addEventListener('click', () => {
-        el.classList.add('is-hint');
-        setTimeout(() => el.classList.remove('is-hint'), 1800);
+        if (window.matchMedia('(max-width: 900px)').matches) {
+          document.querySelector('.cal-confirm-btn')
+            ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          el.classList.add('is-hint');
+          setTimeout(() => el.classList.remove('is-hint'), 1800);
+        }
       });
     });
 

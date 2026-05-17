@@ -1889,7 +1889,7 @@ body {
 
 .booking-grid {
   display: grid;
-  grid-template-columns: 1fr minmax(0, 360px);
+  grid-template-columns: 1fr minmax(0, 460px);
   gap: 3rem;
   align-items: start;
 }
@@ -2085,12 +2085,6 @@ body {
 .cal-foot {
   padding: 1rem 1.6rem;
   border-top: 1px solid rgba(20, 16, 42, 0.08);
-  display: flex; justify-content: space-between; align-items: center;
-}
-.cal-foot-info {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--ink-mute);
 }
 .cal-confirm-btn {
   font-family: var(--font-mono);
@@ -2100,8 +2094,10 @@ body {
   color: var(--paper);
   background: var(--ink);
   border: 1px solid var(--ink);
-  padding: 8px 14px;
+  padding: 10px 14px;
   cursor: pointer;
+  width: 100%;
+  text-align: center;
 }
 
 /* ============================================================
@@ -2406,7 +2402,7 @@ body {
    .is-hint ajoutée par JS pendant 1.8s, auto-removed). */
 .cal-day:not(.empty):not(.disabled) { position: relative; }
 .cal-day:not(.empty):not(.disabled)::after {
-  content: 'Voir les vrais créneaux ↓';
+  content: 'Réservez ci-dessous ↓';
   position: absolute;
   bottom: calc(100% + 6px);
   left: 50%;
@@ -2669,8 +2665,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
   .modulable-meta-line { grid-template-columns: 1fr; gap: 4px; }
   .booking-grid { grid-template-columns: 1fr; gap: 2rem; }
   .cal-body { grid-template-columns: 1fr; }
-  .cal-foot { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-  .cal-confirm-btn { align-self: stretch; text-align: center; }
   .footer { padding: 5% 7% 4% 7%; }
   .footer-top { flex-direction: column; align-items: center; gap: 1.5rem; }
   .footer-feather { height: 80px; }
@@ -3785,7 +3779,6 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
         </div>
       </div>
       <div class="cal-foot">
-        <span class="cal-foot-info">Aperçu — disponibilités réelles au clic</span>
         <button class="cal-confirm-btn">Voir les créneaux disponibles →</button>
       </div>
     </div>
@@ -4037,15 +4030,22 @@ body[data-livrable="mixte"] .fiche-doc-frame::after {
     });
   });
 
-  // ─── Mock calendar : interactions retirées, tooltip pédagogique ajouté ───
-  // Le mock est en lecture seule. Le clic sur un jour ou slot affiche un
-  // tooltip "Voir les vrais créneaux ↓" pendant 1.8s — utile sur mobile
-  // où :hover ne fonctionne pas. Sur desktop, :hover prend le relais via CSS.
+  // ─── Mock calendar : interactions retirées, redirection pédagogique ───
+  // Mock en lecture seule. Comportement au clic sur un jour :
+  // - Mobile (<900px) : scroll smooth vers le bouton .cal-confirm-btn,
+  //   plus efficace que tooltip qui sortirait du viewport
+  // - Desktop : tooltip "Réservez ci-dessous ↓" affiché 1.8s (en plus
+  //   du :hover géré par CSS)
   document.querySelectorAll('.cal-day:not(.empty):not(.disabled)')
     .forEach(el => {
       el.addEventListener('click', () => {
-        el.classList.add('is-hint');
-        setTimeout(() => el.classList.remove('is-hint'), 1800);
+        if (window.matchMedia('(max-width: 900px)').matches) {
+          document.querySelector('.cal-confirm-btn')
+            ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          el.classList.add('is-hint');
+          setTimeout(() => el.classList.remove('is-hint'), 1800);
+        }
       });
     });
 
