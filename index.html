@@ -11,7 +11,14 @@
 <link rel="apple-touch-icon" href="favicon.svg">
 <link rel="preconnect" href="https://calendly.com">
 <link rel="preconnect" href="https://assets.calendly.com">
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<!-- Calendly widget.css en non-bloquant (même pattern que les fonts).
+     Le CSS n'est nécessaire qu'au moment où le popup s'ouvre, pas pour le
+     rendu initial. Évite ~267ms de render-blocking au LCP. -->
+<link rel="preload" as="style" href="https://assets.calendly.com/assets/external/widget.css">
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+</noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Chargement non-bloquant des polices via le pattern media=print → onload swap.
@@ -3777,9 +3784,12 @@ body {
   // ─── A2 IntersectionObserver fade-up sur sections .reveal ───
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const PAGE_LOAD_TIME = performance.now();
-  // Cascade hero : 4 éléments avec delays max 1100ms + duration 600ms ≈ 1700ms.
-  // On marge à 1800ms pour un léger souffle entre fin du hero et démarrage synth.
-  const HERO_ANIM_END = 1800;
+  // Cascade hero : 4 éléments, hero h1 visible vers ~750ms (le LCP probable).
+  // 1000ms permet à la synth de commencer après que le h1 et le lead soient
+  // apparus, avec léger chevauchement assumé sur le CTA hero. Compromis entre
+  // narrative cascade et LCP — diminué de 1800→1000ms suite à insight PSI
+  // (Délai d'affichage de l'élément 3080ms sur synth-desc).
+  const HERO_ANIM_END = 1000;
 
   // Anime un nombre 0 → target avec ease-out cubic. Cale le démarrage sur le
   // delay du fade-in CSS des stats (150ms) pour synchroniser l'effet.
@@ -4131,8 +4141,10 @@ body {
       if (sessionStorage.getItem('fiche-swiped') && swipeHint) swipeHint.classList.add('is-faded');
     } catch (_) {}
     // Wobble pédagogique au 1er montage mobile pour suggérer le swipe (1 fois par session)
+    // Note : matchMedia plutôt que innerWidth pour éviter le forced reflow (innerWidth force
+    // un layout si des changements DOM sont pending — détecté par PSI à 65ms).
     try {
-      if (window.innerWidth <= 900 && !sessionStorage.getItem('fiche-wobbled')) {
+      if (window.matchMedia('(max-width: 900px)').matches && !sessionStorage.getItem('fiche-wobbled')) {
         setTimeout(() => {
           ficheFrame.classList.add('is-wobbling');
           try { sessionStorage.setItem('fiche-wobbled', '1'); } catch (_) {}

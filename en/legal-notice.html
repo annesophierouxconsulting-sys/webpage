@@ -12,7 +12,13 @@
 <link rel="apple-touch-icon" href="/favicon.svg">
 <link rel="preconnect" href="https://calendly.com">
 <link rel="preconnect" href="https://assets.calendly.com">
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<!-- Calendly widget.css non-blocking (same pattern as fonts).
+     CSS is only needed when the popup opens. -->
+<link rel="preload" as="style" href="https://assets.calendly.com/assets/external/widget.css">
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+</noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
