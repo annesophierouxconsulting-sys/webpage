@@ -4269,9 +4269,9 @@ body {
     drawer.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', () => setDrawer(false));
     });
-    // Fermer si on repasse en desktop
+    // Fermer si on repasse en desktop (matchMedia plutôt qu'innerWidth — cohérence + zéro reflow)
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 900 && drawer.classList.contains('is-open')) {
+      if (!window.matchMedia('(max-width: 900px)').matches && drawer.classList.contains('is-open')) {
         setDrawer(false);
       }
     });
