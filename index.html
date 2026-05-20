@@ -1950,6 +1950,17 @@ body {
   width: 12px; height: 1px;
   background: var(--champagne-fonce);
 }
+.book-left .overline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.book-left .overline::before {
+  content: '';
+  display: inline-block;
+  width: 12px; height: 1px;
+  background: var(--champagne-fonce);
+}
 
 .cal-card {
   background: var(--paper);
@@ -3651,13 +3662,14 @@ body {
   </div>
   <div class="booking-grid" id="booking">
     <div class="book-left intro-rule">
-      <div class="overline">— Call de découverte · 30 min</div>
+      <div class="overline">Call de découverte · 30 min</div>
       <h3>Voyons si nous pouvons <em>vous aider.</em></h3>
       <p class="lead">Un premier échange pour comprendre votre situation et voir si notre approche correspond à vos enjeux.</p>
       <ul class="book-points">
         <li>Compréhension de votre business et de vos enjeux</li>
         <li>Clarification de vos objectifs</li>
-        <li>Présentation de notre méthode</li>
+        <li>Premières pistes adaptées à votre situation</li>
+        <li>Aucun discours commercial, juste un échange utile</li>
       </ul>
     </div>
     <div class="cal-card">
