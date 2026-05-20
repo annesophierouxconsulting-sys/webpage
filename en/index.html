@@ -500,19 +500,8 @@ body {
   border-left: 1px solid rgba(140, 106, 44, 0.45);
   border-right: none;
 }
-/* Filets aubergine en gradient sous chaque outcome */
-.outcome-item { border-bottom: none; position: relative; padding: 16px 0; }
-.outcome-item::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  height: 1px;
-  background: linear-gradient(to right,
-    rgba(20, 16, 42, 0.55) 0%,
-    rgba(20, 16, 42, 0.18) 60%,
-    rgba(20, 16, 42, 0) 100%);
-}
-.outcome-item:last-child::after { display: none; }
+/* Réinitialisation de la règle outcome-item — la définition complète est plus bas */
+.outcome-item { border-bottom: none; }
 
 .split-block-title {
   font-family: var(--font-display);
@@ -558,17 +547,22 @@ body {
   font-variation-settings: "opsz" 14;
 }
 
-/* Liste outcome — numérotée */
+/* Liste outcome — numérotée + filet gradient via border-image (rendu pixel-perfect) */
 .outcome-list { display: flex; flex-direction: column; }
 .outcome-item {
-  padding: 14px 0;
+  padding: 16px 0;
   display: grid;
   grid-template-columns: 28px 1fr;
   gap: 12px;
   align-items: baseline;
-  border-bottom: 1px solid rgba(20, 16, 42, 0.08);
+  position: relative;
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(to right,
+    rgba(20, 16, 42, 0.55) 0%,
+    rgba(20, 16, 42, 0.18) 60%,
+    rgba(20, 16, 42, 0) 100%) 1;
 }
-.outcome-item:last-child { border-bottom: none; }
+.outcome-item:last-child { border-bottom: none; border-image: none; }
 .outcome-item:first-child { padding-top: 0; }
 .outcome-num {
   font-family: var(--font-mono);
@@ -590,7 +584,7 @@ body {
   font-family: var(--font-body);
   font-size: 13px;
   color: var(--ink-mute);
-  line-height: 1.5;
+  line-height: 20px;
   font-variation-settings: "opsz" 14;
 }
 
