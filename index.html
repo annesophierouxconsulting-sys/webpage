@@ -496,20 +496,17 @@ body {
   background: none;
 }
 .split-grid > .split-block.editorial-block {
-  border-left: 1px solid rgba(140, 106, 44, 0.32);
+  border-left: 1px solid rgba(140, 106, 44, 0.45);
   border-right: none;
 }
-/* Filets aubergine en gradient sous chaque outcome */
+/* Filets uniformes sous chaque outcome */
 .outcome-item { border-bottom: none; position: relative; padding: 16px 0; }
 .outcome-item::after {
   content: '';
   position: absolute;
   left: 0; right: 0; bottom: 0;
   height: 1px;
-  background: linear-gradient(to right,
-    rgba(20, 16, 42, 0.55) 0%,
-    rgba(20, 16, 42, 0.18) 60%,
-    rgba(20, 16, 42, 0) 100%);
+  background: rgba(20, 16, 42, 0.18);
 }
 .outcome-item:last-child::after { display: none; }
 
@@ -534,16 +531,26 @@ body {
   margin: 0; padding: 0; list-style: none;
 }
 .pain-item {
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(20, 16, 42, 0.08);
+  padding: 10px 0;
+  display: flex; flex-direction: column;
+  gap: 2px;
+}
+.pain-item:first-child { padding-top: 0; }
+.pain-item:last-child { padding-bottom: 0; }
+.pain-title {
   font-family: var(--font-body);
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.4;
   color: var(--ink-soft);
   font-variation-settings: "opsz" 14;
 }
-.pain-item:last-child { border-bottom: none; }
-.pain-item:first-child { padding-top: 0; }
+.pain-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-mute);
+  font-variation-settings: "opsz" 14;
+}
 
 /* Liste outcome — numérotée */
 .outcome-list { display: flex; flex-direction: column; }
@@ -569,7 +576,7 @@ body {
   font-style: italic;
   font-size: 16px;
   line-height: 1.25;
-  color: var(--ink);
+  color: var(--champagne-fonce);
   font-weight: 400;
   font-variation-settings: "opsz" 32;
 }
@@ -3207,11 +3214,26 @@ body {
     <div class="split-block editorial-block">
       <h2 class="split-block-title">Ce que vous vivez<em>.</em></h2>
       <ul class="pain-list">
-        <li class="pain-item">Vous venez de lancer votre site et souhaitez vous assurer qu'il convertit efficacement — avant d'investir dans l'acquisition.</li>
-        <li class="pain-item">Votre site tourne, vous investissez en acquisition — mais les ventes ou leads ne suivent pas votre trafic.</li>
-        <li class="pain-item">Vous avez des données mais ne savez pas quoi en faire ni par où commencer.</li>
-        <li class="pain-item">Vous avez essayé des choses : A/B tests, redesigns — sans savoir ce qui a marché.</li>
-        <li class="pain-item">Quelque chose bloque dans votre parcours mais vous ne savez pas quoi exactement.</li>
+        <li class="pain-item">
+          <div class="pain-title">Vous venez de lancer votre site et souhaitez vous assurer qu'il convertit</div>
+          <div class="pain-desc">avant d'investir dans l'acquisition</div>
+        </li>
+        <li class="pain-item">
+          <div class="pain-title">Votre site tourne, vous investissez en acquisition</div>
+          <div class="pain-desc">mais les ventes ou leads ne suivent pas votre trafic</div>
+        </li>
+        <li class="pain-item">
+          <div class="pain-title">Vous avez des données mais ne savez pas quoi en faire</div>
+          <div class="pain-desc">ni par où commencer</div>
+        </li>
+        <li class="pain-item">
+          <div class="pain-title">Vous avez essayé des choses : A/B tests, redesigns</div>
+          <div class="pain-desc">sans savoir ce qui a marché</div>
+        </li>
+        <li class="pain-item">
+          <div class="pain-title">Quelque chose bloque dans votre parcours</div>
+          <div class="pain-desc">mais vous ne savez pas quoi exactement</div>
+        </li>
       </ul>
     </div>
     <div class="split-block editorial-block">

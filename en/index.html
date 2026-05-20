@@ -497,20 +497,17 @@ body {
   background: none;
 }
 .split-grid > .split-block.editorial-block {
-  border-left: 1px solid rgba(140, 106, 44, 0.32);
+  border-left: 1px solid rgba(140, 106, 44, 0.45);
   border-right: none;
 }
-/* Filets aubergine en gradient sous chaque outcome */
+/* Filets uniformes sous chaque outcome */
 .outcome-item { border-bottom: none; position: relative; padding: 16px 0; }
 .outcome-item::after {
   content: '';
   position: absolute;
   left: 0; right: 0; bottom: 0;
   height: 1px;
-  background: linear-gradient(to right,
-    rgba(20, 16, 42, 0.55) 0%,
-    rgba(20, 16, 42, 0.18) 60%,
-    rgba(20, 16, 42, 0) 100%);
+  background: rgba(20, 16, 42, 0.18);
 }
 .outcome-item:last-child::after { display: none; }
 
@@ -535,16 +532,26 @@ body {
   margin: 0; padding: 0; list-style: none;
 }
 .pain-item {
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(20, 16, 42, 0.08);
+  padding: 10px 0;
+  display: flex; flex-direction: column;
+  gap: 2px;
+}
+.pain-item:first-child { padding-top: 0; }
+.pain-item:last-child { padding-bottom: 0; }
+.pain-title {
   font-family: var(--font-body);
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.4;
   color: var(--ink-soft);
   font-variation-settings: "opsz" 14;
 }
-.pain-item:last-child { border-bottom: none; }
-.pain-item:first-child { padding-top: 0; }
+.pain-desc {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-mute);
+  font-variation-settings: "opsz" 14;
+}
 
 /* Liste outcome — numérotée */
 .outcome-list { display: flex; flex-direction: column; }
@@ -570,7 +577,7 @@ body {
   font-style: italic;
   font-size: 16px;
   line-height: 1.25;
-  color: var(--ink);
+  color: var(--champagne-fonce);
   font-weight: 400;
   font-variation-settings: "opsz" 32;
 }
@@ -3208,11 +3215,26 @@ body {
     <div class="split-block editorial-block">
       <h2 class="split-block-title">What you're facing<em>.</em></h2>
       <ul class="pain-list">
-        <li class="pain-item">You just launched your site and want to make sure it converts effectively — before investing in acquisition.</li>
-        <li class="pain-item">Your site is live and you're investing in acquisition — but sales or leads aren't keeping up with your traffic.</li>
-        <li class="pain-item">You have data but don't know what to do with it or where to start.</li>
-        <li class="pain-item">You've tried things: A/B tests, redesigns — without knowing what actually worked.</li>
-        <li class="pain-item">Something in your funnel is blocking growth — but you don't know exactly what.</li>
+        <li class="pain-item">
+          <div class="pain-title">You just launched your site and want to make sure it converts</div>
+          <div class="pain-desc">before investing in acquisition</div>
+        </li>
+        <li class="pain-item">
+          <div class="pain-title">Your site is live and you're investing in acquisition</div>
+          <div class="pain-desc">but sales or leads aren't keeping up with your traffic</div>
+        </li>
+        <li class="pain-item">
+          <div class="pain-title">You have data but don't know what to do with it</div>
+          <div class="pain-desc">or where to start</div>
+        </li>
+        <li class="pain-item">
+          <div class="pain-title">You've tried things: A/B tests, redesigns</div>
+          <div class="pain-desc">without knowing what actually worked</div>
+        </li>
+        <li class="pain-item">
+          <div class="pain-title">Something in your funnel is blocking growth</div>
+          <div class="pain-desc">but you don't know exactly what</div>
+        </li>
       </ul>
     </div>
     <div class="split-block editorial-block">
