@@ -500,14 +500,17 @@ body {
   border-left: 1px solid rgba(140, 106, 44, 0.45);
   border-right: none;
 }
-/* Filets uniformes sous chaque outcome */
+/* Filets aubergine en gradient sous chaque outcome */
 .outcome-item { border-bottom: none; position: relative; padding: 16px 0; }
 .outcome-item::after {
   content: '';
   position: absolute;
   left: 0; right: 0; bottom: 0;
   height: 1px;
-  background: rgba(20, 16, 42, 0.18);
+  background: linear-gradient(to right,
+    rgba(20, 16, 42, 0.55) 0%,
+    rgba(20, 16, 42, 0.18) 60%,
+    rgba(20, 16, 42, 0) 100%);
 }
 .outcome-item:last-child::after { display: none; }
 
