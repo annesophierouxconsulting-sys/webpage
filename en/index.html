@@ -1951,6 +1951,17 @@ body {
   width: 12px; height: 1px;
   background: var(--champagne-fonce);
 }
+.book-left .overline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.book-left .overline::before {
+  content: '';
+  display: inline-block;
+  width: 12px; height: 1px;
+  background: var(--champagne-fonce);
+}
 
 .cal-card {
   background: var(--paper);
@@ -3652,13 +3663,14 @@ body {
   </div>
   <div class="booking-grid" id="booking">
     <div class="book-left intro-rule">
-      <div class="overline">— Discovery call · 30 min</div>
+      <div class="overline">Discovery call · 30 min</div>
       <h3>Let’s explore how we can <em>help.</em></h3>
       <p class="lead">A first conversation to understand your situation and see whether our approach aligns with your needs.</p>
       <ul class="book-points">
         <li>Understanding your business and challenges</li>
         <li>Clarifying your goals</li>
-        <li>Presenting our approach</li>
+        <li>Initial ideas tailored to your situation</li>
+        <li>No sales pitch, just a useful conversation</li>
       </ul>
     </div>
     <div class="cal-card">
