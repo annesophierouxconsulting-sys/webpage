@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maat — Conversion Focus, Audit CRO & Copywriting</title>
+<meta name="description" content="Découvrez ce qui vous coûte des conversions — et comment y remédier. Audit CRO & copywriting pour coachs, formateurs, consultants, thérapeutes et infopreneurs. Diagnostic, tests utilisateurs, priorisation. 650 €.">
+<link rel="canonical" href="https://maat.so/conversion-focus/">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../favicon.svg">
+<link rel="preconnect" href="https://calendly.com">
+<link rel="preconnect" href="https://assets.calendly.com">
+<!-- Précharge widget.js en parallèle du reste (script chargé async plus bas,
+     donc sans ce preload le fetch ne démarre qu'à l'exécution du <script> en
+     fin de body). Sans widget.js prêt au clic, openCalendly() retombe sur
+     window.open() — un nouvel onglet qui recharge toute la page Calendly,
+     bien plus lent que le popup in-page. Le preload garantit que le script
+     est déjà chargé quand l'utilisateur clique. -->
+<link rel="preload" as="script" href="https://assets.calendly.com/assets/external/widget.js" fetchpriority="high">
+<!-- Calendly widget.css en non-bloquant (même pattern que les fonts).
+     Le CSS n'est nécessaire qu'au moment où le popup s'ouvre, pas pour le
+     rendu initial. Évite le render-blocking au LCP. -->
+<link rel="preload" as="style" href="https://assets.calendly.com/assets/external/widget.css">
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+</noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Chargement non-bloquant des polices via le pattern media=print → onload swap. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Mono:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Mono:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Mono:wght@300;400;500&display=swap">
+</noscript>
+<!-- Privacy-friendly analytics by Plausible (sans cookies, RGPD-compliant) -->
+<script async src="https://plausible.io/js/pa-IQIBlETfvM5eOFGPGg27a.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+<style>
+/* ============================================================
+   TOKENS — Palette aubergine + champagne, magazine sombre
+   (identiques à / — cohérence de marque)
+   ============================================================ */
+:root {
+  --hero-bg: #08041A;
+  --band-bg: #16102E;
+  --paper: #FBF4E0;
+  --champagne: #D4B275;
+  --champagne-fonce: #8C6A2C;
+  --ink: #14102A;
+  --ink-soft: #3A3658;
+  --ink-mute: #6E6890;
+  --ivory: #F4ECD3;
+
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Newsreader', Georgia, serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  --header-height: 100px;
+  --header-height-mobile: 70px;
+}
+
+* { box-sizing: border-box; }
+
+@view-transition { navigation: auto; }
+
+html { scroll-padding-top: var(--header-height); }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+}
+
+.lead { text-wrap: balance; }
+
+/* ============================================================
+   ATOMES
+   ============================================================ */
+.feather-bauhaus { color: var(--champagne); }
+
+.editorial-block {
+  border: 1px solid rgba(140, 106, 44, 0.35);
+  position: relative;
+}
+.editorial-block::before, .editorial-block::after {
+  content: '';
+  position: absolute;
+  width: 22px; height: 22px;
+  border-color: #8C6A2C;
+  border-style: solid;
+  border-width: 0;
+}
+.editorial-block::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+.editorial-block::after { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
+
+.chapter-mark {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin: 0 0 20px;
+}
+.cta-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.45);
+  padding-bottom: 6px;
+  display: inline-block;
+  position: relative;
+  transition: border-color 0.2s ease-out;
+}
+@media (hover: hover) {
+  .cta-mono:hover { border-bottom-color: rgba(212, 178, 117, 1) !important; }
+}
+.cta-mono:active { transform: translateY(1px); }
+
+/* ============================================================
+   REVEAL — fade-up générique piloté par IntersectionObserver
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* Tactile press feedback */
+.mh-cta:active, .mh-mobile-toggle:active, .mh-drawer-cta:active,
+.cta-mono:active, .offre-dark-cta:active, .booking-final-cta:active {
+  transform: scale(0.97);
+  opacity: 0.85;
+  transition: transform 80ms ease, opacity 80ms ease;
+}
+.mobile-cta-floating.is-visible:active {
+  transform: translateX(-50%) scale(0.97);
+  opacity: 0.85;
+  transition: transform 80ms ease, opacity 80ms ease;
+}
+
+/* ============================================================
+   HERO — texte seul, badges d'audience, pas de visuel diagnostic
+   ============================================================ */
+.hero {
+  background: var(--hero-bg);
+  color: var(--ivory);
+  padding: calc(var(--header-height) + 4%) 6% 6%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.hero-inner {
+  position: relative;
+  padding-left: 1.75rem;
+  max-width: 680px;
+}
+.hero-inner::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 4px; bottom: 4px;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    rgba(212, 178, 117, 0.4), rgba(212, 178, 117, 0.75), rgba(212, 178, 117, 0.4));
+}
+/* Groupe 1 — Promesse (H1 + sous-titre) */
+.hero h1 {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 60;
+  font-weight: 400;
+  font-size: clamp(44px, calc(16px + 7vw), 56px);
+  line-height: 1.03;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--ivory);
+}
+.hero-lead {
+  margin-top: 30px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(17px, calc(14px + 0.9vw), 19.5px);
+  line-height: 1.55;
+  color: rgba(244, 236, 211, 0.8);
+  max-width: 540px;
+  font-variation-settings: "opsz" 14;
+}
+
+/* Groupe 2 — Offre + action (nom, descriptor, tags, CTA, microcopy) */
+.hero-offer { margin-top: 44px; }
+.hero-offer-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(19px, calc(16px + 1vw), 23px);
+  line-height: 1.2;
+  color: var(--champagne);
+  margin: 0 0 9px;
+  font-variation-settings: "opsz" 32;
+}
+.hero-offer-descriptor {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.55);
+  margin: 0 0 15px;
+}
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; }
+.hero-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  border: 1px solid rgba(212, 178, 117, 0.45);
+  padding: 5px 12px;
+}
+.hero-cta-row {
+  display: flex; align-items: center; gap: 1.4rem;
+  flex-wrap: wrap;
+}
+.hero-cta-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.5);
+}
+.hero-inner > * {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: heroFadeUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+.hero-inner > .hero-promise { animation-delay: 0ms; }
+.hero-inner > .hero-offer { animation-delay: 500ms; }
+@keyframes heroFadeUp { to { opacity: 1; transform: none; } }
+
+/* ============================================================
+   ch.01 — ENJEU — grille 3 bénéfices numérotés
+   ============================================================ */
+.enjeu-section {
+  background: var(--paper);
+  padding: clamp(40px, 5vw, 60px) 6%;
+  border-top: 1px solid rgba(20, 16, 42, 0.08);
+  position: relative;
+}
+.enjeu-wrap { max-width: 1100px; margin: 0 auto; }
+.enjeu-wrap h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(26px, 3.4vw, 38px);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  max-width: 620px;
+  color: var(--ink);
+  font-variation-settings: "opsz" 60;
+}
+.enjeu-wrap h2 em { font-style: italic; color: var(--champagne-fonce); }
+.enjeu-intro {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 520px;
+  margin: 0;
+  font-variation-settings: "opsz" 14;
+}
+.enjeu-columns {
+  display: flex;
+  gap: clamp(40px, 6vw, 90px);
+  align-items: center;
+  flex-wrap: wrap;
+}
+.enjeu-main { flex: 1.25 1 340px; min-width: 280px; }
+.enjeu-validations {
+  flex: 1 1 300px;
+  min-width: 260px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.enjeu-validation {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  line-height: 1.4;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateX(14px);
+  transition: opacity 0.55s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.enjeu-validation-mark {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: var(--champagne-fonce);
+  color: var(--ivory);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+}
+.enjeu-section.is-visible .enjeu-validation { opacity: 1; transform: none; }
+.enjeu-section.is-visible .enjeu-validation:nth-child(1) { transition-delay: 150ms; }
+.enjeu-section.is-visible .enjeu-validation:nth-child(2) { transition-delay: 280ms; }
+.enjeu-section.is-visible .enjeu-validation:nth-child(3) { transition-delay: 410ms; }
+
+/* ============================================================
+   ch.02 — ANALYSE — 4 dimensions (regard-*, réutilisé tel quel)
+   ============================================================ */
+.regard-section { background: var(--paper); padding: clamp(56px, 7vw, 88px) 6% 0; border-top: 1px solid rgba(20, 16, 42, 0.08); position: relative; }
+.regard-head { text-align: center; max-width: 700px; margin: 0 auto 3rem; }
+.regard-head h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  color: var(--ink);
+  font-variation-settings: "opsz" 60;
+}
+.regard-head .lead {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.62;
+  color: var(--ink-soft);
+  margin: 0 auto;
+  max-width: 600px;
+  font-variation-settings: "opsz" 14;
+}
+.regard-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 900px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(20, 16, 42, 0.15);
+}
+.regard-dim {
+  padding: 22px 32px 22px 0;
+  border-bottom: 1px solid rgba(20, 16, 42, 0.12);
+}
+.regard-dim:nth-child(odd) { border-right: 1px solid rgba(20, 16, 42, 0.1); }
+.regard-dim:nth-child(even) { padding-right: 0; padding-left: 32px; }
+.regard-dim:nth-child(n+3) { padding-bottom: 0; border-bottom: none; }
+.regard-dim-n {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--champagne-fonce);
+  margin-bottom: 0.5rem;
+}
+.regard-dim h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 0 0.4rem;
+  font-variation-settings: "opsz" 32;
+}
+.regard-dim p {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+  font-variation-settings: "opsz" 14;
+}
+
+/* Supports pouvant être audités — grille d'icônes */
+.supports-wrap { max-width: 900px; margin: clamp(40px, 5vw, 60px) auto 0; padding-bottom: clamp(56px, 7vw, 88px); }
+.supports-wrap h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(19px, 2.2vw, 22px);
+  margin: 0 0 1.5rem;
+  color: var(--ink);
+}
+.supports-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.supports-card { border: 1px solid rgba(20, 16, 42, 0.1); padding: 12px 14px; }
+.supports-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.supports-icon {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--champagne-fonce);
+  display: flex; align-items: center; justify-content: center;
+  flex: 0 0 auto;
+  color: var(--champagne-fonce);
+}
+.supports-card h5 {
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-weight: 500;
+  margin: 0;
+  color: var(--ink);
+}
+.supports-card p { font-size: 11.5px; line-height: 1.4; color: var(--ink-mute); margin: 0; }
+.supports-card .supports-example {
+  display: block;
+  margin-top: 3px;
+  font-style: italic;
+  color: var(--champagne-fonce);
+  font-size: 10.5px;
+}
+.supports-note {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink-mute);
+  font-style: italic;
+  margin: 0;
+}
+
+/* ============================================================
+   ch.03 — LIVRABLE — encart en équerre, chaîne + exemple
+   ============================================================ */
+.livrable-section { background: var(--paper); padding: clamp(56px, 7vw, 88px) 6%; border-top: 1px solid rgba(20, 16, 42, 0.08); position: relative; }
+.livrable-box {
+  max-width: 1140px;
+  margin: clamp(48px, 6vw, 72px) auto 0;
+  padding: clamp(32px, 4.5vw, 56px);
+}
+.livrable-grid { display: flex; gap: clamp(36px, 5vw, 64px); flex-wrap: wrap; }
+.livrable-main { flex: 1.22 1 340px; min-width: 280px; display: flex; flex-direction: column; justify-content: center; }
+.livrable-main h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.4vw, 38px);
+  line-height: 1.12;
+  margin: 0 0 0.9rem;
+  color: var(--ink);
+  font-variation-settings: "opsz" 60;
+}
+.livrable-main h2 em { font-style: italic; color: var(--champagne-fonce); }
+.livrable-main > p {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0 0 2rem;
+  font-variation-settings: "opsz" 14;
+}
+.livrable-journey { display: flex; flex-direction: column; }
+.livrable-step { display: flex; gap: 18px; padding-bottom: 28px; }
+.livrable-step:last-child { padding-bottom: 0; }
+.livrable-step-markers {
+  position: relative;
+  flex: none;
+  width: 10px;
+  display: flex;
+  justify-content: center;
+}
+.livrable-step-marker {
+  position: relative;
+  z-index: 1;
+  width: 8px;
+  height: 8px;
+  margin-top: 5px;
+  border-radius: 50%;
+  border: 1px solid var(--champagne-fonce);
+  background: var(--paper);
+}
+.livrable-step.is-emphasis .livrable-step-marker {
+  width: 10px;
+  height: 10px;
+  margin-top: 4px;
+  background: var(--champagne-fonce);
+  box-shadow: 0 0 0 3px rgba(140, 106, 44, 0.14);
+}
+.livrable-step:not(:last-child) .livrable-step-markers::after {
+  content: '';
+  position: absolute;
+  top: 13px;
+  bottom: -37px;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: rgba(140, 106, 44, 0.3);
+}
+.livrable-step-content { flex: 1; min-width: 0; }
+.livrable-step-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin-bottom: 8px;
+}
+.livrable-step-content p {
+  font-family: var(--font-display);
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin: 0;
+}
+.priority-chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.priority-chip.is-solid { color: var(--paper); background: var(--champagne-fonce); padding: 7px 14px; }
+
+.livrable-example {
+  flex: 1 1 300px;
+  min-width: 280px;
+  max-width: 440px;
+  border: 1px solid rgba(140, 106, 44, 0.25);
+  padding: clamp(22px, 2.8vw, 28px);
+  align-self: flex-start;
+}
+.livrable-example-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin: 0 0 1rem;
+}
+.livrable-example-dim {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin: 0 0 6px;
+}
+.livrable-example-constat { font-size: 13px; line-height: 1.5; color: var(--ink-soft); margin: 0 0 12px; }
+.livrable-example-testlabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin: 0 0 10px;
+}
+.livrable-example-stats { display: flex; gap: clamp(18px, 3vw, 30px); flex-wrap: wrap; }
+.livrable-example-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(140, 106, 44, 0.3), transparent);
+  margin: 18px 0;
+}
+.livrable-example-reco {
+  font-family: var(--font-display);
+  font-size: 15.5px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 10px 0 14px;
+}
+.livrable-example-bars { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
+.livrable-bar { flex: 1; min-width: 0; height: 22px; border: 1px solid rgba(20, 16, 42, 0.15); }
+.livrable-bar.is-after { border-color: var(--champagne-fonce); background: rgba(140, 106, 44, 0.06); }
+.livrable-example-arrow { font-size: 10px; color: var(--champagne-fonce); flex: none; }
+.livrable-example-tags {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin: 0;
+}
+
+/* ============================================================
+   POUR QUI — filets latéraux + listes ✓ / ✕ (split-*, fit-*)
+   ============================================================ */
+.split-section { padding: clamp(64px, 8vw, 120px) 6%; background: var(--paper); border-top: 1px solid rgba(20, 16, 42, 0.08); }
+.split-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: clamp(40px, 6vw, 100px);
+  flex-wrap: wrap;
+}
+.split-block { flex: 1 1 340px; min-width: 260px; padding-left: 24px; }
+.split-block.is-yes { border-left: 1px solid rgba(140, 106, 44, 0.35); }
+.split-block.is-no { border-left: 1px solid rgba(20, 16, 42, 0.12); }
+.split-block-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 24px;
+  margin: 0 0 22px;
+  color: var(--ink);
+}
+.split-block-title.is-muted { color: var(--ink-mute); }
+.fit-list { list-style: none; margin: 0; padding: 0; }
+.fit-item {
+  display: flex;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.fit-item .fit-mark { flex: none; color: var(--champagne-fonce); }
+.fit-item.is-no { color: var(--ink-mute); }
+.fit-item.is-no .fit-mark { color: inherit; }
+
+/* ============================================================
+   EXPERTISE — portrait + bio, fond clair (expertise-*)
+   ============================================================ */
+.expertise-section { background: var(--paper); padding: clamp(64px, 8vw, 120px) 6%; border-top: 1px solid rgba(20, 16, 42, 0.08); }
+.expertise-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  gap: clamp(36px, 6vw, 90px);
+  flex-wrap: wrap;
+  align-items: center;
+}
+.expertise-portrait { flex: 1 1 260px; min-width: 220px; max-width: 320px; }
+.expertise-portrait-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 1px solid rgba(140, 106, 44, 0.25);
+  overflow: hidden;
+}
+.expertise-portrait-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.expertise-text { flex: 1.4 1 380px; min-width: 280px; }
+.expertise-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin: 0 0 18px;
+}
+.expertise-text h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.2;
+  margin: 0 0 22px;
+  color: var(--ink);
+  font-variation-settings: "opsz" 60;
+}
+.expertise-text p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0 0 16px;
+  max-width: 520px;
+  font-variation-settings: "opsz" 14;
+}
+.expertise-text p:last-child { margin-bottom: 0; font-style: italic; }
+
+/* ============================================================
+   TÉMOIGNAGES — emplacements réservés (testi-*)
+   ============================================================ */
+.testi-section { background: var(--band-bg); color: var(--ivory); padding: clamp(56px, 7vw, 96px) 6%; }
+.testi-wrap { max-width: 900px; margin: 0 auto; }
+.testi-wrap h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(26px, 3.2vw, 36px);
+  color: var(--ivory);
+  text-align: center;
+  margin: 0 0 3rem;
+  font-variation-settings: "opsz" 60;
+}
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(24px, 4vw, 48px);
+}
+.testi-item { border-left: 1px solid rgba(212, 178, 117, 0.3); padding-left: 22px; display: flex; flex-direction: column; }
+.testi-quote-mark {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 44px;
+  line-height: 1;
+  color: rgba(212, 178, 117, 0.4);
+  margin: 0 0 8px;
+}
+.testi-item p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.55;
+  color: rgba(244, 236, 211, 0.35);
+  margin: 0;
+  font-variation-settings: "opsz" 24;
+  flex: 1;
+}
+.testi-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(212, 178, 117, 0.15);
+}
+.testi-photo {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px dashed rgba(212, 178, 117, 0.4);
+  background: rgba(212, 178, 117, 0.06);
+  display: flex; align-items: center; justify-content: center;
+  flex: none;
+}
+.testi-photo-label {
+  font-family: var(--font-mono);
+  font-size: 6.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.55);
+  text-align: center;
+  line-height: 1.3;
+}
+.testi-person-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.testi-name {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  font-weight: 500;
+}
+.testi-role {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-style: italic;
+  color: rgba(244, 236, 211, 0.5);
+}
+
+/* ============================================================
+   OFFRE — fond aubergine sombre, prix affiché en grand
+   ============================================================ */
+.offre-dark-section { background: var(--hero-bg); color: var(--ivory); padding: clamp(72px, 9vw, 140px) 6%; }
+.offre-dark-wrap { max-width: 820px; margin: 0 auto; }
+.dark-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--champagne); margin: 0 0 24px; }
+.offre-dark-head {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.2);
+  padding-bottom: 32px;
+}
+.offre-dark-head h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 3.6vw, 38px); margin: 0 0 8px; }
+.offre-dark-head .offre-dark-sub {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  margin: 0;
+}
+.offre-dark-price { font-family: var(--font-display); font-size: clamp(44px, 6vw, 64px); color: var(--champagne); line-height: 1; }
+.offre-dark-list { list-style: none; padding: 0; margin: 0 0 44px; }
+.offre-dark-list li {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: rgba(244, 236, 211, 0.85);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.12);
+}
+.offre-dark-list li:last-child { border-bottom: none; }
+.offre-dark-footnote {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  color: rgba(244, 236, 211, 0.45);
+  font-style: italic;
+  margin: 0 0 32px;
+}
+.offre-dark-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hero-bg);
+  background: var(--champagne);
+  padding: 16px 32px;
+  text-decoration: none;
+  transition: background-color 200ms ease;
+}
+@media (hover: hover) { .offre-dark-cta:hover { background: var(--ivory); } }
+
+/* ============================================================
+   FAQ — accordéon natif <details>/<summary> (faq-*)
+   ============================================================ */
+.faq-section { background: var(--paper); padding: clamp(64px, 8vw, 120px) 6%; border-top: 1px solid rgba(20, 16, 42, 0.08); }
+.faq-wrap { max-width: 760px; margin: 0 auto; }
+.faq-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin: 0 0 32px;
+}
+.faq-item { border-bottom: 1px solid rgba(20, 16, 42, 0.1); padding: 20px 0; }
+.faq-item:last-child { border-bottom: none; }
+.faq-item summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--ink);
+  list-style: none;
+  cursor: pointer;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-icon { color: var(--champagne-fonce); flex: none; }
+.faq-item p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 14px 0 0;
+  max-width: 600px;
+}
+
+/* ============================================================
+   BOOKING — clôture éditoriale, fond crème, respiration avant le footer
+   ============================================================ */
+.booking-final-section {
+  background: var(--paper);
+  padding: clamp(72px, 9vw, 130px) 6%;
+  border-top: 1px solid rgba(20, 16, 42, 0.08);
+  display: flex;
+  justify-content: center;
+}
+.booking-final-wrap { max-width: 620px; width: 100%; }
+.booking-final-wrap h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.15;
+  margin: 0 0 20px;
+  color: var(--ink);
+  font-variation-settings: "opsz" 60;
+}
+.booking-final-lead {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 460px;
+  margin: 0 0 34px;
+  font-variation-settings: "opsz" 14;
+}
+.booking-final-cta-row {
+  display: flex; align-items: center; gap: 1.4rem;
+  flex-wrap: wrap;
+}
+.booking-final-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--hero-bg);
+  padding: 17px 36px;
+  text-decoration: none;
+  transition: background-color 200ms ease;
+}
+@media (hover: hover) { .booking-final-cta:hover { background: var(--champagne-fonce); } }
+.booking-final-note {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* ============================================================
+   FOOTER COLOPHON avec plume bauhaus
+   ============================================================ */
+.footer { background: var(--hero-bg); color: var(--ivory); padding: 5% 5% 3% 5%; }
+.footer-top { display: flex; align-items: flex-start; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(212, 178, 117, 0.2); margin-bottom: 2rem; }
+.footer-feather { width: 28px; height: 100px; color: var(--champagne); flex: 0 0 auto; margin-top: 4px; }
+.footer-signature { flex: 1; display: flex; flex-direction: column; gap: 1.5rem; max-width: 720px; }
+.footer-tagline { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(20px, 2.4vw, 26px); line-height: 1.2; color: var(--ivory); margin: 0; font-variation-settings: "opsz" 60; }
+.footer-tagline em { color: var(--champagne); }
+.footer-thesis {
+  font-family: var(--font-display); font-style: italic; font-size: 18px; line-height: 1.55;
+  color: rgba(244, 236, 211, 0.75); font-weight: 300; margin: 0;
+  padding-left: 1rem; border-left: 1px solid rgba(212, 178, 117, 0.4);
+  font-variation-settings: "opsz" 24;
+}
+.footer-definition { font-family: var(--font-body); font-size: 16px; line-height: 1.65; color: rgba(244, 236, 211, 0.6); margin: 0; font-variation-settings: "opsz" 14; }
+.footer-definition strong { color: var(--champagne); font-weight: 500; font-style: italic; }
+.footer-bottom { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: center; }
+.footer-contact { display: flex; flex-direction: column; gap: 4px; }
+.footer-contact-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(212, 178, 117, 0.7); }
+.footer-contact-email {
+  font-family: var(--font-mono); font-size: 12px; color: var(--champagne);
+  padding-bottom: 2px; align-self: flex-start; text-decoration: none;
+  position: relative; border-bottom-color: transparent !important;
+  background-image: linear-gradient(to right, rgba(212, 178, 117, 0.35), rgba(212, 178, 117, 0.35));
+  background-position: 0 100%; background-repeat: no-repeat; background-size: 100% 1px;
+}
+.footer-contact-meta { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244, 236, 211, 0.4); margin-top: 4px; }
+.footer-contact-linkedin {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.7); text-decoration: none; margin-top: 10px; align-self: flex-start;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.3); padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.footer-contact-linkedin:hover { color: var(--champagne); border-bottom-color: rgba(212, 178, 117, 0.6); }
+.footer-sitemap {
+  display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;
+  padding: 1.5rem 0 2rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(212, 178, 117, 0.15);
+}
+.footer-sitemap a {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.7); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.footer-sitemap a:hover { color: var(--champagne); border-bottom-color: rgba(212, 178, 117, 0.4); }
+.footer-meta { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244, 236, 211, 0.4); text-align: center; }
+.footer-legal-link { color: rgba(244, 236, 211, 0.5); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s ease, border-color 0.2s ease; }
+.footer-legal-link:hover { color: var(--ivory); border-bottom-color: rgba(244, 236, 211, 0.5); }
+.footer-cta { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.footer-cta-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(212, 178, 117, 0.7); }
+.footer-cta-link {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--champagne); padding-bottom: 2px; text-decoration: none;
+  position: relative; border-bottom-color: transparent !important;
+  background-image: linear-gradient(to right, rgba(212, 178, 117, 0.35), rgba(212, 178, 117, 0.35));
+  background-position: 0 100%; background-repeat: no-repeat; background-size: 100% 1px;
+}
+.footer-contact-email::after, .footer-cta-link::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: var(--champagne); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.2s ease-out;
+}
+@media (hover: hover) {
+  .footer-contact-email:hover::after, .footer-cta-link:hover::after { transform: scaleX(1); }
+}
+
+/* CTA flottant mobile — bascule de thème selon le fond de la section traversée */
+.mobile-cta-floating {
+  position: fixed; bottom: 16px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--champagne); color: var(--hero-bg);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 14px 24px; border-radius: 18px;
+  box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.40);
+  text-decoration: none; white-space: nowrap; opacity: 0;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out, background-color 280ms ease, color 280ms ease, box-shadow 280ms ease;
+  z-index: 20; pointer-events: none;
+}
+.mobile-cta-floating.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+.mobile-cta-floating.is-on-light { background: var(--hero-bg); color: var(--champagne); box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.30); }
+
+/* ============================================================
+   HEADER STICKY — DA aubergine (mh-*, partagé avec /)
+   ============================================================ */
+.mh-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: transparent; border-bottom: 1px solid transparent;
+  transition: background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease, backdrop-filter 300ms ease, -webkit-backdrop-filter 300ms ease;
+}
+.mh-header.is-scrolled {
+  background: rgba(8, 4, 26, 0.95);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border-bottom-color: rgba(212, 178, 117, 0.18);
+  box-shadow: 0 1px 0 rgba(212, 178, 117, 0.06);
+}
+.mh-row1 { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; padding: 22px 5% 14px; transition: padding 300ms ease; }
+.mh-header.is-scrolled .mh-row1 { padding: 14px 5% 8px; }
+.mh-logo {
+  font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 30px;
+  color: var(--ivory); letter-spacing: 0.005em; text-decoration: none;
+  display: inline-flex; align-items: baseline; line-height: 1;
+  font-variation-settings: "opsz" 32; transition: font-size 300ms ease;
+}
+.mh-header.is-scrolled .mh-logo { font-size: 26px; }
+.mh-logo-macron { position: relative; display: inline-block; }
+.mh-logo-macron::after { content: ''; position: absolute; top: 0.05em; left: 12%; width: 76%; height: 0.05em; background: #F4ECD3; }
+
+.mh-tabs { display: flex; gap: 2.5rem; justify-content: center; align-items: center; margin: 0; padding: 0; list-style: none; }
+.mh-tab {
+  position: relative;
+  font-family: var(--font-display); font-style: italic; font-size: 17px;
+  color: rgba(244, 236, 211, 0.6); text-decoration: none; padding: 4px 0;
+  transition: color 250ms ease; cursor: pointer; background: none; border: none;
+}
+.mh-tab::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 1.5px;
+  background: var(--champagne); transform: scaleX(0); transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mh-tab:hover { color: var(--ivory); }
+.mh-tab:hover::after { transform: scaleX(1); }
+.mh-tab.is-active { color: var(--champagne); font-weight: 500; }
+.mh-tab.is-active::after { transform: scaleX(1); }
+
+/* Groupe déroulant "Audit CRO" — trigger + panneau au survol/focus */
+.mh-tab-group { position: relative; }
+.mh-tab-group-trigger { display: inline-flex; align-items: baseline; gap: 5px; }
+.mh-tab-group-trigger::before {
+  content: '▾'; font-family: var(--font-mono); font-size: 9px; font-style: normal;
+  color: rgba(244, 236, 211, 0.45); transition: transform 200ms ease, color 250ms ease;
+}
+.mh-tab-group-trigger.is-active::before { color: var(--champagne); }
+.mh-tab-group:hover .mh-tab-group-trigger::before,
+.mh-tab-group.is-open .mh-tab-group-trigger::before,
+.mh-tab-group-trigger:focus-visible::before { transform: rotate(-180deg); }
+.mh-tab-dropdown {
+  position: absolute; top: calc(100% + 14px); left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--band-bg);
+  border: 1px solid rgba(212, 178, 117, 0.25);
+  padding: 8px; min-width: 260px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+  z-index: 60;
+  box-shadow: 0 12px 32px -12px rgba(8, 4, 26, 0.5);
+}
+.mh-tab-group:hover .mh-tab-dropdown,
+.mh-tab-group.is-open .mh-tab-dropdown,
+.mh-tab-group:focus-within .mh-tab-dropdown {
+  opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0);
+}
+.mh-tab-dropdown a {
+  display: block;
+  font-family: var(--font-display); font-style: italic; font-size: 15px;
+  color: rgba(244, 236, 211, 0.75);
+  padding: 10px 14px; text-decoration: none; white-space: nowrap;
+  border-left: 2px solid transparent;
+  transition: color 200ms ease, border-color 200ms ease, background-color 200ms ease;
+}
+.mh-tab-dropdown a:hover { color: var(--ivory); background: rgba(212, 178, 117, 0.06); }
+.mh-tab-dropdown a.is-active { color: var(--champagne); border-left-color: var(--champagne); }
+
+.mh-cta {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--champagne); background: transparent; border: 1px solid var(--champagne);
+  padding: 9px 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.mh-cta-arrow { display: inline-block; transition: transform 200ms ease; }
+.mh-cta:hover { background: var(--champagne); color: var(--hero-bg); }
+.mh-cta:hover .mh-cta-arrow { transform: translate(2px, -2px); }
+
+.mh-row2 {
+  border-top: 1px solid transparent; padding: 0 5%;
+  max-height: 0; opacity: 0; overflow: hidden; pointer-events: none;
+  transition: border-color 200ms ease, padding 250ms ease, max-height 250ms ease, opacity 200ms ease;
+}
+.mh-header.is-pinned .mh-row2, .mh-header.is-revealing .mh-row2 {
+  border-top-color: rgba(212, 178, 117, 0.15); padding: 6px 5% 14px; max-height: 80px; opacity: 1; pointer-events: auto;
+}
+.mh-header.is-scrolled.is-pinned .mh-row2, .mh-header.is-scrolled.is-revealing .mh-row2 { padding: 4px 5% 10px; }
+.mh-submenu { display: flex; justify-content: center; align-items: center; gap: 0; margin: 0; padding: 0; list-style: none; }
+.mh-submenu-item {
+  position: relative;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.5); text-decoration: none; padding: 6px 14px; transition: color 250ms ease;
+}
+.mh-submenu-item::after {
+  content: ''; position: absolute; left: 14px; right: 14px; bottom: 2px; height: 1px;
+  background: var(--champagne); transform: scaleX(0); transform-origin: left center; transition: transform 250ms ease;
+}
+.mh-submenu-item:hover { color: var(--ivory); }
+.mh-submenu-item:hover::after { transform: scaleX(1); }
+.mh-submenu-item.is-active { color: var(--champagne); }
+.mh-submenu-item.is-active::after { transform: scaleX(1); }
+.mh-submenu-sep { font-family: var(--font-mono); font-size: 10px; color: rgba(212, 178, 117, 0.3); user-select: none; padding: 0 2px; }
+
+.mh-mobile-toggle {
+  display: none;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--champagne); background: transparent; border: 1px solid var(--champagne); padding: 8px 12px; cursor: pointer;
+}
+
+.mh-drawer {
+  display: none; position: fixed; top: var(--header-height-mobile); left: 0; right: 0;
+  background: var(--hero-bg); border-bottom: 1px solid rgba(212, 178, 117, 0.45);
+  box-shadow: 0 8px 24px -2px rgba(8, 4, 26, 0.6);
+  padding: 24px 24px 32px; z-index: 99;
+  transform: translateY(calc(-100% - var(--header-height-mobile) - 20px));
+  transition: transform 300ms ease;
+  max-height: calc(100vh - var(--header-height-mobile));
+  overflow-y: auto;
+}
+.mh-drawer.is-open { transform: translateY(0); }
+.mh-drawer-tabs { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin: 0 0 22px; padding: 0; list-style: none; }
+.mh-drawer-tab {
+  position: relative;
+  font-family: var(--font-display); font-style: italic; color: var(--ivory); text-decoration: none;
+  display: inline-flex; align-items: baseline; gap: 14px; padding-bottom: 6px; line-height: 1.1;
+  font-size: 20px;
+}
+.mh-drawer-tab::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px;
+  background: var(--champagne); transform: scaleX(0); transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mh-drawer-tab.is-active { color: var(--champagne); font-weight: 500; font-size: 26px; }
+.mh-drawer-tab.is-active::after { transform: scaleX(1); }
+.mh-drawer-category-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.5); margin: -4px 0 -4px;
+}
+.mh-drawer-divider { height: 1px; background: rgba(212, 178, 117, 0.18); margin: 0 0 18px; }
+.mh-drawer-submenu { display: flex; flex-direction: column; gap: 4px; margin: 10px 0 14px; padding: 0 0 0 14px; list-style: none; border-left: 2px solid var(--champagne); }
+.mh-drawer-submenu-item {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.5); text-decoration: none; padding: 6px 0;
+}
+.mh-drawer-submenu-item.is-active { color: var(--champagne); }
+.mh-drawer-cta {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--hero-bg); background: var(--champagne); padding: 14px 20px; text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .mh-row1 { padding: 14px 5%; grid-template-columns: auto auto; }
+  .mh-header.is-scrolled .mh-row1 { padding: 14px 5% 12px; }
+  .mh-tabs, .mh-tabs-wrap, .mh-cta { display: none; }
+  .mh-row2 { display: none; }
+  .mh-mobile-toggle { display: inline-flex; justify-self: end; }
+  .mh-drawer { display: block; }
+  .mh-logo { font-size: 26px; }
+  .mh-header.is-scrolled .mh-logo { font-size: 22px; }
+}
+
+/* ============================================================
+   RESPONSIVE — mobile (<900px)
+   ============================================================ */
+@media (max-width: 900px) {
+  html { scroll-padding-top: var(--header-height-mobile); }
+  .hero { padding: calc(var(--header-height-mobile) + 6%) 6% 8%; }
+  .hero-lead { margin-top: 20px; }
+  .hero-offer { margin-top: 30px; }
+  .hero-offer-name { margin-bottom: 6px; }
+  .hero-offer-descriptor { margin-bottom: 12px; }
+  .hero-tags { margin-bottom: 22px; }
+  .hero-cta-row .cta-mono { font-size: 12.5px; letter-spacing: 0.14em; }
+  .hero-cta-meta { font-size: 10.5px; color: rgba(244, 236, 211, 0.62); }
+  .hero-inner::before { background: linear-gradient(to bottom, rgba(212, 178, 117, 0.25), rgba(212, 178, 117, 0.45), rgba(212, 178, 117, 0.25)); }
+  .enjeu-columns { gap: 32px; }
+  .enjeu-validations { gap: 14px; }
+  .enjeu-validation { font-size: 15.5px; }
+  .regard-row { grid-template-columns: 1fr; }
+  .regard-dim { padding: 1.25rem 0; border-bottom: 1px solid rgba(20, 16, 42, 0.12); }
+  .regard-dim:nth-child(odd) { border-right: none; }
+  .regard-dim:nth-child(even) { padding-left: 0; }
+  .regard-dim:nth-child(n+3) { padding-bottom: 1.25rem; border-bottom: 1px solid rgba(20, 16, 42, 0.12); }
+  .regard-dim:last-child { padding-bottom: 0; border-bottom: none; }
+  .supports-grid { grid-template-columns: 1fr 1fr; }
+  .livrable-box { padding: 28px 22px; }
+  .livrable-grid { gap: 2rem; }
+  .livrable-example { max-width: 100%; }
+  .split-grid { flex-direction: column; gap: 2.25rem; }
+  .testi-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .expertise-portrait { max-width: 220px; margin: 0 auto; }
+  .offre-dark-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .booking-final-section { padding: clamp(48px, 9vw, 72px) 6%; }
+  .booking-final-lead { margin-bottom: 28px; }
+  .footer { padding: 8% 7% 5% 7%; }
+  .footer-top { flex-direction: column; align-items: center; gap: 1.5rem; text-align: center; }
+  .footer-feather { height: 80px; }
+  .footer-signature { width: 100%; max-width: 100%; align-items: center; }
+  .footer-thesis { border-left: none; padding-left: 0; }
+  .footer-sitemap { gap: 0.9rem 1.5rem; padding: 1.25rem 0 1.75rem; margin-bottom: 1.5rem; font-size: 9px; }
+  .footer-bottom { grid-template-columns: 1fr; gap: 1rem; text-align: left; }
+  .footer-meta, .footer-cta { text-align: left; align-items: flex-start; }
+}
+@media (max-width: 640px) {
+  .supports-grid { grid-template-columns: 1fr; }
+  .hero-cta-row { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .livrable-example-stats { gap: 2rem; }
+  .booking-final-cta-row { flex-direction: column; align-items: flex-start; gap: 0.85rem; }
+  .booking-final-cta { display: block; width: 100%; text-align: center; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: clamp(40px, calc(26px + 3.7vw), 42px); line-height: 1.05; }
+  .hero-offer-name { font-size: clamp(20px, calc(13px + 1.8vw), 21px); }
+  .hero-offer { margin-top: 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER STICKY — DA aubergine
+     ============================================================ -->
+<header class="mh-header" id="mh-header" aria-label="Navigation principale">
+  <div class="mh-row1">
+    <a class="mh-logo" href="../" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
+    <nav class="mh-tabs-wrap" aria-label="Pages">
+      <ul class="mh-tabs">
+        <li class="mh-tab-group">
+          <button type="button" class="mh-tab mh-tab-group-trigger is-active" aria-haspopup="true" aria-expanded="false">Audit CRO</button>
+          <div class="mh-tab-dropdown" role="menu">
+            <a href="../" role="menuitem">Audit CRO complet SaaS et e-commerce</a>
+            <a href="#top" class="is-active" role="menuitem" aria-current="page">Conversion Focus - entrepreneurs</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    <a class="mh-cta" href="#booking">Réserver un appel découverte <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
+    <button class="mh-mobile-toggle" id="mh-mobile-toggle" type="button" aria-expanded="false" aria-controls="mh-drawer">Menu</button>
+  </div>
+  <div class="mh-row2">
+    <nav aria-label="Sections de la page">
+      <ul class="mh-submenu">
+        <li><a class="mh-submenu-item is-active" href="#analyse" data-target="analyse">L'analyse</a></li>
+        <li class="mh-submenu-sep" aria-hidden="true">·</li>
+        <li><a class="mh-submenu-item" href="#livrable" data-target="livrable">Le livrable</a></li>
+        <li class="mh-submenu-sep" aria-hidden="true">·</li>
+        <!-- Témoignages désactivé temporairement — cf. section commentée plus bas -->
+        <li><a class="mh-submenu-item" href="#booking" data-target="booking">Réserver un appel découverte</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
+  <ul class="mh-drawer-tabs">
+    <li class="mh-drawer-category-label" aria-hidden="true">— Audit CRO</li>
+    <li>
+      <a class="mh-drawer-tab" href="../">Audit CRO complet SaaS et e-commerce</a>
+    </li>
+    <li>
+      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Conversion Focus - entrepreneurs</a>
+      <ul class="mh-drawer-submenu">
+        <li><a class="mh-drawer-submenu-item is-active" href="#analyse" data-target="analyse">L'analyse</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#livrable" data-target="livrable">Le livrable</a></li>
+        <!-- Témoignages désactivé temporairement — cf. section commentée plus bas -->
+        <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un appel découverte</a></li>
+      </ul>
+    </li>
+  </ul>
+  <div class="mh-drawer-divider" aria-hidden="true"></div>
+  <a class="mh-drawer-cta" href="#booking">Réserver un appel découverte ↗</a>
+</aside>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="feather-bauhaus" viewBox="0 0 64 240">
+      <g fill="currentColor">
+        <line x1="32" y1="8" x2="32" y2="232" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M 32 26 L 18 38 L 32 38 Z" fill-opacity="0.7"/>
+        <path d="M 32 26 L 46 38 L 32 38 Z" fill-opacity="0.7"/>
+        <path d="M 32 48 L 14 60 L 32 60 Z" fill-opacity="0.7"/>
+        <path d="M 32 48 L 50 60 L 32 60 Z" fill-opacity="0.7"/>
+        <path d="M 32 70 L 10 82 L 32 82 Z" fill-opacity="0.75"/>
+        <path d="M 32 70 L 54 82 L 32 82 Z" fill-opacity="0.75"/>
+        <path d="M 32 92 L 8 104 L 32 104 Z" fill-opacity="0.8"/>
+        <path d="M 32 92 L 56 104 L 32 104 Z" fill-opacity="0.8"/>
+        <path d="M 32 114 L 8 126 L 32 126 Z" fill-opacity="0.8"/>
+        <path d="M 32 114 L 56 126 L 32 126 Z" fill-opacity="0.8"/>
+        <path d="M 32 136 L 10 148 L 32 148 Z" fill-opacity="0.75"/>
+        <path d="M 32 136 L 54 148 L 32 148 Z" fill-opacity="0.75"/>
+        <path d="M 32 158 L 14 170 L 32 170 Z" fill-opacity="0.7"/>
+        <path d="M 32 158 L 50 170 L 32 170 Z" fill-opacity="0.7"/>
+        <path d="M 32 180 L 18 192 L 32 192 Z" fill-opacity="0.65"/>
+        <path d="M 32 180 L 46 192 L 32 192 Z" fill-opacity="0.65"/>
+        <path d="M 32 202 L 24 212 L 32 212 Z" fill-opacity="0.6"/>
+        <path d="M 32 202 L 40 212 L 32 212 Z" fill-opacity="0.6"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- HERO -->
+<section class="hero" id="top" data-cta-theme="dark">
+  <div class="hero-inner">
+    <div class="hero-promise">
+      <h1>Votre offre peut mieux convertir.</h1>
+      <p class="hero-lead">Découvrez ce qui vous coûte des conversions — et comment y remédier.</p>
+    </div>
+    <div class="hero-offer">
+      <p class="hero-offer-name">Conversion Focus</p>
+      <p class="hero-offer-descriptor">Audit CRO &amp; Copywriting</p>
+      <div class="hero-tags">
+        <span class="hero-tag">Coachs</span>
+        <span class="hero-tag">Formateurs</span>
+        <span class="hero-tag">Consultants</span>
+        <span class="hero-tag">Thérapeutes</span>
+        <span class="hero-tag">Infopreneurs</span>
+      </div>
+      <div class="hero-cta-row">
+        <a href="#booking" class="cta-mono">Réserver un appel découverte →</a>
+        <span class="hero-cta-meta">30 mn · sans engagement</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ch.01 — LA MISSION -->
+<section class="enjeu-section reveal" id="enjeu" data-cta-theme="light">
+  <span class="chapter-mark">— la mission</span>
+  <div class="enjeu-wrap">
+    <div class="enjeu-columns">
+      <div class="enjeu-main">
+        <h2>Une offre mieux comprise. <em>Plus convaincante. Plus efficace.</em></h2>
+        <p class="enjeu-intro">Leads, rendez-vous, demandes de devis, inscriptions ou ventes&nbsp;: <em style="font-style:italic;color:var(--champagne-fonce)">Conversion Focus</em> identifie où agir pour mieux convertir.</p>
+      </div>
+      <ul class="enjeu-validations">
+        <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">✓</span>Votre offre gagne en pouvoir de conviction.</li>
+        <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">✓</span>Plus de visiteurs passent à l'action.</li>
+        <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">✓</span>Votre trafic génère plus de valeur.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ch.02 — L'ANALYSE -->
+<section class="regard-section reveal" id="analyse" data-cta-theme="light">
+  <span class="chapter-mark">— l'analyse</span>
+  <div class="regard-head">
+    <h3>Tout ce qui peut influencer la décision <em>est passé au crible.</em></h3>
+    <p class="lead">De la première impression au passage à l'action, l'analyse examine ce qui renforce — ou freine — la compréhension de votre offre et son pouvoir de conviction.</p>
+  </div>
+  <div class="regard-row">
+    <div class="regard-dim">
+      <span class="regard-dim-n">01</span>
+      <h4>Offre &amp; promesse</h4>
+      <p>Le visiteur comprend-il rapidement ce qui lui est proposé, à qui cela s'adresse, sa valeur et ce qui la différencie&nbsp;?</p>
+    </div>
+    <div class="regard-dim">
+      <span class="regard-dim-n">02</span>
+      <h4>Persuasion</h4>
+      <p>L'argumentaire soutient-il suffisamment la motivation, répond-il aux questions et objections importantes et apporte-t-il les preuves nécessaires à la décision&nbsp;?</p>
+    </div>
+    <div class="regard-dim">
+      <span class="regard-dim-n">03</span>
+      <h4>Hiérarchie &amp; compréhension</h4>
+      <p>Le message est-il clair, structuré et présenté dans le bon ordre, avec le bon niveau d'importance pour faciliter la compréhension et la progression&nbsp;?</p>
+    </div>
+    <div class="regard-dim">
+      <span class="regard-dim-n">04</span>
+      <h4>Friction &amp; passage à l'action</h4>
+      <p>Certains éléments créent-ils de l'hésitation, de la confusion, de la distraction ou un effort inutile avant le passage à l'action&nbsp;?</p>
+    </div>
+  </div>
+
+  <div class="supports-wrap">
+    <h4>Supports pouvant être audités</h4>
+    <div class="supports-grid">
+      <div class="supports-card">
+        <div class="supports-card-head">
+          <div class="supports-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="1"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          </div>
+          <h5>Landing page</h5>
+        </div>
+        <p>Accroche · proposition de valeur · passage à l'action</p>
+      </div>
+      <div class="supports-card">
+        <div class="supports-card-head">
+          <div class="supports-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"></rect><polygon points="10,9 10,15 15,12" fill="currentColor" stroke="none"></polygon></svg>
+          </div>
+          <h5>Page VSL/vidéo de vente</h5>
+        </div>
+        <p>Présentation de l'offre · argumentation · décision</p>
+      </div>
+      <div class="supports-card">
+        <div class="supports-card-head">
+          <div class="supports-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1"></rect><line x1="8.5" y1="8" x2="15.5" y2="8"></line><line x1="8.5" y1="12" x2="15.5" y2="12"></line><line x1="8.5" y1="16" x2="13" y2="16"></line></svg>
+          </div>
+          <h5>Page de vente</h5>
+        </div>
+        <p>Présentation détaillée · persuasion · conversion</p>
+      </div>
+      <div class="supports-card">
+        <div class="supports-card-head">
+          <div class="supports-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12 C4 7.5 7.5 4 12 4 C16.5 4 20 7.5 20 12 C20 16.5 16.5 20 12 20"></path><polyline points="8,15 12,19 16,15"></polyline></svg>
+          </div>
+          <h5>Page de closing</h5>
+        </div>
+        <p>Décision · réassurance · conversion</p>
+      </div>
+      <div class="supports-card">
+        <div class="supports-card-head">
+          <div class="supports-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="1"></rect><line x1="9" y1="8" x2="15" y2="8"></line><line x1="9" y1="12" x2="15" y2="12"></line><polyline points="9,16 10.5,17.5 15,13.5"></polyline></svg>
+          </div>
+          <h5>Formulaire / Checkout</h5>
+        </div>
+        <p>Saisie · validation · finalisation</p>
+      </div>
+      <div class="supports-card">
+        <div class="supports-card-head">
+          <div class="supports-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 L9 11 L13 15 L21 6"></path><polyline points="15,6 21,6 21,12"></polyline></svg>
+          </div>
+          <h5>Parcours de conversion</h5>
+        </div>
+        <p>Enchaînement de 2–3 pages · continuité du parcours<span class="supports-example">Ex.&nbsp;: Systeme.io, Kajabi ou autre plateforme.</span></p>
+      </div>
+    </div>
+    <p class="supports-note">Le périmètre exact — une page ou plusieurs étapes — est défini selon votre situation.</p>
+  </div>
+</section>
+
+<!-- ch.03 — LE LIVRABLE -->
+<section class="livrable-section reveal" id="livrable" data-cta-theme="light">
+  <span class="chapter-mark">— le livrable</span>
+  <div class="livrable-box editorial-block">
+    <div class="livrable-grid">
+      <div class="livrable-main">
+        <h2>Vous recevez <em>plus qu'un rapport.</em></h2>
+        <p>Un diagnostic étayé, des priorités claires et des solutions concrètes pour passer de l'analyse à l'optimisation.</p>
+
+        <div class="livrable-journey">
+          <div class="livrable-step">
+            <div class="livrable-step-markers" aria-hidden="true"><span class="livrable-step-marker"></span></div>
+            <div class="livrable-step-content">
+              <span class="livrable-step-label">01 — Comprendre ce qui se passe</span>
+              <p>Diagnostic CRO &amp; copywriting · Tests utilisateurs</p>
+            </div>
+          </div>
+          <div class="livrable-step is-emphasis">
+            <div class="livrable-step-markers" aria-hidden="true"><span class="livrable-step-marker"></span></div>
+            <div class="livrable-step-content">
+              <span class="livrable-step-label">02 — Décider de ce qui compte</span>
+              <p>Recommandations priorisées : à corriger · à tester</p>
+            </div>
+          </div>
+          <div class="livrable-step">
+            <div class="livrable-step-markers" aria-hidden="true"><span class="livrable-step-marker"></span></div>
+            <div class="livrable-step-content">
+              <span class="livrable-step-label">03 — Savoir quoi changer</span>
+              <p>Copywriting · Restructuration · Redesign</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="livrable-example">
+        <p class="livrable-example-label">Exemple de recommandation</p>
+        <p class="livrable-example-dim">Proposition de valeur</p>
+        <p class="livrable-example-constat">Formulation imprécise · hiérarchie insuffisante</p>
+        <p class="livrable-example-testlabel">Test utilisateur · 10 personnes</p>
+        <div class="livrable-example-stats">
+          <div class="exemple-stat" style="align-items:flex-start;text-align:left">
+            <span class="exemple-stat-num" style="font-size:clamp(22px,2.4vw,26px)">2/10</span>
+            <span class="exemple-stat-label" style="font-size:11px">identifient la cible</span>
+          </div>
+          <div class="exemple-stat" style="align-items:flex-start;text-align:left">
+            <span class="exemple-stat-num" style="font-size:clamp(22px,2.4vw,26px)">1/10</span>
+            <span class="exemple-stat-label" style="font-size:11px">restitue le bénéfice</span>
+          </div>
+        </div>
+
+        <div class="livrable-example-divider"></div>
+
+        <span class="priority-chip is-solid">Priorité 01 — à corriger</span>
+        <p class="livrable-example-reco">Clarifier la proposition de valeur et restructurer sa hiérarchie.</p>
+
+        <div class="livrable-example-bars">
+          <div class="livrable-bar"></div>
+          <span class="livrable-example-arrow">→</span>
+          <div class="livrable-bar is-after"></div>
+        </div>
+        <p class="livrable-example-tags">Promesse clarifiée · hiérarchie restructurée · copywriting ajusté · traitement visuel revu</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES — désactivé en attendant les vrais retours clients (texte
+     complet à intégrer). Pour réactiver : retirer ce commentaire, et
+     restaurer les liens de nav associés (header row2, drawer, footer
+     sitemap) ainsi que 'temoignages' dans submenuTargets en fin de page. -->
+<!--
+<section class="testi-section reveal" id="temoignages" data-cta-theme="dark">
+  <div class="testi-wrap">
+    <h2>Ce qu'ils disent de Conversion Focus</h2>
+    <div class="testi-grid">
+      <div class="testi-item">
+        <span class="testi-quote-mark" aria-hidden="true">"</span>
+        <p>[Témoignage à ajouter]</p>
+        <div class="testi-person">
+          <div class="testi-photo" aria-hidden="true"><span class="testi-photo-label">Photo</span></div>
+          <div class="testi-person-info">
+            <span class="testi-name">[Prénom Nom]</span>
+            <span class="testi-role">[Activité]</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-item">
+        <span class="testi-quote-mark" aria-hidden="true">"</span>
+        <p>[Témoignage à ajouter]</p>
+        <div class="testi-person">
+          <div class="testi-photo" aria-hidden="true"><span class="testi-photo-label">Photo</span></div>
+          <div class="testi-person-info">
+            <span class="testi-name">[Prénom Nom]</span>
+            <span class="testi-role">[Activité]</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-item">
+        <span class="testi-quote-mark" aria-hidden="true">"</span>
+        <p>[Témoignage à ajouter]</p>
+        <div class="testi-person">
+          <div class="testi-photo" aria-hidden="true"><span class="testi-photo-label">Photo</span></div>
+          <div class="testi-person-info">
+            <span class="testi-name">[Prénom Nom]</span>
+            <span class="testi-role">[Activité]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- POUR QUI -->
+<section class="split-section reveal" id="pour-qui" data-cta-theme="light">
+  <div class="split-grid">
+    <div class="split-block is-yes">
+      <h3 class="split-block-title">Cette offre est pertinente si.</h3>
+      <ul class="fit-list">
+        <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Vous avez une offre existante</li>
+        <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Vous avez déjà un support de conversion en ligne</li>
+        <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Vous avez du trafic</li>
+        <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Vous voulez comprendre où concentrer vos efforts d'optimisation</li>
+        <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Vous voulez des recommandations concrètes plutôt qu'une checklist générique</li>
+      </ul>
+    </div>
+    <div class="split-block is-no">
+      <h3 class="split-block-title is-muted">Ce n'est pas encore le bon moment si.</h3>
+      <ul class="fit-list">
+        <li class="fit-item is-no"><span class="fit-mark" aria-hidden="true">✕</span> Vous n'avez pas encore d'offre définie</li>
+        <li class="fit-item is-no"><span class="fit-mark" aria-hidden="true">✕</span> Vous n'avez pas encore de support de conversion en ligne</li>
+        <li class="fit-item is-no"><span class="fit-mark" aria-hidden="true">✕</span> Vous cherchez uniquement plus de trafic, sans travailler la conversion</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section class="expertise-section reveal" id="expertise" data-cta-theme="light">
+  <div class="expertise-wrap">
+    <div class="expertise-portrait">
+      <div class="expertise-portrait-frame">
+        <img src="assets/anne-sophie-portrait.jpg" alt="Anne-Sophie Roux, fondatrice de Maat" width="400" height="400">
+      </div>
+    </div>
+    <div class="expertise-text">
+      <p class="expertise-eyebrow">À propos de moi</p>
+      <h2>10 ans de marketing digital. Un regard centré sur la conversion.</h2>
+      <p>5 ans côté annonceur, en responsabilité Acquisition &amp; Digital. Une pratique construite à la croisée de l'acquisition, de la conversion et de la data.</p>
+      <p>Je ne regarde pas une page comme un simple objet UX. Je la regarde comme un outil de conversion au service d'une offre.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OFFRE -->
+<section class="offre-dark-section reveal" id="offre" data-cta-theme="dark">
+  <div class="offre-dark-wrap">
+    <p class="dark-eyebrow">— L'offre</p>
+    <div class="offre-dark-head">
+      <div>
+        <h2>Conversion Focus</h2>
+        <p class="offre-dark-sub">Audit CRO &amp; Copywriting pour Entrepreneurs &amp; Experts</p>
+      </div>
+      <span class="offre-dark-price">650&nbsp;€</span>
+    </div>
+    <ul class="offre-dark-list">
+      <li>Jusqu'à 3 pages / étapes selon le besoin*</li>
+      <li>Tests utilisateurs inclus</li>
+      <li>Diagnostic, recommandations, priorisations</li>
+      <li>Copywriting / restructuration / redesign</li>
+    </ul>
+    <p class="offre-dark-footnote">*Pour un funnel plus long, ajustement tarifaire sur-mesure.</p>
+    <a href="#booking" class="offre-dark-cta">Réserver un appel découverte →</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section reveal" id="faq" data-cta-theme="light">
+  <div class="faq-wrap">
+    <p class="faq-label">FAQ</p>
+    <details class="faq-item">
+      <summary><span>Est-ce utile si je n'ai pas assez de trafic pour faire de l'A/B testing&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>Oui. Le diagnostic croise expertise CRO, structure du message et tests utilisateurs — il ne dépend pas d'un gros volume de trafic.</p>
+    </details>
+    <details class="faq-item">
+      <summary><span>Est-ce uniquement un audit UX&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>Non. L'audit croise offre, message, structure, preuve et friction — bien au-delà de l'ergonomie seule.</p>
+    </details>
+    <details class="faq-item">
+      <summary><span>Est-ce que vous réécrivez / redesignez les pages&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>La plupart du temps, oui — copywriting, restructuration et redesign font partie des recommandations possibles selon les optimisations identifiées.</p>
+    </details>
+    <details class="faq-item">
+      <summary><span>Est-ce que vous auditez tout mon tunnel&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>Non. L'audit porte sur les pages onsite concernées — pas sur les supports de campagnes (emails, ads etc).</p>
+    </details>
+    <details class="faq-item">
+      <summary><span>Est-ce que l'audit garantit une hausse de conversion&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>Non, la promesse chiffrée n'est pas possible. L'audit priorise ce qui est nécessaire pour mettre toutes les chances de votre côté pour la meilleure conversion possible, avec le trafic que vous avez et l'offre/service que vous avez établis.</p>
+    </details>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking" class="booking-final-section reveal" data-cta-theme="light">
+  <div class="booking-final-wrap">
+    <p class="chapter-mark">— Premier échange</p>
+    <h2>Commençons par votre offre.</h2>
+    <p class="booking-final-lead">30 minutes pour comprendre vos enjeux, identifier les supports à auditer et vérifier si <em style="font-style:italic;color:var(--champagne-fonce)">Conversion Focus</em> est adapté à votre situation.</p>
+    <div class="booking-final-cta-row">
+      <a href="#booking" class="booking-final-cta">Réserver un appel découverte →</a>
+      <span class="booking-final-note">30 min · sans engagement</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer reveal">
+  <div class="footer-top">
+    <svg class="feather-bauhaus footer-feather"><use href="#feather-bauhaus"/></svg>
+    <div class="footer-signature">
+      <p class="footer-tagline">Audits de conversion <em>pour les entrepreneurs</em><br/>qui ont mieux à faire que deviner.</p>
+      <p class="footer-thesis">La conversion est une question d'alignement.</p>
+      <p class="footer-definition"><strong>«&nbsp;Maât&nbsp;»</strong> est le principe d'équilibre et de vérité. Nous croyons que la conversion ne se force pas&nbsp;: elle émerge quand promesse, expérience et attente s'accordent enfin.</p>
+    </div>
+  </div>
+  <nav class="footer-sitemap" aria-label="Navigation interne du site">
+    <a href="#enjeu">La mission</a>
+    <a href="#analyse">L'analyse</a>
+    <a href="#livrable">Le livrable</a>
+    <a href="#offre">Offre</a>
+    <!-- Témoignages désactivé temporairement — cf. section commentée plus haut -->
+    <a href="#booking">Réserver</a>
+  </nav>
+  <div class="footer-bottom">
+    <div class="footer-contact">
+      <span class="footer-contact-label">— Contact</span>
+      <a href="mailto:annesophieroux.consulting@gmail.com" class="footer-contact-email">annesophieroux.consulting@gmail.com</a>
+      <span class="footer-contact-meta">Réponse sous 24h ouvrées</span>
+      <a href="https://www.linkedin.com/in/anne-sophie-roux" class="footer-contact-linkedin" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+    </div>
+    <div class="footer-meta">© Maat 2026 — <a href="../mentions-legales.html" class="footer-legal-link">Mentions légales</a></div>
+    <div class="footer-cta">
+      <span class="footer-cta-label">— Démarrer un audit</span>
+      <a href="#booking" class="footer-cta-link">Réserver un appel découverte →</a>
+    </div>
+  </div>
+</footer>
+
+<a href="#booking" class="mobile-cta-floating" id="mobile-cta">Réserver un appel découverte →</a>
+
+<script>
+(function() {
+  // ─── Calendly popup : tous les CTAs "Réserver un appel découverte" l'ouvrent ───
+  const CALENDLY_URL = 'https://calendly.com/annesophieroux-maat/30min?primary_color=D4B275&background_color=08041A&text_color=F4ECD3&hide_event_type_details=1&hide_gdpr_banner=1';
+  function openCalendly(e) {
+    e.preventDefault();
+    const trigger = e.currentTarget;
+    if (trigger && trigger.setAttribute) {
+      trigger.setAttribute('aria-busy', 'true');
+      setTimeout(() => trigger.removeAttribute('aria-busy'), 1500);
+    }
+    if (typeof Calendly !== 'undefined' && Calendly.initPopupWidget) {
+      Calendly.initPopupWidget({ url: CALENDLY_URL });
+    } else {
+      window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
+    }
+    return false;
+  }
+  document.querySelectorAll(
+    'a[href="#booking"], a[href="index.html#booking"], a[href$="conversion-focus/#booking"]'
+  ).forEach(el => el.addEventListener('click', openCalendly));
+
+  // ─── Repositionne la croix de fermeture du popup Calendly (desktop) ───
+  // Par défaut Calendly positionne .calendly-popup-close en absolute par
+  // rapport à l'overlay plein écran (top/right fixes), pas par rapport au
+  // popup lui-même. Sur desktop le popup est plus étroit que l'écran, donc
+  // la croix se retrouve loin du calendrier, près du header. On la replace
+  // juste au-dessus du coin supérieur droit du popup.
+  function repositionCalendlyClose() {
+    const overlay = document.querySelector('.calendly-overlay');
+    const popup = document.querySelector('.calendly-popup');
+    const close = document.querySelector('.calendly-popup-close');
+    if (!overlay || !popup || !close) return;
+    const overlayRect = overlay.getBoundingClientRect();
+    const popupRect = popup.getBoundingClientRect();
+    // Calendly ne recadre la croix que lorsque le popup est une carte centrée,
+    // plus étroite que l'overlay (desktop / tablette). En plein écran mobile,
+    // popup ≈ overlay : sa position par défaut colle déjà au calendrier, on
+    // ne touche à rien pour éviter de la faire sortir de l'écran.
+    const isCenteredCard = (overlayRect.width - popupRect.width) > 40;
+    if (!isCenteredCard) return;
+    const top = Math.max(popupRect.top - overlayRect.top - 40, 8) + 'px';
+    const right = Math.max(overlayRect.right - popupRect.right - 4, 8) + 'px';
+    if (close.style.top !== top) close.style.setProperty('top', top, 'important');
+    if (close.style.right !== right) close.style.setProperty('right', right, 'important');
+  }
+  // Calendly peut réappliquer sa propre position sur .calendly-popup-close
+  // après coup (ex. une fois l'iframe chargée) — un simple appel unique au
+  // moment de l'insertion peut donc se faire écraser. On surveille aussi les
+  // mutations de style sur la croix elle-même pour réimposer la nôtre à
+  // chaque fois que Calendly tente de la reposer.
+  let closeStyleObserver = null;
+  function watchCalendlyClose() {
+    const close = document.querySelector('.calendly-popup-close');
+    if (!close || closeStyleObserver) return;
+    repositionCalendlyClose();
+    closeStyleObserver = new MutationObserver(() => repositionCalendlyClose());
+    closeStyleObserver.observe(close, { attributes: true, attributeFilter: ['style'] });
+  }
+  new MutationObserver(() => {
+    if (document.querySelector('.calendly-popup-close')) {
+      watchCalendlyClose();
+    } else if (closeStyleObserver) {
+      closeStyleObserver.disconnect();
+      closeStyleObserver = null;
+    }
+  }).observe(document.body, { childList: true });
+  window.addEventListener('resize', repositionCalendlyClose);
+
+  // ─── IntersectionObserver fade-up sur sections .reveal ───
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-visible');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ─── Mobile floating CTA ───
+  const floatingCta = document.getElementById('mobile-cta');
+  const booking = document.getElementById('booking');
+  const footer = document.querySelector('.footer');
+  let bookingVisible = false;
+  let footerVisible = false;
+  if (booking) {
+    const bookingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { bookingVisible = e.isIntersecting; updateFloatingCta(); });
+    }, { threshold: 0.05 });
+    bookingObserver.observe(booking);
+  }
+  if (footer) {
+    const footerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { footerVisible = e.isIntersecting; updateFloatingCta(); });
+    }, { threshold: 0.05 });
+    footerObserver.observe(footer);
+  }
+  function updateFloatingCta() {
+    const isMobile = window.matchMedia('(max-width: 900px)').matches;
+    const scrolled = window.scrollY > 300;
+    const show = isMobile && scrolled && !bookingVisible && !footerVisible;
+    floatingCta.classList.toggle('is-visible', show);
+  }
+  window.addEventListener('scroll', updateFloatingCta, { passive: true });
+  window.addEventListener('resize', updateFloatingCta);
+
+  // ─── Smooth scroll pour anchor links ───
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+
+  // ─── Header sticky : densification au-delà de 60px, pin du sous-menu au-delà de 300px ───
+  const mhHeader = document.getElementById('mh-header');
+  if (mhHeader) {
+    const SUBMENU_PIN_THRESHOLD = 300;
+    const onScrollHeader = () => {
+      const y = window.scrollY;
+      mhHeader.classList.toggle('is-scrolled', y > 60);
+      mhHeader.classList.toggle('is-pinned', y > SUBMENU_PIN_THRESHOLD);
+    };
+    onScrollHeader();
+    window.addEventListener('scroll', onScrollHeader, { passive: true });
+
+    const activeTab = mhHeader.querySelector('.mh-tab.is-active');
+    const row2 = mhHeader.querySelector('.mh-row2');
+    if (activeTab && row2) {
+      let hideTimer = null;
+      const reveal = () => {
+        if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+        mhHeader.classList.add('is-revealing');
+      };
+      const hide = () => {
+        if (hideTimer) clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => {
+          mhHeader.classList.remove('is-revealing');
+          hideTimer = null;
+        }, 150);
+      };
+      activeTab.addEventListener('mouseenter', reveal);
+      activeTab.addEventListener('focus', reveal);
+      activeTab.addEventListener('mouseleave', hide);
+      activeTab.addEventListener('blur', hide);
+      row2.addEventListener('mouseenter', reveal);
+      row2.addEventListener('mouseleave', hide);
+    }
+  }
+
+  // ─── Sous-menu actif : suit la section visible au scroll ───
+  const submenuTargets = ['analyse', 'livrable', 'booking']; // 'temoignages' retiré temporairement (section désactivée)
+  const submenuItems = document.querySelectorAll('.mh-submenu-item, .mh-drawer-submenu-item');
+  const submenuSections = submenuTargets
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  if (submenuItems.length && submenuSections.length) {
+    const setActive = (id) => {
+      submenuItems.forEach(el => {
+        el.classList.toggle('is-active', el.dataset.target === id);
+      });
+    };
+    const submenuIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { threshold: 0.4, rootMargin: '-20% 0px -50% 0px' });
+    submenuSections.forEach(s => submenuIO.observe(s));
+  }
+
+  // ─── CTA flottant mobile : bascule de thème selon le fond ───
+  const themedSections = document.querySelectorAll('[data-cta-theme]');
+  if (floatingCta && themedSections.length) {
+    const ctaThemeIO = new IntersectionObserver((entries) => {
+      let topMost = null;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const rect = entry.boundingClientRect;
+          if (!topMost || rect.top < topMost.rect.top) {
+            topMost = { el: entry.target, rect };
+          }
+        }
+      });
+      if (topMost) {
+        const theme = topMost.el.dataset.ctaTheme;
+        floatingCta.classList.toggle('is-on-light', theme === 'light');
+      }
+    }, { threshold: 0, rootMargin: '-40% 0px -40% 0px' });
+    themedSections.forEach(s => ctaThemeIO.observe(s));
+  }
+
+  // ─── Dropdown "Audit CRO" (desktop) : hover géré en CSS, clic/tap en JS pour les
+  //     écrans tactiles ≥900px (hover ambigu). Fermeture au clic extérieur / Échap. ───
+  document.querySelectorAll('.mh-tab-group').forEach(group => {
+    const trigger = group.querySelector('.mh-tab-group-trigger');
+    if (!trigger) return;
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = !group.classList.contains('is-open');
+      group.classList.toggle('is-open', open);
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.mh-tab-group.is-open').forEach(g => {
+      g.classList.remove('is-open');
+      const t = g.querySelector('.mh-tab-group-trigger');
+      if (t) t.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.mh-tab-group.is-open').forEach(g => {
+        g.classList.remove('is-open');
+        const t = g.querySelector('.mh-tab-group-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
+  // ─── Drawer mobile : toggle ouvert/fermé ───
+  const drawerToggle = document.getElementById('mh-mobile-toggle');
+  const drawer = document.getElementById('mh-drawer');
+  if (drawerToggle && drawer) {
+    const setDrawer = (open) => {
+      drawer.classList.toggle('is-open', open);
+      drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      drawerToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      drawerToggle.textContent = open ? 'Fermer' : 'Menu';
+    };
+    drawerToggle.addEventListener('click', () => {
+      setDrawer(!drawer.classList.contains('is-open'));
+    });
+    drawer.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', () => setDrawer(false));
+    });
+    window.addEventListener('resize', () => {
+      if (!window.matchMedia('(max-width: 900px)').matches && drawer.classList.contains('is-open')) {
+        setDrawer(false);
+      }
+    });
+  }
+})();
+</script>
+
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+</body>
+</html>
