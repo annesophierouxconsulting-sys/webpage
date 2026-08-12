@@ -1037,20 +1037,30 @@ body {
 .mh-tab-group.is-open .mh-tab-group-trigger::before,
 .mh-tab-group-trigger:focus-visible::before { transform: rotate(-180deg); }
 .mh-tab-dropdown {
-  position: absolute; top: calc(100% + 14px); left: 50%;
-  transform: translateX(-50%) translateY(4px);
+  position: absolute; top: 100%; left: 50%;
+  transform: translateX(-50%);
+  padding-top: 14px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 200ms ease;
+  z-index: 60;
+}
+.mh-tab-dropdown-panel {
   background: var(--band-bg);
   border: 1px solid rgba(212, 178, 117, 0.25);
   padding: 8px; min-width: 260px;
-  opacity: 0; pointer-events: none;
-  transition: opacity 200ms ease, transform 200ms ease;
-  z-index: 60;
   box-shadow: 0 12px 32px -12px rgba(8, 4, 26, 0.5);
+  transform: translateY(4px);
+  transition: transform 200ms ease;
 }
 .mh-tab-group:hover .mh-tab-dropdown,
 .mh-tab-group.is-open .mh-tab-dropdown,
 .mh-tab-group:focus-within .mh-tab-dropdown {
-  opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0);
+  opacity: 1; pointer-events: auto;
+}
+.mh-tab-group:hover .mh-tab-dropdown-panel,
+.mh-tab-group.is-open .mh-tab-dropdown-panel,
+.mh-tab-group:focus-within .mh-tab-dropdown-panel {
+  transform: translateY(0);
 }
 .mh-tab-dropdown a {
   display: block;
@@ -1226,8 +1236,10 @@ body {
         <li class="mh-tab-group">
           <button type="button" class="mh-tab mh-tab-group-trigger is-active" aria-haspopup="true" aria-expanded="false">Audit CRO</button>
           <div class="mh-tab-dropdown" role="menu">
-            <a href="../" role="menuitem">Audit CRO complet SaaS et e-commerce</a>
-            <a href="#top" class="is-active" role="menuitem" aria-current="page">Conversion Focus - entrepreneurs</a>
+            <div class="mh-tab-dropdown-panel">
+              <a href="../" role="menuitem">Audit CRO complet SaaS et e-commerce</a>
+              <a href="#top" class="is-active" role="menuitem" aria-current="page">Conversion Focus - entrepreneurs</a>
+            </div>
           </div>
         </li>
       </ul>
