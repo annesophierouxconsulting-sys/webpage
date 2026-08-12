@@ -2743,6 +2743,45 @@ body {
 }
 .mh-tab.is-active::after { transform: scaleX(1); }
 
+/* Groupe déroulant "Audit CRO" — trigger + panneau au survol/focus.
+   Partagé avec /conversion-focus/. */
+.mh-tab-group { position: relative; }
+.mh-tab-group-trigger { display: inline-flex; align-items: baseline; gap: 5px; }
+.mh-tab-group-trigger::before {
+  content: '▾'; font-family: var(--font-mono); font-size: 9px; font-style: normal;
+  color: rgba(244, 236, 211, 0.45); transition: transform 200ms ease, color 250ms ease;
+}
+.mh-tab-group-trigger.is-active::before { color: var(--champagne); }
+.mh-tab-group:hover .mh-tab-group-trigger::before,
+.mh-tab-group.is-open .mh-tab-group-trigger::before,
+.mh-tab-group-trigger:focus-visible::before { transform: rotate(-180deg); }
+.mh-tab-dropdown {
+  position: absolute; top: calc(100% + 14px); left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--band-bg);
+  border: 1px solid rgba(212, 178, 117, 0.25);
+  padding: 8px; min-width: 260px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 200ms ease, transform 200ms ease;
+  z-index: 60;
+  box-shadow: 0 12px 32px -12px rgba(8, 4, 26, 0.5);
+}
+.mh-tab-group:hover .mh-tab-dropdown,
+.mh-tab-group.is-open .mh-tab-dropdown,
+.mh-tab-group:focus-within .mh-tab-dropdown {
+  opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0);
+}
+.mh-tab-dropdown a {
+  display: block;
+  font-family: var(--font-display); font-style: italic; font-size: 15px;
+  color: rgba(244, 236, 211, 0.75);
+  padding: 10px 14px; text-decoration: none; white-space: nowrap;
+  border-left: 2px solid transparent;
+  transition: color 200ms ease, border-color 200ms ease, background-color 200ms ease;
+}
+.mh-tab-dropdown a:hover { color: var(--ivory); background: rgba(212, 178, 117, 0.06); }
+.mh-tab-dropdown a.is-active { color: var(--champagne); border-left-color: var(--champagne); }
+
 /* Onglet "à venir" — non cliquable, mini-tampon au hover */
 .mh-tab.is-coming {
   color: rgba(244, 236, 211, 0.3);
@@ -3016,6 +3055,10 @@ body {
   padding: 3px 7px;
   white-space: nowrap;
 }
+.mh-drawer-category-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.5); margin: -4px 0 -4px;
+}
 
 .mh-drawer-divider {
   height: 1px;
@@ -3079,8 +3122,12 @@ body {
     <a class="mh-logo" href="#top" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
     <nav class="mh-tabs-wrap" aria-label="Pages">
       <ul class="mh-tabs">
-        <li>
-          <a class="mh-tab is-active" href="#top" aria-current="page">Audit CRO</a>
+        <li class="mh-tab-group">
+          <button type="button" class="mh-tab mh-tab-group-trigger is-active" aria-haspopup="true" aria-expanded="false">Audit CRO</button>
+          <div class="mh-tab-dropdown" role="menu">
+            <a href="#top" class="is-active" role="menuitem" aria-current="page">Audit CRO complet SaaS et e-commerce</a>
+            <a href="conversion-focus/" role="menuitem">Conversion Focus - entrepreneurs</a>
+          </div>
         </li>
         <li>
           <span class="mh-tab is-coming" role="link" aria-disabled="true" tabindex="0">Conversion Messaging</span>
@@ -3112,14 +3159,18 @@ body {
 
 <aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
   <ul class="mh-drawer-tabs">
+    <li class="mh-drawer-category-label" aria-hidden="true">— Audit CRO</li>
     <li>
-      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Audit CRO</a>
+      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Audit CRO complet SaaS et e-commerce</a>
       <ul class="mh-drawer-submenu">
         <li><a class="mh-drawer-submenu-item is-active" href="#demarche" data-target="demarche">Notre démarche</a></li>
         <li><a class="mh-drawer-submenu-item" href="#methodes" data-target="methodes">Les méthodes</a></li>
         <li><a class="mh-drawer-submenu-item" href="#binome" data-target="binome">Le binôme</a></li>
         <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un échange</a></li>
       </ul>
+    </li>
+    <li>
+      <a class="mh-drawer-tab" href="conversion-focus/">Conversion Focus - entrepreneurs</a>
     </li>
     <li>
       <span class="mh-drawer-tab is-coming" role="link" aria-disabled="true">
@@ -4291,6 +4342,35 @@ body {
     }, { threshold: 0, rootMargin: '-40% 0px -40% 0px' });
     themedSections.forEach(s => ctaThemeIO.observe(s));
   }
+
+  // ─── Dropdown "Audit CRO" (desktop) : hover géré en CSS, clic/tap en JS pour les
+  //     écrans tactiles ≥900px (hover ambigu). Fermeture au clic extérieur / Échap. ───
+  document.querySelectorAll('.mh-tab-group').forEach(group => {
+    const trigger = group.querySelector('.mh-tab-group-trigger');
+    if (!trigger) return;
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = !group.classList.contains('is-open');
+      group.classList.toggle('is-open', open);
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.mh-tab-group.is-open').forEach(g => {
+      g.classList.remove('is-open');
+      const t = g.querySelector('.mh-tab-group-trigger');
+      if (t) t.setAttribute('aria-expanded', 'false');
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.mh-tab-group.is-open').forEach(g => {
+        g.classList.remove('is-open');
+        const t = g.querySelector('.mh-tab-group-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
 
   // ─── Drawer mobile : toggle ouvert/fermé ───
   const drawerToggle = document.getElementById('mh-mobile-toggle');
