@@ -286,10 +286,13 @@ body {
   line-height: 1.5;
   color: var(--ink);
   max-width: 520px;
-  margin: 14px 0 0;
+  margin: 22px 0 0;
+  padding-left: 15px;
+  border-left: 1px solid var(--champagne-fonce);
   font-variation-settings: "opsz" 24;
 }
 .enjeu-transition em { font-style: italic; color: var(--champagne-fonce); }
+.enjeu-transition-arrow { color: var(--champagne-fonce); }
 .enjeu-columns {
   display: flex;
   gap: clamp(40px, 6vw, 90px);
@@ -1224,6 +1227,7 @@ body {
   .enjeu-validations { gap: 14px; }
   .enjeu-validation { font-size: 15.5px; }
   .enjeu-conversion-types { margin-top: 39px; }
+  .enjeu-transition { padding-left: 13px; }
   .regard-row { grid-template-columns: 1fr; }
   .regard-dim { padding: 1.25rem 0; border-bottom: 1px solid rgba(20, 16, 42, 0.12); }
   .regard-dim:nth-child(odd) { border-right: none; }
@@ -1385,7 +1389,7 @@ body {
       <div class="enjeu-main">
         <h2>Une offre mieux comprise. <em>Plus convaincante. Plus efficace.</em></h2>
         <p class="enjeu-intro">Vos visiteurs arrivent jusqu'à votre offre, mais ils ne sont pas assez nombreux à passer à l'action&nbsp;? Chaque hésitation, incompréhension ou friction peut être une opportunité qui vous échappe.</p>
-        <p class="enjeu-transition"><em style="font-style:italic;color:var(--champagne-fonce)">Offer Focus</em> identifie les freins qui comptent vraiment et où agir pour mieux convertir.</p>
+        <p class="enjeu-transition"><span class="enjeu-transition-arrow" aria-hidden="true">→</span> <em style="font-style:italic;color:var(--champagne-fonce)">Offer Focus</em> identifie les freins qui comptent vraiment et où agir pour mieux convertir.</p>
       </div>
       <div class="enjeu-validations-col">
         <ul class="enjeu-validations">
