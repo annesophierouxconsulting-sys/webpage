@@ -797,8 +797,37 @@ body {
   color: var(--champagne);
   margin: 0;
 }
+.offre-dark-price-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.offre-dark-price-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.55);
+}
 .offre-dark-price { font-family: var(--font-display); font-size: clamp(44px, 6vw, 64px); color: var(--champagne); line-height: 1; }
-.offre-dark-list { list-style: none; padding: 0; margin: 0 0 44px; }
+.offre-tier-list { list-style: none; padding: 0; margin: 0; }
+.offre-tier-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: rgba(244, 236, 211, 0.85);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.12);
+}
+.offre-tier-price { color: var(--champagne); white-space: nowrap; }
+.offre-tier-note {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.7);
+  margin: 10px 0 0;
+}
+.offre-dark-list { list-style: none; padding: 0; margin: 28px 0 44px; }
 .offre-dark-list li {
   font-size: 16.5px;
   line-height: 1.6;
@@ -807,14 +836,6 @@ body {
   border-bottom: 1px solid rgba(212, 178, 117, 0.12);
 }
 .offre-dark-list li:last-child { border-bottom: none; }
-.offre-dark-footnote {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.04em;
-  color: rgba(244, 236, 211, 0.45);
-  font-style: italic;
-  margin: 0 0 32px;
-}
 .offre-dark-cta {
   display: inline-block;
   font-family: var(--font-mono);
@@ -1218,6 +1239,8 @@ body {
   .testi-grid { grid-template-columns: 1fr; gap: 1.25rem; }
   .expertise-portrait { max-width: 220px; margin: 0 auto; }
   .offre-dark-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .offre-dark-price-wrap { align-items: flex-start; }
+  .offre-tier-item { font-size: 15.5px; }
   .booking-final-section { padding: clamp(48px, 9vw, 72px) 6%; }
   .booking-final-lead { margin-bottom: 28px; }
   .footer { padding: 8% 7% 5% 7%; }
@@ -1633,15 +1656,22 @@ body {
         <h2>Offer Focus</h2>
         <p class="offre-dark-sub">Audit CRO &amp; Copywriting pour Entrepreneurs &amp; Experts</p>
       </div>
-      <span class="offre-dark-price">650&nbsp;€</span>
+      <div class="offre-dark-price-wrap">
+        <span class="offre-dark-price-label">À partir de</span>
+        <span class="offre-dark-price">490&nbsp;€</span>
+      </div>
     </div>
+    <ul class="offre-tier-list">
+      <li class="offre-tier-item"><span>1 page / étape</span><span class="offre-tier-price">490&nbsp;€</span></li>
+      <li class="offre-tier-item"><span>2 pages / étapes</span><span class="offre-tier-price">590&nbsp;€</span></li>
+      <li class="offre-tier-item"><span>3 pages / étapes</span><span class="offre-tier-price">690&nbsp;€</span></li>
+    </ul>
+    <p class="offre-tier-note">Au-delà de 3 pages / étapes · tarif sur mesure</p>
     <ul class="offre-dark-list">
-      <li>Jusqu'à 3 pages / étapes selon le besoin*</li>
       <li>Tests utilisateurs inclus</li>
       <li>Diagnostic, recommandations, priorisations</li>
       <li>Copywriting / restructuration / redesign</li>
     </ul>
-    <p class="offre-dark-footnote">*Pour un funnel plus long, ajustement tarifaire sur-mesure.</p>
     <a href="#booking" class="offre-dark-cta">Réserver un appel découverte →</a>
   </div>
 </section>
