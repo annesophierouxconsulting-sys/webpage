@@ -280,6 +280,16 @@ body {
   margin: 0;
   font-variation-settings: "opsz" 14;
 }
+.enjeu-transition {
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+  max-width: 520px;
+  margin: 14px 0 0;
+  font-variation-settings: "opsz" 24;
+}
+.enjeu-transition em { font-style: italic; color: var(--champagne-fonce); }
 .enjeu-columns {
   display: flex;
   gap: clamp(40px, 6vw, 90px);
@@ -287,15 +297,22 @@ body {
   flex-wrap: wrap;
 }
 .enjeu-main { flex: 1.25 1 340px; min-width: 280px; }
+.enjeu-validations-col { flex: 1 1 300px; min-width: 260px; }
 .enjeu-validations {
-  flex: 1 1 300px;
-  min-width: 260px;
   list-style: none;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+.enjeu-conversion-types {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin: 20px 0 0;
 }
 .enjeu-validation {
   display: flex;
@@ -1338,18 +1355,22 @@ body {
 
 <!-- ch.01 — LA MISSION -->
 <section class="enjeu-section reveal" id="enjeu" data-cta-theme="light">
-  <span class="chapter-mark">— la mission</span>
+  <span class="chapter-mark">— ch.01 · la mission</span>
   <div class="enjeu-wrap">
     <div class="enjeu-columns">
       <div class="enjeu-main">
         <h2>Une offre mieux comprise. <em>Plus convaincante. Plus efficace.</em></h2>
-        <p class="enjeu-intro">Leads, rendez-vous, demandes de devis, inscriptions ou ventes&nbsp;: <em style="font-style:italic;color:var(--champagne-fonce)">Conversion Focus</em> identifie où agir pour mieux convertir.</p>
+        <p class="enjeu-intro">Vos visiteurs arrivent jusqu'à votre offre, mais trop peu passent à l'action&nbsp;? Chaque hésitation, incompréhension ou friction peut être une opportunité qui vous échappe.</p>
+        <p class="enjeu-transition"><em style="font-style:italic;color:var(--champagne-fonce)">Conversion Focus</em> identifie où agir pour lever les freins qui comptent vraiment et mieux convertir.</p>
       </div>
-      <ul class="enjeu-validations">
-        <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">✓</span>Votre offre gagne en pouvoir de conviction.</li>
-        <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">✓</span>Plus de visiteurs passent à l'action.</li>
-        <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">✓</span>Votre trafic génère plus de valeur.</li>
-      </ul>
+      <div class="enjeu-validations-col">
+        <ul class="enjeu-validations">
+          <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">✓</span>Votre offre gagne en pouvoir de conviction.</li>
+          <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">✓</span>Plus de visiteurs passent à l'action.</li>
+          <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">✓</span>Votre trafic génère plus de valeur.</li>
+        </ul>
+        <p class="enjeu-conversion-types">Leads · rendez-vous · demandes de devis · inscriptions · ventes</p>
+      </div>
     </div>
   </div>
 </section>
