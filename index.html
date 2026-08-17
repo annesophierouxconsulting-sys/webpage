@@ -1226,6 +1226,48 @@ body {
   gap: 2px;
 }
 
+/* Accordéon vertical mobile — remplace la roue + la légende cliquable sous 900px.
+   Titres seuls, dorés, "+" pour dérouler chaque méthode indépendamment. */
+.methods-mobile-accordion { display: none; }
+.methods-mobile-item { border-bottom: 1px solid rgba(140, 106, 44, 0.18); }
+.methods-mobile-item:last-child { border-bottom: none; }
+.methods-mobile-item summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 0;
+  cursor: pointer;
+  list-style: none;
+}
+.methods-mobile-item summary::-webkit-details-marker { display: none; }
+.methods-mobile-title-row { display: flex; flex-direction: column; gap: 5px; }
+.methods-mobile-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1.25;
+  color: var(--champagne-fonce);
+}
+.methods-mobile-icon {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--champagne-fonce);
+  transition: transform 200ms ease;
+}
+.methods-mobile-item[open] .methods-mobile-icon { transform: rotate(45deg); }
+.methods-mobile-body { padding: 0 0 18px; }
+.methods-mobile-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0;
+  font-variation-settings: "opsz" 14;
+}
+
 /* ============================================================
    7 — BANDEAU DIFFÉRENCE avec plume bauhaus
    ============================================================ */
@@ -2595,12 +2637,11 @@ body {
   .method-hint, .method-timeline { display: none; }
   .method-mobile-journey { display: flex; flex-direction: column; margin-top: 0.5rem; }
   .methods-section { padding: 5% 5%; }
-  .methods-hint { font-size: 9px; letter-spacing: 0.18em; margin-top: 1rem; }
   .methods-mag { grid-template-columns: 1fr; gap: 2rem; }
   .methods-left { gap: 1.25rem; }
-  .methods-stage { justify-content: center; padding-left: 0; }
-  /* Roue plein largeur sur mobile pour zone tactile généreuse */
-  .donut-svg { max-width: 90vw; }
+  /* Roue + hint retirés au profit de l'accordéon vertical mobile (titres seuls, "+" pour dérouler) */
+  .methods-hint, .methods-stage, .methods-legend-block { display: none; }
+  .methods-mobile-accordion { display: flex; flex-direction: column; }
   /* Markers chapter remis en flow au-dessus du titre sur toutes les sections
      (évite le chevauchement avec les titres sur viewports étroits).
      Taille réduite à 10px (était 12px) + letter-spacing resserré pour s'aligner
@@ -2612,12 +2653,6 @@ body {
     font-size: 10px;
     letter-spacing: 0.18em;
     margin-bottom: 1.5rem;
-  }
-  /* Affiche uniquement la méthode active sous la roue ; les autres sont masquées */
-  .methods-legend-block .lphase:not(.is-active) { display: none; }
-  .methods-legend-block .lphase.is-active {
-    border-bottom: none;
-    padding-top: 0.5rem;
   }
   .lphase-meta { grid-template-columns: 1fr; gap: 4px; }
   .diff-content { gap: 1.25rem; }
@@ -3666,6 +3701,88 @@ body {
         </span>
         <span class="lphase-arrow">→</span>
       </button>
+    </div>
+    <div class="methods-mobile-accordion">
+      <details class="methods-mobile-item">
+        <summary>
+          <div class="methods-mobile-title-row">
+            <span class="methods-mobile-title">Évaluation heuristique</span>
+            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
+          </div>
+          <span class="methods-mobile-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="methods-mobile-body">
+          <p class="methods-mobile-desc">Audit des bonnes pratiques UX et sectorielles. Ce que l'oeil expert repère avant même les données.</p>
+          <div class="lphase-meta">
+            <span class="lphase-meta-key">S'appuie sur</span>
+            <span class="lphase-meta-val">
+              <span>Baymard (130 000 h de recherche UX)</span>
+              <span>GoodUI (+500 A/B tests de grandes entreprises analysés)</span>
+              <span>CXL (formation référence mondiale du CRO)</span>
+            </span>
+          </div>
+        </div>
+      </details>
+      <details class="methods-mobile-item">
+        <summary>
+          <div class="methods-mobile-title-row">
+            <span class="methods-mobile-title">Analytics</span>
+            <span class="lphase-badge"><span class="qq-dot"></span>Quantitatif</span>
+          </div>
+          <span class="methods-mobile-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="methods-mobile-body">
+          <p class="methods-mobile-desc">Review du tracking + lecture des comportements agrégés (entonnoirs, drop-offs, segments). On identifie les points où le trafic perd le plus, les parcours et pages qui convertissent, et où chercher les « pourquoi ».</p>
+        </div>
+      </details>
+      <details class="methods-mobile-item">
+        <summary>
+          <div class="methods-mobile-title-row">
+            <span class="methods-mobile-title">Heatmaps &amp; sessions recordings</span>
+            <span class="lphase-badge"><span class="qq-dot"></span>Mixte</span>
+          </div>
+          <span class="methods-mobile-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="methods-mobile-body">
+          <p class="methods-mobile-desc">On observe les clics, les scroll, les hésitations. Une lecture fine du comportement réel, écran par écran, qui révèle les frictions invisibles dans la data agrégée.</p>
+        </div>
+      </details>
+      <details class="methods-mobile-item">
+        <summary>
+          <div class="methods-mobile-title-row">
+            <span class="methods-mobile-title">Tests utilisateurs</span>
+            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
+          </div>
+          <span class="methods-mobile-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="methods-mobile-body">
+          <p class="methods-mobile-desc">On confronte le parcours à de vrais utilisateurs. Les blocages, les incompréhensions, les hésitations apparaissent en clair — on entend les mots, on voit les gestes.</p>
+        </div>
+      </details>
+      <details class="methods-mobile-item">
+        <summary>
+          <div class="methods-mobile-title-row">
+            <span class="methods-mobile-title">Sondages onsite</span>
+            <span class="lphase-badge"><span class="qq-dot"></span>Mixte</span>
+          </div>
+          <span class="methods-mobile-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="methods-mobile-body">
+          <p class="methods-mobile-desc">Quelques questions ciblées, posées aux moments clés du parcours. On identifie les freins, les hésitations et les déclencheurs de conversion pour comprendre ce qui pousse — ou bloque — le passage à l'action.</p>
+        </div>
+      </details>
+      <details class="methods-mobile-item">
+        <summary>
+          <div class="methods-mobile-title-row">
+            <span class="methods-mobile-title">Interviews clients</span>
+            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
+          </div>
+          <span class="methods-mobile-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="methods-mobile-body">
+          <p class="methods-mobile-desc">Conversations approfondies avec vos clients, sur leur expérience d'achat. Pour comprendre les motivations, les émotions et la perception de valeur - et faire émerger des insights parfois inattendus, souvent invisibles dans les données.</p>
+        </div>
+      </details>
     </div>
   </div>
 </section>
