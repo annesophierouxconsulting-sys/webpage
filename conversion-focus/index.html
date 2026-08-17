@@ -584,7 +584,20 @@ body {
   color: var(--ink-mute);
   margin: 0 0 10px;
 }
-.livrable-example-stats { display: flex; gap: clamp(18px, 3vw, 30px); flex-wrap: wrap; }
+.livrable-example-stats { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; row-gap: 4px; }
+.livrable-example-stat { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 2px; min-width: 0; }
+.livrable-example-stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.4vw, 26px);
+  line-height: 1.1;
+  color: var(--ink);
+}
+.livrable-example-stat-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
 .livrable-example-divider {
   height: 1px;
   background: linear-gradient(to right, transparent, rgba(140, 106, 44, 0.3), transparent);
@@ -597,18 +610,153 @@ body {
   color: var(--ink);
   margin: 10px 0 14px;
 }
-.livrable-example-bars { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
-.livrable-bar { flex: 1; min-width: 0; height: 22px; border: 1px solid rgba(20, 16, 42, 0.15); }
-.livrable-bar.is-after { border-color: var(--champagne-fonce); background: rgba(140, 106, 44, 0.06); }
-.livrable-example-arrow { font-size: 10px; color: var(--champagne-fonce); flex: none; }
 .livrable-example-tags {
   font-family: var(--font-mono);
   font-size: 8.5px;
+  line-height: 1.4;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   color: var(--champagne-fonce);
-  margin: 0;
+  margin: 15px 0 0;
 }
+
+/* Comparateur avant / après — curseur horizontal, deux mini-hero superposés.
+   Le padding lateral (%) cree une zone de securite fixe autour du centre : le
+   contenu de chaque cote reste dans sa moitie quelle que soit la position du
+   curseur (le clip-path ne fait que reveler/masquer, il ne deplace jamais le texte). */
+.livrable-compare {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  border: 1px solid rgba(140, 106, 44, 0.25);
+  overflow: hidden;
+  background: var(--paper);
+  touch-action: pan-y;
+}
+.livrable-compare-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding: 18px;
+  background: var(--paper);
+}
+.livrable-compare-before { clip-path: inset(0 50% 0 0); z-index: 1; padding-right: 20px; }
+.livrable-compare-after { align-items: flex-end; text-align: right; padding-left: 20px; }
+.livrable-compare-after .mock-line { align-self: flex-end; }
+/* max-width en % de la largeur totale du comparateur (pas du conteneur déjà réduit) :
+   garantit une zone de sécurité autour du centre quelle que soit la largeur de la carte. */
+.livrable-compare-before .mock-eyebrow,
+.livrable-compare-before .mock-headline,
+.livrable-compare-before .mock-sub,
+.livrable-compare-after .mock-eyebrow,
+.livrable-compare-after .mock-headline {
+  max-width: 42%;
+}
+/* Labels Avant/Après : hors des calques recouvrables, toujours visibles quelle
+   que soit la position du curseur (pointer-events:none pour ne pas gener le drag). */
+.livrable-compare-badge {
+  position: absolute;
+  top: 8px;
+  z-index: 4;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  background: rgba(251, 244, 224, 0.85);
+  padding: 2px 5px;
+  pointer-events: none;
+}
+.livrable-compare-badge.is-before { left: 10px; }
+.livrable-compare-badge.is-after { right: 10px; }
+.mock-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+}
+.mock-headline {
+  font-family: var(--font-display);
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--ink);
+}
+.livrable-compare-before .mock-headline { color: var(--ink-mute); font-style: normal; }
+.livrable-compare-after .mock-headline { font-weight: 500; }
+.mock-sub { font-family: var(--font-display); font-size: 10.5px; line-height: 1.35; color: var(--ink-mute); }
+.mock-line { display: block; height: 3px; max-width: 30%; background: rgba(20, 16, 42, 0.12); }
+.mock-line.short { max-width: 16%; }
+.mock-cta {
+  display: inline-block;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.mock-cta.is-plain { color: var(--ink-mute); text-decoration: underline; }
+.mock-cta.is-solid { color: var(--paper); background: var(--champagne-fonce); padding: 5px 9px; }
+.livrable-compare-line {
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 1px;
+  background: var(--champagne-fonce);
+  pointer-events: none;
+  z-index: 2;
+}
+/* Chevrons decoratifs superposes au thumb natif (transparent) : communique
+   immediatement que le handle se deplace horizontalement. Syncs en JS avec
+   la meme valeur % que .livrable-compare-line. */
+.livrable-compare-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  color: var(--champagne-fonce);
+}
+.livrable-compare-range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: ew-resize;
+  z-index: 3;
+}
+.livrable-compare-range::-webkit-slider-runnable-track { background: transparent; height: 100%; }
+.livrable-compare-range::-moz-range-track { background: transparent; height: 100%; }
+.livrable-compare-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1px solid var(--champagne-fonce);
+  box-shadow: 0 2px 8px -2px rgba(20, 16, 42, 0.35);
+  cursor: ew-resize;
+}
+.livrable-compare-range::-moz-range-thumb {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1px solid var(--champagne-fonce);
+  box-shadow: 0 2px 8px -2px rgba(20, 16, 42, 0.35);
+  cursor: ew-resize;
+}
+.livrable-compare-range:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--champagne-fonce); outline-offset: 2px; }
+.livrable-compare-range:focus-visible::-moz-range-thumb { outline: 2px solid var(--champagne-fonce); outline-offset: 2px; }
 
 /* ============================================================
    POUR QUI — filets latéraux + listes ✓ / ✕ (split-*, fit-*)
@@ -1256,6 +1404,14 @@ body {
   .livrable-box { padding: 28px 22px; }
   .livrable-grid { gap: 2rem; }
   .livrable-example { max-width: 100%; }
+  .livrable-example-stats { grid-template-columns: 1fr; row-gap: 14px; }
+  .livrable-compare { height: 160px; }
+  .livrable-compare-panel { padding: 16px; gap: 4px; }
+  .livrable-compare-before { padding-right: 16px; }
+  .livrable-compare-after { padding-left: 16px; }
+  .mock-headline { font-size: 12px; line-height: 1.25; }
+  .mock-sub { font-size: 10px; }
+  .livrable-example-tags { line-height: 1.6; }
   .split-grid { flex-direction: column; gap: 2.25rem; }
   .split-block { flex-basis: auto; }
   .testi-grid { grid-template-columns: 1fr; gap: 1.25rem; }
@@ -1277,7 +1433,6 @@ body {
 @media (max-width: 640px) {
   .supports-grid { grid-template-columns: 1fr; }
   .hero-cta-row { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
-  .livrable-example-stats { gap: 2rem; }
   .booking-final-cta-row { flex-direction: column; align-items: flex-start; gap: 0.85rem; }
   .booking-final-cta { display: block; width: 100%; text-align: center; }
 }
@@ -1546,7 +1701,7 @@ body {
           <div class="livrable-step">
             <div class="livrable-step-markers" aria-hidden="true"><span class="livrable-step-marker"></span></div>
             <div class="livrable-step-content">
-              <span class="livrable-step-label">03 — Savoir quoi changer</span>
+              <span class="livrable-step-label">03 — Passer à l'optimisation</span>
               <p>Copywriting · Restructuration · Redesign</p>
             </div>
           </div>
@@ -1559,27 +1714,39 @@ body {
         <p class="livrable-example-constat">Formulation imprécise · hiérarchie insuffisante</p>
         <p class="livrable-example-testlabel">Test utilisateur · 10 personnes</p>
         <div class="livrable-example-stats">
-          <div class="exemple-stat" style="align-items:flex-start;text-align:left">
-            <span class="exemple-stat-num" style="font-size:clamp(22px,2.4vw,26px)">2/10</span>
-            <span class="exemple-stat-label" style="font-size:11px">identifient la cible</span>
+          <div class="livrable-example-stat">
+            <span class="livrable-example-stat-num">2/10</span>
+            <span class="livrable-example-stat-label">identifient la cible</span>
           </div>
-          <div class="exemple-stat" style="align-items:flex-start;text-align:left">
-            <span class="exemple-stat-num" style="font-size:clamp(22px,2.4vw,26px)">1/10</span>
-            <span class="exemple-stat-label" style="font-size:11px">restitue le bénéfice</span>
+          <div class="livrable-example-stat">
+            <span class="livrable-example-stat-num">1/10</span>
+            <span class="livrable-example-stat-label">restitue le bénéfice</span>
           </div>
         </div>
 
         <div class="livrable-example-divider"></div>
 
         <span class="priority-chip is-solid">Priorité 01 — à corriger</span>
-        <p class="livrable-example-reco">Clarifier la proposition de valeur et restructurer sa hiérarchie.</p>
+        <p class="livrable-example-reco">Clarification de la proposition de valeur et restructuration de sa hiérarchie.</p>
 
-        <div class="livrable-example-bars">
-          <div class="livrable-bar"></div>
-          <span class="livrable-example-arrow">→</span>
-          <div class="livrable-bar is-after"></div>
+        <div class="livrable-compare">
+          <div class="livrable-compare-panel livrable-compare-after">
+            <span class="mock-eyebrow">Pour consultants indépendants</span>
+            <span class="mock-headline">Obtenez plus de rendez-vous qualifiés sans passer vos journées à prospecter.</span>
+            <span class="mock-cta is-solid">Découvrir l'accompagnement →</span>
+          </div>
+          <div class="livrable-compare-panel livrable-compare-before">
+            <span class="mock-headline">Développez votre activité avec notre expertise.</span>
+            <span class="mock-sub">Des solutions adaptées à vos besoins.</span>
+            <span class="mock-cta is-plain">En savoir plus</span>
+          </div>
+          <span class="livrable-compare-badge is-before" aria-hidden="true">Avant</span>
+          <span class="livrable-compare-badge is-after" aria-hidden="true">Après</span>
+          <div class="livrable-compare-line" aria-hidden="true"></div>
+          <span class="livrable-compare-handle" aria-hidden="true">‹ ›</span>
+          <input type="range" class="livrable-compare-range" min="0" max="100" value="50" autocomplete="off" aria-label="Curseur de comparaison : avant à gauche, après à droite">
         </div>
-        <p class="livrable-example-tags">Promesse clarifiée · hiérarchie restructurée · copywriting ajusté · traitement visuel revu</p>
+        <p class="livrable-example-tags">Promesse clarifiée · hiérarchie restructurée · copywriting ajusté · design revu</p>
       </div>
     </div>
   </div>
@@ -2027,6 +2194,25 @@ body {
       }
     });
   }
+
+  // ─── Comparateur avant/après (ch.03 le livrable) : curseur natif <input type="range">
+  //     pilote le clip-path du calque "avant" + la ligne de séparation visuelle ───
+  document.querySelectorAll('.livrable-compare').forEach(box => {
+    const range = box.querySelector('.livrable-compare-range');
+    const before = box.querySelector('.livrable-compare-before');
+    const line = box.querySelector('.livrable-compare-line');
+    const handle = box.querySelector('.livrable-compare-handle');
+    if (!range || !before || !line) return;
+    range.value = 50;
+    function update() {
+      const v = range.value;
+      before.style.clipPath = `inset(0 ${100 - v}% 0 0)`;
+      line.style.left = v + '%';
+      if (handle) handle.style.left = v + '%';
+    }
+    range.addEventListener('input', update);
+    update();
+  });
 })();
 </script>
 
