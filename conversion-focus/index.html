@@ -1172,7 +1172,7 @@ body {
   position: relative;
   font-family: var(--font-display); font-style: italic; color: var(--ivory); text-decoration: none;
   display: inline-flex; align-items: baseline; gap: 14px; padding-bottom: 6px; line-height: 1.1;
-  font-size: 20px;
+  font-size: 16px;
 }
 .mh-drawer-tab::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px;
@@ -1181,6 +1181,24 @@ body {
 }
 .mh-drawer-tab.is-active { color: var(--champagne); font-weight: 500; font-size: 26px; }
 .mh-drawer-tab.is-active::after { transform: scaleX(1); }
+.mh-drawer-tab.is-coming {
+  color: var(--ivory);
+  font-size: 16px;
+  font-weight: 400;
+  cursor: default;
+}
+.mh-drawer-tab-stamp {
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  border: 1px dashed var(--champagne-fonce);
+  padding: 3px 7px;
+  white-space: nowrap;
+}
 .mh-drawer-category-label {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
   color: rgba(212, 178, 117, 0.5); margin: -4px 0 -4px;
@@ -1312,9 +1330,6 @@ body {
   <ul class="mh-drawer-tabs">
     <li class="mh-drawer-category-label" aria-hidden="true">— Audit CRO</li>
     <li>
-      <a class="mh-drawer-tab" href="../index.html">Audit CRO complet SaaS et e-commerce</a>
-    </li>
-    <li>
       <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Offer Focus - entrepreneurs</a>
       <ul class="mh-drawer-submenu">
         <li><a class="mh-drawer-submenu-item is-active" href="#analyse" data-target="analyse">L'analyse</a></li>
@@ -1322,6 +1337,15 @@ body {
         <!-- Témoignages désactivé temporairement — cf. section commentée plus bas -->
         <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un appel découverte</a></li>
       </ul>
+    </li>
+    <li>
+      <a class="mh-drawer-tab" href="../index.html">Audit CRO complet SaaS et e-commerce</a>
+    </li>
+    <li>
+      <span class="mh-drawer-tab is-coming" role="link" aria-disabled="true">
+        Conversion Messaging
+        <span class="mh-drawer-tab-stamp">— à venir</span>
+      </span>
     </li>
   </ul>
   <div class="mh-drawer-divider" aria-hidden="true"></div>
