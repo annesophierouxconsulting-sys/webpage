@@ -461,308 +461,176 @@ body {
 }
 
 /* ============================================================
-   ch.03 — LIVRABLE — encart en équerre, chaîne + exemple
+   ch.03 — LIVRABLE — version compacte : tri des priorités +
+   un seul exemple de recommandation (info + mockup)
    ============================================================ */
 .livrable-section { background: var(--paper); padding: clamp(56px, 7vw, 88px) 6%; border-top: 1px solid rgba(20, 16, 42, 0.08); position: relative; }
-.livrable-box {
-  max-width: 1140px;
-  margin: clamp(48px, 6vw, 72px) auto 0;
-  padding: clamp(32px, 4.5vw, 56px);
-}
-.livrable-grid { display: flex; gap: clamp(36px, 5vw, 64px); flex-wrap: wrap; }
-.livrable-main { flex: 1.22 1 340px; min-width: 280px; display: flex; flex-direction: column; justify-content: center; }
-.livrable-main h2 {
+.livrable-head { max-width: 700px; margin: clamp(40px, 5vw, 56px) auto 0; text-align: center; }
+.livrable-head h2 {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(28px, 3.4vw, 38px);
-  line-height: 1.12;
-  margin: 0 0 0.9rem;
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.15;
+  margin: 0 0 1rem;
   color: var(--ink);
   font-variation-settings: "opsz" 60;
 }
-.livrable-main h2 em { font-style: italic; color: var(--champagne-fonce); }
-.livrable-main > p {
+.livrable-head h2 em { font-style: italic; color: var(--champagne-fonce); }
+.livrable-head p {
   font-family: var(--font-body);
-  font-size: 15.5px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.62;
   color: var(--ink-soft);
-  margin: 0 0 2rem;
+  margin: 0 auto;
+  max-width: 600px;
   font-variation-settings: "opsz" 14;
 }
-.livrable-journey { display: flex; flex-direction: column; }
-.livrable-step { display: flex; gap: 18px; padding-bottom: 28px; }
-.livrable-step:last-child { padding-bottom: 0; }
-.livrable-step-markers {
-  position: relative;
-  flex: none;
-  width: 10px;
-  display: flex;
-  justify-content: center;
-}
-.livrable-step-marker {
-  position: relative;
-  z-index: 1;
-  width: 8px;
-  height: 8px;
-  margin-top: 5px;
-  border-radius: 50%;
-  border: 1px solid var(--champagne-fonce);
-  background: var(--paper);
-}
-.livrable-step.is-emphasis .livrable-step-marker {
-  width: 10px;
-  height: 10px;
-  margin-top: 4px;
-  background: var(--champagne-fonce);
-  box-shadow: 0 0 0 3px rgba(140, 106, 44, 0.14);
-}
-.livrable-step:not(:last-child) .livrable-step-markers::after {
-  content: '';
-  position: absolute;
-  top: 13px;
-  bottom: -37px;
-  left: 50%;
-  width: 1px;
-  transform: translateX(-50%);
-  background: rgba(140, 106, 44, 0.3);
-}
-.livrable-step-content { flex: 1; min-width: 0; }
-.livrable-step-label {
-  display: block;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  font-size: 10.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  margin-bottom: 8px;
-}
-.livrable-step-content p {
-  font-family: var(--font-display);
-  font-size: 15.5px;
-  line-height: 1.5;
-  color: var(--ink);
-  margin: 0;
-}
-.priority-chip {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.04em;
-}
-.priority-chip.is-solid { color: var(--paper); background: var(--champagne-fonce); padding: 7px 14px; }
 
-.livrable-example {
-  flex: 1 1 300px;
-  min-width: 280px;
-  max-width: 440px;
-  border: 1px solid rgba(140, 106, 44, 0.25);
-  padding: clamp(22px, 2.8vw, 28px);
-  align-self: flex-start;
+/* Priorisation — une seule zone compacte, comprise en quelques secondes */
+.tri-row {
+  display: flex;
+  max-width: 900px;
+  margin: clamp(28px, 4vw, 40px) auto 0;
+  border-top: 1px solid rgba(20, 16, 42, 0.15);
+  border-bottom: 1px solid rgba(20, 16, 42, 0.15);
 }
-.livrable-example-label {
+.tri-item { flex: 1 1 0; min-width: 0; padding: 16px 24px; text-align: center; }
+.tri-item:first-child { border-right: 1px solid rgba(140, 106, 44, 0.2); }
+.tri-item-label {
   font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin: 0 0 1rem;
-}
-.livrable-example-dim {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  margin: 0 0 6px;
-}
-.livrable-example-constat { font-size: 13px; line-height: 1.5; color: var(--ink-soft); margin: 0 0 12px; }
-.livrable-example-testlabel {
-  font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11.5px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-mute);
-  margin: 0 0 10px;
-}
-.livrable-example-stats { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; row-gap: 4px; }
-.livrable-example-stat { display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 2px; min-width: 0; }
-.livrable-example-stat-num {
-  font-family: var(--font-display);
-  font-size: clamp(22px, 2.4vw, 26px);
-  line-height: 1.1;
   color: var(--ink);
 }
-.livrable-example-stat-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.02em;
+.tri-item.is-fix .tri-item-label { font-weight: 600; }
+.tri-item p {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.45;
   color: var(--ink-soft);
-}
-.livrable-example-divider {
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(140, 106, 44, 0.3), transparent);
-  margin: 18px 0;
-}
-.livrable-example-reco {
-  font-family: var(--font-display);
-  font-size: 15.5px;
-  line-height: 1.4;
-  color: var(--ink);
-  margin: 10px 0 14px;
-}
-.livrable-example-tags {
-  font-family: var(--font-mono);
-  font-size: 8.5px;
-  line-height: 1.4;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  margin: 15px 0 0;
+  margin: 4px 0 0;
+  font-variation-settings: "opsz" 14;
 }
 
-/* Comparateur avant / après — curseur horizontal, deux mini-hero superposés.
-   Le padding lateral (%) cree une zone de securite fixe autour du centre : le
-   contenu de chaque cote reste dans sa moitie quelle que soit la position du
-   curseur (le clip-path ne fait que reveler/masquer, il ne deplace jamais le texte). */
-.livrable-compare {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  border: 1px solid rgba(140, 106, 44, 0.25);
-  overflow: hidden;
-  background: var(--paper);
-  touch-action: pan-y;
-}
-.livrable-compare-panel {
-  position: absolute;
-  inset: 0;
+/* Exemple de recommandation — info (gauche) + mockup (droite) sur desktop */
+.demo-block {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 4px;
-  padding: 18px;
-  padding-top: 37px;
-  background: var(--paper);
+  align-items: flex-start;
+  gap: clamp(32px, 4vw, 56px);
+  max-width: 1140px;
+  margin: clamp(36px, 4.5vw, 48px) auto 0;
 }
-.livrable-compare-before { clip-path: inset(0 50% 0 0); z-index: 1; padding-right: 20px; }
-.livrable-compare-after { align-items: flex-end; text-align: right; padding-left: 20px; }
-.livrable-compare-after .mock-line { align-self: flex-end; }
-/* max-width en % de la largeur totale du comparateur (pas du conteneur déjà réduit) :
-   garantit une zone de sécurité autour du centre quelle que soit la largeur de la carte. */
-.livrable-compare-before .mock-eyebrow,
-.livrable-compare-before .mock-headline,
-.livrable-compare-before .mock-sub,
-.livrable-compare-after .mock-eyebrow,
-.livrable-compare-after .mock-headline {
-  max-width: 42%;
-}
-.livrable-compare-before .mock-cta,
-.livrable-compare-after .mock-cta {
-  max-width: 42%;
-}
-/* Labels Avant/Après : hors des calques recouvrables, toujours visibles quelle
-   que soit la position du curseur (pointer-events:none pour ne pas gener le drag). */
-.livrable-compare-badge {
-  position: absolute;
-  top: 8px;
-  z-index: 4;
+.demo-info { flex: 0 0 clamp(220px, 30%, 320px); min-width: 0; }
+.demo-info .chapter-mark { margin: 0 0 16px; }
+.demo-tag {
+  display: block;
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin: 0 0 6px;
+}
+.demo-constat {
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0 0 14px;
+}
+.demo-info .priority-chip { display: inline-block; }
+.priority-chip {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.priority-chip.is-solid { color: var(--paper); background: var(--champagne-fonce); padding: 6px 12px; }
+.demo-reco {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 10px 0 0;
+}
+.demo-divider { height: 1px; background: rgba(140, 106, 44, 0.2); margin: 22px 0 0; }
+.demo-block .demo-tag:last-of-type { margin: 18px 0 4px; }
+.demo-solution-tags {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin: 0;
+}
+
+/* Mockup — structure de page très simple, 3 micro-annotations max */
+.demo-mockup {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: clamp(24px, 3vw, 36px) clamp(20px, 3vw, 32px);
+}
+.demo-mockup-tag {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-mute);
-  background: rgba(251, 244, 224, 0.85);
-  padding: 2px 5px;
-  pointer-events: none;
+  margin: 0 0 18px;
 }
-.livrable-compare-badge.is-before { left: 10px; }
-.livrable-compare-badge.is-after { right: 10px; }
-.mock-eyebrow {
+.demo-mockup-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(20, 16, 42, 0.08);
+}
+.demo-mockup-row:first-of-type { padding-top: 0; }
+.demo-mockup-row:last-of-type { border-bottom: none; padding-bottom: 0; }
+.demo-mockup-role {
+  color: var(--ink);
+  border-left: 2px solid rgba(140, 106, 44, 0.35);
+  padding-left: 14px;
+}
+.demo-mockup-role.is-eyebrow {
   font-family: var(--font-mono);
-  font-size: 8px;
-  letter-spacing: 0.1em;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--champagne-fonce);
 }
-.mock-headline {
+.demo-mockup-role.is-headline {
   font-family: var(--font-display);
-  font-size: 11px;
-  line-height: 1.22;
-  color: var(--ink);
+  font-size: clamp(19px, 2.4vw, 25px);
+  line-height: 1.2;
 }
-.livrable-compare-before .mock-headline { color: var(--ink-mute); font-style: normal; }
-.livrable-compare-after .mock-headline { font-weight: 500; }
-.mock-sub { font-family: var(--font-display); font-size: 10px; line-height: 1.3; color: var(--ink-mute); }
-.mock-line { display: block; height: 3px; max-width: 30%; background: rgba(20, 16, 42, 0.12); }
-.mock-line.short { max-width: 16%; }
-.mock-cta {
-  display: inline-block;
-  margin-top: 2px;
+.demo-mockup-role.is-sub {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--ink-mute);
+}
+.demo-mockup-role.is-cta {
   font-family: var(--font-mono);
-  font-size: 7.5px;
-  line-height: 1.25;
+  font-size: 10.5px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  width: fit-content;
+  border-bottom: 1px solid rgba(140, 106, 44, 0.5);
+  padding-bottom: 2px;
+  display: inline-block;
 }
-.mock-cta.is-plain { color: var(--ink-mute); text-decoration: underline; }
-.mock-cta.is-solid { color: var(--paper); background: var(--champagne-fonce); padding: 4px 7px; }
-.livrable-compare-line {
-  position: absolute;
-  top: 0; bottom: 0; left: 50%;
-  width: 1px;
-  background: var(--champagne-fonce);
-  pointer-events: none;
-  z-index: 2;
-}
-/* Chevrons decoratifs superposes au thumb natif (transparent) : communique
-   immediatement que le handle se deplace horizontalement. Syncs en JS avec
-   la meme valeur % que .livrable-compare-line. */
-.livrable-compare-handle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 4;
-  pointer-events: none;
+.demo-mockup-note {
+  flex: none;
   font-family: var(--font-mono);
   font-size: 9px;
-  letter-spacing: 0.05em;
-  color: var(--champagne-fonce);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  white-space: nowrap;
 }
-.livrable-compare-range {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  appearance: none;
-  -webkit-appearance: none;
-  background: transparent;
-  cursor: ew-resize;
-  z-index: 3;
-}
-.livrable-compare-range::-webkit-slider-runnable-track { background: transparent; height: 100%; }
-.livrable-compare-range::-moz-range-track { background: transparent; height: 100%; }
-.livrable-compare-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 30px; height: 30px;
-  border-radius: 50%;
-  background: var(--paper);
-  border: 1px solid var(--champagne-fonce);
-  box-shadow: 0 2px 8px -2px rgba(20, 16, 42, 0.35);
-  cursor: ew-resize;
-}
-.livrable-compare-range::-moz-range-thumb {
-  width: 30px; height: 30px;
-  border-radius: 50%;
-  background: var(--paper);
-  border: 1px solid var(--champagne-fonce);
-  box-shadow: 0 2px 8px -2px rgba(20, 16, 42, 0.35);
-  cursor: ew-resize;
-}
-.livrable-compare-range:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--champagne-fonce); outline-offset: 2px; }
-.livrable-compare-range:focus-visible::-moz-range-thumb { outline: 2px solid var(--champagne-fonce); outline-offset: 2px; }
 
 /* ============================================================
    POUR QUI — filets latéraux + listes ✓ / ✕ (split-*, fit-*)
@@ -1407,27 +1275,19 @@ body {
   .regard-dim:nth-child(n+3) { padding-bottom: 1.25rem; border-bottom: 1px solid rgba(20, 16, 42, 0.12); }
   .regard-dim:last-child { padding-bottom: 0; border-bottom: none; }
   .supports-grid { grid-template-columns: 1fr 1fr; }
-  .livrable-box { padding: 28px 22px; }
-  .livrable-grid { gap: 2rem; }
-  .livrable-example { max-width: 100%; }
-  .livrable-example-stats { grid-template-columns: 1fr; row-gap: 14px; }
-  .livrable-compare { height: 170px; }
-  .livrable-compare-panel { padding: 14px; padding-top: 33px; gap: 3px; }
-  .livrable-compare-before { padding-right: 14px; }
-  .livrable-compare-after { padding-left: 14px; }
-  .livrable-compare-before .mock-eyebrow,
-  .livrable-compare-before .mock-headline,
-  .livrable-compare-before .mock-sub,
-  .livrable-compare-after .mock-eyebrow,
-  .livrable-compare-after .mock-headline { max-width: 44%; }
-  .livrable-compare-before .mock-cta,
-  .livrable-compare-after .mock-cta { max-width: 44%; }
-  .mock-eyebrow { font-size: 7px; line-height: 1.2; }
-  .mock-headline { font-size: 9.5px; line-height: 1.18; }
-  .mock-sub { font-size: 9px; line-height: 1.2; }
-  .mock-cta { font-size: 6.5px; line-height: 1.2; margin-top: 1px; }
-  .mock-cta.is-solid { padding: 3px 6px; }
-  .livrable-example-tags { line-height: 1.6; }
+  .livrable-head { max-width: 100%; }
+  .tri-row { flex-direction: column; margin-top: 20px; border-bottom: none; }
+  .tri-item { text-align: left; padding: 12px 0; }
+  .tri-item:first-child { border-right: none; border-bottom: 1px solid rgba(140, 106, 44, 0.2); }
+  .demo-block { flex-direction: column; gap: 26px; margin-top: 28px; }
+  .demo-info { flex: none; }
+  .demo-divider { margin: 16px 0 0; }
+  .demo-block .demo-tag:last-of-type { margin: 14px 0 4px; }
+  .demo-mockup { padding: 18px 16px; }
+  .demo-mockup-tag { margin-bottom: 14px; }
+  .demo-mockup-row { flex-direction: column; align-items: flex-start; gap: 2px; padding: 9px 0; }
+  .demo-mockup-role.is-headline { font-size: clamp(18px, 5.5vw, 21px); }
+  .demo-mockup-note { font-size: 8.5px; }
   .split-grid { flex-direction: column; gap: 2.25rem; }
   .split-block { flex-basis: auto; }
   .testi-grid { grid-template-columns: 1fr; gap: 1.25rem; }
@@ -1692,77 +1552,53 @@ body {
 
 <!-- ch.03 — LE LIVRABLE -->
 <section class="livrable-section reveal" id="livrable" data-cta-theme="light">
-  <span class="chapter-mark">— le livrable</span>
-  <div class="livrable-box editorial-block">
-    <div class="livrable-grid">
-      <div class="livrable-main">
-        <h2>Vous recevez <em>plus qu'un rapport.</em></h2>
-        <p>Un diagnostic étayé, des priorités claires et des solutions concrètes pour passer de l'analyse à l'optimisation.</p>
+  <span class="chapter-mark">— ch.03 · le livrable</span>
+  <div class="livrable-head">
+    <h2>Vous recevez <em>plus qu'un rapport.</em></h2>
+    <p>Un diagnostic étayé, des priorités claires et des solutions concrètes pour passer de l'analyse à l'optimisation.</p>
+  </div>
 
-        <div class="livrable-journey">
-          <div class="livrable-step">
-            <div class="livrable-step-markers" aria-hidden="true"><span class="livrable-step-marker"></span></div>
-            <div class="livrable-step-content">
-              <span class="livrable-step-label">01 — Comprendre ce qui se passe</span>
-              <p>Diagnostic CRO &amp; copywriting · Tests utilisateurs</p>
-            </div>
-          </div>
-          <div class="livrable-step is-emphasis">
-            <div class="livrable-step-markers" aria-hidden="true"><span class="livrable-step-marker"></span></div>
-            <div class="livrable-step-content">
-              <span class="livrable-step-label">02 — Décider de ce qui compte</span>
-              <p>Recommandations priorisées : à corriger · à tester</p>
-            </div>
-          </div>
-          <div class="livrable-step">
-            <div class="livrable-step-markers" aria-hidden="true"><span class="livrable-step-marker"></span></div>
-            <div class="livrable-step-content">
-              <span class="livrable-step-label">03 — Passer à l'optimisation</span>
-              <p>Copywriting · Restructuration · Redesign</p>
-            </div>
-          </div>
-        </div>
+  <!-- Priorisation — version compacte -->
+  <div class="tri-row">
+    <div class="tri-item is-fix">
+      <span class="tri-item-label">À corriger</span>
+      <p>Signaux suffisamment étayés pour agir.</p>
+    </div>
+    <div class="tri-item">
+      <span class="tri-item-label">À tester</span>
+      <p>Optimisation à valider avant application.</p>
+    </div>
+  </div>
+
+  <!-- Exemple de recommandation — bloc démonstratif unique -->
+  <div class="demo-block">
+    <div class="demo-info">
+      <span class="chapter-mark">— exemple de recommandation</span>
+      <span class="demo-tag">Proposition de valeur</span>
+      <p class="demo-constat">Cible et bénéfice principal insuffisamment compris.</p>
+      <span class="priority-chip is-solid">À corriger</span>
+      <p class="demo-reco">Clarifier la proposition de valeur et revoir sa hiérarchie.</p>
+      <div class="demo-divider"></div>
+      <span class="demo-tag">Solution livrée</span>
+      <p class="demo-solution-tags">Copywriting · restructuration · redesign</p>
+    </div>
+
+    <div class="demo-mockup editorial-block">
+      <span class="demo-mockup-tag">Extrait · structure retravaillée</span>
+      <div class="demo-mockup-row">
+        <span class="demo-mockup-role is-eyebrow">Cible</span>
+        <span class="demo-mockup-note">Cible explicitée</span>
       </div>
-
-      <div class="livrable-example">
-        <p class="livrable-example-label">Exemple de recommandation</p>
-        <p class="livrable-example-dim">Proposition de valeur</p>
-        <p class="livrable-example-constat">Formulation imprécise · hiérarchie insuffisante</p>
-        <p class="livrable-example-testlabel">Test utilisateur · 10 personnes</p>
-        <div class="livrable-example-stats">
-          <div class="livrable-example-stat">
-            <span class="livrable-example-stat-num">2/10</span>
-            <span class="livrable-example-stat-label">identifient la cible</span>
-          </div>
-          <div class="livrable-example-stat">
-            <span class="livrable-example-stat-num">1/10</span>
-            <span class="livrable-example-stat-label">restitue le bénéfice</span>
-          </div>
-        </div>
-
-        <div class="livrable-example-divider"></div>
-
-        <span class="priority-chip is-solid">Priorité 01 — à corriger</span>
-        <p class="livrable-example-reco">Clarification de la proposition de valeur et restructuration de sa hiérarchie.</p>
-
-        <div class="livrable-compare">
-          <div class="livrable-compare-panel livrable-compare-after">
-            <span class="mock-eyebrow">Pour consultants indépendants</span>
-            <span class="mock-headline">Obtenez plus de rendez-vous qualifiés sans passer vos journées à prospecter.</span>
-            <span class="mock-cta is-solid">Découvrir l'accompagnement →</span>
-          </div>
-          <div class="livrable-compare-panel livrable-compare-before">
-            <span class="mock-headline">Développez votre activité avec notre expertise.</span>
-            <span class="mock-sub">Des solutions adaptées à vos besoins.</span>
-            <span class="mock-cta is-plain">En savoir plus</span>
-          </div>
-          <span class="livrable-compare-badge is-before" aria-hidden="true">Avant</span>
-          <span class="livrable-compare-badge is-after" aria-hidden="true">Après</span>
-          <div class="livrable-compare-line" aria-hidden="true"></div>
-          <span class="livrable-compare-handle" aria-hidden="true">‹ ›</span>
-          <input type="range" class="livrable-compare-range" min="0" max="100" value="50" autocomplete="off" aria-label="Curseur de comparaison : avant à gauche, après à droite">
-        </div>
-        <p class="livrable-example-tags">Promesse clarifiée · hiérarchie restructurée · copywriting ajusté · design revu</p>
+      <div class="demo-mockup-row">
+        <span class="demo-mockup-role is-headline">Promesse + bénéfice principal</span>
+        <span class="demo-mockup-note">Bénéfice clarifié</span>
+      </div>
+      <div class="demo-mockup-row">
+        <span class="demo-mockup-role is-sub">Réassurance</span>
+      </div>
+      <div class="demo-mockup-row">
+        <span class="demo-mockup-role is-cta">Action →</span>
+        <span class="demo-mockup-note">CTA contextualisé</span>
       </div>
     </div>
   </div>
@@ -2211,24 +2047,6 @@ body {
     });
   }
 
-  // ─── Comparateur avant/après (ch.03 le livrable) : curseur natif <input type="range">
-  //     pilote le clip-path du calque "avant" + la ligne de séparation visuelle ───
-  document.querySelectorAll('.livrable-compare').forEach(box => {
-    const range = box.querySelector('.livrable-compare-range');
-    const before = box.querySelector('.livrable-compare-before');
-    const line = box.querySelector('.livrable-compare-line');
-    const handle = box.querySelector('.livrable-compare-handle');
-    if (!range || !before || !line) return;
-    range.value = 50;
-    function update() {
-      const v = range.value;
-      before.style.clipPath = `inset(0 ${100 - v}% 0 0)`;
-      line.style.left = v + '%';
-      if (handle) handle.style.left = v + '%';
-    }
-    range.addEventListener('input', update);
-    update();
-  });
 })();
 </script>
 
