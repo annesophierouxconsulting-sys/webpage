@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maat — Offer Focus, Audit CRO & Copywriting</title>
 <meta name="description" content="Découvrez ce qui vous coûte des conversions — et comment y remédier. Audit CRO & copywriting pour coachs, formateurs, consultants, thérapeutes et infopreneurs. Diagnostic, tests utilisateurs, priorisation. 650 €.">
-<link rel="canonical" href="https://maat.so/conversion-focus/">
+<link rel="canonical" href="https://maat.so/offer-focus/">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="apple-touch-icon" href="../favicon.svg">
 <link rel="preconnect" href="https://calendly.com">
@@ -1070,10 +1070,11 @@ body {
 .mh-logo-macron { position: relative; display: inline-block; }
 .mh-logo-macron::after { content: ''; position: absolute; top: 0.05em; left: 12%; width: 76%; height: 0.05em; background: #F4ECD3; }
 
-.mh-tabs { display: flex; gap: 2.5rem; justify-content: center; align-items: center; margin: 0; padding: 0; list-style: none; }
+.mh-tabs { display: flex; gap: clamp(1.25rem, 3vw, 2.5rem); justify-content: center; align-items: center; margin: 0; padding: 0; list-style: none; }
 .mh-tab {
   position: relative;
-  font-family: var(--font-display); font-style: italic; font-size: 17px;
+  font-family: var(--font-display); font-style: italic; font-size: clamp(14px, 1.6vw, 17px);
+  white-space: nowrap;
   color: rgba(244, 236, 211, 0.6); text-decoration: none; padding: 4px 0;
   transition: color 250ms ease; cursor: pointer; background: none; border: none;
 }
@@ -1087,58 +1088,11 @@ body {
 .mh-tab.is-active { color: var(--champagne); font-weight: 500; }
 .mh-tab.is-active::after { transform: scaleX(1); }
 
-/* Groupe déroulant "Audit CRO" — trigger + panneau au survol/focus */
-.mh-tab-group { position: relative; }
-.mh-tab-group-trigger { display: inline-flex; align-items: baseline; gap: 5px; }
-.mh-tab-group-trigger::before {
-  content: '▾'; font-family: var(--font-mono); font-size: 9px; font-style: normal;
-  color: rgba(244, 236, 211, 0.45); transition: transform 200ms ease, color 250ms ease;
-}
-.mh-tab-group-trigger.is-active::before { color: var(--champagne); }
-.mh-tab-group:hover .mh-tab-group-trigger::before,
-.mh-tab-group.is-open .mh-tab-group-trigger::before,
-.mh-tab-group-trigger:focus-visible::before { transform: rotate(-180deg); }
-.mh-tab-dropdown {
-  position: absolute; top: 100%; left: 50%;
-  transform: translateX(-50%);
-  padding-top: 14px;
-  opacity: 0; pointer-events: none;
-  transition: opacity 200ms ease;
-  z-index: 60;
-}
-.mh-tab-dropdown-panel {
-  background: var(--band-bg);
-  border: 1px solid rgba(212, 178, 117, 0.25);
-  padding: 8px; min-width: 260px;
-  box-shadow: 0 12px 32px -12px rgba(8, 4, 26, 0.5);
-  transform: translateY(4px);
-  transition: transform 200ms ease;
-}
-.mh-tab-group:hover .mh-tab-dropdown,
-.mh-tab-group.is-open .mh-tab-dropdown,
-.mh-tab-group:focus-within .mh-tab-dropdown {
-  opacity: 1; pointer-events: auto;
-}
-.mh-tab-group:hover .mh-tab-dropdown-panel,
-.mh-tab-group.is-open .mh-tab-dropdown-panel,
-.mh-tab-group:focus-within .mh-tab-dropdown-panel {
-  transform: translateY(0);
-}
-.mh-tab-dropdown a {
-  display: block;
-  font-family: var(--font-display); font-style: italic; font-size: 15px;
-  color: rgba(244, 236, 211, 0.75);
-  padding: 10px 14px; text-decoration: none; white-space: nowrap;
-  border-left: 2px solid transparent;
-  transition: color 200ms ease, border-color 200ms ease, background-color 200ms ease;
-}
-.mh-tab-dropdown a:hover { color: var(--ivory); background: rgba(212, 178, 117, 0.06); }
-.mh-tab-dropdown a.is-active { color: var(--champagne); border-left-color: var(--champagne); }
 
 .mh-cta {
-  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: clamp(0.1em, 1.4vw, 0.2em); text-transform: uppercase;
   color: var(--champagne); background: transparent; border: 1px solid var(--champagne);
-  padding: 9px 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px clamp(11px, 1.6vw, 16px); text-decoration: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
   transition: background-color 200ms ease, color 200ms ease;
 }
 .mh-cta-arrow { display: inline-block; transition: transform 200ms ease; }
@@ -1327,15 +1281,8 @@ body {
     <a class="mh-logo" href="../index.html" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
     <nav class="mh-tabs-wrap" aria-label="Pages">
       <ul class="mh-tabs">
-        <li class="mh-tab-group">
-          <button type="button" class="mh-tab mh-tab-group-trigger is-active" aria-haspopup="true" aria-expanded="false">Audit CRO</button>
-          <div class="mh-tab-dropdown" role="menu">
-            <div class="mh-tab-dropdown-panel">
-              <a href="../index.html" role="menuitem">Audit CRO complet SaaS et e-commerce</a>
-              <a href="#top" class="is-active" role="menuitem" aria-current="page">Offer Focus - entrepreneurs</a>
-            </div>
-          </div>
-        </li>
+        <li><a class="mh-tab" href="../index.html">Audit CRO SaaS et e-commerce</a></li>
+        <li><a class="mh-tab is-active" href="#top" aria-current="page">Offer Focus</a></li>
       </ul>
     </nav>
     <a class="mh-cta" href="#booking">Réserver un appel découverte <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
@@ -1357,9 +1304,9 @@ body {
 
 <aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
   <ul class="mh-drawer-tabs">
-    <li class="mh-drawer-category-label" aria-hidden="true">— Audit CRO</li>
+    <li class="mh-drawer-category-label" aria-hidden="true">— Offer Focus</li>
     <li>
-      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Offer Focus - entrepreneurs</a>
+      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Offer Focus</a>
       <ul class="mh-drawer-submenu">
         <li><a class="mh-drawer-submenu-item is-active" href="#analyse" data-target="analyse">L'analyse</a></li>
         <li><a class="mh-drawer-submenu-item" href="#livrable" data-target="livrable">Le livrable</a></li>
@@ -1367,8 +1314,9 @@ body {
         <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un appel découverte</a></li>
       </ul>
     </li>
+    <li class="mh-drawer-category-label" aria-hidden="true">— Audit CRO SaaS et e-commerce</li>
     <li>
-      <a class="mh-drawer-tab" href="../index.html">Audit CRO complet SaaS et e-commerce</a>
+      <a class="mh-drawer-tab" href="../index.html">Audit CRO SaaS et e-commerce</a>
     </li>
     <li>
       <span class="mh-drawer-tab is-coming" role="link" aria-disabled="true">
@@ -1813,7 +1761,7 @@ body {
     return false;
   }
   document.querySelectorAll(
-    'a[href="#booking"], a[href="index.html#booking"], a[href$="conversion-focus/#booking"]'
+    'a[href="#booking"], a[href="index.html#booking"], a[href$="offer-focus/#booking"]'
   ).forEach(el => el.addEventListener('click', openCalendly));
 
   // ─── Repositionne la croix de fermeture du popup Calendly (desktop) ───
@@ -1990,35 +1938,6 @@ body {
     }, { threshold: 0, rootMargin: '-40% 0px -40% 0px' });
     themedSections.forEach(s => ctaThemeIO.observe(s));
   }
-
-  // ─── Dropdown "Audit CRO" (desktop) : hover géré en CSS, clic/tap en JS pour les
-  //     écrans tactiles ≥900px (hover ambigu). Fermeture au clic extérieur / Échap. ───
-  document.querySelectorAll('.mh-tab-group').forEach(group => {
-    const trigger = group.querySelector('.mh-tab-group-trigger');
-    if (!trigger) return;
-    trigger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const open = !group.classList.contains('is-open');
-      group.classList.toggle('is-open', open);
-      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  });
-  document.addEventListener('click', () => {
-    document.querySelectorAll('.mh-tab-group.is-open').forEach(g => {
-      g.classList.remove('is-open');
-      const t = g.querySelector('.mh-tab-group-trigger');
-      if (t) t.setAttribute('aria-expanded', 'false');
-    });
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.mh-tab-group.is-open').forEach(g => {
-        g.classList.remove('is-open');
-        const t = g.querySelector('.mh-tab-group-trigger');
-        if (t) t.setAttribute('aria-expanded', 'false');
-      });
-    }
-  });
 
   // ─── Drawer mobile : toggle ouvert/fermé ───
   const drawerToggle = document.getElementById('mh-mobile-toggle');
