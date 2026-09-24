@@ -461,8 +461,8 @@ body {
 }
 
 /* ============================================================
-   ch.03 — LIVRABLE — version compacte : tri des priorités +
-   un seul exemple de recommandation (info + mockup)
+   ch.03 — LIVRABLE — titre + sous-titre, puis schéma annoté
+   (callouts + wireframe de la maquette)
    ============================================================ */
 .livrable-section { background: var(--paper); padding: clamp(56px, 7vw, 88px) 6%; border-top: 1px solid rgba(20, 16, 42, 0.08); position: relative; }
 .livrable-head { max-width: 700px; margin: clamp(40px, 5vw, 56px) auto 0; text-align: center; }
@@ -475,7 +475,6 @@ body {
   color: var(--ink);
   font-variation-settings: "opsz" 60;
 }
-.livrable-head h2 em { font-style: italic; color: var(--champagne-fonce); }
 .livrable-head p {
   font-family: var(--font-body);
   font-size: 16px;
@@ -486,149 +485,113 @@ body {
   font-variation-settings: "opsz" 14;
 }
 
-/* Priorisation — une seule zone compacte, comprise en quelques secondes */
-.tri-row {
-  display: flex;
-  max-width: 900px;
-  margin: clamp(28px, 4vw, 40px) auto 0;
-  border-top: 1px solid rgba(20, 16, 42, 0.15);
-  border-bottom: 1px solid rgba(20, 16, 42, 0.15);
-}
-.tri-item { flex: 1 1 0; min-width: 0; padding: 16px 24px; text-align: center; }
-.tri-item:first-child { border-right: 1px solid rgba(140, 106, 44, 0.2); }
-.tri-item-label {
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 11.5px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink);
-}
-.tri-item p {
-  font-family: var(--font-body);
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--ink-soft);
-  margin: 4px 0 0;
-  font-variation-settings: "opsz" 14;
+/* Diagnostic + maquette optimisée — schéma annoté (callouts + wireframe mobile) */
+.livrable-diagram { margin-top: clamp(48px, 6vw, 64px); }
+.livrable-diagram-body {
+  --diagram-gap: clamp(28px, 4vw, 56px);
+  display: grid;
+  grid-template-columns: minmax(0, 260px) minmax(200px, 240px) minmax(0, 260px);
+  align-items: center;
+  justify-content: center;
+  gap: var(--diagram-gap);
+  max-width: 980px;
+  margin: 0 auto;
 }
 
-/* Exemple de recommandation — info (gauche) + mockup (droite) sur desktop */
-.demo-block {
-  display: flex;
-  align-items: flex-start;
-  gap: clamp(32px, 4vw, 56px);
-  max-width: 1140px;
-  margin: clamp(36px, 4.5vw, 48px) auto 0;
+.livrable-callouts { display: flex; flex-direction: column; gap: clamp(24px, 3vw, 40px); }
+.livrable-callout { position: relative; }
+/* Ligne + point qui traversent l'espace jusqu'à toucher la maquette */
+.livrable-callout::before {
+  content: '';
+  position: absolute; left: 100%; top: 10px;
+  width: var(--diagram-gap); height: 1px;
+  background: rgba(140, 106, 44, 0.5);
 }
-.demo-info { flex: 0 0 clamp(220px, 30%, 320px); min-width: 0; }
-.demo-info .chapter-mark { margin: 0 0 16px; }
-.demo-tag {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin: 0 0 6px;
+.livrable-callout::after {
+  content: '';
+  position: absolute; left: calc(100% + var(--diagram-gap) - 3px); top: 7px;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--champagne-fonce);
 }
-.demo-constat {
-  font-family: var(--font-display);
-  font-size: 16px;
-  line-height: 1.4;
-  color: var(--ink);
-  margin: 0 0 14px;
-}
-.demo-info .priority-chip { display: inline-block; }
-.priority-chip {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-.priority-chip.is-solid { color: var(--paper); background: var(--champagne-fonce); padding: 6px 12px; }
-.demo-reco {
+.livrable-callouts.is-right .livrable-callout { text-align: right; }
+.livrable-callouts.is-right .livrable-callout::before { left: auto; right: 100%; }
+.livrable-callouts.is-right .livrable-callout::after { left: auto; right: calc(100% + var(--diagram-gap) - 3px); }
+.livrable-callout h3 {
   font-family: var(--font-display);
   font-weight: 500;
   font-size: 16px;
-  line-height: 1.4;
+  line-height: 1.3;
   color: var(--ink);
-  margin: 10px 0 0;
+  margin: 0 0 6px;
+  font-variation-settings: "opsz" 30;
 }
-.demo-solution-tags {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  margin: 12px 0 0;
+.livrable-callout p {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0;
+  font-variation-settings: "opsz" 14;
 }
 
-/* Mockup — structure de page très simple, 3 micro-annotations max */
-.demo-mockup {
-  flex: 1 1 0;
-  min-width: 0;
-  padding: clamp(24px, 3vw, 36px) clamp(20px, 3vw, 32px);
+/* Maquette centrale — écran mobile miniature, même en desktop */
+.livrable-mockup {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto;
+  padding: 30px 16px 22px;
+  background: var(--paper);
+  position: relative;
 }
-.demo-mockup-tag {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin: 0 0 18px;
+.livrable-mockup-notch {
+  position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+  width: 40px; height: 5px; border-radius: 3px;
+  background: rgba(20, 16, 42, 0.15);
 }
-.demo-mockup-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 0;
+.livrable-mockup-home-indicator {
+  position: absolute; bottom: 9px; left: 50%; transform: translateX(-50%);
+  width: 52px; height: 4px; border-radius: 2px;
+  background: rgba(20, 16, 42, 0.15);
+}
+
+.livrable-mockup-hero { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+.livrable-mockup-hero .bar { display: block; border-radius: 2px; }
+.livrable-mockup-hero .bar.is-title { height: 12px; width: 92%; background: rgba(20, 16, 42, 0.62); }
+.livrable-mockup-hero .bar.is-accent { height: 7px; width: 48%; background: var(--champagne-fonce); margin-top: 2px; }
+.livrable-mockup-hero .bar.is-line { height: 6px; width: 100%; background: rgba(20, 16, 42, 0.1); }
+.livrable-mockup-hero .bar.is-line.short { width: 65%; }
+
+.livrable-mockup-visual { width: 100%; aspect-ratio: 16 / 11; border-radius: 4px; background: rgba(20, 16, 42, 0.05); position: relative; overflow: hidden; margin-bottom: 14px; }
+.livrable-mockup-visual .visual-dot { position: absolute; top: 14%; right: 12%; width: 26%; height: 26%; border-radius: 50%; background: rgba(212, 178, 117, 0.55); }
+
+.livrable-mockup-icons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
   border-bottom: 1px solid rgba(20, 16, 42, 0.08);
 }
-.demo-mockup-row:first-of-type { padding-top: 0; }
-.demo-mockup-row:last-of-type { border-bottom: none; padding-bottom: 0; }
-.demo-mockup-role {
-  color: var(--ink);
-  border-left: 2px solid rgba(140, 106, 44, 0.35);
-  padding-left: 14px;
+.livrable-mockup-icon { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.livrable-mockup-icon-mark { width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(140, 106, 44, 0.4); }
+.livrable-mockup-icon .bar.is-line { width: 70%; height: 5px; border-radius: 2px; background: rgba(20, 16, 42, 0.08); }
+
+.livrable-mockup-list { display: flex; flex-direction: column; gap: 8px; }
+.livrable-mockup-list .bar.is-title { display: block; height: 10px; width: 80%; border-radius: 2px; background: rgba(20, 16, 42, 0.55); margin-bottom: 2px; }
+.livrable-mockup-list-item { display: flex; align-items: center; gap: 8px; }
+.livrable-mockup-list-item .check {
+  flex: none; width: 14px; height: 14px; border-radius: 50%;
+  border: 1px solid var(--champagne-fonce); position: relative;
 }
-.demo-mockup-role.is-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
+.livrable-mockup-list-item .check::after {
+  content: '';
+  position: absolute; left: 3px; top: 4.5px;
+  width: 6px; height: 3px;
+  border-left: 1.5px solid var(--champagne-fonce);
+  border-bottom: 1.5px solid var(--champagne-fonce);
+  transform: rotate(-45deg);
 }
-.demo-mockup-role.is-headline {
-  font-family: var(--font-display);
-  font-size: clamp(19px, 2.4vw, 25px);
-  line-height: 1.2;
-}
-.demo-mockup-role.is-sub {
-  font-family: var(--font-display);
-  font-size: 14px;
-  color: var(--ink-mute);
-}
-.demo-mockup-role.is-cta {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  border-bottom: 1px solid rgba(140, 106, 44, 0.5);
-  padding-bottom: 2px;
-  display: inline-block;
-}
-.demo-mockup-note {
-  flex: none;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  white-space: nowrap;
-}
+.livrable-mockup-list-item .bar.is-line { flex: 1 1 0; height: 5px; border-radius: 2px; background: rgba(20, 16, 42, 0.08); }
 
 /* ============================================================
    POUR QUI — filets latéraux + listes ✓ / ✕ (split-*, fit-*)
@@ -1228,18 +1191,15 @@ body {
   .regard-dim:last-child { padding-bottom: 0; border-bottom: none; }
   .supports-grid { grid-template-columns: 1fr 1fr; }
   .livrable-head { max-width: 100%; }
-  .tri-row { flex-direction: column; margin-top: 20px; border-bottom: none; }
-  .tri-item { text-align: left; padding: 12px 0; }
-  .tri-item:first-child { border-right: none; border-bottom: 1px solid rgba(140, 106, 44, 0.2); }
-  .demo-block { flex-direction: column; gap: 28px; margin-top: 28px; }
-  .demo-info { flex: none; }
-  .demo-constat { margin-bottom: 8px; }
-  .demo-solution-tags { margin-top: 12px; }
-  .demo-mockup { padding: 18px 16px; }
-  .demo-mockup-tag { margin-bottom: 14px; }
-  .demo-mockup-row { flex-direction: column; align-items: flex-start; gap: 2px; padding: 9px 0; }
-  .demo-mockup-role.is-headline { font-size: clamp(18px, 5.5vw, 21px); }
-  .demo-mockup-note { font-size: 8.5px; }
+  .livrable-diagram-body { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
+  .livrable-mockup { order: -1; grid-column: 1 / -1; }
+  .livrable-callouts { display: contents; }
+  .livrable-callout,
+  .livrable-callouts.is-right .livrable-callout {
+    padding-left: 14px; padding-right: 0; text-align: left;
+    border-left: 2px solid rgba(140, 106, 44, 0.35);
+  }
+  .livrable-callout::before, .livrable-callout::after { display: none; }
   .split-grid { flex-direction: column; gap: 2.25rem; }
   .split-block { flex-basis: auto; }
   .testi-grid { grid-template-columns: 1fr; gap: 1.25rem; }
@@ -1259,7 +1219,6 @@ body {
   .footer-meta, .footer-cta { text-align: left; align-items: flex-start; }
 }
 @media (max-width: 640px) {
-  .supports-grid { grid-template-columns: 1fr; }
   .hero-cta-row { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
   .booking-final-cta-row { flex-direction: column; align-items: flex-start; gap: 0.85rem; }
   .booking-final-cta { display: block; width: 100%; text-align: center; }
@@ -1498,51 +1457,64 @@ body {
 
 <!-- ch.03 — LE LIVRABLE -->
 <section class="livrable-section reveal" id="livrable" data-cta-theme="light">
-  <span class="chapter-mark">— ch.03 · le livrable</span>
+  <span class="chapter-mark">— le livrable</span>
   <div class="livrable-head">
-    <h2>Vous recevez <em>plus qu'un rapport.</em></h2>
-    <p>Un diagnostic complet de votre page, des recommandations priorisées et des solutions concrètement matérialisées en copywriting, structure et design.</p>
+    <h2>Ce que vous recevez</h2>
+    <p>Un diagnostic complet de votre page + des recommandations priorisées + une maquette complète pour vous montrer le résultat visé.</p>
   </div>
 
-  <!-- Priorisation — version compacte -->
-  <div class="tri-row">
-    <div class="tri-item is-fix">
-      <span class="tri-item-label">À corriger</span>
-      <p>Signaux suffisamment étayés pour agir.</p>
-    </div>
-    <div class="tri-item">
-      <span class="tri-item-label">À tester</span>
-      <p>Optimisation à valider avant application.</p>
-    </div>
-  </div>
+  <!-- Diagnostic + maquette optimisée — schéma annoté -->
+  <div class="livrable-diagram">
+    <div class="livrable-diagram-body">
+      <div class="livrable-callouts is-left">
+        <div class="livrable-callout">
+          <h3>Proposition de valeur clarifiée</h3>
+          <p>Une promesse claire et différenciante, immédiatement compréhensible.</p>
+        </div>
+        <div class="livrable-callout">
+          <h3>Bénéfices clés mis en avant</h3>
+          <p>Les éléments de réassurance et de valeur sont visibles dès le premier écran.</p>
+        </div>
+        <div class="livrable-callout">
+          <h3>Parcours réstructuré</h3>
+          <p>Une hiérarchie claire pour guider la lecture et renforcer la conversion.</p>
+        </div>
+      </div>
 
-  <!-- Exemple de recommandation — bloc démonstratif unique -->
-  <div class="demo-block">
-    <div class="demo-info">
-      <span class="chapter-mark">— exemple de recommandation</span>
-      <span class="demo-tag">Proposition de valeur</span>
-      <p class="demo-constat">Cible et bénéfice principal insuffisamment compris.</p>
-      <span class="priority-chip is-solid">À corriger</span>
-      <p class="demo-reco">Clarifier la proposition de valeur et revoir sa hiérarchie.</p>
-      <p class="demo-solution-tags">Copywriting · restructuration · redesign</p>
-    </div>
+      <div class="livrable-mockup editorial-block">
+        <span class="livrable-mockup-notch"></span>
+        <div class="livrable-mockup-hero">
+          <span class="bar is-title"></span>
+          <span class="bar is-accent"></span>
+          <span class="bar is-line"></span>
+          <span class="bar is-line short"></span>
+        </div>
+        <div class="livrable-mockup-visual"><span class="visual-dot"></span></div>
+        <div class="livrable-mockup-icons">
+          <div class="livrable-mockup-icon"><span class="livrable-mockup-icon-mark"></span><span class="bar is-line"></span></div>
+          <div class="livrable-mockup-icon"><span class="livrable-mockup-icon-mark"></span><span class="bar is-line"></span></div>
+        </div>
+        <div class="livrable-mockup-list">
+          <span class="bar is-title"></span>
+          <div class="livrable-mockup-list-item"><span class="check"></span><span class="bar is-line"></span></div>
+          <div class="livrable-mockup-list-item"><span class="check"></span><span class="bar is-line"></span></div>
+        </div>
+        <span class="livrable-mockup-home-indicator"></span>
+      </div>
 
-    <div class="demo-mockup editorial-block">
-      <span class="demo-mockup-tag">Extrait · structure retravaillée</span>
-      <div class="demo-mockup-row">
-        <span class="demo-mockup-role is-eyebrow">Cible</span>
-        <span class="demo-mockup-note">Cible explicitée</span>
-      </div>
-      <div class="demo-mockup-row">
-        <span class="demo-mockup-role is-headline">Promesse + bénéfice principal</span>
-        <span class="demo-mockup-note">Bénéfice clarifié</span>
-      </div>
-      <div class="demo-mockup-row">
-        <span class="demo-mockup-role is-sub">Réassurance</span>
-      </div>
-      <div class="demo-mockup-row">
-        <span class="demo-mockup-role is-cta">Action →</span>
-        <span class="demo-mockup-note">CTA contextualisé</span>
+      <div class="livrable-callouts is-right">
+        <div class="livrable-callout">
+          <h3>Repositionnement stratégique</h3>
+          <p>Une analyse de l'offre et du marché pour affirmer un angle unique et pertinent.</p>
+        </div>
+        <div class="livrable-callout">
+          <h3>Copywriting complet</h3>
+          <p>Réécriture de l'intégralité des contenus pour incarner l'essence de l'offre et parler directement à la cible.</p>
+        </div>
+        <div class="livrable-callout">
+          <h3>Design sur-mesure</h3>
+          <p>Une maquette complète intégrant toutes les recommandations (textes, visuels, hiérarchie, éléments de preuve…).</p>
+        </div>
       </div>
     </div>
   </div>
