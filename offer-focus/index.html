@@ -319,7 +319,7 @@ body {
 .enjeu-conversion-types-track {
   display: flex;
   width: max-content;
-  animation: enjeu-slide 22s linear infinite;
+  animation: enjeu-slide 11s linear infinite;
 }
 .enjeu-conversion-types:hover .enjeu-conversion-types-track { animation-play-state: paused; }
 .enjeu-conversion-types-item {
@@ -448,7 +448,6 @@ body {
   margin-bottom: 20px;
 }
 .supports-card { border: 1px solid rgba(20, 16, 42, 0.1); padding: 12px 14px; }
-.supports-card.is-full { grid-column: 1 / -1; }
 .supports-card-head { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
 .supports-icon {
   width: 26px; height: 26px;
@@ -460,22 +459,22 @@ body {
 }
 .supports-card h5 {
   font-family: var(--font-display);
-  font-size: 14.5px;
+  font-size: 16.5px;
   font-weight: 500;
   margin: 0;
   color: var(--ink);
 }
-.supports-card p { font-size: 11.5px; line-height: 1.4; color: var(--ink-mute); margin: 0; }
+.supports-card p { font-size: 14px; line-height: 1.45; color: var(--ink-mute); margin: 0; }
 .supports-card .supports-example {
   display: block;
   margin-top: 3px;
   font-style: italic;
   color: var(--champagne-fonce);
-  font-size: 10.5px;
+  font-size: 13px;
 }
 .supports-note {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12.5px;
   letter-spacing: 0.04em;
   color: var(--ink-mute);
   font-style: italic;
@@ -512,11 +511,11 @@ body {
 .livrable-diagram-body {
   --diagram-gap: clamp(28px, 4vw, 56px);
   display: grid;
-  grid-template-columns: minmax(0, 260px) minmax(200px, 240px) minmax(0, 260px);
+  grid-template-columns: minmax(0, 300px) minmax(200px, 240px) minmax(0, 300px);
   align-items: center;
   justify-content: center;
   gap: var(--diagram-gap);
-  max-width: 980px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -541,7 +540,7 @@ body {
 .livrable-callout h3 {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 16px;
+  font-size: 19px;
   line-height: 1.3;
   color: var(--ink);
   margin: 0 0 6px;
@@ -549,7 +548,7 @@ body {
 }
 .livrable-callout p {
   font-family: var(--font-body);
-  font-size: 12.5px;
+  font-size: 14.5px;
   line-height: 1.55;
   color: var(--ink-soft);
   margin: 0;
@@ -1212,6 +1211,8 @@ body {
   .regard-dim:nth-child(n+3) { padding-bottom: 1.25rem; border-bottom: 1px solid rgba(20, 16, 42, 0.12); }
   .regard-dim:last-child { padding-bottom: 0; border-bottom: none; }
   .supports-grid { grid-template-columns: 1fr 1fr; }
+  .supports-card--desktop-only { display: none; }
+  .supports-card:last-child { grid-column: 1 / -1; }
   .livrable-head { max-width: 100%; }
   .livrable-diagram-body { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
   .livrable-mockup { order: -1; grid-column: 1 / -1; }
@@ -1431,6 +1432,14 @@ body {
           <h5>Landing page</h5>
         </div>
       </div>
+      <div class="supports-card supports-card--desktop-only">
+        <div class="supports-card-head">
+          <div class="supports-icon">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1"></rect><line x1="8.5" y1="8" x2="15.5" y2="8"></line><line x1="8.5" y1="12" x2="15.5" y2="12"></line><line x1="8.5" y1="16" x2="13" y2="16"></line></svg>
+          </div>
+          <h5>Page de vente</h5>
+        </div>
+      </div>
       <div class="supports-card">
         <div class="supports-card-head">
           <div class="supports-icon">
@@ -1455,7 +1464,7 @@ body {
           <h5>Formulaire / Checkout</h5>
         </div>
       </div>
-      <div class="supports-card is-full">
+      <div class="supports-card">
         <div class="supports-card-head">
           <div class="supports-icon">
             <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 L9 11 L13 15 L21 6"></path><polyline points="15,6 21,6 21,12"></polyline></svg>
