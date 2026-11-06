@@ -1537,6 +1537,9 @@ body {
 .lc-head { max-width: 920px; }
 .lc-head .lc-intro { max-width: 720px; }
 
+.lc-row.is-feature .lc-qa > div { grid-template-columns: 190px 1fr; }
+@media (max-width: 520px) { .lc-row.is-feature .lc-qa > div { grid-template-columns: 1fr; gap: 2px; } }
+
 </style>
 </head>
 <body>
@@ -1741,7 +1744,11 @@ body {
       <div class="lc-text">
         <span class="lc-n">03</span>
         <h3>La maquette</h3>
-        <p>La page à plus fort impact, généralement la fiche produit, entièrement redessinée et réécrite, en deux maquettes complètes — desktop et mobile — livrées dans un PDF annoté. Et une version mobile en ligne, pour voir les comportements réels&nbsp;: défilement, éléments fixes, menus et interactions.</p>
+        <p>La page à plus fort impact, généralement la fiche produit, entièrement redessinée et réécrite.</p>
+        <dl class="lc-qa">
+          <div><dt>Maquettes annotées</dt><dd>desktop et mobile, livrées en PDF, chaque choix expliqué</dd></div>
+          <div><dt>Version mobile en ligne</dt><dd>à ouvrir sur votre téléphone, pour tester le défilement, les éléments fixes, les menus et les interactions</dd></div>
+        </dl>
         <p class="lc-note">Construite pour l'outil existant — sans changer de site.</p>
       </div>
       <div class="lc-media">
