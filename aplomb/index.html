@@ -1480,6 +1480,30 @@ body {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute);
 }
 
+/* Diagnostic : éventail de pages réelles */
+.doc-fan { margin: 0; }
+.doc-fan-pages { position: relative; padding: 5% 8% 6%; }
+.doc-fan-pages img { display: block; background: #fff; border: 1px solid rgba(20, 16, 42, 0.12); }
+.doc-fan-front { position: relative; z-index: 3; width: 100%; height: auto; box-shadow: 0 22px 44px -22px rgba(20, 16, 42, 0.45); transition: transform 0.4s ease; }
+.doc-fan-back {
+  position: absolute; top: 5%; left: 8%; width: 84%; height: auto; z-index: 1;
+  box-shadow: 0 12px 30px -20px rgba(20, 16, 42, 0.4);
+  transition: transform 0.4s ease;
+}
+.doc-fan-back.is-left { transform: translate(-5%, 2%) rotate(-3deg); }
+.doc-fan-back.is-right { z-index: 2; transform: translate(5%, -2%) rotate(2.5deg); }
+@media (hover: hover) {
+  .doc-fan:hover .doc-fan-back.is-left { transform: translate(-7%, 3%) rotate(-4.5deg); }
+  .doc-fan:hover .doc-fan-back.is-right { transform: translate(7%, -3%) rotate(4deg); }
+}
+@media (prefers-reduced-motion: reduce) { .doc-fan-front, .doc-fan-back { transition: none; } }
+.doc-fan figcaption {
+  margin-top: 18px; text-align: center;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute);
+}
+
+.lc-media .doc-fan-pages .doc-fan-back { width: 84%; }
+
 </style>
 </head>
 <body>
@@ -1630,9 +1654,13 @@ body {
     <!-- 01 — Diagnostic -->
     <article class="lc-row">
       <div class="lc-media">
-        <figure class="doc-stack">
-          <img src="assets/hh-diagnostic.jpg" alt="Page du diagnostic : capture de la fiche produit avec repère numéroté, observation n°4 rattachée au critère Pertinence" width="930" height="666">
-          <figcaption>Observation n°4 · fiche produit — une page parmi d'autres</figcaption>
+        <figure class="doc-fan">
+          <div class="doc-fan-pages">
+            <img class="doc-fan-back is-left" src="assets/hh-diag-17.jpg" alt="Observation n°17, tunnel d'achat sur mobile : le bouton « Valider la commande » n'apparaît qu'après deux écrans" loading="lazy">
+            <img class="doc-fan-back is-right" src="assets/hh-diag-10.jpg" alt="Observation n°10, panier : les boutons de paiement express concurrencent « Valider la commande »" loading="lazy">
+            <img class="doc-fan-front" src="assets/hh-diagnostic.jpg" alt="Observation n°4, fiche produit : l'édition beau livre n'est mentionnée nulle part, critère Pertinence" width="930" height="666">
+          </div>
+          <figcaption>Observations n°4, 10 et 17 · fiche produit et tunnel d'achat</figcaption>
         </figure>
       </div>
       <div class="lc-text">
