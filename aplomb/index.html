@@ -1464,6 +1464,22 @@ body {
 .faq-link { color: var(--champagne-fonce); text-decoration: underline; text-underline-offset: 3px; }
 
 
+/* Diagnostic : page réelle posée sur une pile de pages */
+.doc-stack { position: relative; margin: 0; padding: 0 16px 16px 0; }
+.doc-stack::before, .doc-stack::after {
+  content: ''; position: absolute; background: #fff; border: 1px solid rgba(20, 16, 42, 0.1);
+}
+.doc-stack::before { inset: 16px 0 0 16px; transform: rotate(1.2deg); }
+.doc-stack::after { inset: 8px 8px 8px 8px; }
+.doc-stack img {
+  position: relative; z-index: 1; display: block; width: 100%; height: auto; background: #fff;
+  border: 1px solid rgba(20, 16, 42, 0.12); box-shadow: 0 18px 40px -24px rgba(20, 16, 42, 0.4);
+}
+.doc-stack figcaption {
+  position: relative; z-index: 1; margin-top: 36px;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute);
+}
+
 </style>
 </head>
 <body>
@@ -1614,8 +1630,10 @@ body {
     <!-- 01 — Diagnostic -->
     <article class="lc-row">
       <div class="lc-media">
-        <!-- Remplacer par <img src="assets/hh-diagnostic.jpg" alt="Page du diagnostic : capture annotée de la fiche produit"> -->
-        <div class="shot-ph is-landscape"><span>Capture à venir</span><small>Page du diagnostic (PDF)</small></div>
+        <figure class="doc-stack">
+          <img src="assets/hh-diagnostic.jpg" alt="Page du diagnostic : capture de la fiche produit avec repère numéroté, observation n°4 rattachée au critère Pertinence" width="930" height="666">
+          <figcaption>Observation n°4 · fiche produit — une page parmi d'autres</figcaption>
+        </figure>
       </div>
       <div class="lc-text">
         <span class="lc-n">01</span>
