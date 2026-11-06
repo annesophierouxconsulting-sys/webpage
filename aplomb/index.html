@@ -1531,6 +1531,10 @@ body {
 /* FAQ : lien interne */
 .faq-link { color: var(--champagne-fonce); text-decoration: underline; text-underline-offset: 3px; }
 
+/* Pages évaluées : 4 cartes sur une ligne */
+.supports-grid { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 760px) { .supports-grid { grid-template-columns: 1fr 1fr; } }
+
 </style>
 </head>
 <body>
@@ -1624,7 +1628,7 @@ body {
   <div class="hero-inner">
     <div class="hero-promise">
       <h1>Votre site ne rend pas justice à ce que vous vendez.</h1>
-      <p class="hero-lead">Diagnostic expert, plan d'action par étapes et pages clés entièrement redessinées — pour remettre votre site d'aplomb sans repartir de zéro.</p>
+      <p class="hero-lead">Diagnostic expert, plan d'action par étapes et votre page clé entièrement redessinée — pour remettre votre site d'aplomb sans repartir de zéro.</p>
     </div>
     <div class="hero-offer">
       <p class="hero-offer-name">Aplomb</p>
@@ -1662,7 +1666,7 @@ body {
         <h3 class="change-title">Ce qui va changer<em>.</em></h3>
         <ul class="enjeu-validations">
           <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">▸</span><span><strong>Vous savez ce qui freine vos ventes</strong>, page par page, et pourquoi.</span></li>
-          <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">▸</span><span><strong>Vous voyez à quoi votre site peut ressembler</strong> — vos pages clés redessinées, textes compris.</span></li>
+          <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">▸</span><span><strong>Vous voyez à quoi votre site peut ressembler</strong> — votre page clé redessinée, textes compris.</span></li>
           <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">▸</span><span><strong>Vous savez par où commencer</strong>, puis quoi faire ensuite, à votre rythme.</span></li>
           <li class="enjeu-validation"><span class="enjeu-validation-mark" aria-hidden="true">▸</span><span><strong>Vous êtes prêt·e à accélérer</strong> — publicité ou réseaux sociaux, sur un site qui convertit.</span></li>
         </ul>
@@ -1759,17 +1763,8 @@ body {
           <h5>Tunnel d'achat</h5>
         </div>
       </div>
-      <div class="supports-card is-full">
-        <div class="supports-card-head">
-          <div class="supports-icon">
-            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"></rect><line x1="8" y1="8" x2="16" y2="8"></line><line x1="8" y1="12" x2="16" y2="12"></line><line x1="8" y1="16" x2="13" y2="16"></line></svg>
-          </div>
-          <h5>Site de services</h5>
-        </div>
-        <p>Accueil · page de service · tarifs · prise de contact<span class="supports-example">Desktop et mobile, quel que soit votre outil&nbsp;: WordPress, Shopify, Wix…</span></p>
-      </div>
     </div>
-    <p class="supports-note">S'appuie sur Baymard (130&nbsp;000&nbsp;h de recherche UX), GoodUI et CXL.</p>
+    <p class="supports-note">Desktop et mobile, quel que soit votre outil&nbsp;: WordPress, Shopify, Wix… S'appuie sur Baymard (130&nbsp;000&nbsp;h de recherche UX), GoodUI et CXL.</p>
   </div>
 </section>
 
@@ -1778,7 +1773,7 @@ body {
   <span class="chapter-mark">/ ch.03 — le livrable</span>
   <div class="livrable-head">
     <h2>Ce que vous recevez</h2>
-    <p>Un diagnostic complet, votre page la plus importante entièrement redessinée, et un plan d'action pour avancer par étapes.</p>
+    <p>Un diagnostic complet, un plan d'action pour avancer par étapes, et votre page la plus importante entièrement redessinée.</p>
   </div>
 
   <div class="livrable-diagram">
@@ -1906,7 +1901,7 @@ body {
     <div class="split-block is-yes">
       <h3 class="split-block-title">Cette offre est pertinente si.</h3>
       <ul class="fit-list">
-        <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Vous vendez des produits ou des services en quoi vous croyez — et votre site ne le montre pas</li>
+        <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Vous vendez des produits en quoi vous croyez — et votre site ne le montre pas</li>
         <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Votre site existe et fonctionne, même s'il est à revoir</li>
         <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Vous gérez le site, ou une personne de votre équipe peut le faire</li>
         <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Vous voulez savoir quoi faire, et dans quel ordre, plutôt que tout refaire à l'aveugle</li>
@@ -2030,7 +2025,7 @@ body {
     </details>
     <details class="faq-item">
       <summary><span>Quelle différence avec Offer Focus&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
-      <p><a class="faq-link" href="../offer-focus/index.html">Offer Focus</a> porte sur une offre et sa page de vente&nbsp;: pour les coachs, formateurs et consultants qui vendent leur expertise. Aplomb porte sur un site entier&nbsp;: pour les entreprises qui vendent des produits ou des services via leur site.</p>
+      <p><a class="faq-link" href="../offer-focus/index.html">Offer Focus</a> porte sur une offre et sa page de vente&nbsp;: pour les coachs, formateurs et consultants qui vendent leur expertise. Aplomb porte sur un site entier&nbsp;: pour les petites entreprises qui vendent leurs produits en ligne.</p>
     </details>
     <details class="faq-item">
       <summary><span>Et mon compte Instagram&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
