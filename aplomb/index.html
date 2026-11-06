@@ -1540,6 +1540,9 @@ body {
 .lc-row.is-feature .lc-qa > div { grid-template-columns: 190px 1fr; }
 @media (max-width: 520px) { .lc-row.is-feature .lc-qa > div { grid-template-columns: 1fr; gap: 2px; } }
 
+.lc-client-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; margin: 0 0 4px; }
+.lc-client-title .lc-client-label, .lc-client-title .lc-client-name { margin: 0; }
+
 </style>
 </head>
 <body>
@@ -1682,8 +1685,7 @@ body {
       <h2>Ce que vous recevez.</h2>
       <p class="lc-intro">Quatre livrables, et une restitution pour les prendre en main.</p>
       <div class="lc-client">
-        <p class="lc-client-label">— Exemples réels · audit client</p>
-        <p class="lc-client-name">Éditions L'Honnête Homme</p>
+        <p class="lc-client-title"><span class="lc-client-label">— Exemples réels · audit client</span> <span class="lc-client-name">Éditions L'Honnête Homme</span></p>
         <p class="lc-client-meta">Maison d'édition indépendante · site WordPress + WooCommerce, géré sans développeur</p>
         <ul class="lc-client-stats" aria-label="L'audit de L'Honnête Homme en chiffres">
           <li class="lc-client-stats-label">Pour cet audit&nbsp;:</li>
