@@ -1545,6 +1545,32 @@ body {
 
 .lc-client .lc-client-label { margin: 0 0 6px; }
 
+/* Témoignage — fin du livrable */
+.lc-testimonial { margin: clamp(40px, 5vw, 64px) 0 0; padding: clamp(28px, 4vw, 44px) 0 0; border-top: 1px solid rgba(20, 16, 42, 0.1); max-width: 820px; }
+.lc-testimonial blockquote { margin: 0; }
+.lc-testimonial blockquote p {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: clamp(21px, 2.4vw, 27px); line-height: 1.45; color: var(--ink); margin: 0;
+  font-variation-settings: "opsz" 48;
+}
+.lc-testimonial figcaption { margin-top: 18px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+.lc-testimonial figcaption strong { color: var(--champagne-fonce); font-weight: 500; }
+.lc-testimonial-full { margin-top: 18px; }
+.lc-testimonial-full summary {
+  cursor: pointer; list-style: none; display: inline-flex; gap: 8px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--champagne-fonce); border-bottom: 1px solid rgba(140, 106, 44, 0.45); padding-bottom: 4px;
+}
+.lc-testimonial-full summary::-webkit-details-marker { display: none; }
+.lc-testimonial-full[open] summary span { transform: rotate(45deg); display: inline-block; }
+.lc-testimonial-text { margin-top: 20px; padding-left: 18px; border-left: 1px solid var(--champagne-fonce); }
+.lc-testimonial-text p { font-family: var(--font-body); font-size: 16px; line-height: 1.65; color: var(--ink-soft); margin: 0 0 14px; }
+
+/* Témoignage court — sous le prix */
+.offre-quote { margin: 0 0 32px; padding-left: 16px; border-left: 1px solid rgba(212, 178, 117, 0.6); }
+.offre-quote blockquote { margin: 0; font-family: var(--font-display); font-style: italic; font-size: 18px; line-height: 1.5; color: var(--ivory); }
+.offre-quote figcaption { margin-top: 10px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--champagne); }
+
 </style>
 </head>
 <body>
@@ -1797,8 +1823,24 @@ body {
       <span class="lc-n">+</span>
       <p><strong>La restitution.</strong> Le temps qu'il faut pour tout parcourir ensemble, puis prendre en main le plan d'action avec la personne qui gère le site.</p>
     </div>
-    <!-- Citation client à ajouter ici si obtenue :
-    <blockquote class="lc-quote">« … »<cite>Prénom Nom, Éditions L'Honnête Homme</cite></blockquote> -->
+    <!-- Témoignage : texte à faire valider par Floriane Stoecklin avant mise en ligne
+         (dernière phrase élargie : « chef d'entreprise » ajouté, sous réserve de son accord). -->
+    <figure class="lc-testimonial">
+      <blockquote>
+        <p>«&nbsp;Elle a rapidement compris le contexte et les enjeux de cette refonte. Ce qui a surtout fait la différence, c'est sa passion pour le CRO et sa capacité à s'imprégner de l'univers de la maison d'édition. […] Avec un sens de l'esthétique affirmé et beaucoup de goût, elle m'a proposé des maquettes qui m'ont bluffée&nbsp;!&nbsp;»</p>
+      </blockquote>
+      <figcaption><strong>Floriane Stoecklin</strong> · responsable communication marketing, Éditions L'Honnête Homme</figcaption>
+      <details class="lc-testimonial-full">
+        <summary>Lire le témoignage complet <span aria-hidden="true">+</span></summary>
+        <div class="lc-testimonial-text">
+          <p>Dans le cadre d'une refonte complète du site de la maison d'édition L'Honnête Homme, j'ai souhaité confier la partie CRO à une professionnelle aguerrie. L'objectif était de mener ce travail en parallèle des actions engagées sur les différents piliers du référencement et du marketing.</p>
+          <p>J'ai choisi Anne-Sophie pour réaliser un audit CRO du site et concevoir des maquettes. Elle a rapidement compris le contexte et les enjeux de cette refonte. Ce qui a surtout fait la différence, c'est sa passion pour le CRO et sa capacité à s'imprégner de l'univers de la maison d'édition.</p>
+          <p>Au-delà de ses compétences techniques, Anne-Sophie est une artiste. Avec un sens de l'esthétique affirmé et beaucoup de goût, elle m'a proposé des maquettes qui m'ont bluffée&nbsp;! Elle a parfaitement respecté l'enveloppe budgétaire allouée au projet, tout en livrant un travail qui est allé au-delà de mes attentes.</p>
+          <p>Agréable, avenante et force de proposition, Anne-Sophie est une professionnelle avec qui c'est un vrai plaisir de travailler. Cette collaboration m'a confirmé combien un regard extérieur peut aider à prendre du recul et à avancer plus efficacement.</p>
+          <p>Je continuerai à faire appel à elle et ne peux que la recommander à tout chef d'entreprise, chef de projet e-commerce ou directeur marketing&nbsp;!</p>
+        </div>
+      </details>
+    </figure>
   </div>
 </section>
 
@@ -1840,6 +1882,10 @@ body {
         <span class="offre-dark-price">1&nbsp;200&nbsp;€</span>
       </div>
     </div>
+    <figure class="offre-quote">
+      <blockquote>«&nbsp;Elle a parfaitement respecté l'enveloppe budgétaire allouée au projet, tout en livrant un travail qui est allé au-delà de mes attentes.&nbsp;»</blockquote>
+      <figcaption>Floriane Stoecklin · Éditions L'Honnête Homme</figcaption>
+    </figure>
     <ul class="offre-dark-list">
       <li>Diagnostic de vos pages clés et du tunnel d'achat, desktop et mobile</li>
       <li>Plan d'action priorisé en trois lots</li>
