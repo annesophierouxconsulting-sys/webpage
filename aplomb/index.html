@@ -1530,6 +1530,13 @@ body {
 .lc-client-stats li { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); }
 .lc-client-stats strong { font-family: var(--font-display); font-weight: 400; font-size: 22px; letter-spacing: 0; color: var(--champagne-fonce); margin-right: 5px; vertical-align: -2px; }
 
+.lc-client-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--champagne-fonce); margin: 0 0 8px; }
+.lc-client-consent { font-family: var(--font-body); font-style: italic; font-size: 14px; color: var(--ink-soft); margin: 8px 0 0; }
+.lc-client-stats .lc-client-stats-label { font-family: var(--font-body); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--ink-soft); align-self: center; }
+
+.lc-head { max-width: 920px; }
+.lc-head .lc-intro { max-width: 720px; }
+
 </style>
 </head>
 <body>
@@ -1670,11 +1677,14 @@ body {
     <span class="chapter-mark">/ ch.02 — le livrable</span>
     <div class="lc-head">
       <h2>Ce que vous recevez.</h2>
-      <p class="lc-intro">Quatre livrables, et une restitution pour les prendre en main. Pour vous les montrer tels qu'ils sont livrés, chacun est illustré par un audit réalisé pour un client&nbsp;:</p>
+      <p class="lc-intro">Quatre livrables, et une restitution pour les prendre en main.</p>
       <div class="lc-client">
+        <p class="lc-client-label">— Exemples réels · audit client</p>
         <p class="lc-client-name">Éditions L'Honnête Homme</p>
-        <p class="lc-client-meta">Maison d'édition indépendante · WordPress + WooCommerce · pas de développeur</p>
+        <p class="lc-client-meta">Maison d'édition indépendante · site WordPress + WooCommerce, géré sans développeur</p>
+        <p class="lc-client-consent">Captures présentées avec l'accord de la maison.</p>
         <ul class="lc-client-stats" aria-label="L'audit de L'Honnête Homme en chiffres">
+          <li class="lc-client-stats-label">Pour cet audit&nbsp;:</li>
           <li><strong>94</strong> observations</li>
           <li><strong>99</strong> recommandations</li>
           <li><strong>31</strong> transverses</li>
@@ -1731,7 +1741,7 @@ body {
       <div class="lc-text">
         <span class="lc-n">03</span>
         <h3>La maquette</h3>
-        <p>La page à plus fort impact, entièrement redessinée et réécrite, en deux maquettes complètes — desktop et mobile — livrées dans un PDF annoté. Et une version mobile en ligne, pour voir les comportements réels&nbsp;: défilement, barre d'achat fixe, choix de l'édition.</p>
+        <p>La page à plus fort impact, entièrement redessinée et réécrite, en deux maquettes complètes — desktop et mobile — livrées dans un PDF annoté. Et une version mobile en ligne, pour voir les comportements réels&nbsp;: défilement, éléments fixes, menus et interactions.</p>
         <p class="lc-note">Construite pour l'outil existant — sans changer de site.</p>
       </div>
       <div class="lc-media">
