@@ -1526,6 +1526,10 @@ body {
 .lc-head .lc-intro { margin: 0 0 22px; }
 .lc-head .lc-client { margin: 0; }
 
+.lc-client-stats { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.lc-client-stats li { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); }
+.lc-client-stats strong { font-family: var(--font-display); font-weight: 400; font-size: 22px; letter-spacing: 0; color: var(--champagne-fonce); margin-right: 5px; vertical-align: -2px; }
+
 </style>
 </head>
 <body>
@@ -1670,6 +1674,12 @@ body {
       <div class="lc-client">
         <p class="lc-client-name">Éditions L'Honnête Homme</p>
         <p class="lc-client-meta">Maison d'édition indépendante · WordPress + WooCommerce · pas de développeur</p>
+        <ul class="lc-client-stats" aria-label="L'audit de L'Honnête Homme en chiffres">
+          <li><strong>94</strong> observations</li>
+          <li><strong>99</strong> recommandations</li>
+          <li><strong>31</strong> transverses</li>
+          <li><strong>65</strong> rapides et sans développement</li>
+        </ul>
       </div>
     </div>
 
@@ -1692,7 +1702,6 @@ body {
         <ul class="crit-tags" aria-label="Les cinq critères d'analyse">
           <li>Clarté</li><li>Pertinence</li><li>Valeur perçue</li><li>Motivation</li><li>Friction</li>
         </ul>
-        <p class="lc-figure"><strong>94</strong> observations</p>
       </div>
     </article>
 
@@ -1714,11 +1723,6 @@ body {
           <div><dt>Par où</dt><dd>contenu, réglage, extension ou développeur</dd></div>
           <div><dt>Quand</dt><dd>trois lots, du plus rentable au plus fin</dd></div>
         </dl>
-        <ul class="lc-stats">
-          <li><strong>99</strong> recommandations</li>
-          <li><strong>31</strong> transverses&nbsp;: une correction vaut pour tout le site</li>
-          <li><strong>65</strong> rapides et réalisables sans développement</li>
-        </ul>
       </div>
     </article>
 
@@ -1766,7 +1770,6 @@ body {
         <span class="lc-n">04</span>
         <h3>La synthèse</h3>
         <p>L'essentiel en quelques slides&nbsp;: ce qui freine vos ventes, ce qu'il faut corriger d'abord, et pourquoi. Celle qu'on relit, et qu'on partage.</p>
-        <p class="lc-figure"><strong>3</strong> lots — le premier à mettre en œuvre avant Noël</p>
       </div>
     </article>
 
