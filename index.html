@@ -175,10 +175,7 @@ body {
   padding-bottom: 6px;
   text-decoration: none;
 }
-.cta-mono.on-light {
-  color: var(--champagne-fonce);
-  border-bottom-color: rgba(140, 106, 44, 0.5);
-}
+
 
 /* Équilibrage typographique des paragraphes narratifs courts —
    évite les orphelins (dernier mot seul sur sa ligne) en redistribuant
@@ -186,11 +183,7 @@ body {
    Support : Chrome/Edge 114+, Safari 17.4+, Firefox 121+. Fallback gracieux. */
 .hero-lead,
 .lead,
-.method-lead,
-.rec-lead,
-.band-maat-text,
-.synth-desc,
-.synth-tag {
+.band-maat-text {
   text-wrap: balance;
 }
 
@@ -323,1383 +316,345 @@ body {
    fond hero continu (#08041A), composition centrée et factuelle :
    marker + filets latéraux, bandeau 3 chiffres, description, tag.
    ============================================================ */
-.synth-section {
-  background: #0C0822;
-  color: var(--ivory);
-  padding: 44px 5% 58px;
-  text-align: center;
-}
-.synth-marker-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  max-width: 900px;
-  margin: 0 auto;
-}
-.synth-marker-line {
-  flex: 1;
-  height: 1px;
-  max-width: 260px;
-}
-.synth-marker-line.left {
-  background: linear-gradient(to right, transparent, rgba(212, 178, 117, 0.4));
-}
-.synth-marker-line.right {
-  background: linear-gradient(to left, transparent, rgba(212, 178, 117, 0.4));
-}
-.synth-marker {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--champagne);
-  font-weight: 500;
-  white-space: nowrap;
-}
-.synth-stats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  margin: 1.75rem 0 1.9rem;
-}
-.synth-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
-  padding: 0 30px;
-}
-.synth-stat-num {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 31px;
-  line-height: 1;
-  color: var(--ivory);
-  font-weight: 400;
-  white-space: nowrap;
-  font-variation-settings: "opsz" 32;
-}
-.synth-stat-label {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(212, 178, 117, 0.7);
-  font-weight: 500;
-}
-.synth-stat-sep {
-  align-self: stretch;
-  width: 1px;
-  margin: 2px 0;
-  background: rgba(212, 178, 117, 0.25);
-}
-.synth-desc {
-  font-family: var(--font-display);
-  font-size: 25px;
-  line-height: 1.35;
-  color: rgba(244, 236, 211, 0.92);
-  max-width: 540px;
-  margin: 0 auto 0.75rem;
-  font-variation-settings: "opsz" 32;
-}
-.synth-desc em {
-  font-style: italic;
-  color: var(--champagne);
-}
-.synth-tag {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 13px;
-  color: rgba(212, 178, 117, 0.6);
-  margin: 0;
-}
-.synth-closing-line {
-  width: 100%;
-  max-width: 200px;
-  height: 1px;
-  margin: 2rem auto 0;
-  background: linear-gradient(to right,
-    transparent 0%,
-    rgba(212, 178, 117, 0.3) 50%,
-    transparent 100%);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Synthèse — composition d'entrée en cascade (marker → stats → desc → tag → ligne).
    On neutralise le reveal global de la section pour que chaque enfant fasse son
    propre fade-up séquencé sans être masqué par l'opacité du parent. */
-.synth-section.reveal { opacity: 1; transform: none; transition: none; }
-.synth-section.reveal:not(.is-visible) .synth-marker-row,
-.synth-section.reveal:not(.is-visible) .synth-stats,
-.synth-section.reveal:not(.is-visible) .synth-desc,
-.synth-section.reveal:not(.is-visible) .synth-tag,
-.synth-section.reveal:not(.is-visible) .synth-closing-line {
-  opacity: 0;
-  transform: translateY(8px);
-}
-.synth-section .synth-marker-row,
-.synth-section .synth-stats,
-.synth-section .synth-desc,
-.synth-section .synth-tag,
-.synth-section .synth-closing-line {
-  transition: opacity 600ms cubic-bezier(0.22, 0.61, 0.36, 1),
-              transform 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-.synth-section.is-visible .synth-marker-row   { transition-delay: 0ms; }
-.synth-section.is-visible .synth-stats        { transition-delay: 150ms; }
-.synth-section.is-visible .synth-desc         { transition-delay: 300ms; }
-.synth-section.is-visible .synth-tag          { transition-delay: 450ms; }
-.synth-section.is-visible .synth-closing-line { transition-delay: 600ms; }
+
+
+
+
+
+
+
+
 
 /* Filets latéraux du marker : extension max-width 0 → 260px depuis le centre */
-.synth-section.reveal:not(.is-visible) .synth-marker-line { max-width: 0; }
-.synth-marker-line {
-  transition: max-width 800ms cubic-bezier(0.22, 1, 0.36, 1) 100ms;
-}
+
+
 
 /* Réduction de mouvement : respect des préférences utilisateur — état final instantané */
-@media (prefers-reduced-motion: reduce) {
-  .synth-section.reveal:not(.is-visible) .synth-marker-row,
-  .synth-section.reveal:not(.is-visible) .synth-stats,
-  .synth-section.reveal:not(.is-visible) .synth-desc,
-  .synth-section.reveal:not(.is-visible) .synth-tag,
-  .synth-section.reveal:not(.is-visible) .synth-closing-line {
-    opacity: 1;
-    transform: none;
-  }
-  .synth-section.reveal:not(.is-visible) .synth-marker-line { max-width: 260px; }
-  .synth-marker-line { transition: none; }
-}
+
 
 /* ============================================================
    3 — SPLIT — deux encarts éditoriaux côte à côte
    "Ce que vous vivez" sans numérotation, "Ce qui va changer" avec numérotation
    ============================================================ */
-.split-section {
-  padding: 5% 5%;
-  background: var(--paper);
-  position: relative;
-}
-.split-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-}
-.split-block { padding: 2.25rem 2rem; }
-/* Override : pas d'encart, juste filets latéraux */
-.split-block.editorial-block {
-  background: none;
-  border: none;
-  padding: 0.5rem 1.75rem;
-  position: relative;
-}
-.split-block.editorial-block::before,
-.split-block.editorial-block::after {
-  display: none;
-}
-.split-block.editorial-block {
-  background: none;
-}
-.split-grid > .split-block.editorial-block {
-  border-left: 1px solid rgba(140, 106, 44, 0.45);
-  border-right: none;
-}
-/* Réinitialisation de la règle outcome-item — la définition complète est plus bas */
-.outcome-item { border-bottom: none; }
 
-.split-block-title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(22px, 2.8vw, 30px);
-  line-height: 1.05;
-  margin: 0 0 1.5rem;
-  color: var(--ink);
-  font-variation-settings: "opsz" 60;
-}
-.split-block-title em {
-  font-style: italic;
-  color: var(--champagne-fonce);
-  font-variation-settings: "opsz" 72;
-}
+
+
+/* Override : pas d'encart, juste filets latéraux */
+
+
+
+
+/* Réinitialisation de la règle outcome-item — la définition complète est plus bas */
+
+
+
+
 
 /* Liste pain — sans numérotation */
-.pain-list {
-  display: flex; flex-direction: column;
-  margin: 0; padding: 0; list-style: none;
-}
-.pain-item {
-  padding: 13px 0;
-  display: flex; flex-direction: column;
-  gap: 2px;
-}
-.pain-item:first-child { padding-top: 0; }
-.pain-item:last-child { padding-bottom: 0; }
-.pain-title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 15px;
-  line-height: 1.35;
-  color: var(--ink-soft);
-  font-weight: 400;
-  font-variation-settings: "opsz" 24;
-}
-.pain-desc {
-  font-family: var(--font-body);
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--ink-mute);
-  font-variation-settings: "opsz" 14;
-}
+
+
+
+
+
+
 
 /* Liste outcome — numérotée + filet gradient via border-image (rendu pixel-perfect) */
-.outcome-list { display: flex; flex-direction: column; }
-.outcome-item {
-  padding: 16px 0;
-  display: grid;
-  grid-template-columns: 28px 1fr;
-  gap: 12px;
-  align-items: baseline;
-  position: relative;
-  border-bottom: 1px solid transparent;
-  border-image: linear-gradient(to right,
-    rgba(20, 16, 42, 0.55) 0%,
-    rgba(20, 16, 42, 0.18) 60%,
-    rgba(20, 16, 42, 0) 100%) 1;
-}
-.outcome-item:last-child { border-bottom: none; border-image: none; }
-.outcome-item:first-child { padding-top: 0; }
-.outcome-num {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  line-height: 1;
-  color: var(--champagne-fonce);
-}
-.outcome-content { display: flex; flex-direction: column; gap: 2px; }
-.outcome-title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 16px;
-  line-height: 1.25;
-  color: var(--champagne-fonce);
-  font-weight: 400;
-  font-variation-settings: "opsz" 32;
-}
-.outcome-desc {
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: var(--ink-mute);
-  line-height: 20px;
-  font-variation-settings: "opsz" 14;
-}
+
+
+
+
+
+
+
+
 
 /* ============================================================
    5 — NOTRE DÉMARCHE — timeline horizontale aubergine + panel crème en dessous
    ============================================================ */
-.method-section {
-  background: var(--hero-bg);
-  color: var(--ivory);
-  padding: 5% 5%;
-  position: relative;
-}
-.method-head {
-  text-align: center;
-  margin-bottom: 3.5rem;
-}
-.method-head-inner {
-  display: inline-block;
-  text-align: left;
-  position: relative;
-  padding-left: 1.75rem;
-  max-width: 580px;
-}
-.method-head-inner::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 4px; bottom: 4px;
-  width: 1px;
-  background: linear-gradient(to bottom,
-    rgba(212, 178, 117, 0.4),
-    rgba(212, 178, 117, 0.75),
-    rgba(212, 178, 117, 0.4));
-}
-.method-head h3 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(24px, 3.4vw, 38px);
-  line-height: 1.05;
-  margin: 0 0 0.9rem;
-  color: var(--ivory);
-  font-variation-settings: "opsz" 60;
-}
-.method-head h3 em {
-  font-style: italic;
-  color: var(--champagne);
-  font-variation-settings: "opsz" 72;
-}
-.method-lead {
-  font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.6;
-  color: rgba(244, 236, 211, 0.65);
-  max-width: 540px;
-  margin: 0;
-  font-variation-settings: "opsz" 14;
-}
 
-.method-timeline { position: relative; padding: 0 2%; }
-.method-track {
-  position: absolute;
-  top: 38px; left: 12%; right: 12%;
-  height: 1px;
-  background: linear-gradient(to right,
-    transparent 0%,
-    rgba(212, 178, 117, 0.4) 12%,
-    rgba(212, 178, 117, 0.4) 88%,
-    transparent 100%);
-  z-index: 1;
-}
-.method-arrow {
-  position: absolute; top: 31px;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: rgba(212, 178, 117, 0.5);
-  background: var(--hero-bg);
-  padding: 0 5px;
-  z-index: 2;
-}
-.method-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  position: relative;
-  z-index: 2;
-}
-.method-step {
-  display: flex; flex-direction: column;
-  align-items: center; text-align: center;
-  gap: 14px;
-  cursor: pointer;
-  background: none; border: none;
-  font-family: inherit; padding: 0;
-  transition: opacity 0.3s;
-  color: inherit;
-}
-.method-step:not(.active) { opacity: 0.7; }
-.method-step:hover:not(.active) { opacity: 1; }
 
-.method-step-num {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: rgba(244, 236, 211, 0.5);
-  margin-bottom: -8px;
-}
-.method-step.active .method-step-num { color: var(--champagne); }
-.method-marker {
-  width: 56px; height: 56px;
-  border-radius: 50%;
-  background: var(--hero-bg);
-  border: 1.5px solid rgba(244, 236, 211, 0.5);
-  display: flex; align-items: center; justify-content: center;
-  color: rgba(244, 236, 211, 0.6);
-  position: relative; z-index: 2;
-  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease;
-}
-.method-step:hover:not(.active) .method-marker {
-  border-color: var(--champagne);
-  color: var(--champagne);
-}
-.method-step.active .method-marker {
-  background: var(--ivory);
-  border-color: var(--ivory);
-  color: var(--ink);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Hint d'interaction : signale la cliquabilité des 4 étapes (affordance) */
-.method-hint {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(212, 178, 117, 0.6);
-  text-align: center;
-  margin: 1.5rem 0 0.5rem;
-}
-.method-step-title {
-  font-family: var(--font-display);
-  font-size: 16px;
-  line-height: 1.2;
-  color: rgba(244, 236, 211, 0.7);
-  font-weight: 400;
-  font-variation-settings: "opsz" 24;
-}
-.method-step.active .method-step-title {
-  color: var(--champagne);
-  font-style: italic;
-  font-weight: 500;
-}
+
+
+
 
 /* Detail panel : encart crème désaturée sur fond aubergine */
-.method-detail {
-  margin-top: 3rem;
-  padding: 2.5rem 2.75rem;
-  background: rgba(244, 236, 211, 0.06);
-  color: var(--ivory);
-  display: grid;
-  grid-template-columns: 1fr 2.2fr;
-  gap: 2.5rem;
-  border-radius: 1px;
-  position: relative;
-  border: 1px solid rgba(212, 178, 117, 0.18);
-  max-width: 920px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.method-detail::before, .method-detail::after {
-  content: '';
-  position: absolute;
-  width: 16px; height: 16px;
-  border-color: var(--champagne);
-  border-style: solid;
-  border-width: 0;
-}
-.method-detail::before {
-  top: -1px; left: -1px;
-  border-top-width: 1px; border-left-width: 1px;
-}
-.method-detail::after {
-  bottom: -1px; right: -1px;
-  border-bottom-width: 1px; border-right-width: 1px;
-}
-.method-detail-pointer {
-  position: absolute;
-  top: -16px; left: 12.5%;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  color: var(--ivory);
-  background: var(--hero-bg);
-  padding: 0 8px;
-}
-.method-detail-left {
-  border-right: 1px solid rgba(212, 178, 117, 0.15);
-  padding-right: 1.5rem;
-}
-.method-detail-num {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(212, 178, 117, 0.6);
-  font-weight: 500;
-  display: block;
-  margin-bottom: 10px;
-}
-.method-detail-name {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 30px;
-  line-height: 1.05;
-  color: var(--ivory);
-  font-weight: 400;
-  font-variation-settings: "opsz" 60;
-}
-.method-detail-desc {
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.65;
-  color: rgba(244, 236, 211, 0.85);
-  margin: 0 0 1.2rem;
-  font-variation-settings: "opsz" 14;
-}
-.method-detail-out {
-  display: flex; align-items: baseline; gap: 14px;
-  padding: 1rem 0;
-  border-top: 1px solid rgba(212, 178, 117, 0.15);
-}
+
+
+
+
+
+
+
+
+
+
 /* Le display: flex ci-dessus override l'effet user-agent de l'attribut HTML hidden. Force le masquage. */
-.method-detail-out[hidden] { display: none; }
-.method-detail-out-lbl {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(212, 178, 117, 0.6);
-  font-weight: 500;
-}
-.method-detail-out-val {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 14px;
-  color: var(--ivory);
-}
-.method-detail a {
-  font-style: italic;
-  color: var(--champagne);
-  text-decoration: none;
-  border-bottom: 1px solid var(--champagne);
-}
-.method-detail-link {
-  padding-bottom: 1px;
-  transition: color 0.2s ease, border-color 0.2s ease;
-}
-.method-detail-link:hover {
-  color: var(--ivory);
-  border-bottom-color: var(--ivory);
-}
+
+
+
+
+
+
 
 /* Parcours vertical mobile — remplace le système interactif (cliquable) sous 900px.
    Timeline éditoriale statique : ligne dorée + numéros, pas d'icônes, pas d'états actif/inactif. */
-.method-mobile-journey { display: none; }
-.method-mobile-step { display: flex; gap: 16px; padding-bottom: 24px; }
-.method-mobile-step:last-child { padding-bottom: 0; }
-.method-mobile-markers { position: relative; flex: none; width: 20px; display: flex; justify-content: center; }
-.method-mobile-num {
-  position: relative; z-index: 1;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--champagne);
-}
-.method-mobile-step:not(:last-child) .method-mobile-markers::after {
-  content: '';
-  position: absolute;
-  top: 15px; bottom: -24px; left: 50%;
-  width: 1px;
-  transform: translateX(-50%);
-  background: rgba(212, 178, 117, 0.3);
-}
-.method-mobile-content { flex: 1; min-width: 0; }
-.method-mobile-title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 18px;
-  line-height: 1.15;
-  color: var(--ivory);
-  font-weight: 400;
-  margin: 0 0 6px;
-  font-variation-settings: "opsz" 40;
-}
-.method-mobile-content p {
-  font-family: var(--font-body);
-  font-size: 13.5px;
-  line-height: 1.55;
-  color: rgba(244, 236, 211, 0.7);
-  margin: 0;
-  font-variation-settings: "opsz" 14;
-}
+
+
+
+
+
+
+
+
+
 
 /* ============================================================
    6 — METHODS CYCLE — composition magazine vertical décalé
    Intro + cercle à gauche, légende sur toute la hauteur droite
    ============================================================ */
-.methods-section {
-  background: var(--paper);
-  padding: 4.5% 5%;
-  position: relative;
-}
-.methods-mag {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 4rem;
-  align-items: end;
-}
-.methods-left {
-  display: flex; flex-direction: column;
-  gap: 2.5rem;
-}
-.methods-stage {
-  display: flex; align-items: center;
-  justify-content: center;
-  padding-left: 0;
-}
-.methods-legend-block { align-self: end; }
-.methods-intro h3 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(28px, 3.6vw, 40px);
-  line-height: 1.0;
-  margin: 0 0 1.4rem;
-  color: var(--ink);
-  font-variation-settings: "opsz" 60;
-  letter-spacing: -0.01em;
-}
-.methods-intro h3 em {
-  font-style: italic;
-  color: var(--champagne-fonce);
-  font-variation-settings: "opsz" 72;
-}
-.methods-intro .lead {
-  font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.5;
-  color: var(--ink-soft);
-  margin: 0;
-  max-width: 460px;
-  font-variation-settings: "opsz" 14;
-}
-.methods-hint {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(140, 106, 44, 0.7);
-  margin: 1.5rem 0 0;
-}
-.methods-stage-DEPRECATED {
-  display: flex; align-items: flex-end;
-  justify-content: flex-start;
-  padding-left: 0.5rem;
-}
+
+
+
+
+
+
+
+
+
+
 
 /* Nouvelle constellation des méthodes — 6 nœuds autour d'un cercle, arc actif champagne */
-.donut-svg {
-  width: 100%;
-  max-width: 460px;
-}
-.constellation-ring {
-  fill: none;
-  stroke: rgba(140, 106, 44, 0.22);
-  stroke-width: 1;
-}
-.constellation-arc {
-  fill: none;
-  stroke: rgba(140, 106, 44, 0.85);
-  stroke-width: 5;
-  stroke-linecap: round;
-  transition: stroke-dashoffset 0.5s cubic-bezier(0.22,1,0.36,1),
-              transform 0.5s cubic-bezier(0.22,1,0.36,1);
-  transform-origin: 180px 180px;
-}
-.constellation-node {
-  cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
-  transform-box: fill-box;
-  transform-origin: center;
-}
-.constellation-node circle {
-  fill: var(--paper);
-  stroke: rgba(212, 178, 117, 0.55);
-  stroke-width: 1.8;
-  transition: fill 0.25s, stroke 0.25s;
-}
+
+
+
+
+
 /* Hit area invisible — étend la zone tactile sans changer l'esthétique */
-.constellation-node .constellation-hit {
-  fill: transparent;
-  stroke: none;
-}
-.constellation-node text {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  fill: rgba(20, 16, 42, 0.65);
-  text-anchor: middle;
-  dominant-baseline: central;
-  pointer-events: none;
-  letter-spacing: 0.05em;
-  transition: fill 0.25s;
-}
-.constellation-node:hover circle {
-  stroke: var(--champagne-fonce);
-  fill: rgba(212, 178, 117, 0.08);
-}
-.constellation-node.is-active circle {
-  fill: var(--ink);
-  stroke: var(--ink);
-}
-.constellation-node.is-active text { fill: var(--ivory); }
-.constellation-node.is-hovered:not(.is-active) circle {
-  fill: rgba(140, 106, 44, 0.12);
-}
-.donut-segment {
-  cursor: pointer;
-  transition: fill 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  transform-origin: 160px 160px;
-}
+
+
+
+
+
+
+
 /* Croissants en alternance — couleurs très désaturées */
-.donut-segment.tone-aubergine { fill: rgba(20, 16, 42, 0.14); }
-.donut-segment.tone-champagne { fill: rgba(140, 106, 44, 0.12); }
+
+
 
 /* Hover : croissant pousse vers l'extérieur + passe aubergine plein 70% */
-.donut-segment:hover { fill: rgba(20, 16, 42, 0.7); }
-.donut-segment.idx-0:hover { transform: translate(0, -3px); }
-.donut-segment.idx-1:hover { transform: translate(2.6px, -1.5px); }
-.donut-segment.idx-2:hover { transform: translate(2.6px, 1.5px); }
-.donut-segment.idx-3:hover { transform: translate(0, 3px); }
-.donut-segment.idx-4:hover { transform: translate(-2.6px, 1.5px); }
-.donut-segment.idx-5:hover { transform: translate(-2.6px, -1.5px); }
+
+
+
+
+
+
+
 
 /* Actif : champagne plein 95% */
-.donut-segment.is-active { fill: rgba(212, 178, 117, 0.95) !important; }
+
 
 /* Filets dorés ultra-fins entre segments */
-.donut-divider {
-  stroke: rgba(140, 106, 44, 0.3);
-  stroke-width: 1;
-  fill: none;
-}
+
 
 /* Légende dans encart soigné */
-.methods-legend-block {
-  padding: 0.5rem 0;
-  display: flex; flex-direction: column;
-}
-.lphase {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 14px;
-  padding: 11px 0;
-  align-items: baseline;
-  background: none; border: none;
-  border-bottom: 1px solid rgba(140, 106, 44, 0.15);
-  width: 100%; text-align: left;
-  font-family: inherit; cursor: pointer;
-  position: relative;
-  transition: background-color 0.25s, padding 0.25s;
-}
-.lphase:last-child { border-bottom: none; }
-.lphase:first-of-type { padding-top: 8px; }
-.lphase.is-active {
-  padding-left: 14px;
-  background: rgba(140, 106, 44, 0.06);
-  border-left: 2px solid var(--champagne-fonce);
-  border-bottom: 1px solid rgba(140, 106, 44, 0.15);
-  animation: lphaseActiveIn 240ms ease;
-}
-@keyframes lphaseActiveIn {
-  from { opacity: 0.4; }
-  to { opacity: 1; }
-}
-.lphase-desc {
-  animation: lphaseDescIn 240ms ease;
-}
-@keyframes lphaseDescIn {
-  from { opacity: 0; transform: translateY(-2px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+
+
+
+
+
+
+
+
 /* Fade-in du contenu de la fiche livrable au changement prev/next */
-.fiche-content.is-fresh {
-  animation: ficheContentFadeIn 240ms ease;
-}
-@keyframes ficheContentFadeIn {
-  from { opacity: 0.4; }
-  to { opacity: 1; }
-}
+
+
 /* Slide horizontal directionnel quand le changement vient d'un swipe ou d'une flèche prev/next */
-.fiche-content.is-fresh-from-right {
-  animation: ficheContentSlideFromRight 280ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-.fiche-content.is-fresh-from-left {
-  animation: ficheContentSlideFromLeft 280ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-@keyframes ficheContentSlideFromRight {
-  from { opacity: 0; transform: translateX(20px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes ficheContentSlideFromLeft {
-  from { opacity: 0; transform: translateX(-20px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
+
+
+
+
 /* Wobble pédagogique au 1er montage mobile pour suggérer le swipe horizontal */
-.fiche-doc-frame.is-wobbling {
-  animation: ficheWobble 700ms cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-@keyframes ficheWobble {
-  0%   { transform: translateX(0); }
-  30%  { transform: translateX(10px); }
-  60%  { transform: translateX(-3px); }
-  100% { transform: translateX(0); }
-}
+
+
 /* Hint texte "← Glissez pour naviguer →" — visible mobile <600px uniquement,
    caché de manière permanente après le 1er swipe (localStorage) */
-.fiche-swipe-hint {
-  display: none;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(212, 178, 117, 0.55);
-  text-align: center;
-  margin-top: -1.25rem;
-  margin-bottom: 1.25rem;
-  transition: opacity 0.4s ease;
-}
-.fiche-swipe-hint.is-faded {
-  opacity: 0;
-  pointer-events: none;
-}
-.lphase:hover:not(.is-active) {
-  background: rgba(140, 106, 44, 0.025);
-  padding-left: 4px;
-}
-.lphase-n {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: rgba(20, 16, 42, 0.45);
-  padding-top: 2px;
-  min-width: 22px;
-}
-.lphase.is-active .lphase-n { color: var(--champagne-fonce); }
-.lphase-content { display: flex; flex-direction: column; gap: 6px; }
-.lphase-title-row {
-  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
-}
-.lphase-title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 17px;
-  line-height: 1.2;
-  color: var(--ink);
-  font-weight: 400;
-  font-variation-settings: "opsz" 32;
-}
-.lphase.is-active .lphase-title {
-  font-size: 19px;
-  font-weight: 500;
-  color: var(--champagne-fonce);
-}
-.lphase-desc {
-  font-family: var(--font-body);
-  font-size: 13px;
-  line-height: 1.6;
-  color: var(--ink-soft);
-  margin-top: 4px;
-  font-variation-settings: "opsz" 14;
-  max-width: 95%;
-}
-.lphase-badge {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  display: inline-flex; align-items: center; gap: 5px;
-}
-.lphase-badge .qq-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--champagne-fonce);
-}
-.lphase-badge.quali .qq-dot {
-  background: transparent;
-  border: 1px solid var(--champagne-fonce);
-}
-.lphase-arrow {
-  font-family: var(--font-mono);
-  font-size: 13px;
-  color: rgba(140, 106, 44, 0.4);
-}
-.lphase.is-active .lphase-arrow { color: var(--champagne-fonce); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Meta line "S'appuie sur" — uniquement pour la méthode active 01 (sources externes).
    order: 99 force le rendu visuel en fin de .lphase-content même quand le JS ré-injecte
    .lphase-desc via appendChild après désactivation/réactivation. */
-.lphase-meta {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0 1rem;
-  align-items: baseline;
-  margin-top: 0.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(140, 106, 44, 0.18);
-  order: 99;
-}
-.lphase:not(.is-active) .lphase-meta { display: none; }
-.lphase-meta-key {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--champagne-fonce);
-  white-space: nowrap;
-}
-.lphase-meta-val {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--ink-soft);
-  font-variation-settings: "opsz" 18;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
+
+
+
+
 
 /* Accordéon vertical mobile — remplace la roue + la légende cliquable sous 900px.
    Titres seuls, dorés, "+" pour dérouler chaque méthode indépendamment. */
-.methods-mobile-accordion { display: none; }
-.methods-mobile-item { border-bottom: 1px solid rgba(140, 106, 44, 0.18); }
-.methods-mobile-item:last-child { border-bottom: none; }
-.methods-mobile-item summary {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 16px 0;
-  cursor: pointer;
-  list-style: none;
-}
-.methods-mobile-item summary::-webkit-details-marker { display: none; }
-.methods-mobile-title-row { display: flex; flex-direction: column; gap: 5px; }
-.methods-mobile-title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 1.25;
-  color: var(--champagne-fonce);
-}
-.methods-mobile-icon {
-  flex: none;
-  font-family: var(--font-mono);
-  font-size: 16px;
-  color: var(--champagne-fonce);
-  transition: transform 200ms ease;
-}
-.methods-mobile-item[open] .methods-mobile-icon { transform: rotate(45deg); }
-.methods-mobile-body { padding: 0 0 18px; }
-.methods-mobile-desc {
-  font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--ink-soft);
-  margin: 0;
-  font-variation-settings: "opsz" 14;
-}
+
+
+
+
+
+
+
+
+
+
+
 
 /* ============================================================
    7 — BANDEAU DIFFÉRENCE avec plume bauhaus
    ============================================================ */
-.diff-band {
-  background: var(--band-bg);
-  color: var(--ivory);
-  padding: 3.5% 5%;
-  position: relative;
-}
-.diff-band::before, .diff-band::after {
-  content: '';
-  position: absolute;
-  left: 5%; right: 5%;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(212, 178, 117, 0.45), transparent);
-}
-.diff-band::before { top: 0; }
-.diff-band::after { bottom: 0; }
-.diff-content {
-  display: flex; align-items: center; gap: 2rem;
-  max-width: 1000px; margin: 0 auto;
-}
-.diff-feather { width: 22px; height: 70px; flex: 0 0 auto; }
-.diff-text {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 16px;
-  line-height: 1.5;
-  color: rgba(244, 236, 211, 0.85);
-  font-weight: 300;
-  margin: 0;
-  font-variation-settings: "opsz" 24;
-}
-.diff-text b { font-style: normal; font-weight: 500; color: var(--ivory); }
-.diff-text .accent { color: var(--champagne); font-weight: 500; font-style: normal; }
+
+
+
+
+
+
+
+
+
 
 /* ============================================================
    8 — RECOMMENDATIONS — fiche document + sommaire
    ============================================================ */
-.rec-section {
-  background: var(--band-bg);
-  color: var(--ivory);
-  padding: 5% 5%;
-  position: relative;
-}
-.rec-head {
-  margin-bottom: 3rem;
-  max-width: 600px;
-  position: relative;
-  padding-left: 1.75rem;
-}
-.rec-head::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 4px; bottom: 4px;
-  width: 1px;
-  background: linear-gradient(to bottom,
-    rgba(212, 178, 117, 0.4),
-    rgba(212, 178, 117, 0.75),
-    rgba(212, 178, 117, 0.4));
-}
-.rec-section h3 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(24px, 3.4vw, 38px);
-  line-height: 1.05;
-  margin: 0 0 0.9rem;
-  color: var(--ivory);
-  font-variation-settings: "opsz" 60;
-}
-.rec-section h3 em {
-  font-style: italic;
-  color: var(--champagne);
-  font-variation-settings: "opsz" 72;
-}
-.rec-lead {
-  font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.6;
-  color: rgba(244, 236, 211, 0.7);
-  max-width: 540px;
-  font-variation-settings: "opsz" 14;
-}
 
-.fiche-doc-layout {
-  max-width: 880px;
-  margin: 0 auto;
-  position: relative;
-}
+
+
+
+
+
+
+
 
 /* Indicateur de progression — 6 points au-dessus de la fiche */
-.fiche-progress-dots {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 2rem;
-}
-.fiche-progress-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: 1px solid rgba(212, 178, 117, 0.5);
-  background: transparent;
-  padding: 0;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.fiche-progress-dot:hover:not(.is-active) {
-  background: rgba(212, 178, 117, 0.3);
-  border-color: rgba(212, 178, 117, 0.8);
-}
-.fiche-progress-dot.is-active {
-  width: 24px;
-  border-radius: 4px;
-  background: var(--champagne);
-  border-color: var(--champagne);
-}
+
+
+
+
 
 /* Flèches latérales discrètes — débordent dans le fond de section */
-.fiche-nav-arrow {
-  position: absolute;
-  top: calc(50% + 1rem);
-  transform: translateY(-50%);
-  width: 50px; height: 50px;
-  border-radius: 50%;
-  border: none;
-  background: transparent;
-  font-family: var(--font-mono);
-  font-size: 18px;
-  color: rgba(212, 178, 117, 0.45);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
-  z-index: 2;
-}
-.fiche-nav-arrow.left { left: -75px; }
-.fiche-nav-arrow.right { right: -75px; }
+
+
+
 /* Arc asymétrique champagne — passe par le haut, ouverture en bas-extérieur */
-.fiche-nav-arc {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  color: rgba(212, 178, 117, 0.85);
-  transition: color 0.25s ease;
-  pointer-events: none;
-}
-.fiche-nav-arrow:hover:not(:disabled) {
-  background: rgba(212, 178, 117, 0.08);
-  color: var(--champagne);
-}
-.fiche-nav-arrow:hover:not(:disabled) .fiche-nav-arc {
-  color: var(--champagne);
-}
-.fiche-nav-arrow.left:hover:not(:disabled) {
-  transform: translate(-2px, -50%);
-}
-.fiche-nav-arrow.right:hover:not(:disabled) {
-  transform: translate(2px, -50%);
-}
-.fiche-nav-arrow:disabled {
-  display: none;
-}
+
+
+
+
+
+
 
 /* Footer prev/next disabled aux extrémités — caché purement
    (signal "fin de liste" porté par les dots et l'absence de flèche latérale) */
-.fiche-foot-prev:disabled,
-.fiche-foot-next:disabled {
-  visibility: hidden;
-}
-.fiche-num-total {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  color: var(--ink-mute);
-  text-transform: uppercase;
-  font-style: normal;
-  vertical-align: middle;
-  margin-left: 6px;
-}
-.fiche-doc-frame {
-  background: var(--paper);
-  background-image: linear-gradient(180deg,
-    rgba(20, 16, 42, 0.04) 0%,
-    rgba(20, 16, 42, 0) 10%,
-    rgba(20, 16, 42, 0) 90%,
-    rgba(20, 16, 42, 0.04) 100%);
-  box-shadow: 0 0 60px 0 rgba(8, 4, 26, 0.4);
-  color: var(--ink);
-  padding: 3rem 3.25rem 0;
-  position: relative;
-  border: 1px solid rgba(140, 106, 44, 0.4);
-}
-.fiche-content { padding-bottom: 1.75rem; }
-.fiche-header {
-  display: flex; justify-content: space-between; align-items: baseline;
-  gap: 2rem;
-  padding-bottom: 1.25rem;
-  margin-bottom: 1.75rem;
-  border-bottom: 1px solid rgba(20, 16, 42, 0.15);
-}
-.fiche-num-block { display: flex; flex-direction: column; gap: 2px; }
-.fiche-num-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
-.fiche-num-value {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 24px;
-  line-height: 1;
-  color: var(--champagne-fonce);
-  font-variation-settings: "opsz" 60;
-  white-space: nowrap;
-}
+
+
+
+
+
+
+
+
 /* Tag importance — 4 variantes selon le niveau de priorité */
-.fiche-classification {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 500;
-  padding: 5px 9px;
-  white-space: nowrap;
-  align-self: center;
-  border: 1px solid transparent;
-}
-.fiche-classification.is-critique {
-  color: var(--paper);
-  background: var(--champagne-fonce);
-  border-color: var(--champagne-fonce);
-}
-.fiche-classification.is-elevee {
-  color: var(--champagne-fonce);
-  border-color: var(--champagne-fonce);
-}
-.fiche-classification.is-moyenne {
-  color: var(--champagne-fonce);
-  border-style: dashed;
-  border-color: rgba(140, 106, 44, 0.6);
-}
-.fiche-classification.is-basse {
-  color: var(--champagne-fonce);
-  font-style: italic;
-  letter-spacing: 0.18em;
-  padding: 5px 0;
-}
-.fiche-title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-style: italic;
-  font-size: clamp(22px, 2.8vw, 30px);
-  line-height: 1.1;
-  color: var(--ink);
-  margin: 0 0 1.2rem;
-  font-variation-settings: "opsz" 60;
-}
-.fiche-diagnostic-label {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
-.fiche-diagnostic {
-  font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.6;
-  color: var(--ink-soft);
-  margin: 0 0 2rem;
-  font-variation-settings: "opsz" 14;
-}
-.fiche-meta-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-}
-.fiche-meta-line {
-  display: grid;
-  grid-template-columns: 130px 1fr;
-  gap: 1.5rem;
-  padding: 9px 0;
-  border-bottom: 1px solid rgba(20, 16, 42, 0.08);
-  align-items: baseline;
-}
-.fiche-meta-line:last-child { border-bottom: none; }
-.fiche-meta-key {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-}
-.fiche-meta-val {
-  font-family: var(--font-display);
-  font-size: 14px;
-  color: var(--ink);
-  font-style: italic;
-  font-variation-settings: "opsz" 18;
-}
-.fiche-meta-val.list { display: flex; gap: 1.5rem; flex-wrap: wrap; font-style: normal; }
-.fiche-meta-val.list span { position: relative; }
-.fiche-meta-val.list span:not(:last-child)::after {
-  content: '·';
-  margin-left: 1.5rem;
-  color: rgba(140, 106, 44, 0.5);
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Footer navigation */
-.fiche-foot {
-  display: flex;
-  justify-content: space-between;
-  gap: 1.5rem;
-  align-items: baseline;
-  padding: 1.25rem 0;
-  margin: 1.75rem -3.25rem 0;
-  padding-left: 3.25rem;
-  padding-right: 3.25rem;
-  border-top: 1px solid rgba(20, 16, 42, 0.15);
-  background: rgba(140, 106, 44, 0.04);
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-.fiche-foot-prev, .fiche-foot-next {
-  display: flex; flex-direction: column; gap: 4px;
-  cursor: pointer; background: none; border: none;
-  font-family: inherit; padding: 0;
-}
-.fiche-foot-prev { text-align: left; }
-.fiche-foot-next { text-align: right; align-items: flex-end; }
-.fiche-foot-nav-label {
-  color: rgba(20, 16, 42, 0.45);
-  letter-spacing: 0.18em;
-}
-.fiche-foot-nav-text {
-  color: var(--champagne-fonce);
-  display: flex; align-items: baseline; gap: 8px;
-}
-.fiche-foot-prev .fiche-foot-nav-text::before { content: '←'; font-size: 13px; }
-.fiche-foot-next .fiche-foot-nav-text::after { content: '→'; font-size: 13px; }
+
+
+
+
+
+
+
+
 /* Sommaire latéral */
-.fiche-summary {
-  padding: 1.75rem 1.75rem;
-  align-self: stretch;
-  display: flex; flex-direction: column;
-}
-.fiche-summary-header {
-  display: flex; justify-content: space-between; align-items: baseline;
-  padding-bottom: 1rem;
-  margin-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(212, 178, 117, 0.25);
-}
-.fiche-summary-title {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--champagne);
-  font-weight: 500;
-}
-.fiche-summary-meta {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(244, 236, 211, 0.4);
-}
-.fiche-summary-list { display: flex; flex-direction: column; }
-.fiche-sum-item {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(244, 236, 211, 0.08);
-  align-items: baseline;
-  cursor: pointer;
-  background: none; border: none; border-bottom: 1px solid rgba(244, 236, 211, 0.08);
-  width: 100%; text-align: left;
-  font-family: inherit;
-  transition: padding 0.2s;
-  color: inherit;
-}
-.fiche-sum-item:hover { padding-left: 4px; }
-.fiche-sum-item:last-child { border-bottom: none; }
-.fiche-sum-item:first-child { padding-top: 8px; }
-.fiche-sum-item.is-active {
-  margin: 0 -1.75rem;
-  padding-left: calc(1.75rem - 2px);
-  padding-right: 1.75rem;
-  background: rgba(212, 178, 117, 0.07);
-  border-left: 2px solid var(--champagne);
-}
-.fiche-sum-item.is-active:hover { padding-left: calc(1.75rem - 2px); }
-.fiche-sum-num {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: rgba(244, 236, 211, 0.5);
-}
-.fiche-sum-item.is-active .fiche-sum-num { color: var(--champagne); }
-.fiche-sum-title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 13.5px;
-  line-height: 1.3;
-  color: rgba(244, 236, 211, 0.75);
-  font-variation-settings: "opsz" 18;
-}
-.fiche-sum-item.is-active .fiche-sum-title {
-  color: var(--ivory);
-  font-weight: 500;
-}
-.fiche-sum-imp {
-  display: flex; gap: 2px;
-  align-self: center;
-}
-.fiche-sum-imp-dot {
-  width: 4px; height: 4px;
-  border-radius: 50%;
-  background: rgba(244, 236, 211, 0.15);
-}
-.fiche-sum-imp-dot.on { background: var(--champagne); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* ============================================================
    9 — TEAM avec anneaux entrelacés et tags aubergine pleins
@@ -1715,105 +670,23 @@ body {
   right: 5%;
 }
 
-.team-head {
-  margin: 0 auto 2rem;
-  max-width: 720px;
-  text-align: center;
-}
-.team-head h2 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(32px, 4vw, 52px);
-  line-height: 1.05;
-  letter-spacing: -0.012em;
-  margin: 0 0 1rem;
-  color: var(--ivory);
-  font-variation-settings: "opsz" 96;
-}
-.team-head h2 em {
-  font-style: italic;
-  color: var(--champagne);
-}
-.team-head .lead {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 17px;
-  line-height: 1.55;
-  color: rgba(244, 236, 211, 0.65);
-  max-width: 640px;
-  margin: 0 auto;
-  font-variation-settings: "opsz" 24;
-}
+
+
+
+
 
 /* Tampon central Maa̅t × SDLV — séparateur vertical entre les 2 colonnes en desktop,
    bascule en horizontal au-dessus d'Anne-Sophie en mobile (cf. media query 900px) */
-.team-stamp-divider {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  align-self: stretch;
-}
-.team-stamp-line {
-  width: 1px;
-  flex: 1;
-  background: linear-gradient(to bottom,
-    rgba(212, 178, 117, 0) 0%,
-    rgba(212, 178, 117, 0.3) 50%,
-    rgba(212, 178, 117, 0) 100%);
-}
-.team-stamp {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--champagne);
-  border: 1px solid var(--champagne);
-  background: var(--hero-bg);
-  padding: 10px 20px;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 10px;
-  white-space: nowrap;
-}
-.team-stamp-x {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 18px;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--champagne);
-}
-.team-stamp-macron {
-  position: relative;
-  display: inline-block;
-}
-.team-stamp-macron::after {
-  content: '';
-  position: absolute;
-  top: 0.05em;
-  left: 12%;
-  width: 76%;
-  height: 0.05em;
-  background: var(--champagne);
-}
+
+
+
+
+
+
 
 /* Duo en grid 3 cols (Anne-Sophie / tampon central / Florent) */
-.team-duo {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 3rem;
-  align-items: stretch;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.team-person {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin: 0;
-}
+
+
 .team-role {
   display: inline-flex;
   align-items: center;
@@ -1832,26 +705,8 @@ body {
   height: 1px;
   background: var(--champagne);
 }
-.team-name {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 30px;
-  line-height: 1.05;
-  color: var(--ivory);
-  font-weight: 400;
-  font-variation-settings: "opsz" 96;
-  margin: 0;
-}
-.team-bio {
-  font-family: var(--font-body);
-  font-size: 15px;
-  line-height: 1.65;
-  color: rgba(244, 236, 211, 0.78);
-  margin: 0;
-  font-variation-settings: "opsz" 14;
-  text-align: justify;
-  hyphens: auto;
-}
+
+
 
 /* Tags : pleins champagne (Anne-Sophie) / outline champagne (Florent) */
 .team-tags {
@@ -1872,23 +727,8 @@ body {
   background: var(--champagne);
   padding: 5px 10px;
 }
-.team-tag.is-outline {
-  color: var(--champagne);
-  background: transparent;
-  border: 1px solid var(--champagne);
-  padding: 4px 9px;
-}
-.team-link {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 14px;
-  color: var(--champagne);
-  border-bottom: 1px solid var(--champagne);
-  padding-bottom: 2px;
-  margin-top: 0.4rem;
-  align-self: flex-start;
-  text-decoration: none;
-}
+
+
 
 /* ============================================================
    10 — MODULABLE + BOOKING
@@ -1896,6 +736,8 @@ body {
 .booking-section {
   background: var(--paper);
   padding: 5% 5%;
+  /* les infobulles des jours du calendrier dépassent à droite sur mobile */
+  overflow-x: clip;
 }
 
 .modulable-card {
@@ -2222,6 +1064,9 @@ body {
      évite le doublon avec le CTA glass qui prend le relais. */
   .cal-foot { display: none; }
 }
+@media (max-width: 400px) {
+  .cal-sticky-cta { white-space: normal; width: calc(100% - 32px); padding: 16px 18px; letter-spacing: 0.14em; }
+}
 
 /* ============================================================
    11 — FOOTER COLOPHON avec plume bauhaus
@@ -2440,12 +1285,12 @@ body {
 }
 
 /* Tactile press : feedback visuel au tap (simule le "press" iOS/Android natif) */
-.mh-cta:active, .mh-mobile-toggle:active, .mh-drawer-cta:active,
-.fiche-progress-dot:active, .fiche-nav-arrow:active,
-.fiche-foot-prev:active, .fiche-foot-next:active,
-.cta-mono:active, .method-step:active,
-.cal-day:not(.empty):not(.disabled):active, .cal-confirm-btn:active,
-.team-link:active {
+.mh-cta:active,
+.mh-mobile-toggle:active,
+.mh-drawer-cta:active,
+.cta-mono:active,
+.cal-day:not(.empty):not(.disabled):active,
+.cal-confirm-btn:active {
   transform: scale(0.97);
   opacity: 0.85;
   transition: transform 80ms ease, opacity 80ms ease;
@@ -2458,15 +1303,8 @@ body {
 }
 
 /* Hover livrables — soulèvement subtil */
-.fiche-doc-frame {
-  transition: transform 0.24s ease-out, box-shadow 0.24s ease-out;
-}
-@media (hover: hover) {
-  .fiche-doc-frame:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 20px 40px -16px rgba(20, 16, 42, 0.18);
-  }
-}
+
+
 
 /* CTA mono — micro-réaction */
 .cta-mono { display: inline-block; transition: border-color 0.2s ease-out; }
@@ -2476,7 +1314,7 @@ body {
 .cta-mono { position: relative; }
 @media (hover: hover) {
   .cta-mono:hover { border-bottom-color: rgba(212, 178, 117, 1) !important; }
-  .cta-mono.on-light:hover { border-bottom-color: rgba(140, 106, 44, 1) !important; }
+  
 }
 .cta-mono:active { transform: translateY(1px); }
 
@@ -2549,30 +1387,14 @@ body {
 }
 
 /* Point lumineux qui glisse sur la timeline démarche */
-.method-pulse {
-  position: absolute;
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--champagne);
-  box-shadow: 0 0 12px 2px rgba(212, 178, 117, 0.4);
-  top: 34px;
-  left: 12%;
-  transform: translateX(-50%);
-  transition: left 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 3;
-  pointer-events: none;
-}
+
 
 /* Donut hover — pousser la ligne correspondante */
-.lphase.is-hovered:not(.is-active) {
-  background: rgba(140, 106, 44, 0.045);
-}
-.donut-segment.is-hovered:not(.is-active) {
-  fill: rgba(20, 16, 42, 0.55);
-}
+
+
 
 /* Méthode active — dans le donut, on garde le champagne plein */
-.donut-segment.is-active { fill: rgba(212, 178, 117, 0.95) !important; transform: none !important; }
+
 
 /* CTA flottant mobile — bascule de thème selon le fond de la section traversée */
 .mobile-cta-floating {
@@ -2621,27 +1443,27 @@ body {
   /* Sur mobile : le principe Maat est trop redondant avec le manifeste du footer.
      On le masque pour alléger le scroll — le footer porte la même idée en clôture. */
   .band-maat { display: none; }
-  .synth-section { padding: 28px 20px 40px; }
-  .synth-marker { font-size: 9px; letter-spacing: 0.18em; }
-  .synth-marker-row { gap: 12px; }
-  .synth-stats { gap: 0; margin: 1.4rem 0 1.4rem; }
-  .synth-stat { gap: 5px; padding: 0 14px; }
-  .synth-stat-num { font-size: 21px; }
-  .synth-stat-label { font-size: 8.5px; letter-spacing: 0.13em; }
-  .synth-stat-sep { margin: 1px 0; }
-  .synth-desc { font-size: 20px; line-height: 1.3; max-width: 320px; padding: 0; }
-  .synth-tag { font-size: 12px; padding: 0 8px; }
-  .synth-closing-line { max-width: 140px; margin-top: 1.5rem; }
-  .split-grid { grid-template-columns: 1fr; gap: 1rem; margin-top: 0; }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   /* Système interactif (cliquable) masqué au profit du parcours vertical statique */
-  .method-hint, .method-timeline { display: none; }
-  .method-mobile-journey { display: flex; flex-direction: column; margin-top: 0.5rem; }
-  .methods-section { padding: 5% 5%; }
-  .methods-mag { grid-template-columns: 1fr; gap: 2rem; }
-  .methods-left { gap: 1.25rem; }
+  
+  
+  
+  
+  
   /* Roue + hint retirés au profit de l'accordéon vertical mobile (titres seuls, "+" pour dérouler) */
-  .methods-hint, .methods-stage, .methods-legend-block { display: none; }
-  .methods-mobile-accordion { display: flex; flex-direction: column; }
+  
+  
   /* Markers chapter remis en flow au-dessus du titre sur toutes les sections
      (évite le chevauchement avec les titres sur viewports étroits).
      Taille réduite à 10px (était 12px) + letter-spacing resserré pour s'aligner
@@ -2654,41 +1476,26 @@ body {
     letter-spacing: 0.18em;
     margin-bottom: 1.5rem;
   }
-  .lphase-meta { grid-template-columns: 1fr; gap: 4px; }
-  .diff-content { gap: 1.25rem; }
-  .fiche-doc-frame { padding: 1.25rem 1.5rem 0; }
-  .fiche-content { padding-bottom: 1.25rem; }
-  .fiche-foot { display: none; }
-  .fiche-num-label { display: none; }
-  .fiche-doc-layout { max-width: 100%; }
-  .fiche-nav-arrow { width: 40px; height: 40px; font-size: 16px; }
-  .fiche-nav-arrow.left { left: 8px; }
-  .fiche-nav-arrow.right { right: 8px; }
-  .fiche-foot {
-    grid-template-columns: 1fr;
-    margin: 1.5rem -1.75rem 0;
-    padding-left: 1.75rem;
-    padding-right: 1.75rem;
-    gap: 1rem;
-  }
-  .fiche-foot-next { align-items: flex-start; text-align: left; }
-  .fiche-foot-link { text-align: left; align-self: flex-start; }
-  .fiche-meta-line { grid-template-columns: 1fr; gap: 4px; }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   /* Mobile : tampon repassé en haut des 2 blocs (comportement original),
      bios non justifiées (lecture plus naturelle sur viewport étroit) */
-  .team-duo { display: flex; flex-direction: column; gap: 2.5rem; }
-  .team-stamp-divider { flex-direction: row; gap: 1rem; order: -1; }
-  .team-stamp-line {
-    width: auto;
-    height: 1px;
-    flex: 1;
-    max-width: calc(50% - 90px);
-    background: linear-gradient(to right,
-      rgba(212, 178, 117, 0) 0%,
-      rgba(212, 178, 117, 0.3) 50%,
-      rgba(212, 178, 117, 0) 100%);
-  }
-  .team-bio { text-align: left; hyphens: none; }
+  
+  
+  
+  
   .modulable-card-grid { grid-template-columns: 1fr; gap: 1.5rem; }
   .modulable-text-block p:last-of-type { display: none; }
   .modulable-divider-vertical { display: none; }
@@ -2702,14 +1509,14 @@ body {
   .footer-sitemap { gap: 0.9rem 1.5rem; padding: 1.25rem 0 1.75rem; margin-bottom: 1.5rem; font-size: 9px; }
   .footer-bottom { grid-template-columns: 1fr; gap: 1rem; text-align: left; }
   .footer-meta, .footer-cta { text-align: left; align-items: flex-start; }
-  .fiche-classification { font-size: 8px; letter-spacing: 0.18em; padding: 5px 7px; align-self: flex-start; }
+  
   /* Header de fiche passe en column sur mobile : numéro au-dessus, tag importance en dessous (évite tout débordement) */
-  .fiche-header { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+  
 }
 
 @media (max-width: 600px) {
-  .fiche-nav-arrow { display: none; }
-  .fiche-swipe-hint { display: block; }
+  
+  
   .hero-cta-row { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
 }
 
@@ -2826,40 +1633,11 @@ body {
 
 
 /* Onglet "à venir" — non cliquable, mini-tampon au hover */
-.mh-tab.is-coming {
-  color: rgba(244, 236, 211, 0.3);
-  cursor: default;
-}
-.mh-tab.is-coming:hover { color: rgba(244, 236, 211, 0.5); }
-.mh-tab.is-coming:hover::after { transform: scaleX(0); }
-.mh-tab.is-coming::before {
-  content: '— à venir';
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-50%) translateY(-4px);
-  font-family: var(--font-mono);
-  font-style: normal;
-  font-weight: 500;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  background: var(--band-bg);
-  border: 1px dashed var(--champagne-fonce);
-  padding: 3px 7px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition:
-    opacity 250ms cubic-bezier(0.34, 1.4, 0.64, 1),
-    transform 250ms cubic-bezier(0.34, 1.4, 0.64, 1);
-}
-.mh-tab.is-coming:hover::before,
-.mh-tab.is-coming:focus-visible::before {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
+
+
+
+
+
 
 /* Toggle langue FR · EN — mono champagne, langue active en plein, autre en lien */
 .mh-lang-toggle {
@@ -3081,24 +1859,8 @@ body {
   font-size: 26px;
 }
 .mh-drawer-tab.is-active::after { transform: scaleX(1); }
-.mh-drawer-tab.is-coming {
-  color: var(--ivory);
-  font-size: 16px;
-  font-weight: 400;
-  cursor: default;
-}
-.mh-drawer-tab-stamp {
-  font-family: var(--font-mono);
-  font-style: normal;
-  font-weight: 500;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  border: 1px dashed var(--champagne-fonce);
-  padding: 3px 7px;
-  white-space: nowrap;
-}
+
+
 .mh-drawer-category-label {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
   color: rgba(212, 178, 117, 0.5); margin: -4px 0 -4px;
@@ -3154,6 +1916,150 @@ body {
   .mh-logo { font-size: 26px; }
   .mh-header.is-scrolled .mh-logo { font-size: 22px; }
 }
+
+/* ============================================================
+   HOME — aiguillage vers les offres
+   ============================================================ */
+.hero-cta-secondary { text-decoration: none; border-bottom: 1px solid rgba(244, 236, 211, 0.25); }
+.hero-cta-secondary:hover { color: var(--ivory); }
+
+.offres-section { background: var(--paper); padding: clamp(72px, 9vw, 120px) 6%; position: relative; }
+.offres-head { max-width: 1080px; margin: 0 auto clamp(32px, 4vw, 48px); }
+.offres-head h2 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(30px, 4vw, 48px); line-height: 1.08; margin: 0; color: var(--ink);
+  font-variation-settings: "opsz" 72;
+}
+.offres-head h2 em { font-style: italic; color: var(--champagne-fonce); }
+
+.offres-grid { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.offre-card {
+  display: flex; flex-direction: column;
+  background: rgba(255, 255, 255, 0.45); border: 1px solid rgba(20, 16, 42, 0.12);
+  padding: clamp(28px, 3.4vw, 40px);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.offre-card:hover { border-color: var(--champagne-fonce); transform: translateY(-2px); }
+.offre-card-name {
+  font-family: var(--font-display); font-style: italic; font-size: 30px; line-height: 1;
+  color: var(--champagne-fonce); margin: 0 0 18px; font-variation-settings: "opsz" 60;
+}
+.offre-card-hook {
+  font-family: var(--font-display); font-weight: 400; font-size: clamp(22px, 2.4vw, 26px); line-height: 1.2;
+  margin: 0 0 8px; color: var(--ink); font-variation-settings: "opsz" 48;
+}
+.offre-card-target { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin: 0 0 18px; }
+.offre-card-desc { font-family: var(--font-body); font-size: 16px; line-height: 1.6; color: var(--ink-soft); margin: 0 0 24px; }
+.offre-card-foot { margin-top: auto; padding-top: 20px; border-top: 1px solid rgba(20, 16, 42, 0.1); }
+.offre-card-price { font-family: var(--font-display); font-size: 28px; line-height: 1; color: var(--ink); margin: 0 0 8px; }
+.offre-card-scope { font-family: var(--font-body); font-style: italic; font-size: 14.5px; line-height: 1.45; color: var(--ink-mute); margin: 0 0 20px; }
+.offre-card-link {
+  display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--champagne-fonce); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 4px;
+}
+.offre-card-link:hover { color: var(--ink); }
+
+/* Sur-mesure : troisième porte, plus discrète mais pleine largeur */
+.offre-sur-mesure {
+  max-width: 1080px; margin: 24px auto 0;
+  display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: end;
+  background: var(--band-bg); color: var(--ivory);
+  padding: clamp(28px, 3.4vw, 40px);
+  scroll-margin-top: calc(var(--header-height) + 24px);
+}
+.on-dark.offre-card-name { color: var(--champagne); font-size: 26px; }
+.on-dark.offre-card-hook { color: var(--ivory); }
+.offre-sur-mesure-desc { font-family: var(--font-body); font-size: 15.5px; line-height: 1.6; color: rgba(244, 236, 211, 0.75); margin: 0; }
+.offre-sur-mesure-side { border-left: 1px solid rgba(212, 178, 117, 0.25); padding-left: clamp(20px, 3vw, 36px); }
+.on-dark.offre-card-price { color: var(--ivory); font-size: 24px; }
+.on-dark.offre-card-scope { color: rgba(244, 236, 211, 0.55); }
+.on-dark.offre-card-link { color: var(--champagne); }
+.on-dark.offre-card-link:hover { color: var(--ivory); }
+
+
+
+@media (max-width: 820px) {
+  .offres-grid, .offre-sur-mesure { grid-template-columns: 1fr; }
+  .offre-sur-mesure-side { border-left: none; padding-left: 0; border-top: 1px solid rgba(212, 178, 117, 0.25); padding-top: 20px; }
+}
+
+/* Témoignage */
+.quote-section { background: var(--paper); padding: clamp(64px, 8vw, 110px) 6%; }
+.quote-figure { max-width: 860px; margin: 0 auto; text-align: center; }
+.quote-figure blockquote { margin: 0; }
+.quote-figure blockquote p {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: clamp(21px, 2.5vw, 28px); line-height: 1.45; color: var(--ink); margin: 0;
+  font-variation-settings: "opsz" 48;
+}
+.quote-figure figcaption { margin-top: 22px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+.quote-figure figcaption strong { color: var(--champagne-fonce); font-weight: 500; }
+.quote-link { display: inline-block; margin-top: 22px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--champagne-fonce); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 4px; }
+
+/* À propos : une seule personne */
+
+
+
+/* À propos : portrait rond à gauche, texte à droite */
+.about-grid {
+  display: grid; grid-template-columns: minmax(200px, 300px) minmax(0, 620px);
+  gap: clamp(40px, 6vw, 80px); align-items: center; justify-content: center;
+  max-width: 1000px; margin: clamp(24px, 3vw, 40px) auto 0;
+}
+.about-portrait { aspect-ratio: 1 / 1; border-radius: 50%; overflow: hidden; border: 2px solid var(--ivory); }
+.about-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-text h2 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(28px, 3.2vw, 40px); line-height: 1.18; letter-spacing: -0.01em;
+  margin: 0 0 22px; color: var(--ivory); font-variation-settings: "opsz" 72;
+}
+.about-text h2 em { font-style: italic; color: var(--champagne); }
+.about-text .team-role { margin-bottom: 14px; }
+.about-bio {
+  font-family: var(--font-body); font-size: 15px; line-height: 1.75;
+  color: rgba(244, 236, 211, 0.78); margin: 0 0 14px; font-variation-settings: "opsz" 14;
+}
+.about-text .team-tags { margin-top: 18px; }
+@media (max-width: 760px) {
+  .about-grid { grid-template-columns: 1fr; gap: 28px; }
+  .about-portrait { width: min(200px, 60%); margin: 0 auto; }
+}
+
+/* Comment je travaille */
+.travail-section { background: var(--paper); padding: clamp(64px, 8vw, 110px) 6%; position: relative; border-top: 1px solid rgba(20, 16, 42, 0.08); }
+.travail-head { max-width: 1080px; margin: 0 auto clamp(28px, 4vw, 44px); }
+.travail-head h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 3.6vw, 42px); line-height: 1.1; margin: 0; color: var(--ink); font-variation-settings: "opsz" 72; }
+.travail-head h2 em { font-style: italic; color: var(--champagne-fonce); }
+.travail-steps { list-style: none; margin: 0 auto; padding: 0; max-width: 1080px; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--champagne-fonce); }
+.travail-step { padding: 24px 28px 0 0; }
+.travail-step + .travail-step { padding-left: 28px; border-left: 1px solid rgba(20, 16, 42, 0.1); }
+.travail-n { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--champagne-fonce); }
+.travail-step h3 { font-family: var(--font-display); font-weight: 400; font-style: italic; font-size: clamp(24px, 2.6vw, 30px); margin: 8px 0 10px; color: var(--ink); }
+.travail-step p { font-family: var(--font-body); font-size: 16px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+
+@media (max-width: 820px) {
+  .travail-steps { grid-template-columns: 1fr; }
+  .travail-step, .travail-step + .travail-step { padding: 20px 0; border-left: none; border-bottom: 1px solid rgba(20, 16, 42, 0.1); }
+}
+.offre-sur-mesure-why { margin: 16px 0 0; font-family: var(--font-display); font-style: italic; font-size: 17px; line-height: 1.5; color: var(--ivory); }
+.offre-sur-mesure-why b { font-weight: 500; }
+.offre-sur-mesure-why span { color: var(--champagne); }
+
+/* Resserre l'espace entre la méthode et le témoignage */
+.travail-section { padding-bottom: clamp(40px, 5vw, 64px); }
+.quote-section { padding-top: clamp(56px, 7vw, 96px); }
+
+
+/* À propos home : portrait + texte */
+.about-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: minmax(200px, 300px) 1fr; gap: clamp(36px, 6vw, 80px); align-items: center; }
+.about-portrait img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 50%; border: 1px solid rgba(212, 178, 117, 0.4); display: block; }
+
+
+
+@media (max-width: 760px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-portrait { max-width: 200px; margin: 0 auto; }
+}
 </style>
 </head>
 <body>
@@ -3166,11 +2072,9 @@ body {
     <a class="mh-logo" href="#top" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
     <nav class="mh-tabs-wrap" aria-label="Pages">
       <ul class="mh-tabs">
-        <li><a class="mh-tab is-active" href="#top" aria-current="page">Audit CRO SaaS et e-commerce</a></li>
-        <li><a class="mh-tab" href="offer-focus/index.html">Offer Focus</a></li>
-        <li>
-          <span class="mh-tab is-coming" role="link" aria-disabled="true" tabindex="0">Conversion Messaging</span>
-        </li>
+        <li><a class="mh-tab" href="offer-focus/index.html">Au Clair</a></li>
+        <li><a class="mh-tab" href="aplomb/index.html">d'Aplomb</a></li>
+        <li><a class="mh-tab" href="#sur-mesure">Sur-mesure</a></li>
       </ul>
     </nav>
     <span class="mh-lang-toggle" aria-label="Langue / Language">
@@ -3184,11 +2088,11 @@ body {
   <div class="mh-row2">
     <nav aria-label="Sections de la page">
       <ul class="mh-submenu">
-        <li><a class="mh-submenu-item is-active" href="#demarche" data-target="demarche">Notre démarche</a></li>
+        <li><a class="mh-submenu-item is-active" href="#offres" data-target="offres">Les offres</a></li>
         <li class="mh-submenu-sep" aria-hidden="true">·</li>
-        <li><a class="mh-submenu-item" href="#methodes" data-target="methodes">Les méthodes</a></li>
+        <li><a class="mh-submenu-item" href="#methodes" data-target="methodes">La méthode</a></li>
         <li class="mh-submenu-sep" aria-hidden="true">·</li>
-        <li><a class="mh-submenu-item" href="#binome" data-target="binome">Le binôme</a></li>
+        <li><a class="mh-submenu-item" href="#a-propos" data-target="a-propos">À propos</a></li>
         <li class="mh-submenu-sep" aria-hidden="true">·</li>
         <li><a class="mh-submenu-item" href="#booking" data-target="booking">Réserver un échange</a></li>
       </ul>
@@ -3198,26 +2102,20 @@ body {
 
 <aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
   <ul class="mh-drawer-tabs">
-    <li class="mh-drawer-category-label" aria-hidden="true">— Audit CRO SaaS et e-commerce</li>
+    <li class="mh-drawer-category-label" aria-hidden="true">— Maat</li>
     <li>
-      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Audit CRO SaaS et e-commerce</a>
+      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Accueil</a>
       <ul class="mh-drawer-submenu">
-        <li><a class="mh-drawer-submenu-item is-active" href="#demarche" data-target="demarche">Notre démarche</a></li>
-        <li><a class="mh-drawer-submenu-item" href="#methodes" data-target="methodes">Les méthodes</a></li>
-        <li><a class="mh-drawer-submenu-item" href="#binome" data-target="binome">Le binôme</a></li>
+        <li><a class="mh-drawer-submenu-item is-active" href="#offres" data-target="offres">Les offres</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#methodes" data-target="methodes">La méthode</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#a-propos" data-target="a-propos">À propos</a></li>
         <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un échange</a></li>
       </ul>
     </li>
-    <li class="mh-drawer-category-label" aria-hidden="true">— Offer Focus</li>
-    <li>
-      <a class="mh-drawer-tab" href="offer-focus/index.html">Offer Focus</a>
-    </li>
-    <li>
-      <span class="mh-drawer-tab is-coming" role="link" aria-disabled="true">
-        Conversion Messaging
-        <span class="mh-drawer-tab-stamp">— à venir</span>
-      </span>
-    </li>
+    <li class="mh-drawer-category-label" aria-hidden="true">— Les offres</li>
+    <li><a class="mh-drawer-tab" href="offer-focus/index.html">Au Clair</a></li>
+    <li><a class="mh-drawer-tab" href="aplomb/index.html">d'Aplomb</a></li>
+    <li><a class="mh-drawer-tab" href="#sur-mesure">Sur-mesure</a></li>
   </ul>
   <div class="mh-drawer-divider" aria-hidden="true"></div>
   <a class="mh-drawer-cta" href="#booking">Réserver un échange ↗</a>
@@ -3256,117 +2154,87 @@ body {
   </defs>
 </svg>
 
-<!-- 1 — HERO (pleine largeur asymétrique gauche, simple) -->
+<!-- 1 — HERO -->
 <section class="hero" id="top" data-cta-theme="dark">
   <div class="hero-inner">
-    <div class="hero-overline">— Audit CRO · 2026</div>
-    <h1>Votre trafic ne manque pas. <em>Vos conversions, si.</em></h1>
-    <p class="hero-lead">On révèle les incohérences. On identifie les freins. On priorise les actions qui paient.</p>
+    <div class="hero-overline">— Maat · Audits de conversion</div>
+    <h1>Transformez plus de visiteurs en clients, <em>sans deviner.</em></h1>
+    <p class="hero-lead">Comprendre ce qui freine vos ventes. Savoir quoi corriger d'abord. Voir vos pages repensées et réécrites.</p>
     <div class="hero-cta-row">
-      <a href="#booking" class="cta-mono">Réserver un échange →</a>
-      <span class="hero-cta-meta">30 min · sans engagement</span>
+      <a href="#offres" class="cta-mono">Trouver l'offre qui vous correspond ↓</a>
+      <a href="#booking" class="hero-cta-meta hero-cta-secondary">ou réserver un échange · 30 min</a>
     </div>
   </div>
 </section>
 
-<!-- 2 — SYNTHÈSE DE L'OFFRE (continuité chromatique avec le hero, composition centrée factuelle) -->
-<section class="synth-section reveal" data-cta-theme="dark">
-  <div class="synth-marker-row">
-    <span class="synth-marker-line left" aria-hidden="true"></span>
-    <span class="synth-marker">— L'audit · en bref</span>
-    <span class="synth-marker-line right" aria-hidden="true"></span>
+<!-- 3 — LES OFFRES -->
+<section class="offres-section reveal" id="offres" data-cta-theme="light">
+  <span class="chapter-mark">/ ch.01 — les offres</span>
+  <div class="offres-head">
+    <h2>Trois portes d'entrée, <em>une même exigence.</em></h2>
   </div>
-  <div class="synth-stats">
-    <div class="synth-stat">
-      <span class="synth-stat-num" data-count="4">4</span>
-      <span class="synth-stat-label">étapes</span>
-    </div>
-    <span class="synth-stat-sep" aria-hidden="true"></span>
-    <div class="synth-stat">
-      <span class="synth-stat-num" data-count="6">6</span>
-      <span class="synth-stat-label">méthodes</span>
-    </div>
-    <span class="synth-stat-sep" aria-hidden="true"></span>
-    <div class="synth-stat">
-      <span class="synth-stat-num">1 à 6</span>
-      <span class="synth-stat-label">semaines</span>
-    </div>
-  </div>
-  <p class="synth-desc">Sachez quoi optimiser pour <em>transformer plus de visiteurs en clients</em>.</p>
-  <p class="synth-tag">— Sur-mesure selon votre périmètre.</p>
-  <div class="synth-closing-line" aria-hidden="true"></div>
-</section>
-
-<!-- 3 — SPLIT -->
-<section class="split-section reveal" data-cta-theme="light">
-  <span class="chapter-mark">/ ch.01 — état des lieux</span>
-  <div class="split-grid">
-    <div class="split-block editorial-block">
-      <h2 class="split-block-title">Ce que vous vivez<em>.</em></h2>
-      <ul class="pain-list">
-        <li class="pain-item">
-          <div class="pain-title">Vous venez de lancer votre site et souhaitez vous assurer qu'il convertit</div>
-          <div class="pain-desc">avant d'investir dans l'acquisition</div>
-        </li>
-        <li class="pain-item">
-          <div class="pain-title">Votre site tourne, vous investissez en acquisition</div>
-          <div class="pain-desc">mais les ventes ou leads ne suivent pas votre trafic</div>
-        </li>
-        <li class="pain-item">
-          <div class="pain-title">Vous avez des données mais ne savez pas quoi en faire</div>
-          <div class="pain-desc">ni par où commencer</div>
-        </li>
-        <li class="pain-item">
-          <div class="pain-title">Vous avez essayé des choses : A/B tests, redesigns</div>
-          <div class="pain-desc">sans savoir ce qui a marché</div>
-        </li>
-        <li class="pain-item">
-          <div class="pain-title">Quelque chose bloque dans votre parcours</div>
-          <div class="pain-desc">mais vous ne savez pas quoi exactement</div>
-        </li>
-      </ul>
-    </div>
-    <div class="split-block editorial-block">
-      <h2 class="split-block-title">Ce qui va changer<em>.</em></h2>
-      <div class="outcome-list">
-        <div class="outcome-item">
-          <span class="outcome-num" aria-hidden="true">▸</span>
-          <div class="outcome-content">
-            <div class="outcome-title">Vous comprenez enfin ce qui bloque</div>
-            <div class="outcome-desc">dans votre message, vos pages et vos parcours</div>
-          </div>
-        </div>
-        <div class="outcome-item">
-          <span class="outcome-num" aria-hidden="true">▸</span>
-          <div class="outcome-content">
-            <div class="outcome-title">Vous savez comment lever les hésitations de vos visiteurs</div>
-            <div class="outcome-desc">quoi clarifier, quoi prouver, quoi ajuster</div>
-          </div>
-        </div>
-        <div class="outcome-item">
-          <span class="outcome-num" aria-hidden="true">▸</span>
-          <div class="outcome-content">
-            <div class="outcome-title">Vous savez comment mieux les guider</div>
-            <div class="outcome-desc">sans rupture, sans confusion</div>
-          </div>
-        </div>
-        <div class="outcome-item">
-          <span class="outcome-num" aria-hidden="true">▸</span>
-          <div class="outcome-content">
-            <div class="outcome-title">Vous ne testez plus au hasard</div>
-            <div class="outcome-desc">vous améliorez avec méthode</div>
-          </div>
-        </div>
-        <div class="outcome-item">
-          <span class="outcome-num" aria-hidden="true">▸</span>
-          <div class="outcome-content">
-            <div class="outcome-title">Vous améliorez votre taux de conversion</div>
-            <div class="outcome-desc">et donc votre chiffre d'affaires</div>
-          </div>
-        </div>
+  <div class="offres-grid">
+    <article class="offre-card">
+      <p class="offre-card-name">Au Clair</p>
+      <h3 class="offre-card-hook">Vous vendez votre expertise.</h3>
+      <p class="offre-card-target">Pour les indépendants&nbsp;: coachs, formateurs, consultants…</p>
+      <p class="offre-card-desc">Votre page de vente passée au crible, un plan d'optimisation concret et une refonte maquettée pour mieux faire comprendre votre valeur et convertir.</p>
+      <div class="offre-card-foot">
+        <p class="offre-card-price">À partir de 650&nbsp;€</p>
+        <p class="offre-card-scope">Audit + recommandations + refonte maquettée</p>
+        <a class="offre-card-link" href="offer-focus/index.html">Découvrir Au Clair →</a>
       </div>
-    </div>
+    </article>
+    <article class="offre-card">
+      <p class="offre-card-name">d'Aplomb</p>
+      <h3 class="offre-card-hook">Vous vendez des produits en ligne.</h3>
+      <p class="offre-card-target">Pour les petites marques engagées.</p>
+      <p class="offre-card-desc">Un diagnostic de votre site e-commerce, un plan d'optimisation priorisé pour améliorer l'ensemble du parcours d'achat et la refonte maquettée d'une page clé.</p>
+      <div class="offre-card-foot">
+        <p class="offre-card-price">1&nbsp;200&nbsp;€</p>
+        <p class="offre-card-scope">Audit du site + plan d'action priorisé + maquette d'une page clé</p>
+        <a class="offre-card-link" href="aplomb/index.html">Découvrir d'Aplomb →</a>
+      </div>
+    </article>
   </div>
+  <article class="offre-sur-mesure" id="sur-mesure">
+    <div class="offre-sur-mesure-main">
+      <p class="offre-card-name on-dark">Sur-mesure</p>
+      <h3 class="offre-card-hook on-dark">Une équipe marketing, du trafic, des enjeux de tests&nbsp;?</h3>
+      <p class="offre-sur-mesure-desc">Audit CRO construit avec vous, avec les méthodes utiles à vos enjeux&nbsp;: diagnostic UX, analytics, heatmaps et enregistrements de sessions, tests utilisateurs, sondages ou interviews clients — puis une feuille de route priorisée pour l'expérimentation. En collaboration avec Florent Kiecken (SDLV), expert UX et expérimentation.</p>
+      <p class="offre-sur-mesure-why">Un signal isolé reste une hypothèse. Plusieurs signaux qui se recoupent deviennent <span>une certitude</span>.</p>
+    </div>
+    <div class="offre-sur-mesure-side">
+      <p class="offre-card-price on-dark">Sur devis</p>
+      <p class="offre-card-scope on-dark">1 à 6 semaines selon le périmètre</p>
+      <a class="offre-card-link on-dark" href="#booking">Parlons de votre contexte →</a>
+    </div>
+  </article>
+</section>
+
+<!-- 4 — COMMENT JE TRAVAILLE -->
+<section class="travail-section reveal" id="methodes" data-cta-theme="light">
+  <span class="chapter-mark">/ ch.02 — la méthode</span>
+  <div class="travail-head">
+    <h2>Comment je travaille, <em>quelle que soit l'offre.</em></h2>
+  </div>
+  <ol class="travail-steps">
+    <li class="travail-step">
+      <span class="travail-n">01</span>
+      <h3>Comprendre</h3>
+      <p>Identifier ce qui freine vos visiteurs, et pourquoi, à partir de votre contexte, de vos objectifs et de votre parcours.</p>
+    </li>
+    <li class="travail-step">
+      <span class="travail-n">02</span>
+      <h3>Prioriser</h3>
+      <p>Un plan d'action classé par impact et par effort, organisé en lots, pour savoir quoi corriger d'abord.</p>
+    </li>
+    <li class="travail-step">
+      <span class="travail-n">03</span>
+      <h3>Repenser</h3>
+      <p>Vos pages clés remaquettées et réécrites, prêtes à intégrer.</p>
+    </li>
+  </ol>
 </section>
 
 <!-- 4 — BANDEAU MAÂT (transition narrative entre état des lieux et démarche) -->
@@ -3380,512 +2248,63 @@ body {
   </div>
 </section>
 
-<!-- 5 — NOTRE DÉMARCHE -->
-<section class="method-section reveal" id="demarche" data-cta-theme="dark">
-  <span class="chapter-mark on-dark">/ ch.02 — démarche</span>
-  <div class="method-head">
-    <div class="method-head-inner">
-      <h3>Comprendre. Croiser.<br/>Prioriser. <em>Agir.</em></h3>
-      <p class="method-lead">Quatre étapes qui se répondent — pour relier ce que vous savez à ce que font réellement vos utilisateurs.</p>
-    </div>
-  </div>
-  <p class="method-hint">— Cliquez une étape pour en voir le détail</p>
-  <div class="method-timeline">
-    <div class="method-track"></div>
-    <div class="method-arrow" style="left: 27%;">→</div>
-    <div class="method-arrow" style="left: 52%;">→</div>
-    <div class="method-arrow" style="left: 77%;">→</div>
-    <div class="method-grid">
-      <button class="method-step active">
-        <div class="method-step-num">01</div>
-        <div class="method-marker">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 12h4l3-8 4 16 3-8h4"/>
-          </svg>
-        </div>
-        <div class="method-step-title">Lecture business</div>
-      </button>
-      <button class="method-step">
-        <div class="method-step-num">02</div>
-        <div class="method-marker">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="6"/>
-            <path d="m19.5 19.5-3.5-3.5"/>
-          </svg>
-        </div>
-        <div class="method-step-title">Recherche & insights</div>
-      </button>
-      <button class="method-step">
-        <div class="method-step-num">03</div>
-        <div class="method-marker">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="3" rx="0.5"/>
-            <rect x="3" y="10.5" width="13" height="3" rx="0.5"/>
-            <rect x="3" y="17" width="8" height="3" rx="0.5"/>
-          </svg>
-        </div>
-        <div class="method-step-title">Priorisation des actions</div>
-      </button>
-      <button class="method-step">
-        <div class="method-step-num">04</div>
-        <div class="method-marker">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="4" width="18" height="14" rx="2"/>
-            <path d="M3 9h18"/>
-            <path d="M8 14h8"/>
-          </svg>
-        </div>
-        <div class="method-step-title">CRO redesign</div>
-      </button>
-    </div>
-    <div class="method-detail">
-      <span class="method-detail-pointer">↓ 01</span>
-      <div class="method-detail-left">
-        <span class="method-detail-num">Étape 01 · sur 04</span>
-        <span class="method-detail-name">Lecture business</span>
-      </div>
-      <div>
-        <p class="method-detail-desc">Comprendre votre contexte, vos objectifs, vos personas, leurs besoins et leurs contraintes. On pose le bon cadre d'analyse.</p>
-        <div class="method-detail-out">
-          <span class="method-detail-out-lbl">Livrable</span>
-          <span class="method-detail-out-val">Cadre d'analyse partagé</span>
-        </div>
-        <div class="method-detail-out method-detail-out-with" hidden>
-          <span class="method-detail-out-lbl">Fait par</span>
-          <span class="method-detail-out-val">un partenaire UX dédié <a class="method-detail-link" href="#binome">→ voir l'équipe</a></span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="method-mobile-journey">
-    <div class="method-mobile-step">
-      <div class="method-mobile-markers"><span class="method-mobile-num">01</span></div>
-      <div class="method-mobile-content">
-        <h4 class="method-mobile-title">Lecture business</h4>
-        <p>Comprendre votre contexte, vos objectifs, vos personas, leurs besoins et leurs contraintes. On pose le bon cadre d'analyse.</p>
-      </div>
-    </div>
-    <div class="method-mobile-step">
-      <div class="method-mobile-markers"><span class="method-mobile-num">02</span></div>
-      <div class="method-mobile-content">
-        <h4 class="method-mobile-title">Recherche &amp; insights</h4>
-        <p>Recherche utilisateur basée sur des méthodes qualitatives et quantitatives. On observe, on interroge, on mesure - pour comprendre les comportements et identifier les points de friction réels et opportunités manquées.</p>
-      </div>
-    </div>
-    <div class="method-mobile-step">
-      <div class="method-mobile-markers"><span class="method-mobile-num">03</span></div>
-      <div class="method-mobile-content">
-        <h4 class="method-mobile-title">Priorisation des actions</h4>
-        <p>Croiser ces insights pour faire émerger les leviers d'actions les plus pertinents à activer. Selon scoring Impact, Confiance, Effort.</p>
-      </div>
-    </div>
-    <div class="method-mobile-step">
-      <div class="method-mobile-markers"><span class="method-mobile-num">04</span></div>
-      <div class="method-mobile-content">
-        <h4 class="method-mobile-title">CRO redesign</h4>
-        <p>Selon le périmètre, maquettes correctives sur les écrans à plus fort impact. Le redesign s'appuie sur l'audit, jamais sur l'intuition seule.</p>
-      </div>
-    </div>
-  </div>
+<!-- 6 — TÉMOIGNAGE -->
+<section class="quote-section reveal" id="temoignage" data-cta-theme="light">
+  <figure class="quote-figure">
+    <blockquote>
+      <p>«&nbsp;Anne-Sophie a rapidement compris le contexte et les enjeux. […] Ce qui a surtout fait la différence, c'est sa passion pour le CRO et sa capacité à s'imprégner de l'univers de la maison d'édition. […] Au-delà de ses compétences techniques, elle a un sens de l'esthétique affirmé et beaucoup de goût, elle m'a proposé des maquettes qui m'ont bluffée&nbsp;!&nbsp;»</p>
+    </blockquote>
+    <figcaption><strong>Floriane Stoecklin</strong> · responsable communication marketing, Éditions L'Honnête Homme</figcaption>
+    <a class="quote-link" href="aplomb/index.html#livrable">Voir l'audit réalisé · d'Aplomb →</a>
+  </figure>
 </section>
 
-<!-- 6 — METHODS CYCLE -->
-<section class="methods-section reveal" id="methodes" data-cta-theme="light">
-  <span class="chapter-mark">/ ch.03 — méthodes</span>
-  <div class="methods-mag">
-    <div class="methods-left">
-      <div class="methods-intro intro-rule">
-        <h3>Les méthodes qui alimentent<br/><em>cette démarche.</em></h3>
-        <p class="lead">Chaque méthode produit un signal. Ensemble, elles se complètent, se recoupent et s'affinent pour transformer le « quoi » en « pourquoi ».</p>
-        <p class="methods-hint">— Cliquez une méthode pour en voir le détail</p>
-      </div>
-      <div class="methods-stage">
-        <svg class="donut-svg" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" id="constellation-svg" style="display:none">
-          <!-- 6 croissants de 60° chacun, depuis 12h dans le sens horaire.
-               Idx 0 : 12h → 2h  (Évaluation heuristique - active par défaut)
-               Idx 1 : 2h → 4h   (Analytics)
-               Idx 2 : 4h → 6h   (Heatmaps & sessions)
-               Idx 3 : 6h → 8h   (Tests utilisateurs)
-               Idx 4 : 8h → 10h  (Sondages onsite)
-               Idx 5 : 10h → 12h (Interviews clients) -->
-
-          <!-- Idx 0 — Évaluation heuristique (active) -->
-          <path class="donut-segment is-active idx-0"
-            d="M 160 30
-               A 130 130 0 0 1 272.58 95
-               L 220.62 125
-               A 70 70 0 0 0 160 90 Z"/>
-
-          <!-- Idx 1 — Analytics -->
-          <path class="donut-segment tone-aubergine idx-1"
-            d="M 272.58 95
-               A 130 130 0 0 1 272.58 225
-               L 220.62 195
-               A 70 70 0 0 0 220.62 125 Z"/>
-
-          <!-- Idx 2 — Heatmaps & sessions -->
-          <path class="donut-segment tone-champagne idx-2"
-            d="M 272.58 225
-               A 130 130 0 0 1 160 290
-               L 160 230
-               A 70 70 0 0 0 220.62 195 Z"/>
-
-          <!-- Idx 3 — Tests utilisateurs -->
-          <path class="donut-segment tone-aubergine idx-3"
-            d="M 160 290
-               A 130 130 0 0 1 47.42 225
-               L 99.38 195
-               A 70 70 0 0 0 160 230 Z"/>
-
-          <!-- Idx 4 — Sondages onsite -->
-          <path class="donut-segment tone-champagne idx-4"
-            d="M 47.42 225
-               A 130 130 0 0 1 47.42 95
-               L 99.38 125
-               A 70 70 0 0 0 99.38 195 Z"/>
-
-          <!-- Idx 5 — Interviews clients -->
-          <path class="donut-segment tone-aubergine idx-5"
-            d="M 47.42 95
-               A 130 130 0 0 1 160 30
-               L 160 90
-               A 70 70 0 0 0 99.38 125 Z"/>
-
-          <!-- Filets dorés ultra-fins entre segments (radial) -->
-          <line class="donut-divider" x1="160" y1="30"  x2="160" y2="90"/>
-          <line class="donut-divider" x1="272.58" y1="95"  x2="220.62" y2="125"/>
-          <line class="donut-divider" x1="272.58" y1="225" x2="220.62" y2="195"/>
-          <line class="donut-divider" x1="160" y1="290" x2="160" y2="230"/>
-          <line class="donut-divider" x1="47.42" y1="225" x2="99.38" y2="195"/>
-          <line class="donut-divider" x1="47.42" y1="95"  x2="99.38" y2="125"/>
-
-          <!-- Centre -->
-          <text x="160" y="155" text-anchor="middle" font-family="Newsreader, serif" font-weight="400" font-size="22" fill="#14102A">Démarche</text>
-          <text x="160" y="183" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-weight="400" font-size="22" fill="#8C6A2C">CRO.</text>
-          <text x="160" y="206" text-anchor="middle" font-family="DM Mono, monospace" font-size="9" fill="#6E6890" letter-spacing="2">— 06 méthodes —</text>
-        </svg>
-        <svg class="donut-svg" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" id="constellation">
-          <circle class="constellation-ring" cx="180" cy="180" r="130"/>
-          <path class="constellation-arc" id="cArc" d="M 180 50 A 130 130 0 0 1 309.39 175.21" pathLength="100" stroke-dasharray="22 100" stroke-dashoffset="0"/>
-          <text x="180" y="168" text-anchor="middle" font-family="Newsreader, serif" font-weight="400" font-size="26" fill="#14102A">Démarche</text>
-          <text x="180" y="200" text-anchor="middle" font-family="Newsreader, serif" font-style="italic" font-weight="400" font-size="26" fill="#8C6A2C">CRO.</text>
-          <text x="180" y="226" text-anchor="middle" font-family="DM Mono, monospace" font-size="10" fill="#6E6890" letter-spacing="1.5">— 06 méthodes —</text>
-          <g class="constellation-node is-active" data-i="0"><circle class="constellation-hit" cx="180" cy="50" r="28" fill="transparent" pointer-events="all"/><circle cx="180" cy="50" r="18"/><text x="180" y="50">01</text></g>
-          <g class="constellation-node" data-i="1"><circle class="constellation-hit" cx="292.58" cy="115" r="28" fill="transparent" pointer-events="all"/><circle cx="292.58" cy="115" r="18"/><text x="292.58" y="115">02</text></g>
-          <g class="constellation-node" data-i="2"><circle class="constellation-hit" cx="292.58" cy="245" r="28" fill="transparent" pointer-events="all"/><circle cx="292.58" cy="245" r="18"/><text x="292.58" y="245">03</text></g>
-          <g class="constellation-node" data-i="3"><circle class="constellation-hit" cx="180" cy="310" r="28" fill="transparent" pointer-events="all"/><circle cx="180" cy="310" r="18"/><text x="180" y="310">04</text></g>
-          <g class="constellation-node" data-i="4"><circle class="constellation-hit" cx="67.42" cy="245" r="28" fill="transparent" pointer-events="all"/><circle cx="67.42" cy="245" r="18"/><text x="67.42" y="245">05</text></g>
-          <g class="constellation-node" data-i="5"><circle class="constellation-hit" cx="67.42" cy="115" r="28" fill="transparent" pointer-events="all"/><circle cx="67.42" cy="115" r="18"/><text x="67.42" y="115">06</text></g>
-        </svg>
-      </div>
+<!-- 7 — À PROPOS -->
+<section class="team-section reveal" id="a-propos" data-cta-theme="dark">
+  <span class="chapter-mark on-dark">/ ch.03 — à propos de moi</span>
+  <div class="about-grid">
+    <div class="about-portrait">
+      <img src="offer-focus/assets/anne-sophie-portrait.jpg" alt="Anne-Sophie Roux, fondatrice de Maat" width="400" height="400" loading="lazy" decoding="async">
     </div>
-    <div class="methods-legend-block">
-      <button class="lphase is-active">
-        <span class="lphase-n">01</span>
-        <span class="lphase-content">
-          <span class="lphase-title-row">
-            <span class="lphase-title">Évaluation heuristique</span>
-            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
-          </span>
-          <span class="lphase-desc">Audit des bonnes pratiques UX et sectorielles. Ce que l'oeil expert repère avant même les données.</span>
-          <span class="lphase-meta">
-            <span class="lphase-meta-key">S'appuie sur</span>
-            <span class="lphase-meta-val">
-              <span>Baymard (130 000 h de recherche UX)</span>
-              <span>GoodUI (+500 A/B tests de grandes entreprises analysés)</span>
-              <span>CXL (formation référence mondiale du CRO)</span>
-            </span>
-          </span>
-        </span>
-        <span class="lphase-arrow">→</span>
-      </button>
-      <button class="lphase">
-        <span class="lphase-n">02</span>
-        <span class="lphase-content">
-          <span class="lphase-title-row">
-            <span class="lphase-title">Analytics</span>
-            <span class="lphase-badge"><span class="qq-dot"></span>Quantitatif</span>
-          </span>
-        </span>
-        <span class="lphase-arrow">→</span>
-      </button>
-      <button class="lphase">
-        <span class="lphase-n">03</span>
-        <span class="lphase-content">
-          <span class="lphase-title-row">
-            <span class="lphase-title">Heatmaps & sessions recordings</span>
-            <span class="lphase-badge"><span class="qq-dot"></span>Mixte</span>
-          </span>
-        </span>
-        <span class="lphase-arrow">→</span>
-      </button>
-      <button class="lphase">
-        <span class="lphase-n">04</span>
-        <span class="lphase-content">
-          <span class="lphase-title-row">
-            <span class="lphase-title">Tests utilisateurs</span>
-            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
-          </span>
-        </span>
-        <span class="lphase-arrow">→</span>
-      </button>
-      <button class="lphase">
-        <span class="lphase-n">05</span>
-        <span class="lphase-content">
-          <span class="lphase-title-row">
-            <span class="lphase-title">Sondages onsite</span>
-            <span class="lphase-badge"><span class="qq-dot"></span>Mixte</span>
-          </span>
-        </span>
-        <span class="lphase-arrow">→</span>
-      </button>
-      <button class="lphase">
-        <span class="lphase-n">06</span>
-        <span class="lphase-content">
-          <span class="lphase-title-row">
-            <span class="lphase-title">Interviews clients</span>
-            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
-          </span>
-        </span>
-        <span class="lphase-arrow">→</span>
-      </button>
-    </div>
-    <div class="methods-mobile-accordion">
-      <details class="methods-mobile-item">
-        <summary>
-          <div class="methods-mobile-title-row">
-            <span class="methods-mobile-title">Évaluation heuristique</span>
-            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
-          </div>
-          <span class="methods-mobile-icon" aria-hidden="true">+</span>
-        </summary>
-        <div class="methods-mobile-body">
-          <p class="methods-mobile-desc">Audit des bonnes pratiques UX et sectorielles. Ce que l'oeil expert repère avant même les données.</p>
-          <div class="lphase-meta">
-            <span class="lphase-meta-key">S'appuie sur</span>
-            <span class="lphase-meta-val">
-              <span>Baymard (130 000 h de recherche UX)</span>
-              <span>GoodUI (+500 A/B tests de grandes entreprises analysés)</span>
-              <span>CXL (formation référence mondiale du CRO)</span>
-            </span>
-          </div>
-        </div>
-      </details>
-      <details class="methods-mobile-item">
-        <summary>
-          <div class="methods-mobile-title-row">
-            <span class="methods-mobile-title">Analytics</span>
-            <span class="lphase-badge"><span class="qq-dot"></span>Quantitatif</span>
-          </div>
-          <span class="methods-mobile-icon" aria-hidden="true">+</span>
-        </summary>
-        <div class="methods-mobile-body">
-          <p class="methods-mobile-desc">Review du tracking + lecture des comportements agrégés (entonnoirs, drop-offs, segments). On identifie les points où le trafic perd le plus, les parcours et pages qui convertissent, et où chercher les « pourquoi ».</p>
-        </div>
-      </details>
-      <details class="methods-mobile-item">
-        <summary>
-          <div class="methods-mobile-title-row">
-            <span class="methods-mobile-title">Heatmaps &amp; sessions recordings</span>
-            <span class="lphase-badge"><span class="qq-dot"></span>Mixte</span>
-          </div>
-          <span class="methods-mobile-icon" aria-hidden="true">+</span>
-        </summary>
-        <div class="methods-mobile-body">
-          <p class="methods-mobile-desc">On observe les clics, les scroll, les hésitations. Une lecture fine du comportement réel, écran par écran, qui révèle les frictions invisibles dans la data agrégée.</p>
-        </div>
-      </details>
-      <details class="methods-mobile-item">
-        <summary>
-          <div class="methods-mobile-title-row">
-            <span class="methods-mobile-title">Tests utilisateurs</span>
-            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
-          </div>
-          <span class="methods-mobile-icon" aria-hidden="true">+</span>
-        </summary>
-        <div class="methods-mobile-body">
-          <p class="methods-mobile-desc">On confronte le parcours à de vrais utilisateurs. Les blocages, les incompréhensions, les hésitations apparaissent en clair — on entend les mots, on voit les gestes.</p>
-        </div>
-      </details>
-      <details class="methods-mobile-item">
-        <summary>
-          <div class="methods-mobile-title-row">
-            <span class="methods-mobile-title">Sondages onsite</span>
-            <span class="lphase-badge"><span class="qq-dot"></span>Mixte</span>
-          </div>
-          <span class="methods-mobile-icon" aria-hidden="true">+</span>
-        </summary>
-        <div class="methods-mobile-body">
-          <p class="methods-mobile-desc">Quelques questions ciblées, posées aux moments clés du parcours. On identifie les freins, les hésitations et les déclencheurs de conversion pour comprendre ce qui pousse — ou bloque — le passage à l'action.</p>
-        </div>
-      </details>
-      <details class="methods-mobile-item">
-        <summary>
-          <div class="methods-mobile-title-row">
-            <span class="methods-mobile-title">Interviews clients</span>
-            <span class="lphase-badge quali"><span class="qq-dot"></span>Qualitatif</span>
-          </div>
-          <span class="methods-mobile-icon" aria-hidden="true">+</span>
-        </summary>
-        <div class="methods-mobile-body">
-          <p class="methods-mobile-desc">Conversations approfondies avec vos clients, sur leur expérience d'achat. Pour comprendre les motivations, les émotions et la perception de valeur - et faire émerger des insights parfois inattendus, souvent invisibles dans les données.</p>
-        </div>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- 7 — BANDEAU DIFFÉRENCE -->
-<section class="diff-band reveal" data-cta-theme="dark">
-  <div class="diff-content">
-    <svg class="feather-bauhaus diff-feather"><use href="#feather-bauhaus"/></svg>
-    <p class="diff-text">
-      On ne regarde pas seulement ce qui ne marche pas : on comprend <b>pourquoi</b> ça ne marche pas dans <span class="accent">votre business</span>.
-    </p>
-  </div>
-</section>
-
-<!-- 8 — RECOMMENDATIONS -->
-<section class="rec-section reveal" id="livrables" data-cta-theme="dark">
-  <span class="chapter-mark on-dark">/ ch.04 — livrables</span>
-  <div class="rec-head">
-    <h3>De l'insight à <em>l'action.</em></h3>
-    <p class="rec-lead">Chaque recommandation est structurée, priorisée et mise en perspective — pour passer de l'insight à des décisions claires et des actions concrètes.</p>
-  </div>
-  <div class="fiche-doc-layout">
-    <div class="fiche-progress-dots" role="tablist" aria-label="Progression entre les recommandations">
-      <button class="fiche-progress-dot is-active" type="button" data-fiche="0" aria-label="Recommandation 1 sur 6"></button>
-      <button class="fiche-progress-dot" type="button" data-fiche="1" aria-label="Recommandation 2 sur 6"></button>
-      <button class="fiche-progress-dot" type="button" data-fiche="2" aria-label="Recommandation 3 sur 6"></button>
-      <button class="fiche-progress-dot" type="button" data-fiche="3" aria-label="Recommandation 4 sur 6"></button>
-      <button class="fiche-progress-dot" type="button" data-fiche="4" aria-label="Recommandation 5 sur 6"></button>
-      <button class="fiche-progress-dot" type="button" data-fiche="5" aria-label="Recommandation 6 sur 6"></button>
-    </div>
-    <div class="fiche-swipe-hint" aria-hidden="true">← Glissez pour naviguer →</div>
-    <button class="fiche-nav-arrow left" type="button" aria-label="Recommandation précédente" disabled>
-      <svg class="fiche-nav-arc" viewBox="0 0 50 50" aria-hidden="true">
-        <path d="M 6.82 14.5 A 21 21 0 1 1 35.5 43.18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      ←
-    </button>
-    <button class="fiche-nav-arrow right" type="button" aria-label="Recommandation suivante">
-      <svg class="fiche-nav-arc" viewBox="0 0 50 50" aria-hidden="true">
-        <path d="M 14.5 43.18 A 21 21 0 1 1 43.18 14.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      →
-    </button>
-    <div class="fiche-doc-frame">
-      <div class="fiche-content">
-        <header class="fiche-header">
-          <div class="fiche-num-block">
-            <span class="fiche-num-label">Recommandation</span>
-            <span class="fiche-num-value">№ 01 <span class="fiche-num-total">· sur 120</span></span>
-          </div>
-          <div class="fiche-classification">Importance — Critique</div>
-        </header>
-        <h4 class="fiche-title">Retirer les champs « société » et « TVA » de l'étape 3.</h4>
-        <span class="fiche-diagnostic-label">Insight :</span>
-        <p class="fiche-diagnostic">Seulement 8% des clients remplissent ces champs. Drop-off mesuré de 34% sur l'étape 3 du tunnel — la friction n'est pas justifiée par le volume B2B observé sur le segment.</p>
-        <div class="fiche-meta-grid">
-          <div class="fiche-meta-line">
-            <span class="fiche-meta-key">Emplacement</span>
-            <span class="fiche-meta-val">Tunnel checkout — étape 3</span>
-          </div>
-          <div class="fiche-meta-line">
-            <span class="fiche-meta-key">Catégorie</span>
-            <span class="fiche-meta-val">Utilisabilité</span>
-          </div>
-          <div class="fiche-meta-line">
-            <span class="fiche-meta-key">Thème</span>
-            <span class="fiche-meta-val">Effort</span>
-          </div>
-          <div class="fiche-meta-line">
-            <span class="fiche-meta-key">Action</span>
-            <span class="fiche-meta-val">Modification directe</span>
-          </div>
-          <div class="fiche-meta-line">
-            <span class="fiche-meta-key">Sources</span>
-            <span class="fiche-meta-val list"><span>Analytics</span><span>Sessions recordings</span></span>
-          </div>
-        </div>
-      </div>
-      <footer class="fiche-foot">
-        <button class="fiche-foot-prev">
-          <span class="fiche-foot-nav-label">Précédente</span>
-          <span class="fiche-foot-nav-text">№ 06 — Pricing en 3 tiers</span>
-        </button>
-        <button class="fiche-foot-next">
-          <span class="fiche-foot-nav-label">Suivante</span>
-          <span class="fiche-foot-nav-text">№ 02 — Avis clients</span>
-        </button>
-      </footer>
-    </div>
-  </div>
-</section>
-
-<!-- 9 — TEAM -->
-<section class="team-section reveal" id="binome" data-cta-theme="dark">
-  <span class="chapter-mark on-dark">/ ch.05 — L'équipe</span>
-  <div class="team-head">
-    <h2>Un audit fait <em>en collaboration.</em></h2>
-    <p class="lead">Un audit CRO gagne en profondeur quand deux lectures différentes se rejoignent sur les mêmes signaux.</p>
-  </div>
-
-  <div class="team-duo">
-    <article class="team-person">
-      <div class="team-role">Fondatrice de Maat</div>
-      <h3 class="team-name">Anne-Sophie Roux</h3>
-      <p class="team-bio">10 ans en marketing digital, du SEO au CRO, en passant par le contenu. 5 ans passés chez l'annonceur comme Responsable Acquisition / Digital, avec une forte culture data et MarTech. Je cadre des missions ancrées dans vos enjeux et transforme les signaux en opportunités concrètes. Dans l'audit, j'apporte une lecture CRO à l'intersection de l'acquisition, du business et de la data pour identifier les leviers de croissance prioritaires et structurer les recommandations à fort impact.</p>
+    <article class="about-text">
+      <h2>10 ans de marketing digital. <em>Une tête data, une plume, un œil de designer.</em></h2>
+      <div class="team-role">Anne-Sophie Roux · Consultante CRO &amp; Copywriting</div>
+      <p class="about-bio">5 ans côté annonceur, en responsabilité Acquisition &amp; Digital, puis j'ai développé ma propre lecture du CRO.</p>
+      <p class="about-bio">Ma particularité&nbsp;: je ne m'arrête pas au diagnostic. Je croise acquisition, business, UX et data pour décider quoi corriger d'abord, puis je repense vos pages et j'en réécris les textes. Vous voyez concrètement à quoi ressemble la version qui convertit.</p>
       <div class="team-tags">
         <span class="team-tag is-solid">CRO</span>
-        <span class="team-tag is-solid">Acquisition</span>
+        <span class="team-tag is-solid">UX</span>
+        <span class="team-tag is-solid">Copywriting</span>
         <span class="team-tag is-solid">Data</span>
       </div>
     </article>
-    <div class="team-stamp-divider" aria-hidden="true">
-      <span class="team-stamp-line"></span>
-      <span class="team-stamp">
-        <span>Ma<span class="team-stamp-macron">a</span>t</span>
-        <span class="team-stamp-x">×</span>
-        <span>SDLV</span>
-      </span>
-      <span class="team-stamp-line"></span>
-    </div>
-    <article class="team-person">
-      <div class="team-role">Fondateur de SDLV</div>
-      <h3 class="team-name">Florent Kiecken</h3>
-      <p class="team-bio">6+ ans à accompagner des marques en CRO et UX sur des sites e-commerce, SaaS et leadgen à fort trafic (+130 marques accompagnées). Expert en recherche utilisateur et expérimentation, il forme également au CRO et partage des méthodes éprouvées (+1200 personnes formées, +3500 abonnés à la plus grande newsletter CRO francophone). Dans l’audit, il apporte une lecture CRO orientée UX et expérimentation pour structurer les hypothèses et prioriser les tests à plus fort potentiel.</p>
-      <div class="team-tags">
-        <span class="team-tag is-outline">CRO</span>
-        <span class="team-tag is-outline">UX</span>
-        <span class="team-tag is-outline">Formation</span>
-      </div>
-      <a href="https://www.sdlv.fr/" class="team-link" target="_blank" rel="noopener noreferrer">Voir SDLV ↗</a>
-    </article>
   </div>
 </section>
 
-<!-- 10 — MODULABLE + BOOKING -->
+<!-- 8 — RÉCAP DES OFFRES + BOOKING -->
 <section class="booking-section reveal" data-cta-theme="light">
   <div class="modulable-card editorial-block">
     <div class="modulable-card-grid">
       <div class="modulable-title-block">
-        <span class="modulable-title-line1">Audit modulable</span>
-        <span class="modulable-title-line2">à la carte.</span>
-        <span class="modulable-title-line3">Pas de format unique</span>
+        <span class="modulable-title-line1">Une hésitation</span>
+        <span class="modulable-title-line2">entre deux offres&nbsp;?</span>
+        <span class="modulable-title-line3">30 minutes pour en parler</span>
       </div>
       <div class="modulable-divider-vertical"></div>
       <div class="modulable-text-block">
-        <p>On construit l'audit <b>avec vous</b> — en choisissant les méthodes qui ont le plus de sens pour votre situation, votre budget et vos objectifs.</p>
-        <p>Une mission ne ressemble jamais à la précédente : on adapte la profondeur, le périmètre et les livrables à ce que votre business demande vraiment.</p>
+        <p>Au Clair, d'Aplomb ou sur-mesure&nbsp;: un premier échange suffit pour savoir <b>laquelle correspond à votre situation</b> — votre offre, votre site, vos objectifs.</p>
         <div class="modulable-meta-grid">
           <div class="modulable-meta-line">
-            <span class="modulable-meta-key">Durée</span>
-            <span class="modulable-meta-val">1 à 6 semaines selon le périmètre</span>
+            <span class="modulable-meta-key">Au Clair</span>
+            <span class="modulable-meta-val">À partir de 650 €</span>
           </div>
           <div class="modulable-meta-line">
-            <span class="modulable-meta-key">Investissement</span>
-            <span class="modulable-meta-val">À partir de 1 000 € (évaluation heuristique + backlog priorisé)</span>
+            <span class="modulable-meta-key">d'Aplomb</span>
+            <span class="modulable-meta-val">1 200 €</span>
+          </div>
+          <div class="modulable-meta-line">
+            <span class="modulable-meta-key">Sur-mesure</span>
+            <span class="modulable-meta-val">Sur devis</span>
           </div>
         </div>
       </div>
@@ -3894,8 +2313,8 @@ body {
   <div class="booking-grid" id="booking">
     <div class="book-left intro-rule">
       <div class="overline">Call de découverte · 30 min</div>
-      <h3>Voyons si nous pouvons <em>vous aider.</em></h3>
-      <p class="lead">Un premier échange pour comprendre votre situation et voir si notre approche correspond à vos enjeux.</p>
+      <h3>Voyons si je peux <em>vous aider.</em></h3>
+      <p class="lead">Un premier échange pour comprendre votre situation et voir si mon approche correspond à vos enjeux.</p>
       <ul class="book-points">
         <li>Compréhension de votre business et de vos enjeux</li>
         <li>Clarification de vos objectifs</li>
@@ -3967,16 +2386,18 @@ body {
   <div class="footer-top">
     <svg class="feather-bauhaus footer-feather"><use href="#feather-bauhaus"/></svg>
     <div class="footer-signature">
-      <p class="footer-tagline">Audits de conversion <em>pour les marques</em><br/>qui ont mieux à faire que deviner.</p>
+      <p class="footer-tagline">Audits de conversion <em>pour celles et ceux</em><br/>qui ont mieux à faire que deviner.</p>
       <p class="footer-thesis">La conversion est une question d'alignement.</p>
       <p class="footer-definition"><strong>«&nbsp;Maât&nbsp;»</strong> est le principe d'équilibre et de vérité. Nous croyons que la conversion ne se force pas : elle émerge quand promesse, expérience et attente s'accordent enfin.</p>
     </div>
   </div>
   <nav class="footer-sitemap" aria-label="Navigation interne du site">
-    <a href="#demarche">Démarche</a>
-    <a href="#methodes">Méthodes</a>
-    <a href="#livrables">Livrables</a>
-    <a href="#binome">Équipe</a>
+    <a href="#offres">Les offres</a>
+    <a href="offer-focus/index.html">Au Clair</a>
+    <a href="aplomb/index.html">d'Aplomb</a>
+    <a href="#sur-mesure">Sur-mesure</a>
+    <a href="#methodes">La méthode</a>
+    <a href="#a-propos">À propos</a>
     <a href="#booking">Réserver</a>
   </nav>
   <div class="footer-bottom">
@@ -4024,199 +2445,15 @@ body {
     'a[href="#booking"], a[href="index.html#booking"], .cal-confirm-btn'
   ).forEach(el => el.addEventListener('click', openCalendly));
 
-  // ─── A2 IntersectionObserver fade-up sur sections .reveal ───
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const PAGE_LOAD_TIME = performance.now();
-  // Cascade hero : 4 éléments, hero h1 visible vers ~750ms (le LCP probable).
-  // 1000ms permet à la synth de commencer après que le h1 et le lead soient
-  // apparus, avec léger chevauchement assumé sur le CTA hero. Compromis entre
-  // narrative cascade et LCP — diminué de 1800→1000ms suite à insight PSI
-  // (Délai d'affichage de l'élément 3080ms sur synth-desc).
-  const HERO_ANIM_END = 1000;
-
-  // Anime un nombre 0 → target avec ease-out cubic. Cale le démarrage sur le
-  // delay du fade-in CSS des stats (150ms) pour synchroniser l'effet.
-  function animateCounter(el, target, duration, startDelay) {
-    const startTime = performance.now();
-    el.textContent = '0';
-    function tick(now) {
-      const elapsed = now - startTime - startDelay;
-      if (elapsed < 0) { requestAnimationFrame(tick); return; }
-      const t = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      el.textContent = Math.round(eased * target);
-      if (t < 1) requestAnimationFrame(tick);
-      else el.textContent = target;
-    }
-    requestAnimationFrame(tick);
-  }
-
-  function triggerSynthCounters(section) {
-    const counters = section.querySelectorAll('.synth-stat-num[data-count]');
-    counters.forEach(c => {
-      const target = parseInt(c.dataset.count, 10);
-      if (prefersReducedMotion) { c.textContent = target; return; }
-      animateCounter(c, target, 1000, 150);
-    });
-  }
-
+  // ─── IntersectionObserver fade-up sur sections .reveal ───
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
-      const target = e.target;
-      const isSynth = target.classList.contains('synth-section');
-
-      // Sur petits viewports, la synth peut intersecter dès le chargement initial
-      // (avant que la cascade hero ne soit terminée) → ses animations se joueraient
-      // en parallèle du hero, sans logique narrative. Si on est encore dans la
-      // fenêtre du hero, on diffère l'activation de la synth.
-      const elapsed = performance.now() - PAGE_LOAD_TIME;
-      const delay = (isSynth && elapsed < HERO_ANIM_END) ? HERO_ANIM_END - elapsed : 0;
-
-      setTimeout(() => {
-        target.classList.add('is-visible');
-        if (isSynth) triggerSynthCounters(target);
-      }, delay);
-      io.unobserve(target);
+      e.target.classList.add('is-visible');
+      io.unobserve(e.target);
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-  // ─── Démarche timeline interactions ───
-  const STEPS = [
-    { name: 'Lecture business', desc: 'Comprendre votre contexte, vos objectifs, vos personas, leurs besoins et leurs contraintes. On pose le bon cadre d\u2019analyse.', livrable: 'Cadre d\u2019analyse partagé' },
-    { name: 'Recherche & insights', desc: 'Recherche utilisateur basée sur des méthodes qualitatives et quantitatives. On observe, on interroge, on mesure - pour comprendre les comportements et identifier les points de friction réels et opportunités manquées.', livrable: 'Backlog d’insights sourcés' },
-    { name: 'Priorisation des actions', desc: 'Croiser ces insights pour faire émerger les leviers d\u2019actions les plus pertinents à activer. Selon scoring Impact, Confiance, Effort.', livrable: 'Backlog priorisé + synthèse globale' },
-    { name: 'CRO redesign', desc: 'Selon le périmètre, maquettes correctives sur les écrans à plus fort impact. Le redesign s\u2019appuie sur l\u2019audit, jamais sur l\u2019intuition seule.', livrable: 'Maquettes UX finalisées, annotées', avec: true }
-  ];
-  const stepsBtns = document.querySelectorAll('.method-step');
-  const detail = document.querySelector('.method-detail');
-  const detailNum = detail.querySelector('.method-detail-num');
-  const detailName = detail.querySelector('.method-detail-name');
-  const detailDesc = detail.querySelector('.method-detail-desc');
-  const detailVal = detail.querySelector('.method-detail-out-val');
-  const detailWithRow = detail.querySelector('.method-detail-out-with');
-  const detailPointer = detail.querySelector('.method-detail-pointer');
-  const timeline = document.querySelector('.method-timeline');
-  // Inject pulse
-  const pulse = document.createElement('div');
-  pulse.className = 'method-pulse';
-  timeline.appendChild(pulse);
-  // 4 steps positioned at 12.5%, 37.5%, 62.5%, 87.5% of the timeline width
-  const PULSE_POS = ['12.5%', '37.5%', '62.5%', '87.5%'];
-  const POINTER_POS = ['12.5%', '37.5%', '62.5%', '87.5%'];
-  pulse.style.left = PULSE_POS[0];
-
-  stepsBtns.forEach((btn, i) => {
-    btn.addEventListener('click', () => {
-      stepsBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      detailNum.textContent = `Étape ${String(i+1).padStart(2, '0')} · sur 04`;
-      detailName.textContent = STEPS[i].name;
-      detailDesc.textContent = STEPS[i].desc;
-      detailVal.textContent = STEPS[i].livrable;
-      if (detailWithRow) detailWithRow.hidden = !STEPS[i].avec;
-      detailPointer.textContent = `↓ ${String(i+1).padStart(2, '0')}`;
-      detailPointer.style.left = POINTER_POS[i];
-      pulse.style.left = PULSE_POS[i];
-      // Mobile auto-scroll : on évite que le CTA flottant cache la fin du panel (livrable)
-      if (window.matchMedia('(max-width: 900px)').matches) {
-        const rect = detail.getBoundingClientRect();
-        const reservedBottom = 100; // espace réservé pour le CTA flottant + respiration
-        const targetBottom = window.innerHeight - reservedBottom;
-        if (rect.bottom > targetBottom) {
-          window.scrollTo({ top: window.scrollY + (rect.bottom - targetBottom), behavior: 'smooth' });
-        }
-      }
-    });
-  });
-
-  // ─── Methods cycle interactions (donut ↔ list) ───
-  const METHODS = [
-    { title: 'Évaluation heuristique', kind: 'quali', label: 'Qualitatif', desc: 'Lecture experte du parcours utilisateur sur les principes d\u2019utilisabilité reconnus. Première détection des frictions évidentes — avant même de regarder la data.' },
-    { title: 'Analytics', kind: 'quanti', label: 'Quantitatif', desc: 'Review du tracking + lecture des comportements agrégés (entonnoirs, drop-offs, segments). On identifie les points où le trafic perd le plus, les parcours et pages qui convertissent, et où chercher les “pourquoi”.' },
-    { title: 'Heatmaps & sessions recordings', kind: 'mixte', label: 'Mixte', desc: 'On observe les clics, les scroll, les hésitations. Une lecture fine du comportement réel, écran par écran, qui révèle les frictions invisibles dans la data agrégée.' },
-    { title: 'Tests utilisateurs', kind: 'quali', label: 'Qualitatif', desc: 'On confronte le parcours à de vrais utilisateurs. Les blocages, les incompréhensions, les hésitations apparaissent en clair — on entend les mots, on voit les gestes.' },
-    { title: 'Sondages onsite', kind: 'mixte', label: 'Mixte', desc: 'Quelques questions ciblées, posées aux moments clés du parcours. On identifie les freins, les hésitations et les déclencheurs de conversion pour comprendre ce qui pousse — ou bloque — le passage à l’action.' },
-    { title: 'Interviews clients', kind: 'quali', label: 'Qualitatif', desc: 'Conversations approfondies avec vos clients, sur leur expérience d\u2019achat. Pour comprendre les motivations, les émotions et la perception de valeur - et faire émerger des insights parfois innatendus, souvent invisibles dans les données.' }
-  ];
-  const segments = document.querySelectorAll('.constellation-node');
-  const phases = document.querySelectorAll('.lphase');
-  const arc = document.getElementById('cArc');
-  // 6 nodes around circle: angles starting at -90° (top), every 60° clockwise
-  // Arc spans 60° centered on the active node (so it sits between active node and neighbors)
-  function setArcAt(i) {
-    if (!arc) return;
-    const cx = 180, cy = 180, r = 130;
-    const angles = [-90, -30, 30, 90, 150, 210];
-    const a = angles[i];
-    // Arc from a-30° to a+30°
-    const a1 = (a - 30) * Math.PI / 180;
-    const a2 = (a + 30) * Math.PI / 180;
-    const x1 = cx + r * Math.cos(a1);
-    const y1 = cy + r * Math.sin(a1);
-    const x2 = cx + r * Math.cos(a2);
-    const y2 = cy + r * Math.sin(a2);
-    arc.setAttribute('d', `M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`);
-    arc.removeAttribute('stroke-dasharray');
-    arc.removeAttribute('stroke-dashoffset');
-  }
-  setArcAt(0);
-
-  function setActiveMethod(i) {
-    segments.forEach((s, j) => s.classList.toggle('is-active', j === i));
-    setArcAt(i);
-    phases.forEach((p, j) => {
-      p.classList.toggle('is-active', j === i);
-      // Reset content on inactive: keep static; only refill the active one
-      const desc = p.querySelector('.lphase-desc');
-      const m = METHODS[j];
-      if (j === i) {
-        if (!desc) {
-          const newDesc = document.createElement('span');
-          newDesc.className = 'lphase-desc';
-          newDesc.textContent = m.desc;
-          p.querySelector('.lphase-content').appendChild(newDesc);
-        } else {
-          desc.textContent = m.desc;
-        }
-      } else if (desc) {
-        desc.remove();
-      }
-    });
-  }
-  segments.forEach((seg, i) => {
-    seg.addEventListener('click', () => {
-      setActiveMethod(i);
-      if (window.matchMedia('(max-width: 900px)').matches) {
-        // Scroll calculé : on évite que le CTA flottant (fixed bottom) cache la fin de la lphase active
-        const activeLphase = document.querySelector('.lphase.is-active');
-        if (activeLphase) {
-          const rect = activeLphase.getBoundingClientRect();
-          const reservedBottom = 100; // espace réservé pour le CTA flottant + respiration
-          const targetBottom = window.innerHeight - reservedBottom;
-          if (rect.bottom > targetBottom) {
-            window.scrollTo({ top: window.scrollY + (rect.bottom - targetBottom), behavior: 'smooth' });
-          }
-        }
-      }
-    });
-    seg.addEventListener('mouseenter', () => {
-      phases[i].classList.add('is-hovered');
-    });
-    seg.addEventListener('mouseleave', () => {
-      phases[i].classList.remove('is-hovered');
-    });
-  });
-  phases.forEach((ph, i) => {
-    ph.addEventListener('click', () => setActiveMethod(i));
-    ph.addEventListener('mouseenter', () => {
-      segments[i].classList.add('is-hovered');
-    });
-    ph.addEventListener('mouseleave', () => {
-      segments[i].classList.remove('is-hovered');
-    });
-  });
 
   // ─── Mock calendar : tooltip pédagogique desktop au clic ───
   // Mock en lecture seule. Sur desktop, clic sur un jour affiche le tooltip
@@ -4272,134 +2509,6 @@ body {
   window.addEventListener('scroll', updateFloatingCta, { passive: true });
   window.addEventListener('resize', updateFloatingCta);
 
-  // ─── Fiches livrables — navigation Précédente / Suivante ───
-  const FICHES = [
-    { n: '01', short: 'Champs société & TVA', title: "Retirer les champs « société » et « TVA » de l'étape 3.", importance: 'Critique', place: 'Tunnel checkout — étape 3', cat: 'Utilisabilité', theme: 'Effort', action: 'Modification directe', research: ['Analytics', 'Sessions recordings'], diagnostic: "Seulement 8% des clients remplissent ces champs. Drop-off mesuré de 34% sur l'étape 3 du tunnel — la friction n'est pas justifiée par le volume B2B observé sur le segment." },
-    { n: '12', short: 'Avis au-dessus du fold', title: 'Remonter les avis clients au-dessus du fold sur la fiche produit.', importance: 'Élevée', place: 'Page produit', cat: 'Confiance', theme: 'Crédibilité', action: 'Modification directe', research: ['Heatmaps', 'Sessions recordings'], diagnostic: "73% des visiteurs ne scrollent pas jusqu'aux avis. Pattern de sortie observé avant l'ajout au panier — la preuve sociale n'a pas le temps d'opérer." },
-    { n: '34', short: 'Hero orienté résultat', title: 'Reformuler le hero autour du résultat client, pas du produit.', importance: 'Élevée', place: 'Homepage', cat: 'Motivation', theme: 'Désirabilité', action: 'Test A/B', research: ['Interviews clients', 'Évaluation heuristique'], diagnostic: "Les interviews révèlent que la promesse principale n'est pas comprise avant la 3ème page visitée. Le hero parle du produit, pas de l'effet attendu." },
-    { n: '67', short: 'Livraison dès le produit', title: 'Clarifier les options de livraison dès la page produit.', importance: 'Moyenne', place: 'Page produit', cat: 'Coût', theme: 'Livraison', action: 'Modification directe', research: ['Tests utilisateurs', 'Analytics'], diagnostic: "Signal fort sur l'abandon panier lié à la découverte tardive des frais de livraison. À expliciter en amont du tunnel." },
-    { n: '89', short: 'Preuve sociale inline', title: 'Ajouter la preuve sociale dans le flow, pas en bas de page.', importance: 'Moyenne', place: 'Panier', cat: 'Confiance', theme: 'Attention', action: 'Modification directe', research: ['Tests utilisateurs', 'Sessions recordings'], diagnostic: "Avis clients enfouis en footer : invisibles au moment où la décision se joue. Repositionnement inline pendant l'ajout au panier." },
-    { n: '113', short: 'Pricing en 3 tiers', title: "Tester un pricing en 3 tiers avec ancrage sur l'offre premium.", importance: 'Basse', place: 'Global / multi-pages', cat: 'Coût', theme: 'Choix', action: 'Test A/B', research: ['Sondages onsite', 'Analytics'], diagnostic: "Hésitation forte sur le rapport qualité/prix exprimée dans les sondages. Sans point d'ancrage tarifaire, le visiteur n'a pas de repère pour évaluer l'offre." }
-  ];
-  const ficheLayout = document.querySelector('.fiche-doc-layout');
-  const ficheFrame = ficheLayout?.querySelector('.fiche-doc-frame');
-  if (ficheFrame && FICHES.length) {
-    const ficheContent = ficheFrame.querySelector('.fiche-content');
-    const numEl = ficheFrame.querySelector('.fiche-num-value');
-    const classifEl = ficheFrame.querySelector('.fiche-classification');
-    const titleEl = ficheFrame.querySelector('.fiche-title');
-    const diagEl = ficheFrame.querySelector('.fiche-diagnostic');
-    const metaLines = ficheFrame.querySelectorAll('.fiche-meta-line');
-    const prevBtn = ficheFrame.querySelector('.fiche-foot-prev');
-    const nextBtn = ficheFrame.querySelector('.fiche-foot-next');
-    const prevText = prevBtn?.querySelector('.fiche-foot-nav-text');
-    const nextText = nextBtn?.querySelector('.fiche-foot-nav-text');
-    const dots = ficheLayout.querySelectorAll('.fiche-progress-dot');
-    const arrowLeft = ficheLayout.querySelector('.fiche-nav-arrow.left');
-    const arrowRight = ficheLayout.querySelector('.fiche-nav-arrow.right');
-    const total = FICHES.length;
-    let currentIdx = 0;
-    const IMPORTANCE_SLUGS = { 'Critique': 'critique', 'Élevée': 'elevee', 'Moyenne': 'moyenne', 'Basse': 'basse' };
-    function setFiche(idx, direction) {
-      // direction : 'next' (slide depuis la droite), 'prev' (slide depuis la gauche), undefined (fade simple)
-      // Pas de wrap : on clamp aux extrémités (parcours narratif borné)
-      const previousIdx = currentIdx;
-      currentIdx = Math.max(0, Math.min(total - 1, idx));
-      // Si aucune direction explicite, déduit de la variation d'index (clic sur dot lointain)
-      if (!direction && currentIdx !== previousIdx) {
-        direction = currentIdx > previousIdx ? 'next' : 'prev';
-      }
-      const f = FICHES[currentIdx];
-      numEl.innerHTML = `№ ${f.n} <span class="fiche-num-total">· sur 120</span>`;
-      classifEl.textContent = `Importance — ${f.importance}`;
-      classifEl.className = 'fiche-classification is-' + (IMPORTANCE_SLUGS[f.importance] || 'elevee');
-      titleEl.textContent = f.title;
-      diagEl.textContent = f.diagnostic;
-      metaLines[0].querySelector('.fiche-meta-val').textContent = f.place;
-      metaLines[1].querySelector('.fiche-meta-val').textContent = f.cat;
-      metaLines[2].querySelector('.fiche-meta-val').textContent = f.theme;
-      metaLines[3].querySelector('.fiche-meta-val').textContent = f.action;
-      const sourcesVal = metaLines[4].querySelector('.fiche-meta-val');
-      sourcesVal.innerHTML = f.research.map(r => `<span>${r}</span>`).join('');
-      // Footer prev/next : disabled aux extrémités, label "Première / Dernière"
-      const isFirst = currentIdx === 0;
-      const isLast = currentIdx === total - 1;
-      if (prevBtn) {
-        prevBtn.disabled = isFirst;
-        if (prevText) {
-          prevText.textContent = isFirst
-            ? 'Première recommandation'
-            : `№ ${FICHES[currentIdx - 1].n} — ${FICHES[currentIdx - 1].short}`;
-        }
-      }
-      if (nextBtn) {
-        nextBtn.disabled = isLast;
-        if (nextText) {
-          nextText.textContent = isLast
-            ? 'Dernière recommandation'
-            : `№ ${FICHES[currentIdx + 1].n} — ${FICHES[currentIdx + 1].short}`;
-        }
-      }
-      // Dots
-      dots.forEach((d, i) => d.classList.toggle('is-active', i === currentIdx));
-      // Flèches latérales
-      if (arrowLeft) arrowLeft.disabled = isFirst;
-      if (arrowRight) arrowRight.disabled = isLast;
-      // Relance l'animation : slide directionnel si direction connue, sinon fade simple
-      ficheContent.classList.remove('is-fresh', 'is-fresh-from-right', 'is-fresh-from-left');
-      void ficheContent.offsetWidth;
-      if (direction === 'next') ficheContent.classList.add('is-fresh-from-right');
-      else if (direction === 'prev') ficheContent.classList.add('is-fresh-from-left');
-      else ficheContent.classList.add('is-fresh');
-    }
-    prevBtn?.addEventListener('click', () => setFiche(currentIdx - 1, 'prev'));
-    nextBtn?.addEventListener('click', () => setFiche(currentIdx + 1, 'next'));
-    arrowLeft?.addEventListener('click', () => setFiche(currentIdx - 1, 'prev'));
-    arrowRight?.addEventListener('click', () => setFiche(currentIdx + 1, 'next'));
-    dots.forEach((d, i) => d.addEventListener('click', () => setFiche(i)));
-    // Swipe horizontal sur la fiche (mobile) — seuil 60px, |dX| > |dY| pour préserver le scroll vertical
-    let touchStartX = 0, touchStartY = 0;
-    ficheFrame.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-    const swipeHint = ficheLayout.querySelector('.fiche-swipe-hint');
-    ficheFrame.addEventListener('touchend', (e) => {
-      const dX = e.changedTouches[0].clientX - touchStartX;
-      const dY = e.changedTouches[0].clientY - touchStartY;
-      if (Math.abs(dX) > 60 && Math.abs(dX) > Math.abs(dY)) {
-        const dir = dX < 0 ? 'next' : 'prev';
-        setFiche(currentIdx + (dX < 0 ? 1 : -1), dir);
-        // Haptic feedback léger au swipe réussi (Chrome Android — fallback silencieux sur Safari iOS)
-        try { navigator.vibrate?.(15); } catch (_) {}
-        // Fade le hint au 1er swipe réussi (persistant via localStorage)
-        if (swipeHint && !swipeHint.classList.contains('is-faded')) {
-          swipeHint.classList.add('is-faded');
-          try { sessionStorage.setItem('fiche-swiped', '1'); } catch (_) {}
-        }
-      }
-    }, { passive: true });
-    // Si l'utilisateur a déjà swipé une fois, masque le hint dès le load
-    try {
-      if (sessionStorage.getItem('fiche-swiped') && swipeHint) swipeHint.classList.add('is-faded');
-    } catch (_) {}
-    // Wobble pédagogique au 1er montage mobile pour suggérer le swipe (1 fois par session)
-    // Note : matchMedia plutôt que innerWidth pour éviter le forced reflow (innerWidth force
-    // un layout si des changements DOM sont pending — détecté par PSI à 65ms).
-    try {
-      if (window.matchMedia('(max-width: 900px)').matches && !sessionStorage.getItem('fiche-wobbled')) {
-        setTimeout(() => {
-          ficheFrame.classList.add('is-wobbling');
-          try { sessionStorage.setItem('fiche-wobbled', '1'); } catch (_) {}
-        }, 1200);
-      }
-    } catch (_) {}
-    // Synchronise l'état initial des 3 dispositifs (footer prev/next, dots, flèches) avec la fiche courante
-    setFiche(0);
-    // Retire la classe is-fresh à l'init pour ne pas animer au load (l'animation initiale est gérée par .reveal)
-    ficheContent.classList.remove('is-fresh');
-  }
-
   // ─── Smooth scroll pour anchor links ───
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
@@ -4454,7 +2563,7 @@ body {
   }
 
   // ─── Sous-menu actif : suit la section visible au scroll ───
-  const submenuTargets = ['demarche', 'methodes', 'binome', 'booking'];
+  const submenuTargets = ['offres', 'methodes', 'a-propos', 'booking'];
   const submenuItems = document.querySelectorAll('.mh-submenu-item, .mh-drawer-submenu-item');
   const submenuSections = submenuTargets
     .map(id => document.getElementById(id))

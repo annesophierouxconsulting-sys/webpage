@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maat — Offer Focus, Audit CRO & Copywriting</title>
+<title>Maat — Au Clair, Audit CRO & Copywriting</title>
 <meta name="description" content="Découvrez ce qui vous coûte des conversions — et comment y remédier. Audit CRO & copywriting pour coachs, formateurs, consultants, thérapeutes et infopreneurs. Diagnostic, tests utilisateurs, priorisation. 650 €.">
 <link rel="canonical" href="https://maat.so/offer-focus/">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
@@ -15,8 +15,9 @@
      fin de body). Sans widget.js prêt au clic, openCalendly() retombe sur
      window.open() — un nouvel onglet qui recharge toute la page Calendly,
      bien plus lent que le popup in-page. Le preload garantit que le script
-     est déjà chargé quand l'utilisateur clique. -->
-<link rel="preload" as="script" href="https://assets.calendly.com/assets/external/widget.js" fetchpriority="high">
+     est déjà chargé quand l'utilisateur clique ; priorité basse pour ne pas
+     concurrencer le rendu de la page. -->
+<link rel="preload" as="script" href="https://assets.calendly.com/assets/external/widget.js" fetchpriority="low">
 <!-- Calendly widget.css en non-bloquant (même pattern que les fonts).
      Le CSS n'est nécessaire qu'au moment où le popup s'ouvre, pas pour le
      rendu initial. Évite le render-blocking au LCP. -->
@@ -662,20 +663,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
 }
-.expertise-portrait { flex: 1 1 260px; min-width: 220px; max-width: 320px; }
-.expertise-portrait-frame {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  border: 1px solid rgba(140, 106, 44, 0.25);
-  overflow: hidden;
-}
-.expertise-portrait-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+
 .expertise-text { flex: 1.4 1 380px; min-width: 280px; }
 .expertise-eyebrow {
   font-family: var(--font-mono);
@@ -704,6 +692,35 @@ body {
   font-variation-settings: "opsz" 14;
 }
 .expertise-text p:last-child { margin-bottom: 0; font-style: italic; }
+
+/* À propos compact : texte seul + signature avec vignette, lien vers le parcours complet */
+.expertise-section.is-compact { padding: clamp(48px, 6vw, 88px) 6%; }
+.expertise-section.is-compact .expertise-wrap { display: block; max-width: 720px; }
+.expertise-section.is-compact .expertise-text p { max-width: none; }
+.expertise-text p.expertise-quote { font-style: italic; margin-bottom: 0; }
+.expertise-sign {
+  display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: center; column-gap: 14px; row-gap: 10px;
+  margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(20, 16, 42, 0.1);
+}
+.expertise-sign img {
+  width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block;
+  border: 1px solid rgba(140, 106, 44, 0.3);
+}
+.expertise-sign-name {
+  display: block; font-family: var(--font-display); font-style: italic; font-size: 18px;
+  color: var(--ink); line-height: 1.2; font-variation-settings: "opsz" 24;
+}
+.expertise-sign-role {
+  display: block; margin-top: 4px; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute);
+}
+.expertise-sign-link {
+  justify-self: end; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--champagne-fonce); text-decoration: none;
+  border-bottom: 1px solid rgba(140, 106, 44, 0.4); padding-bottom: 4px;
+}
+.expertise-sign-link:hover { border-bottom-color: var(--champagne-fonce); }
+@media (max-width: 560px) { .expertise-sign-link { grid-column: 2; justify-self: start; } }
 
 /* ============================================================
    TÉMOIGNAGES — emplacements réservés (testi-*)
@@ -1073,7 +1090,6 @@ body {
 .mh-tab.is-active { color: var(--champagne); font-weight: 500; }
 .mh-tab.is-active::after { transform: scaleX(1); }
 
-
 .mh-cta {
   font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: clamp(0.1em, 1.4vw, 0.2em); text-transform: uppercase;
   color: var(--champagne); background: transparent; border: 1px solid var(--champagne);
@@ -1140,24 +1156,7 @@ body {
 }
 .mh-drawer-tab.is-active { color: var(--champagne); font-weight: 500; font-size: 26px; }
 .mh-drawer-tab.is-active::after { transform: scaleX(1); }
-.mh-drawer-tab.is-coming {
-  color: var(--ivory);
-  font-size: 16px;
-  font-weight: 400;
-  cursor: default;
-}
-.mh-drawer-tab-stamp {
-  font-family: var(--font-mono);
-  font-style: normal;
-  font-weight: 500;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  border: 1px dashed var(--champagne-fonce);
-  padding: 3px 7px;
-  white-space: nowrap;
-}
+
 .mh-drawer-category-label {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
   color: rgba(212, 178, 117, 0.5); margin: -4px 0 -4px;
@@ -1225,7 +1224,7 @@ body {
   .split-grid { flex-direction: column; gap: 2.25rem; }
   .split-block { flex-basis: auto; }
   .testi-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-  .expertise-portrait { max-width: 220px; margin: 0 auto; }
+  
   .offre-dark-head { flex-direction: column; align-items: flex-start; gap: 12px; }
   .offre-dark-price-wrap { align-items: flex-start; }
   .offre-tier-item { font-size: 15.5px; }
@@ -1250,6 +1249,20 @@ body {
   .hero-offer-name { font-size: clamp(20px, calc(13px + 1.8vw), 21px); }
   .hero-offer { margin-top: 32px; }
 }
+
+/* À propos compact (signature sous l'offre) */
+.expertise-section.is-compact { padding: clamp(48px, 6vw, 80px) 6%; border-top: none; }
+.expertise-section.is-compact .expertise-wrap { max-width: 760px; display: block; }
+.expertise-section.is-compact .expertise-text h2 { font-size: clamp(22px, 2.6vw, 28px); margin-bottom: 16px; }
+.expertise-section.is-compact .expertise-text p { max-width: none; }
+.expertise-section.is-compact .expertise-text p:last-child { font-style: normal; }
+.expertise-sign { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(140, 106, 44, 0.2); }
+.expertise-sign img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(140, 106, 44, 0.3); flex: none; }
+.expertise-sign-name { display: flex; flex-direction: column; gap: 3px; margin-right: auto; flex: 1 1 0; min-width: 0; }
+@media (max-width: 600px) { .expertise-sign { display: grid; grid-template-columns: 56px 1fr; column-gap: 14px; row-gap: 12px; } .expertise-sign a { grid-column: 2; justify-self: start; } }
+.expertise-sign-name strong { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 19px; color: var(--ink); }
+.expertise-sign-name span { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
+.expertise-sign a { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--champagne-fonce); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 3px; }
 </style>
 </head>
 <body>
@@ -1262,8 +1275,9 @@ body {
     <a class="mh-logo" href="../index.html" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
     <nav class="mh-tabs-wrap" aria-label="Pages">
       <ul class="mh-tabs">
-        <li><a class="mh-tab" href="../index.html">Audit CRO SaaS et e-commerce</a></li>
-        <li><a class="mh-tab is-active" href="#top" aria-current="page">Offer Focus</a></li>
+        <li><a class="mh-tab is-active" href="#top" aria-current="page">Au Clair</a></li>
+        <li><a class="mh-tab" href="../aplomb/index.html">d'Aplomb</a></li>
+        <li><a class="mh-tab" href="../index.html#sur-mesure">Sur-mesure</a></li>
       </ul>
     </nav>
     <a class="mh-cta" href="#booking">Réserver un appel découverte <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
@@ -1285,9 +1299,9 @@ body {
 
 <aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
   <ul class="mh-drawer-tabs">
-    <li class="mh-drawer-category-label" aria-hidden="true">— Offer Focus</li>
+    <li class="mh-drawer-category-label" aria-hidden="true">— Au Clair</li>
     <li>
-      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Offer Focus</a>
+      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Au Clair</a>
       <ul class="mh-drawer-submenu">
         <li><a class="mh-drawer-submenu-item is-active" href="#analyse" data-target="analyse">L'analyse</a></li>
         <li><a class="mh-drawer-submenu-item" href="#livrable" data-target="livrable">Le livrable</a></li>
@@ -1295,16 +1309,10 @@ body {
         <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un appel découverte</a></li>
       </ul>
     </li>
-    <li class="mh-drawer-category-label" aria-hidden="true">— Audit CRO SaaS et e-commerce</li>
-    <li>
-      <a class="mh-drawer-tab" href="../index.html">Audit CRO SaaS et e-commerce</a>
-    </li>
-    <li>
-      <span class="mh-drawer-tab is-coming" role="link" aria-disabled="true">
-        Conversion Messaging
-        <span class="mh-drawer-tab-stamp">— à venir</span>
-      </span>
-    </li>
+    <li class="mh-drawer-category-label" aria-hidden="true">— Les autres offres</li>
+    <li><a class="mh-drawer-tab" href="../aplomb/index.html">d'Aplomb</a></li>
+    <li><a class="mh-drawer-tab" href="../index.html#sur-mesure">Sur-mesure</a></li>
+    <li><a class="mh-drawer-tab" href="../index.html">Accueil Maat</a></li>
   </ul>
   <div class="mh-drawer-divider" aria-hidden="true"></div>
   <a class="mh-drawer-cta" href="#booking">Réserver un appel découverte ↗</a>
@@ -1346,7 +1354,7 @@ body {
       <p class="hero-lead">Découvrez ce qui vous coûte des conversions — et comment y remédier.</p>
     </div>
     <div class="hero-offer">
-      <p class="hero-offer-name">Offer Focus</p>
+      <p class="hero-offer-name">Au Clair</p>
       <p class="hero-offer-descriptor">Audit CRO x Copywriting pour entrepreneurs &amp; experts</p>
       <div class="hero-tags">
         <span class="hero-tag">Coachs</span>
@@ -1371,7 +1379,7 @@ body {
       <div class="enjeu-main">
         <h2>Une offre mieux comprise. <em>Plus convaincante. Plus efficace.</em></h2>
         <p class="enjeu-intro">Vos visiteurs arrivent jusqu'à votre offre, mais ils ne sont pas assez nombreux à passer à l'action&nbsp;? Chaque hésitation, incompréhension ou friction peut être une opportunité qui vous échappe.</p>
-        <p class="enjeu-transition"><span class="enjeu-transition-arrow" aria-hidden="true">→</span> <em style="font-style:italic;color:var(--champagne-fonce)">Offer Focus</em> identifie les freins qui comptent vraiment et où agir pour mieux convertir.</p>
+        <p class="enjeu-transition"><span class="enjeu-transition-arrow" aria-hidden="true">→</span> <em style="font-style:italic;color:var(--champagne-fonce)">Au Clair</em> identifie les freins qui comptent vraiment et où agir pour mieux convertir.</p>
       </div>
       <div class="enjeu-validations-col">
         <ul class="enjeu-validations">
@@ -1541,7 +1549,7 @@ body {
 <!--
 <section class="testi-section reveal" id="temoignages" data-cta-theme="dark">
   <div class="testi-wrap">
-    <h2>Ce qu'ils disent d'Offer Focus</h2>
+    <h2>Ce qu'ils disent d'Au Clair</h2>
     <div class="testi-grid">
       <div class="testi-item">
         <span class="testi-quote-mark" aria-hidden="true">"</span>
@@ -1606,31 +1614,13 @@ body {
   </div>
 </section>
 
-<!-- EXPERTISE -->
-<section class="expertise-section reveal" id="expertise" data-cta-theme="light">
-  <div class="expertise-wrap">
-    <div class="expertise-portrait">
-      <div class="expertise-portrait-frame">
-        <img src="assets/anne-sophie-portrait.jpg" alt="Anne-Sophie Roux, fondatrice de Maat" width="400" height="400">
-      </div>
-    </div>
-    <div class="expertise-text">
-      <p class="expertise-eyebrow">À propos de moi</p>
-      <h2>10 ans de marketing digital. Un regard centré sur la conversion.</h2>
-      <p>5 ans côté annonceur, en responsabilité Acquisition &amp; Digital, puis une pratique du CRO construite à la croisée de l'acquisition, de la conversion et de la data.</p>
-      <p>Avec Offer Focus, j'ai voulu mettre cette expertise à la portée des entrepreneurs et experts — et tout particulièrement de ceux qui portent des projets à impact positif. Les aider à mieux faire comprendre leur valeur et à développer leur activité, c'est aussi une façon pour moi de contribuer, à mon échelle, à leur impact.</p>
-      <p>Je ne regarde pas une page comme un simple objet UX. Je la regarde comme un outil de conversion au service d'une offre.</p>
-    </div>
-  </div>
-</section>
-
 <!-- OFFRE -->
 <section class="offre-dark-section reveal" id="offre" data-cta-theme="dark">
   <div class="offre-dark-wrap">
     <p class="dark-eyebrow">— L'offre</p>
     <div class="offre-dark-head">
       <div>
-        <h2>Offer Focus</h2>
+        <h2>Au Clair</h2>
         <p class="offre-dark-sub">Audit CRO x Copywriting pour Entrepreneurs &amp; Experts</p>
       </div>
       <div class="offre-dark-price-wrap">
@@ -1650,6 +1640,26 @@ body {
       <li>Copywriting / restructuration / redesign</li>
     </ul>
     <a href="#booking" class="offre-dark-cta">Réserver un appel découverte →</a>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section class="expertise-section is-compact reveal" id="expertise" data-cta-theme="light">
+  <div class="expertise-wrap">
+    <div class="expertise-text">
+      <p class="expertise-eyebrow">À propos de moi</p>
+      <h2>Pour que votre valeur se comprenne dès la première lecture.</h2>
+      <p>10 ans de marketing digital, dont 5 côté annonceur. J'ai créé Au Clair pour les entrepreneurs et experts, en particulier ceux qui portent des projets à impact, dont l'offre est solide, mais dont la page ne la fait pas encore comprendre.</p>
+      <p class="expertise-quote">Je ne regarde pas une page comme un objet UX, mais comme un outil de vente au service de votre offre.</p>
+      <div class="expertise-sign">
+        <img src="assets/anne-sophie-portrait.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+        <div>
+          <span class="expertise-sign-name">Anne-Sophie Roux</span>
+          <span class="expertise-sign-role">Consultante CRO · Fondatrice de Maat</span>
+        </div>
+        <a class="expertise-sign-link" href="../index.html#a-propos">Mon parcours →</a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1674,6 +1684,10 @@ body {
       <p>Non. L'audit porte sur les pages onsite concernées — pas sur les supports de campagnes (emails, ads etc).</p>
     </details>
     <details class="faq-item">
+      <summary><span>Je vends des produits via une boutique en ligne&nbsp;: est-ce pour moi&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>Au Clair porte sur une offre et sa page de vente. Si vous vendez des produits via une boutique en ligne — catalogue, fiches produits, panier —, c'est l'offre <a href="../aplomb/index.html" style="color:var(--champagne-fonce);text-decoration:underline;text-underline-offset:3px">d'Aplomb</a> qui vous correspond.</p>
+    </details>
+    <details class="faq-item">
       <summary><span>Est-ce que l'audit garantit une hausse de conversion&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
       <p>Non, la promesse chiffrée n'est pas possible. L'audit priorise ce qui est nécessaire pour mettre toutes les chances de votre côté pour la meilleure conversion possible, avec le trafic que vous avez et l'offre/service que vous avez établis.</p>
     </details>
@@ -1685,7 +1699,7 @@ body {
   <div class="booking-final-wrap">
     <p class="chapter-mark">— Premier échange</p>
     <h2>Commençons par votre offre.</h2>
-    <p class="booking-final-lead">30 minutes pour comprendre vos enjeux, identifier les supports à auditer et vérifier si <em style="font-style:italic;color:var(--champagne-fonce)">Offer Focus</em> est adapté à votre situation.</p>
+    <p class="booking-final-lead">30 minutes pour comprendre vos enjeux, identifier les supports à auditer et vérifier si <em style="font-style:italic;color:var(--champagne-fonce)">Au Clair</em> est adapté à votre situation.</p>
     <div class="booking-final-cta-row">
       <a href="#booking" class="booking-final-cta">Réserver un appel découverte →</a>
       <span class="booking-final-note">30 min · sans engagement</span>

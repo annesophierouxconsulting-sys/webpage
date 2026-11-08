@@ -21,7 +21,11 @@
 </noscript>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=DM+Mono:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=DM+Mono:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=DM+Mono:wght@300;400;500&display=swap">
+</noscript>
 <!-- Privacy-friendly analytics by Plausible (sans cookies, RGPD-compliant) -->
 <script async src="https://plausible.io/js/pa-IQIBlETfvM5eOFGPGg27a.js"></script>
 <script>
@@ -146,38 +150,11 @@ body {
 }
 .mh-tab:hover { color: var(--ivory); }
 .mh-tab:hover::after { transform: scaleX(1); }
-.mh-tab.is-coming {
-  color: rgba(244, 236, 211, 0.3);
-  cursor: default;
-}
-.mh-tab.is-coming:hover { color: rgba(244, 236, 211, 0.5); }
-.mh-tab.is-coming:hover::after { transform: scaleX(0); }
-.mh-tab.is-coming::before {
-  content: '— à venir';
-  position: absolute;
-  top: -32px;
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
-  font-family: var(--font-mono);
-  font-style: normal;
-  font-weight: 500;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  background: var(--band-bg);
-  border: 1px dashed var(--champagne-fonce);
-  padding: 3px 7px;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 250ms cubic-bezier(0.34, 1.4, 0.64, 1), transform 250ms cubic-bezier(0.34, 1.4, 0.64, 1);
-}
-.mh-tab.is-coming:hover::before,
-.mh-tab.is-coming:focus-visible::before {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
+
+
+
+
+
 /* Toggle langue FR · EN */
 .mh-lang-toggle {
   display: inline-flex; align-items: center; gap: 6px;
@@ -282,24 +259,8 @@ body {
   transform-origin: left center;
   transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
-.mh-drawer-tab.is-coming {
-  color: rgba(244, 236, 211, 0.4);
-  font-size: 20px;
-  font-weight: 400;
-  cursor: default;
-}
-.mh-drawer-tab-stamp {
-  font-family: var(--font-mono);
-  font-style: normal;
-  font-weight: 500;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  border: 1px dashed var(--champagne-fonce);
-  padding: 3px 7px;
-  white-space: nowrap;
-}
+
+
 .mh-drawer-divider {
   height: 1px;
   background: rgba(212, 178, 117, 0.18);
@@ -741,12 +702,9 @@ body {
     <a class="mh-logo" href="index.html" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
     <nav class="mh-tabs-wrap" aria-label="Pages">
       <ul class="mh-tabs">
-        <li>
-          <a class="mh-tab" href="index.html">Audit CRO</a>
-        </li>
-        <li>
-          <span class="mh-tab is-coming" role="link" aria-disabled="true" tabindex="0">Conversion Messaging</span>
-        </li>
+        <li><a class="mh-tab" href="offer-focus/index.html">Au Clair</a></li>
+        <li><a class="mh-tab" href="aplomb/index.html">d'Aplomb</a></li>
+        <li><a class="mh-tab" href="index.html#sur-mesure">Sur-mesure</a></li>
       </ul>
     </nav>
     <span class="mh-lang-toggle" aria-label="Langue / Language">
@@ -761,15 +719,10 @@ body {
 
 <aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
   <ul class="mh-drawer-tabs">
-    <li>
-      <a class="mh-drawer-tab" href="index.html">Audit CRO</a>
-    </li>
-    <li>
-      <span class="mh-drawer-tab is-coming" role="link" aria-disabled="true">
-        Conversion Messaging
-        <span class="mh-drawer-tab-stamp">— à venir</span>
-      </span>
-    </li>
+    <li><a class="mh-drawer-tab" href="index.html">Accueil</a></li>
+    <li><a class="mh-drawer-tab" href="offer-focus/index.html">Au Clair</a></li>
+    <li><a class="mh-drawer-tab" href="aplomb/index.html">d'Aplomb</a></li>
+    <li><a class="mh-drawer-tab" href="index.html#sur-mesure">Sur-mesure</a></li>
   </ul>
   <div class="mh-drawer-divider" aria-hidden="true"></div>
   <a class="mh-drawer-cta" href="index.html#booking">Réserver un échange ↗</a>
@@ -947,10 +900,12 @@ body {
     </div>
   </div>
   <nav class="footer-sitemap" aria-label="Navigation interne du site">
-    <a href="index.html#demarche">Démarche</a>
-    <a href="index.html#methodes">Méthodes</a>
-    <a href="index.html#livrables">Livrables</a>
-    <a href="index.html#binome">Équipe</a>
+    <a href="index.html#offres">Les offres</a>
+    <a href="offer-focus/index.html">Au Clair</a>
+    <a href="aplomb/index.html">d'Aplomb</a>
+    <a href="index.html#sur-mesure">Sur-mesure</a>
+    <a href="index.html#methodes">La méthode</a>
+    <a href="index.html#a-propos">À propos</a>
     <a href="index.html#booking">Réserver</a>
   </nav>
   <div class="footer-bottom">

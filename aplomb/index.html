@@ -1,0 +1,2260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maat — d'Aplomb, audit CRO &amp; refonte pour petites entreprises</title>
+<meta name="description" content="Votre site ne rend pas justice à ce que vous vendez. D'Aplomb : diagnostic CRO, pages clés redessinées et plan d'action par étapes pour artisans, éditeurs indépendants et marques responsables. 1 200 €.">
+<link rel="canonical" href="https://maat.so/aplomb/">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="apple-touch-icon" href="../favicon.svg">
+<link rel="preconnect" href="https://calendly.com">
+<link rel="preconnect" href="https://assets.calendly.com">
+<!-- Précharge widget.js en parallèle du reste (script chargé async plus bas,
+     donc sans ce preload le fetch ne démarre qu'à l'exécution du <script> en
+     fin de body). Sans widget.js prêt au clic, openCalendly() retombe sur
+     window.open() — un nouvel onglet qui recharge toute la page Calendly,
+     bien plus lent que le popup in-page. Le preload garantit que le script
+     est déjà chargé quand l'utilisateur clique ; priorité basse pour ne pas
+     concurrencer le rendu de la page. -->
+<link rel="preload" as="script" href="https://assets.calendly.com/assets/external/widget.js" fetchpriority="low">
+<!-- Calendly widget.css en non-bloquant (même pattern que les fonts).
+     Le CSS n'est nécessaire qu'au moment où le popup s'ouvre, pas pour le
+     rendu initial. Évite le render-blocking au LCP. -->
+<link rel="preload" as="style" href="https://assets.calendly.com/assets/external/widget.css">
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+</noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Chargement non-bloquant des polices via le pattern media=print → onload swap. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Mono:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Mono:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Mono:wght@300;400;500&display=swap">
+</noscript>
+<!-- Privacy-friendly analytics by Plausible (sans cookies, RGPD-compliant) -->
+<script async src="https://plausible.io/js/pa-IQIBlETfvM5eOFGPGg27a.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+<style>
+/* ============================================================
+   TOKENS — Palette aubergine + champagne, magazine sombre
+   (identiques à / — cohérence de marque)
+   ============================================================ */
+:root {
+  --hero-bg: #08041A;
+  --band-bg: #16102E;
+  --paper: #FBF4E0;
+  --champagne: #D4B275;
+  --champagne-fonce: #8C6A2C;
+  --ink: #14102A;
+  --ink-soft: #3A3658;
+  --ink-mute: #6E6890;
+  --ivory: #F4ECD3;
+
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Newsreader', Georgia, serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  --header-height: 100px;
+  --header-height-mobile: 70px;
+}
+
+* { box-sizing: border-box; }
+
+@view-transition { navigation: auto; }
+
+html { scroll-padding-top: var(--header-height); }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+
+/* ============================================================
+   ATOMES
+   ============================================================ */
+.feather-bauhaus { color: var(--champagne); }
+
+.editorial-block {
+  border: 1px solid rgba(140, 106, 44, 0.35);
+  position: relative;
+}
+.editorial-block::before, .editorial-block::after {
+  content: '';
+  position: absolute;
+  width: 22px; height: 22px;
+  border-color: #8C6A2C;
+  border-style: solid;
+  border-width: 0;
+}
+.editorial-block::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+.editorial-block::after { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
+
+.chapter-mark {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin: 0 0 20px;
+}
+.cta-mono {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.45);
+  padding-bottom: 6px;
+  display: inline-block;
+  position: relative;
+  transition: border-color 0.2s ease-out;
+}
+@media (hover: hover) {
+  .cta-mono:hover { border-bottom-color: rgba(212, 178, 117, 1) !important; }
+}
+.cta-mono:active { transform: translateY(1px); }
+
+/* ============================================================
+   REVEAL — fade-up générique piloté par IntersectionObserver
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+/* Tactile press feedback */
+.mh-cta:active, .mh-mobile-toggle:active, .mh-drawer-cta:active,
+.cta-mono:active, .offre-dark-cta:active, .booking-final-cta:active {
+  transform: scale(0.97);
+  opacity: 0.85;
+  transition: transform 80ms ease, opacity 80ms ease;
+}
+.mobile-cta-floating.is-visible:active {
+  transform: translateX(-50%) scale(0.97);
+  opacity: 0.85;
+  transition: transform 80ms ease, opacity 80ms ease;
+}
+
+/* ============================================================
+   HERO — texte seul, badges d'audience, pas de visuel diagnostic
+   ============================================================ */
+.hero {
+  background: var(--hero-bg);
+  color: var(--ivory);
+  padding: calc(var(--header-height) + 4%) 6% 6%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.hero-inner {
+  position: relative;
+  padding-left: 1.75rem;
+  max-width: 680px;
+}
+.hero-inner::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 4px; bottom: 4px;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    rgba(212, 178, 117, 0.4), rgba(212, 178, 117, 0.75), rgba(212, 178, 117, 0.4));
+}
+/* Groupe 1 — Promesse (H1 + sous-titre) */
+.hero h1 {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 60;
+  font-weight: 400;
+  font-size: clamp(44px, calc(16px + 7vw), 56px);
+  line-height: 1.03;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--ivory);
+}
+.hero-lead {
+  margin-top: 30px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(17px, calc(14px + 0.9vw), 19.5px);
+  line-height: 1.55;
+  color: rgba(244, 236, 211, 0.8);
+  max-width: 540px;
+  font-variation-settings: "opsz" 14;
+}
+
+/* Groupe 2 — Offre + action (nom, descriptor, tags, CTA, microcopy) */
+.hero-offer { margin-top: 44px; }
+.hero-offer-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(24px, calc(19px + 1.6vw), 30px);
+  line-height: 1.2;
+  color: var(--champagne);
+  margin: 0 0 9px;
+  font-variation-settings: "opsz" 32;
+}
+.hero-offer-descriptor {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  margin: 0 0 15px;
+}
+
+
+.hero-cta-row {
+  display: flex; align-items: center; gap: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.hero-inner > * {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: heroFadeUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+.hero-inner > .hero-promise { animation-delay: 0ms; }
+.hero-inner > .hero-offer { animation-delay: 500ms; }
+@keyframes heroFadeUp { to { opacity: 1; transform: none; } }
+
+/* ============================================================
+   ch.01 — ENJEU — grille 3 bénéfices numérotés
+   ============================================================ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   ch.02 — ANALYSE — 4 dimensions (regard-*, réutilisé tel quel)
+   ============================================================ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Supports pouvant être audités — grille d'icônes */
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   ch.03 — LIVRABLE — titre + sous-titre, puis schéma annoté
+   (callouts + wireframe de la maquette)
+   ============================================================ */
+
+
+
+
+
+/* Diagnostic + maquette optimisée — schéma annoté (callouts + wireframe mobile) */
+
+
+
+
+
+/* Ligne + point qui traversent l'espace jusqu'à toucher la maquette */
+
+
+
+
+
+
+
+
+/* Maquette centrale — écran mobile miniature, même en desktop */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   POUR QUI — filets latéraux + listes ✓ / ✕ (split-*, fit-*)
+   ============================================================ */
+.split-section { padding: clamp(64px, 8vw, 120px) 6%; background: var(--paper); border-top: 1px solid rgba(20, 16, 42, 0.08); }
+.split-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  gap: clamp(40px, 6vw, 100px);
+  flex-wrap: wrap;
+}
+.split-block { flex: 1 1 340px; min-width: 260px; padding-left: 24px; }
+.split-block.is-yes { border-left: 1px solid rgba(140, 106, 44, 0.35); }
+.split-block.is-no { border-left: 1px solid rgba(20, 16, 42, 0.12); }
+.split-block-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 24px;
+  margin: 0 0 22px;
+  color: var(--ink);
+}
+.split-block-title.is-muted { color: var(--ink-mute); }
+.fit-list { list-style: none; margin: 0; padding: 0; }
+.fit-item {
+  display: flex;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.fit-item .fit-mark { flex: none; color: var(--champagne-fonce); }
+.fit-item.is-no { color: var(--ink-mute); }
+.fit-item.is-no .fit-mark { color: inherit; }
+
+/* ============================================================
+   EXPERTISE — portrait + bio, fond clair (expertise-*)
+   ============================================================ */
+.expertise-section { background: var(--paper); padding: clamp(64px, 8vw, 120px) 6%; border-top: 1px solid rgba(20, 16, 42, 0.08); }
+.expertise-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  gap: clamp(36px, 6vw, 90px);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+
+
+.expertise-text { flex: 1.4 1 380px; min-width: 280px; }
+.expertise-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin: 0 0 18px;
+}
+.expertise-text h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.2;
+  margin: 0 0 22px;
+  color: var(--ink);
+  font-variation-settings: "opsz" 60;
+}
+.expertise-text p {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0 0 16px;
+  max-width: 520px;
+  font-variation-settings: "opsz" 14;
+}
+.expertise-text p:last-child { margin-bottom: 0; font-style: italic; }
+
+/* À propos compact : texte seul + signature avec vignette, lien vers le parcours complet */
+.expertise-section.is-compact { padding: clamp(48px, 6vw, 88px) 6%; }
+.expertise-section.is-compact .expertise-wrap { display: block; max-width: 720px; }
+.expertise-section.is-compact .expertise-text p { max-width: none; }
+.expertise-text p.expertise-quote { font-style: italic; margin-bottom: 0; }
+.expertise-sign {
+  display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: center; column-gap: 14px; row-gap: 10px;
+  margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(20, 16, 42, 0.1);
+}
+.expertise-sign img {
+  width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block;
+  border: 1px solid rgba(140, 106, 44, 0.3);
+}
+.expertise-sign-name {
+  display: block; font-family: var(--font-display); font-style: italic; font-size: 18px;
+  color: var(--ink); line-height: 1.2; font-variation-settings: "opsz" 24;
+}
+.expertise-sign-role {
+  display: block; margin-top: 4px; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute);
+}
+.expertise-sign-link {
+  justify-self: end; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--champagne-fonce); text-decoration: none;
+  border-bottom: 1px solid rgba(140, 106, 44, 0.4); padding-bottom: 4px;
+}
+.expertise-sign-link:hover { border-bottom-color: var(--champagne-fonce); }
+@media (max-width: 560px) { .expertise-sign-link { grid-column: 2; justify-self: start; } }
+
+/* ============================================================
+   TÉMOIGNAGES — emplacements réservés (testi-*)
+   ============================================================ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================
+   OFFRE — fond aubergine sombre, prix affiché en grand
+   ============================================================ */
+.offre-dark-section { background: var(--hero-bg); color: var(--ivory); padding: clamp(72px, 9vw, 140px) 6%; }
+.offre-dark-wrap { max-width: 820px; margin: 0 auto; }
+.dark-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--champagne); margin: 0 0 24px; }
+.offre-dark-head {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.2);
+  padding-bottom: 32px;
+}
+.offre-dark-head h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 3.6vw, 38px); margin: 0 0 8px; }
+.offre-dark-head .offre-dark-sub {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  margin: 0;
+}
+.offre-dark-price-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.offre-dark-price-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.55);
+}
+.offre-dark-price { font-family: var(--font-display); font-size: clamp(44px, 6vw, 64px); color: var(--champagne); line-height: 1; }
+.offre-tier-list { list-style: none; padding: 0; margin: 0; }
+.offre-tier-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: rgba(244, 236, 211, 0.85);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.12);
+}
+.offre-tier-price { color: var(--champagne); white-space: nowrap; }
+
+.offre-dark-list { list-style: none; padding: 0; margin: 28px 0 44px; }
+.offre-dark-list li {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: rgba(244, 236, 211, 0.85);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.12);
+}
+.offre-dark-list li:last-child { border-bottom: none; }
+.offre-dark-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hero-bg);
+  background: var(--champagne);
+  padding: 16px 32px;
+  text-decoration: none;
+  transition: background-color 200ms ease;
+}
+@media (hover: hover) { .offre-dark-cta:hover { background: var(--ivory); } }
+
+/* ============================================================
+   FAQ — accordéon natif <details>/<summary> (faq-*)
+   ============================================================ */
+.faq-section { background: var(--paper); padding: clamp(64px, 8vw, 120px) 6%; border-top: 1px solid rgba(20, 16, 42, 0.08); }
+.faq-wrap { max-width: 760px; margin: 0 auto; }
+.faq-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  margin: 0 0 32px;
+}
+.faq-item { border-bottom: 1px solid rgba(20, 16, 42, 0.1); padding: 20px 0; }
+.faq-item:last-child { border-bottom: none; }
+.faq-item summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--ink);
+  list-style: none;
+  cursor: pointer;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-icon { color: var(--champagne-fonce); flex: none; }
+.faq-item p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 14px 0 0;
+  max-width: 600px;
+}
+
+/* ============================================================
+   BOOKING — clôture éditoriale, fond crème, respiration avant le footer
+   ============================================================ */
+.booking-final-section {
+  background: var(--paper);
+  padding: clamp(72px, 9vw, 130px) 6%;
+  border-top: 1px solid rgba(20, 16, 42, 0.08);
+  display: flex;
+  justify-content: center;
+}
+.booking-final-wrap { max-width: 620px; width: 100%; }
+.booking-final-wrap h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.15;
+  margin: 0 0 20px;
+  color: var(--ink);
+  font-variation-settings: "opsz" 60;
+}
+.booking-final-lead {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 460px;
+  margin: 0 0 34px;
+  font-variation-settings: "opsz" 14;
+}
+.booking-final-cta-row {
+  display: flex; align-items: center; gap: 1.4rem;
+  flex-wrap: wrap;
+}
+.booking-final-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--hero-bg);
+  padding: 17px 36px;
+  text-decoration: none;
+  transition: background-color 200ms ease;
+}
+@media (hover: hover) { .booking-final-cta:hover { background: var(--champagne-fonce); } }
+.booking-final-note {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* ============================================================
+   FOOTER COLOPHON avec plume bauhaus
+   ============================================================ */
+.footer { background: var(--hero-bg); color: var(--ivory); padding: 5% 5% 3% 5%; }
+.footer-top { display: flex; align-items: flex-start; gap: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(212, 178, 117, 0.2); margin-bottom: 2rem; }
+.footer-feather { width: 28px; height: 100px; color: var(--champagne); flex: 0 0 auto; margin-top: 4px; }
+.footer-signature { flex: 1; display: flex; flex-direction: column; gap: 1.5rem; max-width: 720px; }
+.footer-tagline { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(20px, 2.4vw, 26px); line-height: 1.2; color: var(--ivory); margin: 0; font-variation-settings: "opsz" 60; }
+.footer-tagline em { color: var(--champagne); }
+.footer-thesis {
+  font-family: var(--font-display); font-style: italic; font-size: 18px; line-height: 1.55;
+  color: rgba(244, 236, 211, 0.75); font-weight: 300; margin: 0;
+  padding-left: 1rem; border-left: 1px solid rgba(212, 178, 117, 0.4);
+  font-variation-settings: "opsz" 24;
+}
+.footer-definition { font-family: var(--font-body); font-size: 16px; line-height: 1.65; color: rgba(244, 236, 211, 0.6); margin: 0; font-variation-settings: "opsz" 14; }
+.footer-definition strong { color: var(--champagne); font-weight: 500; font-style: italic; }
+.footer-bottom { display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem; align-items: center; }
+.footer-contact { display: flex; flex-direction: column; gap: 4px; }
+.footer-contact-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(212, 178, 117, 0.7); }
+.footer-contact-email {
+  font-family: var(--font-mono); font-size: 12px; color: var(--champagne);
+  padding-bottom: 2px; align-self: flex-start; text-decoration: none;
+  position: relative; border-bottom-color: transparent !important;
+  background-image: linear-gradient(to right, rgba(212, 178, 117, 0.35), rgba(212, 178, 117, 0.35));
+  background-position: 0 100%; background-repeat: no-repeat; background-size: 100% 1px;
+}
+.footer-contact-meta { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244, 236, 211, 0.4); margin-top: 4px; }
+.footer-contact-linkedin {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.7); text-decoration: none; margin-top: 10px; align-self: flex-start;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.3); padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.footer-contact-linkedin:hover { color: var(--champagne); border-bottom-color: rgba(212, 178, 117, 0.6); }
+.footer-sitemap {
+  display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap;
+  padding: 1.5rem 0 2rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(212, 178, 117, 0.15);
+}
+.footer-sitemap a {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.7); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.footer-sitemap a:hover { color: var(--champagne); border-bottom-color: rgba(212, 178, 117, 0.4); }
+.footer-meta { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244, 236, 211, 0.4); text-align: center; }
+.footer-legal-link { color: rgba(244, 236, 211, 0.5); text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 1px; transition: color 0.2s ease, border-color 0.2s ease; }
+.footer-legal-link:hover { color: var(--ivory); border-bottom-color: rgba(244, 236, 211, 0.5); }
+.footer-cta { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.footer-cta-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(212, 178, 117, 0.7); }
+.footer-cta-link {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--champagne); padding-bottom: 2px; text-decoration: none;
+  position: relative; border-bottom-color: transparent !important;
+  background-image: linear-gradient(to right, rgba(212, 178, 117, 0.35), rgba(212, 178, 117, 0.35));
+  background-position: 0 100%; background-repeat: no-repeat; background-size: 100% 1px;
+}
+.footer-contact-email::after, .footer-cta-link::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: var(--champagne); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.2s ease-out;
+}
+@media (hover: hover) {
+  .footer-contact-email:hover::after, .footer-cta-link:hover::after { transform: scaleX(1); }
+}
+
+/* CTA flottant mobile — bascule de thème selon le fond de la section traversée */
+.mobile-cta-floating {
+  position: fixed; bottom: 16px; left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--champagne); color: var(--hero-bg);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 14px 24px; border-radius: 18px;
+  box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.40);
+  text-decoration: none; white-space: nowrap; opacity: 0;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out, background-color 280ms ease, color 280ms ease, box-shadow 280ms ease;
+  z-index: 20; pointer-events: none;
+}
+.mobile-cta-floating.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+.mobile-cta-floating.is-on-light { background: var(--hero-bg); color: var(--champagne); box-shadow: 0 8px 24px -8px rgba(8, 4, 26, 0.30); }
+
+/* ============================================================
+   HEADER STICKY — DA aubergine (mh-*, partagé avec /)
+   ============================================================ */
+.mh-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: transparent; border-bottom: 1px solid transparent;
+  transition: background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease, backdrop-filter 300ms ease, -webkit-backdrop-filter 300ms ease;
+}
+.mh-header.is-scrolled {
+  background: rgba(8, 4, 26, 0.95);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border-bottom-color: rgba(212, 178, 117, 0.18);
+  box-shadow: 0 1px 0 rgba(212, 178, 117, 0.06);
+}
+.mh-row1 { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; padding: 22px 5% 14px; transition: padding 300ms ease; }
+.mh-header.is-scrolled .mh-row1 { padding: 14px 5% 8px; }
+.mh-logo {
+  font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 30px;
+  color: var(--ivory); letter-spacing: 0.005em; text-decoration: none;
+  display: inline-flex; align-items: baseline; line-height: 1;
+  font-variation-settings: "opsz" 32; transition: font-size 300ms ease;
+}
+.mh-header.is-scrolled .mh-logo { font-size: 26px; }
+.mh-logo-macron { position: relative; display: inline-block; }
+.mh-logo-macron::after { content: ''; position: absolute; top: 0.05em; left: 12%; width: 76%; height: 0.05em; background: #F4ECD3; }
+
+.mh-tabs { display: flex; gap: clamp(1.25rem, 3vw, 2.5rem); justify-content: center; align-items: center; margin: 0; padding: 0; list-style: none; }
+.mh-tab {
+  position: relative;
+  font-family: var(--font-display); font-style: italic; font-size: clamp(14px, 1.6vw, 17px);
+  white-space: nowrap;
+  color: rgba(244, 236, 211, 0.6); text-decoration: none; padding: 4px 0;
+  transition: color 250ms ease; cursor: pointer; background: none; border: none;
+}
+.mh-tab::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 1.5px;
+  background: var(--champagne); transform: scaleX(0); transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mh-tab:hover { color: var(--ivory); }
+.mh-tab:hover::after { transform: scaleX(1); }
+.mh-tab.is-active { color: var(--champagne); font-weight: 500; }
+.mh-tab.is-active::after { transform: scaleX(1); }
+
+
+.mh-cta {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: clamp(0.1em, 1.4vw, 0.2em); text-transform: uppercase;
+  color: var(--champagne); background: transparent; border: 1px solid var(--champagne);
+  padding: 9px clamp(11px, 1.6vw, 16px); text-decoration: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.mh-cta-arrow { display: inline-block; transition: transform 200ms ease; }
+.mh-cta:hover { background: var(--champagne); color: var(--hero-bg); }
+.mh-cta:hover .mh-cta-arrow { transform: translate(2px, -2px); }
+
+.mh-row2 {
+  border-top: 1px solid transparent; padding: 0 5%;
+  max-height: 0; opacity: 0; overflow: hidden; pointer-events: none;
+  transition: border-color 200ms ease, padding 250ms ease, max-height 250ms ease, opacity 200ms ease;
+}
+.mh-header.is-pinned .mh-row2, .mh-header.is-revealing .mh-row2 {
+  border-top-color: rgba(212, 178, 117, 0.15); padding: 6px 5% 14px; max-height: 80px; opacity: 1; pointer-events: auto;
+}
+.mh-header.is-scrolled.is-pinned .mh-row2, .mh-header.is-scrolled.is-revealing .mh-row2 { padding: 4px 5% 10px; }
+.mh-submenu { display: flex; justify-content: center; align-items: center; gap: 0; margin: 0; padding: 0; list-style: none; }
+.mh-submenu-item {
+  position: relative;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.5); text-decoration: none; padding: 6px 14px; transition: color 250ms ease;
+}
+.mh-submenu-item::after {
+  content: ''; position: absolute; left: 14px; right: 14px; bottom: 2px; height: 1px;
+  background: var(--champagne); transform: scaleX(0); transform-origin: left center; transition: transform 250ms ease;
+}
+.mh-submenu-item:hover { color: var(--ivory); }
+.mh-submenu-item:hover::after { transform: scaleX(1); }
+.mh-submenu-item.is-active { color: var(--champagne); }
+.mh-submenu-item.is-active::after { transform: scaleX(1); }
+.mh-submenu-sep { font-family: var(--font-mono); font-size: 10px; color: rgba(212, 178, 117, 0.3); user-select: none; padding: 0 2px; }
+
+.mh-mobile-toggle {
+  display: none;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--champagne); background: transparent; border: 1px solid var(--champagne); padding: 8px 12px; cursor: pointer;
+}
+
+.mh-drawer {
+  display: none; position: fixed; top: var(--header-height-mobile); left: 0; right: 0;
+  background: var(--hero-bg); border-bottom: 1px solid rgba(212, 178, 117, 0.45);
+  box-shadow: 0 8px 24px -2px rgba(8, 4, 26, 0.6);
+  padding: 24px 24px 32px; z-index: 99;
+  transform: translateY(calc(-100% - var(--header-height-mobile) - 20px));
+  transition: transform 300ms ease;
+  max-height: calc(100vh - var(--header-height-mobile));
+  overflow-y: auto;
+}
+.mh-drawer.is-open { transform: translateY(0); }
+.mh-drawer-tabs { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin: 0 0 22px; padding: 0; list-style: none; }
+.mh-drawer-tab {
+  position: relative;
+  font-family: var(--font-display); font-style: italic; color: var(--ivory); text-decoration: none;
+  display: inline-flex; align-items: baseline; gap: 14px; padding-bottom: 6px; line-height: 1.1;
+  font-size: 16px;
+}
+.mh-drawer-tab::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1.5px;
+  background: var(--champagne); transform: scaleX(0); transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mh-drawer-tab.is-active { color: var(--champagne); font-weight: 500; font-size: 26px; }
+.mh-drawer-tab.is-active::after { transform: scaleX(1); }
+
+
+.mh-drawer-category-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(212, 178, 117, 0.5); margin: -4px 0 -4px;
+}
+.mh-drawer-divider { height: 1px; background: rgba(212, 178, 117, 0.18); margin: 0 0 18px; }
+.mh-drawer-submenu { display: flex; flex-direction: column; gap: 4px; margin: 10px 0 14px; padding: 0 0 0 14px; list-style: none; border-left: 2px solid var(--champagne); }
+.mh-drawer-submenu-item {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.5); text-decoration: none; padding: 6px 0;
+}
+.mh-drawer-submenu-item.is-active { color: var(--champagne); }
+.mh-drawer-cta {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--hero-bg); background: var(--champagne); padding: 14px 20px; text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .mh-row1 { padding: 14px 5%; grid-template-columns: auto auto; }
+  .mh-header.is-scrolled .mh-row1 { padding: 14px 5% 12px; }
+  .mh-tabs, .mh-tabs-wrap, .mh-cta { display: none; }
+  .mh-row2 { display: none; }
+  .mh-mobile-toggle { display: inline-flex; justify-self: end; }
+  .mh-drawer { display: block; }
+  .mh-logo { font-size: 26px; }
+  .mh-header.is-scrolled .mh-logo { font-size: 22px; }
+}
+
+/* ============================================================
+   RESPONSIVE — mobile (<900px)
+   ============================================================ */
+@media (max-width: 900px) {
+  html { scroll-padding-top: var(--header-height-mobile); }
+  .hero { padding: calc(var(--header-height-mobile) + 6%) 6% 8%; }
+  .hero-lead { margin-top: 20px; }
+  .hero-offer { margin-top: 30px; }
+  .hero-offer-name { margin-bottom: 6px; }
+  .hero-offer-descriptor { margin-bottom: 12px; }
+  
+  .hero-cta-row .cta-mono { font-size: 12.5px; letter-spacing: 0.14em; }
+  
+  .hero-inner::before { background: linear-gradient(to bottom, rgba(212, 178, 117, 0.25), rgba(212, 178, 117, 0.45), rgba(212, 178, 117, 0.25)); }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  .split-grid { flex-direction: column; gap: 2.25rem; }
+  .split-block { flex-basis: auto; }
+  
+  
+  .offre-dark-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .offre-dark-price-wrap { align-items: flex-start; }
+  .offre-tier-item { font-size: 15.5px; }
+  .booking-final-section { padding: clamp(48px, 9vw, 72px) 6%; }
+  .booking-final-lead { margin-bottom: 28px; }
+  .footer { padding: 8% 7% 5% 7%; }
+  .footer-top { flex-direction: column; align-items: center; gap: 1.5rem; text-align: center; }
+  .footer-feather { height: 80px; }
+  .footer-signature { width: 100%; max-width: 100%; align-items: center; }
+  .footer-thesis { border-left: none; padding-left: 0; }
+  .footer-sitemap { gap: 0.9rem 1.5rem; padding: 1.25rem 0 1.75rem; margin-bottom: 1.5rem; font-size: 9px; }
+  .footer-bottom { grid-template-columns: 1fr; gap: 1rem; text-align: left; }
+  .footer-meta, .footer-cta { text-align: left; align-items: flex-start; }
+}
+@media (max-width: 640px) {
+  .hero-cta-row { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .booking-final-cta-row { flex-direction: column; align-items: flex-start; gap: 0.85rem; }
+  .booking-final-cta { display: block; width: 100%; text-align: center; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: clamp(40px, calc(26px + 3.7vw), 42px); line-height: 1.05; }
+  .hero-offer-name { font-size: clamp(20px, calc(13px + 1.8vw), 21px); }
+  .hero-offer { margin-top: 32px; }
+}
+
+/* ============================================================
+   APLOMB — composants spécifiques à cette page
+   ============================================================ */
+
+/* Hero : faits clés (prix, délai, mise en œuvre) */
+.hero-facts { list-style: none; margin: 0 0 30px; padding: 0; display: flex; flex-wrap: wrap; border-top: 1px solid rgba(212, 178, 117, 0.25); border-bottom: 1px solid rgba(212, 178, 117, 0.25); }
+.hero-facts li { display: flex; flex-direction: column; gap: 4px; padding: 12px 22px 12px 0; margin-right: 22px; border-right: 1px solid rgba(212, 178, 117, 0.18); }
+.hero-facts li:last-child { border-right: none; margin-right: 0; }
+.hero-fact-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244, 236, 211, 0.5); }
+.hero-fact-value { font-family: var(--font-display); font-size: 20px; color: var(--ivory); }
+.hero-facts li:first-child .hero-fact-value { color: var(--champagne); }
+.hero-secondary { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244, 236, 211, 0.6); text-decoration: none; }
+.hero-secondary:hover { color: var(--ivory); }
+@media (max-width: 520px) {
+  .hero-facts li { padding-right: 14px; margin-right: 14px; }
+  .hero-fact-value { font-size: 17px; }
+}
+
+/* ch.01 — miroir */
+.miroir-section { background: var(--paper); padding: clamp(56px, 7vw, 96px) 6%; }
+.miroir-wrap { max-width: 820px; margin: 0 auto; }
+.miroir-wrap h2 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(28px, 3.6vw, 40px); line-height: 1.15; margin: 0 0 28px; color: var(--ink);
+  font-variation-settings: "opsz" 60;
+}
+.miroir-wrap h2 em { font-style: italic; color: var(--champagne-fonce); }
+.miroir-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(20, 16, 42, 0.12); }
+.miroir-list li {
+  font-family: var(--font-body); font-size: 16px; line-height: 1.55; color: var(--ink-soft);
+  padding: 20px 24px 20px 0; border-bottom: 1px solid rgba(20, 16, 42, 0.08);
+}
+.miroir-list li:nth-child(even) { padding: 20px 0 20px 24px; border-left: 1px solid rgba(20, 16, 42, 0.08); }
+.miroir-list strong { font-weight: 500; color: var(--ink); }
+@media (max-width: 680px) {
+  .miroir-list { grid-template-columns: 1fr; }
+  .miroir-list li, .miroir-list li:nth-child(even) { padding: 16px 0; border-left: none; }
+}
+
+/* Principe — bandeau sombre */
+.principe-section { background: var(--band-bg); color: var(--ivory); padding: clamp(64px, 8vw, 110px) 6%; }
+.principe-wrap {
+  max-width: 900px; margin: 0 auto;
+  display: grid; grid-template-columns: 44px 1fr; gap: clamp(24px, 4vw, 48px); align-items: start;
+}
+.principe-feather { width: 44px; height: 165px; opacity: 0.85; }
+.principe-section h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 4.4vw, 52px);
+  line-height: 1.08;
+  margin: 0 0 22px;
+  font-variation-settings: "opsz" 72;
+}
+.principe-section h2 em { font-style: italic; color: var(--champagne); }
+.principe-text {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(244, 236, 211, 0.78);
+  margin: 0;
+  max-width: 640px;
+  font-variation-settings: "opsz" 18;
+}
+@media (max-width: 640px) {
+  .principe-wrap { grid-template-columns: 1fr; }
+  .principe-feather { display: none; }
+}
+
+
+/* ch.02 — livrable sur un cas réel */
+.lc-section { background: var(--paper); padding: clamp(64px, 8vw, 120px) 6%; border-top: 1px solid rgba(20, 16, 42, 0.08); }
+.lc-wrap { max-width: 1080px; margin: 0 auto; }
+.lc-head { max-width: 760px; margin: 0 0 clamp(40px, 5vw, 64px); }
+.lc-head h2 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(30px, 4vw, 46px); line-height: 1.1; margin: 0 0 24px; color: var(--ink);
+  font-variation-settings: "opsz" 72;
+}
+.lc-head h2 em { font-style: italic; color: var(--champagne-fonce); }
+.lc-client { border-left: 1px solid var(--champagne-fonce); padding-left: 16px; margin: 0 0 18px; }
+
+.lc-client-meta { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin: 0; }
+.lc-intro { font-family: var(--font-body); font-size: 16.5px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+
+.lc-row {
+  display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(28px, 5vw, 72px); align-items: center;
+  padding: clamp(36px, 5vw, 56px) 0; border-top: 1px solid rgba(20, 16, 42, 0.1);
+}
+.lc-row.is-reverse { grid-template-columns: 0.85fr 1.15fr; }
+.lc-row.is-reverse .lc-media { order: 2; }
+.lc-row.is-feature { grid-template-columns: 0.8fr 1.2fr; }
+.lc-media { min-width: 0; }
+.lc-media img { display: block; width: 100%; height: auto; }
+.lc-media > img { border: 1px solid rgba(20, 16, 42, 0.12); box-shadow: 0 18px 40px -24px rgba(20, 16, 42, 0.35); }
+.lc-n { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--champagne-fonce); margin-bottom: 10px; }
+.lc-text h3 {
+  font-family: var(--font-display); font-weight: 400; font-size: clamp(24px, 2.8vw, 30px); line-height: 1.15;
+  margin: 0 0 14px; color: var(--ink); font-variation-settings: "opsz" 48;
+}
+.lc-text p { font-family: var(--font-body); font-size: 15.5px; line-height: 1.6; color: var(--ink-soft); margin: 0 0 14px; }
+.lc-note { font-style: italic; color: var(--champagne-fonce) !important; }
+.lc-hint { font-family: var(--font-mono); font-size: 10px !important; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute) !important; }
+
+
+
+.crit-tags { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.crit-tags li {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--champagne-fonce); border: 1px solid rgba(140, 106, 44, 0.4); padding: 5px 9px;
+}
+.lc-qa { margin: 0 0 18px; border-top: 1px solid rgba(20, 16, 42, 0.1); }
+.lc-qa > div { display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 9px 0; border-bottom: 1px solid rgba(20, 16, 42, 0.08); }
+.lc-qa dt { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--champagne-fonce); padding-top: 3px; }
+.lc-qa dd { margin: 0; font-family: var(--font-body); font-size: 15px; color: var(--ink); }
+
+
+
+.lc-restitution { display: flex; gap: 16px; align-items: baseline; padding: 22px 26px; margin-top: 12px; background: rgba(255, 255, 255, 0.35); }
+.lc-restitution .lc-n { margin: 0; font-size: 16px; }
+.lc-restitution p { margin: 0; font-family: var(--font-body); font-size: 16px; line-height: 1.55; color: var(--ink-soft); }
+.lc-restitution strong { font-weight: 500; color: var(--ink); }
+
+
+
+/* Emplacements de capture (en attendant les vraies) */
+
+
+
+
+
+
+@media (max-width: 820px) {
+  .lc-row, .lc-row.is-feature { grid-template-columns: 1fr; }
+  .lc-row.is-reverse .lc-media { order: 0; }
+}
+
+/* Comparateur avant / après */
+.ba {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  max-height: 620px;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(212, 178, 117, 0.3);
+  user-select: none;
+  touch-action: pan-y;
+}
+.ba-layer { position: absolute; inset: 0; }
+.ba-layer img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+.ba-after { clip-path: inset(0 0 0 var(--pos)); }
+.ba-handle {
+  position: absolute; top: 0; bottom: 0; left: var(--pos);
+  width: 3px; background: var(--champagne);
+  transform: translateX(-1.5px);
+  /* filet sombre + ombre portée des deux côtés : détache nettement deux écrans blancs */
+  box-shadow: 0 0 0 1px rgba(8, 4, 26, 0.55), 0 0 22px 2px rgba(8, 4, 26, 0.35);
+  pointer-events: none;
+}
+.ba-knob {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--hero-bg); border: 2px solid var(--champagne); color: var(--champagne);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 22px -6px rgba(8, 4, 26, 0.6);
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.ba-knob svg { display: block; }
+@media (hover: hover) {
+  .ba:hover .ba-knob { background: var(--champagne); color: var(--hero-bg); transform: translate(-50%, -50%) scale(1.06); }
+}
+.ba.is-dragging .ba-knob { background: var(--champagne); color: var(--hero-bg); transform: translate(-50%, -50%) scale(0.94); }
+/* Invitation au geste : la séparation oscille une fois à l'apparition */
+.ba.is-hinting .ba-layer, .ba.is-hinting .ba-handle { transition: clip-path 0.5s cubic-bezier(0.45, 0, 0.25, 1), left 0.5s cubic-bezier(0.45, 0, 0.25, 1); }
+@media (prefers-reduced-motion: reduce) { .ba-knob { transition: none; } }
+.ba-range {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  margin: 0; opacity: 0; cursor: ew-resize;
+  -webkit-appearance: none; appearance: none;
+}
+.ba-range:focus-visible + .ba-label, .ba:focus-within .ba-knob { box-shadow: 0 0 0 3px rgba(212, 178, 117, 0.45); }
+.ba-label {
+  position: absolute; top: 14px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 5px 9px; background: rgba(8, 4, 26, 0.75); color: var(--ivory);
+  pointer-events: none;
+}
+.ba-label.is-before { left: 14px; }
+.ba-label.is-after { right: 14px; color: var(--champagne); }
+
+
+
+
+
+
+/* Offre : déroulé intégré au bloc sombre */
+.deroule-eyebrow { margin-top: 48px !important; }
+.deroule-dark { list-style: none; margin: 0 0 40px; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(212, 178, 117, 0.35); }
+.deroule-dark li { padding: 18px 18px 0 0; }
+.deroule-dark li + li { padding-left: 18px; border-left: 1px solid rgba(212, 178, 117, 0.12); }
+.deroule-dark .deroule-n { font-family: var(--font-mono); font-size: 11px; color: var(--champagne); }
+.deroule-dark h4 { font-family: var(--font-display); font-weight: 400; font-size: 18px; line-height: 1.2; margin: 8px 0 4px; color: var(--ivory); }
+.deroule-dark .deroule-meta { display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244, 236, 211, 0.5); margin-bottom: 8px; }
+.deroule-dark p { font-family: var(--font-body); font-size: 14px; line-height: 1.5; color: rgba(244, 236, 211, 0.72); margin: 0; }
+@media (max-width: 760px) {
+  .deroule-dark { grid-template-columns: 1fr 1fr; }
+  .deroule-dark li, .deroule-dark li + li { padding: 16px 14px 16px 0; border-left: none; border-bottom: 1px solid rgba(212, 178, 117, 0.12); }
+  .deroule-dark li:nth-child(even) { padding-left: 14px; border-left: 1px solid rgba(212, 178, 117, 0.12); }
+}
+
+/* Offre : option sous la liste */
+.offre-option-list { margin: 8px 0 36px; border-top: 1px solid rgba(212, 178, 117, 0.2); }
+
+/* FAQ : lien interne */
+.faq-link { color: var(--champagne-fonce); text-decoration: underline; text-underline-offset: 3px; }
+
+
+/* Diagnostic : page réelle posée sur une pile de pages */
+
+
+
+
+
+
+
+/* Diagnostic : éventail de pages réelles */
+.doc-fan { margin: 0; }
+.doc-fan-pages { position: relative; padding: 5% 8% 6%; }
+.doc-fan-pages img { display: block; background: #fff; border: 1px solid rgba(20, 16, 42, 0.12); }
+.doc-fan-front { position: relative; z-index: 3; width: 100%; height: auto; box-shadow: 0 22px 44px -22px rgba(20, 16, 42, 0.45); transition: transform 0.4s ease; }
+.doc-fan-back {
+  position: absolute; top: 5%; left: 8%; width: 84%; height: auto; z-index: 1;
+  box-shadow: 0 12px 30px -20px rgba(20, 16, 42, 0.4);
+  transition: transform 0.4s ease;
+}
+.doc-fan-back.is-left { transform: translate(-5%, 2%) rotate(-3deg); }
+.doc-fan-back.is-right { z-index: 2; transform: translate(5%, -2%) rotate(2.5deg); }
+@media (hover: hover) {
+  .doc-fan:hover .doc-fan-back.is-left { transform: translate(-7%, 3%) rotate(-4.5deg); }
+  .doc-fan:hover .doc-fan-back.is-right { transform: translate(7%, -3%) rotate(4deg); }
+}
+@media (prefers-reduced-motion: reduce) { .doc-fan-front, .doc-fan-back { transition: none; } }
+.doc-fan figcaption {
+  margin-top: 18px; text-align: center;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute);
+}
+
+.lc-media .doc-fan-pages .doc-fan-back { width: 84%; }
+
+/* Éventail balayable : toutes les pages en absolu, hauteur portée par un gabarit */
+.doc-fan-pages.is-deck { touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; outline: none; }
+.doc-fan-pages.is-deck.is-dragging { cursor: grabbing; }
+.doc-fan-pages.is-deck::before { content: ""; display: block; aspect-ratio: var(--deck-ratio, 4 / 3); }
+.doc-fan-pages.is-deck img { position: absolute; top: 5%; left: 8%; width: 84%; -webkit-user-drag: none; }
+.doc-fan-pages.is-deck .doc-fan-front { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+.doc-fan-pages.is-deck.is-dragging .doc-fan-front { transition: none; }
+.doc-fan-pages.is-deck:focus-visible { outline: 1px solid var(--champagne); outline-offset: 4px; }
+/* Livrable sur mobile : titre avant le visuel, bloc client aéré, rien sous 12 px */
+@media (max-width: 760px) {
+  /* le numéro et le titre passent au-dessus du visuel, le texte en dessous */
+  .lc-row { row-gap: 0; }
+  .lc-row .lc-text { display: contents; }
+  .lc-row .lc-text > .lc-n, .lc-row .lc-text > h3 { order: -2; }
+  .lc-row > .lc-media, .lc-row.is-reverse > .lc-media { order: -1; margin: 6px 0 22px; }
+  /* La maquette garde l'ordre du desktop : titre, texte, puis l'avant / après */
+  .lc-row.is-feature > .lc-media { order: 0; margin: 22px 0 0; }
+  #livrable .lc-client-meta { font-family: var(--font-body); text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--ink-soft); }
+  #livrable .lc-client-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+  #livrable .lc-client-stats .lc-client-stats-label { display: none; }
+  #livrable .lc-client-stats li { display: flex; flex-direction: column; gap: 2px; font-size: 12px; letter-spacing: 0.06em; }
+  #livrable .lc-client-stats strong { font-size: 28px; margin: 0; vertical-align: 0; line-height: 1.1; }
+  .lc-client-label, .lc-n, .crit-tags li, .lc-hint, .doc-fan figcaption, .lc-shot figcaption, .lc-testimonial figcaption,
+  #livrable .chapter-mark, .lc-text dt, .ba-label, .lc-testimonial summary span {
+    font-size: 12px !important; letter-spacing: 0.08em;
+  }
+}
+
+/* Avant / après mobile : cadre téléphone, remplace la version navigateur sous 760 px */
+.ba-mobile { display: none; }
+.ba.is-phone {
+  aspect-ratio: 428 / 1012; max-height: none; width: min(230px, 62vw); margin: 0 auto;
+  border: 8px solid var(--hero-bg); border-radius: 28px; box-shadow: 0 30px 60px -30px rgba(8, 4, 26, 0.55);
+}
+/* Libellés au-dessus du cadre, pour ne rien masquer des écrans comparés */
+.ba-phone-labels {
+  display: flex; justify-content: space-between; width: min(230px, 62vw); margin: 0 auto 8px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.ba-phone-labels span:first-child { color: var(--ink-mute); }
+.ba-phone-labels span:last-child { color: var(--champagne-fonce); }
+.ba-phone-note {
+  margin: 6px auto 0; max-width: 280px; text-align: center;
+  font-family: var(--font-body); font-style: italic; font-size: 14px; line-height: 1.5; color: var(--ink-soft);
+}
+@media (max-width: 760px) {
+  .ba-desktop { display: none; }
+  .ba-mobile { display: block; }
+  .ba-mobile .lc-hint { text-align: center; margin-top: 14px; }
+}
+
+/* Agrandissement : bouton « + » sur les visuels, visionneuse plein écran (toucher l'image = taille réelle) */
+.zoom-wrap { position: relative; display: block; }
+.zoom-btn {
+  position: absolute; right: 10px; bottom: 10px; z-index: 5;
+  width: 38px; height: 38px; border-radius: 50%; padding: 0; cursor: zoom-in;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(8, 4, 26, 0.82); color: var(--champagne); border: 1px solid rgba(212, 178, 117, 0.6);
+  font-family: var(--font-mono); font-size: 20px; line-height: 1;
+  box-shadow: 0 6px 16px -6px rgba(8, 4, 26, 0.6);
+}
+.zoom-btn:hover, .zoom-btn:focus-visible { background: var(--champagne); color: var(--hero-bg); }
+.lc-shot img, .doc-fan-pages.is-deck { cursor: zoom-in; }
+.zoom {
+  position: fixed; inset: 0; z-index: 200; display: none;
+  background: rgba(8, 4, 26, 0.94);
+}
+.zoom.is-open { display: block; }
+.zoom-scroll {
+  position: absolute; inset: 0; overflow: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  display: flex; align-items: flex-start; justify-content: center; padding: 64px 12px 24px;
+}
+.zoom-scroll img { display: block; max-width: 100%; height: auto; margin: auto; background: #fff; cursor: zoom-in; }
+.zoom.is-zoomed .zoom-scroll { justify-content: flex-start; }
+.zoom.is-zoomed .zoom-scroll img { max-width: none; width: var(--zoom-w); cursor: zoom-out; }
+.zoom-close {
+  position: absolute; top: 12px; right: 12px; z-index: 2; width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(244, 236, 211, 0.12); color: var(--ivory); border: 1px solid rgba(244, 236, 211, 0.35);
+  font-size: 24px; line-height: 1; cursor: pointer;
+}
+.zoom-hint {
+  position: absolute; top: 24px; left: 16px; right: 72px; margin: 0;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(244, 236, 211, 0.7);
+}
+html.zoom-lock, html.zoom-lock body { overflow: hidden; }
+
+/* Pages au-delà de trois : empilées hors de vue ; pages réservées au mobile absentes sur desktop */
+.doc-fan-back.is-stacked { visibility: hidden; }
+@media (min-width: 761px) { .doc-fan-pages [data-only="mobile"] { display: none; } }
+
+/* Mobile : plus d'éventail, la page de devant occupe toute la largeur ; les autres restent empilées dessous */
+@media (max-width: 760px) {
+  .doc-fan-pages, .doc-fan-pages.is-deck { padding: 0; }
+  .lc-media .doc-fan-pages.is-deck img { top: 0; left: 0; width: 100%; }
+  .doc-fan-back.is-left, .doc-fan-back.is-right { transform: none; }
+}
+.doc-fan-dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
+.doc-fan-dot {
+  width: 24px; height: 24px; padding: 0; border: none; background: none; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.doc-fan-dot::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  border: 1px solid var(--ink-mute); transition: background 0.25s ease, border-color 0.25s ease;
+}
+.doc-fan-dot.is-active::before { background: var(--ink); border-color: var(--ink); }
+.doc-fan-dots + figcaption { margin-top: 8px; }
+
+/* Capture simple avec légende */
+.lc-shot { margin: 0; }
+.lc-shot img { border: 1px solid rgba(20, 16, 42, 0.12); box-shadow: 0 18px 40px -24px rgba(20, 16, 42, 0.35); background: #fff; }
+.lc-shot figcaption { margin-top: 14px; text-align: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
+
+/* Maquette : comparateur desktop pleine largeur dans un cadre navigateur */
+.lc-row.is-feature { grid-template-columns: 1fr; gap: 28px; }
+.lc-row.is-feature .lc-text { max-width: 720px; }
+.browser-frame { border: 1px solid rgba(20, 16, 42, 0.18); border-radius: 10px; overflow: hidden; background: #fff; box-shadow: 0 30px 60px -34px rgba(8, 4, 26, 0.5); }
+.browser-bar { display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; background: #EDE5CF; border-bottom: 1px solid rgba(20, 16, 42, 0.1); }
+.browser-bar span { width: 9px; height: 9px; border-radius: 50%; background: rgba(20, 16, 42, 0.18); }
+.browser-bar em { margin-left: 12px; font-style: normal; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em; color: var(--ink-mute); }
+.ba.is-browser { aspect-ratio: 16 / 9; max-height: none; border: none; }
+.lc-row.is-feature .lc-hint { text-align: center; margin-top: 14px; }
+@media (max-width: 760px) { .ba.is-browser { aspect-ratio: 16 / 9; } .browser-bar em { display: none; } }
+
+@media (max-width: 820px) { .lc-row.is-reverse { grid-template-columns: 1fr; } }
+
+.lc-head .lc-intro { margin: 0 0 22px; }
+.lc-head .lc-client { margin: 0; }
+
+.lc-client-stats { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.lc-client-stats li { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); }
+.lc-client-stats strong { font-family: var(--font-display); font-weight: 400; font-size: 22px; letter-spacing: 0; color: var(--champagne-fonce); margin-right: 5px; vertical-align: -2px; }
+
+.lc-client-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--champagne-fonce); margin: 0 0 8px; }
+
+.lc-client-stats .lc-client-stats-label { font-family: var(--font-body); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--ink-soft); align-self: center; }
+
+.lc-head { max-width: 920px; }
+.lc-head .lc-intro { max-width: 720px; }
+
+.lc-row.is-feature .lc-qa > div { grid-template-columns: 190px 1fr; }
+@media (max-width: 520px) { .lc-row.is-feature .lc-qa > div { grid-template-columns: 1fr; gap: 2px; } }
+
+
+
+
+.lc-client .lc-client-label { margin: 0 0 6px; }
+
+/* Témoignage — fin du livrable */
+.lc-testimonial { margin: clamp(40px, 5vw, 64px) 0 0; padding: clamp(28px, 4vw, 44px) 0 0; border-top: 1px solid rgba(20, 16, 42, 0.1); max-width: 820px; }
+.lc-testimonial blockquote { margin: 0; }
+.lc-testimonial blockquote p {
+  font-family: var(--font-display); font-style: italic; font-weight: 400;
+  font-size: clamp(21px, 2.4vw, 27px); line-height: 1.45; color: var(--ink); margin: 0;
+  font-variation-settings: "opsz" 48;
+}
+.lc-testimonial figcaption { margin-top: 18px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+.lc-testimonial figcaption strong { color: var(--champagne-fonce); font-weight: 500; }
+.lc-testimonial-full { margin-top: 18px; }
+.lc-testimonial-full summary {
+  cursor: pointer; list-style: none; display: inline-flex; gap: 8px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--champagne-fonce); border-bottom: 1px solid rgba(140, 106, 44, 0.45); padding-bottom: 4px;
+}
+.lc-testimonial-full summary::-webkit-details-marker { display: none; }
+.lc-testimonial-full[open] summary span { transform: rotate(45deg); display: inline-block; }
+.lc-testimonial-text { margin-top: 20px; padding-left: 18px; border-left: 1px solid var(--champagne-fonce); }
+.lc-testimonial-text p { font-family: var(--font-body); font-size: 16px; line-height: 1.65; color: var(--ink-soft); margin: 0 0 14px; }
+
+/* Témoignage court — sous le prix */
+.offre-quote { margin: 0 0 32px; padding-left: 16px; border-left: 1px solid rgba(212, 178, 117, 0.6); }
+.offre-quote blockquote { margin: 0; font-family: var(--font-display); font-style: italic; font-size: 18px; line-height: 1.5; color: var(--ivory); }
+.offre-quote figcaption { margin-top: 10px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--champagne); }
+
+
+/* À propos compact (signature sous l'offre) */
+.expertise-section.is-compact { padding: clamp(48px, 6vw, 80px) 6%; border-top: none; }
+.expertise-section.is-compact .expertise-wrap { max-width: 760px; display: block; }
+.expertise-section.is-compact .expertise-text h2 { font-size: clamp(22px, 2.6vw, 28px); margin-bottom: 16px; }
+.expertise-section.is-compact .expertise-text p { max-width: none; }
+.expertise-section.is-compact .expertise-text p:last-child { font-style: normal; }
+.expertise-sign { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(140, 106, 44, 0.2); }
+.expertise-sign img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(140, 106, 44, 0.3); flex: none; }
+.expertise-sign-name { display: flex; flex-direction: column; gap: 3px; margin-right: auto; flex: 1 1 0; min-width: 0; }
+@media (max-width: 600px) { .expertise-sign { display: grid; grid-template-columns: 56px 1fr; column-gap: 14px; row-gap: 12px; } .expertise-sign a { grid-column: 2; justify-self: start; } }
+.expertise-sign-name strong { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 19px; color: var(--ink); }
+.expertise-sign-name span { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
+.expertise-sign a { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--champagne-fonce); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 3px; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER STICKY — DA aubergine
+     ============================================================ -->
+<header class="mh-header" id="mh-header" aria-label="Navigation principale">
+  <div class="mh-row1">
+    <a class="mh-logo" href="../index.html" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
+    <nav class="mh-tabs-wrap" aria-label="Pages">
+      <ul class="mh-tabs">
+        <li><a class="mh-tab" href="../offer-focus/index.html">Au Clair</a></li>
+        <li><a class="mh-tab is-active" href="#top" aria-current="page">d'Aplomb</a></li>
+        <li><a class="mh-tab" href="../index.html#sur-mesure">Sur-mesure</a></li>
+      </ul>
+    </nav>
+    <a class="mh-cta" href="#booking">Réserver un appel découverte <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
+    <button class="mh-mobile-toggle" id="mh-mobile-toggle" type="button" aria-expanded="false" aria-controls="mh-drawer">Menu</button>
+  </div>
+  <div class="mh-row2">
+    <nav aria-label="Sections de la page">
+      <ul class="mh-submenu">
+        <li><a class="mh-submenu-item is-active" href="#livrable" data-target="livrable">Le livrable</a></li>
+        <li class="mh-submenu-sep" aria-hidden="true">·</li>
+        <li><a class="mh-submenu-item" href="#offre" data-target="offre">L'offre</a></li>
+        <li class="mh-submenu-sep" aria-hidden="true">·</li>
+        <li><a class="mh-submenu-item" href="#booking" data-target="booking">Réserver un appel découverte</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
+  <ul class="mh-drawer-tabs">
+    <li class="mh-drawer-category-label" aria-hidden="true">— d'Aplomb</li>
+    <li>
+      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">d'Aplomb</a>
+      <ul class="mh-drawer-submenu">
+        <li><a class="mh-drawer-submenu-item is-active" href="#livrable" data-target="livrable">Le livrable</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#offre" data-target="offre">L'offre</a></li>
+        <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un appel découverte</a></li>
+      </ul>
+    </li>
+    <li class="mh-drawer-category-label" aria-hidden="true">— Les autres offres</li>
+    <li><a class="mh-drawer-tab" href="../offer-focus/index.html">Au Clair</a></li>
+    <li><a class="mh-drawer-tab" href="../index.html#sur-mesure">Sur-mesure</a></li>
+    <li><a class="mh-drawer-tab" href="../index.html">Accueil Maat</a></li>
+  </ul>
+  <div class="mh-drawer-divider" aria-hidden="true"></div>
+  <a class="mh-drawer-cta" href="#booking">Réserver un appel découverte ↗</a>
+</aside>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="feather-bauhaus" viewBox="0 0 64 240">
+      <g fill="currentColor">
+        <line x1="32" y1="8" x2="32" y2="232" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M 32 26 L 18 38 L 32 38 Z" fill-opacity="0.7"/>
+        <path d="M 32 26 L 46 38 L 32 38 Z" fill-opacity="0.7"/>
+        <path d="M 32 48 L 14 60 L 32 60 Z" fill-opacity="0.7"/>
+        <path d="M 32 48 L 50 60 L 32 60 Z" fill-opacity="0.7"/>
+        <path d="M 32 70 L 10 82 L 32 82 Z" fill-opacity="0.75"/>
+        <path d="M 32 70 L 54 82 L 32 82 Z" fill-opacity="0.75"/>
+        <path d="M 32 92 L 8 104 L 32 104 Z" fill-opacity="0.8"/>
+        <path d="M 32 92 L 56 104 L 32 104 Z" fill-opacity="0.8"/>
+        <path d="M 32 114 L 8 126 L 32 126 Z" fill-opacity="0.8"/>
+        <path d="M 32 114 L 56 126 L 32 126 Z" fill-opacity="0.8"/>
+        <path d="M 32 136 L 10 148 L 32 148 Z" fill-opacity="0.75"/>
+        <path d="M 32 136 L 54 148 L 32 148 Z" fill-opacity="0.75"/>
+        <path d="M 32 158 L 14 170 L 32 170 Z" fill-opacity="0.7"/>
+        <path d="M 32 158 L 50 170 L 32 170 Z" fill-opacity="0.7"/>
+        <path d="M 32 180 L 18 192 L 32 192 Z" fill-opacity="0.65"/>
+        <path d="M 32 180 L 46 192 L 32 192 Z" fill-opacity="0.65"/>
+        <path d="M 32 202 L 24 212 L 32 212 Z" fill-opacity="0.6"/>
+        <path d="M 32 202 L 40 212 L 32 212 Z" fill-opacity="0.6"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- HERO -->
+<section class="hero" id="top" data-cta-theme="dark">
+  <div class="hero-inner">
+    <div class="hero-promise">
+      <h1>Votre site ne rend pas justice à ce que vous vendez.</h1>
+      <p class="hero-lead">Diagnostic expert, plan d'action par étapes + une page clé remaquettée et réécrite — pour remettre votre site d'aplomb sans repartir de zéro.</p>
+    </div>
+    <div class="hero-offer">
+      <p class="hero-offer-name">d'Aplomb</p>
+      <p class="hero-offer-descriptor">Audit CRO &amp; refonte pour petites entreprises engagées</p>
+      <ul class="hero-facts">
+        <li><span class="hero-fact-label">Forfait</span><span class="hero-fact-value">1&nbsp;200&nbsp;€</span></li>
+        <li><span class="hero-fact-label">Délai</span><span class="hero-fact-value">2 à 3 semaines</span></li>
+        <li><span class="hero-fact-label">Mise en œuvre</span><span class="hero-fact-value">avec ou sans développeur</span></li>
+      </ul>
+      <div class="hero-cta-row">
+        <a href="#booking" class="cta-mono">Réserver un appel découverte →</a>
+        <a href="#livrable" class="hero-secondary">Voir les livrables ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ch.01 — MIROIR -->
+<section class="miroir-section reveal" id="enjeu" data-cta-theme="light">
+  <div class="miroir-wrap">
+    <span class="chapter-mark">/ ch.01 — état des lieux</span>
+    <h2>Vous vous reconnaissez<em>&nbsp;?</em></h2>
+    <ul class="miroir-list">
+      <li><strong>Vous mettez du soin dans ce que vous vendez.</strong> Votre site, lui, ne le montre pas — fait il y a des années, retouché par morceaux.</li>
+      <li><strong>Vos visiteurs viennent, mais achètent peu</strong>, et vous ne savez pas ce qui les retient.</li>
+      <li><strong>On vous a parlé de refonte complète</strong>, avec un devis hors de portée.</li>
+      <li><strong>Vous gérez le site seul·e</strong>, sans développeur — et tout semble à revoir.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PRINCIPE -->
+<section class="principe-section reveal" data-cta-theme="dark">
+  <div class="principe-wrap">
+    <svg class="feather-bauhaus principe-feather" aria-hidden="true"><use href="#feather-bauhaus"/></svg>
+    <div>
+      <p class="dark-eyebrow">— Le principe</p>
+      <h2>Tout reprendre, <em>dans le bon ordre.</em></h2>
+      <p class="principe-text">Quand beaucoup est à revoir, la tentation est de tout reconstruire — ou de ne rien toucher. Il existe une autre voie&nbsp;: comprendre ce qui freine vos ventes, revoir en profondeur les pages qui comptent, et avancer par étapes, sur votre site actuel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ch.02 — LE LIVRABLE, SUR UN CAS RÉEL -->
+<section class="lc-section reveal" id="livrable" data-cta-theme="light">
+  <div class="lc-wrap">
+    <span class="chapter-mark">/ ch.02 — le livrable</span>
+    <div class="lc-head">
+      <h2>Ce que vous recevez.</h2>
+      <p class="lc-intro">5 livrables, et une restitution pour les comprendre et les prendre en main.</p>
+      <div class="lc-client">
+        <p class="lc-client-label">— Exemple</p>
+        <p class="lc-client-meta">Maison d'édition indépendante, site WooCommerce géré sans développeur</p>
+        <ul class="lc-client-stats" aria-label="L'audit de L'Honnête Homme en chiffres">
+          <li class="lc-client-stats-label">Pour cet audit&nbsp;:</li>
+          <li><strong>94</strong> observations</li>
+          <li><strong>99</strong> recommandations</li>
+          <li><strong>31</strong> transverses</li>
+          <li><strong>65</strong> rapides et sans développement</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 01 — Diagnostic -->
+    <article class="lc-row">
+      <div class="lc-media">
+        <figure class="doc-fan">
+          <!-- Mobile : montages « emplacement + observation » (format portrait) à la place des pages PDF -->
+          <div class="doc-fan-pages" data-mobile-ratio="840 / 1030">
+            <picture>
+              <source media="(max-width: 760px)" srcset="assets/hh-diag-mobile-21.jpg" width="840" height="1030">
+              <img class="doc-fan-back is-left" src="assets/hh-diag-21.jpg" width="962" height="702" alt="Observation n°21, fiche produit sur mobile : les caractéristiques du livre ne sont visibles que dans le dernier onglet, critère Clarté" loading="lazy" decoding="async">
+            </picture>
+            <picture>
+              <source media="(max-width: 760px)" srcset="assets/hh-diag-mobile-04.jpg" width="840" height="1030">
+              <img class="doc-fan-back is-right" src="assets/hh-diagnostic.jpg" width="930" height="666" alt="Observation n°4, fiche produit : l'édition beau livre n'est mentionnée nulle part, critère Pertinence" loading="lazy" decoding="async">
+            </picture>
+            <picture>
+              <source media="(max-width: 760px)" srcset="assets/hh-diag-mobile-17.jpg" width="840" height="1030">
+              <img class="doc-fan-front" src="assets/hh-diag-17.jpg" alt="Observation n°17, panier sur mobile : le bouton « Valider la commande » n'apparaît qu'après près de deux écrans, critère Friction" width="966" height="692" loading="lazy" decoding="async">
+            </picture>
+            <img class="doc-fan-back doc-fan-extra" data-only="mobile" src="assets/hh-diag-mobile-08.jpg" width="840" height="1030" alt="Observation n°8, panier : le forfait de livraison à 5 € est suivi de mentions qui laissent croire que le montant pourrait changer, critère Clarté" loading="lazy" decoding="async">
+          </div>
+          <figcaption>Les observations dans un PDF · extrait</figcaption>
+        </figure>
+      </div>
+      <div class="lc-text">
+        <span class="lc-n">01</span>
+        <h3>Le diagnostic</h3>
+        <p>Chaque page clé passée au crible — accueil, catalogue, fiche produit, tunnel d'achat —, sur desktop et sur mobile. Chaque observation est illustrée, et rattachée à ce qu'elle freine&nbsp;:</p>
+        <ul class="crit-tags" aria-label="Les cinq critères d'analyse">
+          <li>Clarté</li><li>Pertinence</li><li>Valeur perçue</li><li>Motivation</li><li>Friction</li>
+        </ul>
+      </div>
+    </article>
+
+    <!-- 02 — Plan d'action -->
+    <article class="lc-row is-reverse">
+      <div class="lc-media">
+        <figure class="lc-shot">
+          <img src="assets/hh-plan-action.jpg" alt="Plan d'action dans Notion : chaque observation avec sa priorité, son lot, la page concernée, le chantier, le critère et sa portée" width="748" height="533" loading="lazy" decoding="async">
+          <figcaption>Le plan d'action dans Notion · extrait</figcaption>
+        </figure>
+      </div>
+      <div class="lc-text">
+        <span class="lc-n">02</span>
+        <h3>Le plan d'action</h3>
+        <p>Un plan d'action, pas une liste de défauts. Chaque recommandation dit&nbsp;:</p>
+        <dl class="lc-qa">
+          <div><dt>Où</dt><dd>la page et l'emplacement concernés</dd></div>
+          <div><dt>Pourquoi</dt><dd>ce qui freine la vente</dd></div>
+          <div><dt>Quoi faire</dt><dd>la recommandation, et le type de travail&nbsp;: rédaction, visuels, réglages, structure…</dd></div>
+          <div><dt>Quand</dt><dd>trois lots, du plus urgent au moins urgent</dd></div>
+        </dl>
+      </div>
+    </article>
+
+    <!-- 03 — Maquette -->
+    <article class="lc-row is-feature">
+      <div class="lc-text">
+        <span class="lc-n">03</span>
+        <h3>La maquette</h3>
+        <p>La page à plus fort impact, généralement la fiche produit, entièrement redessinée et réécrite.</p>
+        <dl class="lc-qa">
+          <div><dt>Maquettes annotées</dt><dd>desktop et mobile, livrées en PDF, chaque choix expliqué</dd></div>
+          <div><dt>Version mobile en ligne</dt><dd>à ouvrir sur votre téléphone, pour tester le défilement, les éléments fixes, les menus et les interactions</dd></div>
+        </dl>
+        <p class="lc-note">Construite pour l'outil existant — sans devoir changer de CMS.</p>
+      </div>
+      <div class="lc-media">
+        <div class="browser-frame ba-desktop">
+          <div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span><em>lhonnetehomme.fr · fiche produit</em></div>
+          <div class="ba is-browser" style="--pos: 50%">
+            <div class="ba-layer ba-before">
+              <img src="assets/hh-fiche-avant-desktop.jpg" alt="Fiche produit avant l'audit : titre en capitales, longue présentation, mention « le bouton Ajouter au panier se trouve en bas de cette présentation », pas de bouton d'achat visible" width="1440" height="810" loading="lazy" decoding="async">
+            </div>
+            <div class="ba-layer ba-after">
+              <img src="assets/hh-fiche-apres-desktop.jpg" alt="Fiche produit redessinée : titre, sous-titre, auteur, avis, choix entre broché et beau livre, prix et bouton « Ajouter au panier » visibles dès le premier écran" width="1440" height="810" loading="lazy" decoding="async">
+            </div>
+            <div class="ba-handle" aria-hidden="true"><span class="ba-knob"><svg viewBox="0 0 24 12" width="22" height="11"><path d="M7 1 2 6l5 5M17 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Comparer la fiche produit avant et après">
+            <span class="ba-label is-before" aria-hidden="true">Avant</span>
+            <span class="ba-label is-after" aria-hidden="true">Après</span>
+          </div>
+        </div>
+        <p class="lc-hint ba-desktop" aria-hidden="true">← Faites glisser pour comparer · premier écran, desktop →</p>
+        <!-- Mobile : même comparaison, au format téléphone -->
+        <div class="ba-mobile">
+          <div class="ba-phone-labels" aria-hidden="true"><span>← Avant</span><span>Après →</span></div>
+          <div class="ba is-phone" style="--pos: 50%">
+            <div class="ba-layer ba-before">
+              <img src="assets/hh-fiche-avant-mobile.jpg" alt="Fiche produit actuelle sur mobile : logo, fil d'Ariane, photo avec bandeau « Livre couverture rigide », titre en capitales coupé en bas d'écran, ni prix ni bouton d'achat visibles" width="428" height="1012" loading="lazy" decoding="async">
+            </div>
+            <div class="ba-layer ba-after">
+              <img src="assets/hh-fiche-apres-mobile.jpg" alt="Fiche produit redessinée sur mobile : titre, sous-titre, auteur, avis 5/5, citation, photo du livre et bouton « Broché · 30,00 € — Ajouter au panier » fixé en bas d'écran" width="780" height="1844" loading="lazy" decoding="async">
+            </div>
+            <div class="ba-handle" aria-hidden="true"><span class="ba-knob"><svg viewBox="0 0 24 12" width="22" height="11"><path d="M7 1 2 6l5 5M17 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+            <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Comparer la fiche produit avant et après, sur mobile">
+          </div>
+          <p class="lc-hint" aria-hidden="true">Faites glisser pour comparer</p>
+          <p class="ba-phone-note">Premier écran mobile · un extrait de la nouvelle maquette complète</p>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 — Synthèse -->
+    <article class="lc-row is-reverse">
+      <div class="lc-media">
+        <figure class="doc-fan is-slides">
+          <div class="doc-fan-pages">
+            <img class="doc-fan-back is-left" src="assets/hh-synth-17.jpg" width="1200" height="675" alt="Slide « Ce qu'il faut traiter en premier » : les cinq premières actions du top 10, avec leurs observations et leur lot" loading="lazy" decoding="async">
+            <img class="doc-fan-back is-right" src="assets/hh-synth-07.jpg" width="1200" height="675" alt="Slide « Les livres, et le moyen de les acheter, arrivent trop tard » : un problème transverse repéré sur la home, le catalogue et la fiche produit" loading="lazy" decoding="async">
+            <img class="doc-fan-front" src="assets/hh-synth-11.jpg" alt="Slide « Le mobile accentue chacun de ces problèmes » : 20 écrans à faire défiler sur la home, 7,5 écrans avant le bouton d'achat sur la fiche" width="1200" height="675" loading="lazy" decoding="async">
+          </div>
+          <figcaption>Extraits de la synthèse · slides 11, 07 et 17</figcaption>
+        </figure>
+      </div>
+      <div class="lc-text">
+        <span class="lc-n">04</span>
+        <h3>La synthèse</h3>
+        <p>L'essentiel en quelques slides&nbsp;: ce qui freine vos ventes, ce qu'il faut corriger d'abord, et pourquoi. Celle qu'on relit, et qu'on partage.</p>
+      </div>
+    </article>
+
+    <div class="lc-restitution editorial-block">
+      <span class="lc-n">+</span>
+      <p><strong>La restitution en visio&nbsp;:</strong> le temps qu'il faut pour tout parcourir ensemble, puis prendre en main le plan d'action avec la personne qui gère le site.</p>
+    </div>
+    <!-- Témoignage : texte à faire valider par Floriane Stoecklin avant mise en ligne
+         (dernière phrase élargie : « chef d'entreprise » ajouté, sous réserve de son accord). -->
+    <figure class="lc-testimonial">
+      <blockquote>
+        <p>«&nbsp;Anne-Sophie a rapidement compris le contexte et les enjeux. […] Ce qui a surtout fait la différence, c'est sa passion pour le CRO et sa capacité à s'imprégner de l'univers de la maison d'édition. […] Au-delà de ses compétences techniques, elle a un sens de l'esthétique affirmé et beaucoup de goût, elle m'a proposé des maquettes qui m'ont bluffée&nbsp;!&nbsp;»</p>
+      </blockquote>
+      <figcaption><strong>Floriane Stoecklin</strong> · responsable communication marketing, Éditions L'Honnête Homme</figcaption>
+      <details class="lc-testimonial-full">
+        <summary>Lire le témoignage complet <span aria-hidden="true">+</span></summary>
+        <div class="lc-testimonial-text">
+          <p>Dans le cadre d'une refonte complète du site de la maison d'édition L'Honnête Homme, j'ai souhaité confier la partie CRO à une professionnelle aguerrie. L'objectif était de mener ce travail en parallèle des actions engagées sur les différents piliers du référencement et du marketing.</p>
+          <p>J'ai choisi Anne-Sophie pour réaliser un audit CRO du site et concevoir des maquettes. Elle a rapidement compris le contexte et les enjeux de cette refonte. Ce qui a surtout fait la différence, c'est sa passion pour le CRO et sa capacité à s'imprégner de l'univers de la maison d'édition.</p>
+          <p>Au-delà de ses compétences techniques, Anne-Sophie est une artiste. Avec un sens de l'esthétique affirmé et beaucoup de goût, elle m'a proposé des maquettes qui m'ont bluffée&nbsp;! Elle a parfaitement respecté l'enveloppe budgétaire allouée au projet, tout en livrant un travail qui est allé au-delà de mes attentes.</p>
+          <p>Agréable, avenante et force de proposition, Anne-Sophie est une professionnelle avec qui c'est un vrai plaisir de travailler. Cette collaboration m'a confirmé combien un regard extérieur peut aider à prendre du recul et à avancer plus efficacement.</p>
+          <p>Je continuerai à faire appel à elle et ne peux que la recommander à tout chef d'entreprise, chef de projet e-commerce ou directeur marketing&nbsp;!</p>
+        </div>
+      </details>
+    </figure>
+  </div>
+</section>
+
+<!-- POUR QUI -->
+<section class="split-section reveal" id="pour-qui" data-cta-theme="light">
+  <div class="split-grid">
+    <div class="split-block is-yes">
+      <h3 class="split-block-title">Cette offre est pertinente si.</h3>
+      <ul class="fit-list">
+        <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Vous vendez des produits en quoi vous croyez — et votre site ne le montre pas</li>
+        <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Votre site existe et fonctionne, même s'il est à revoir</li>
+        <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Vous gérez le site, ou une personne de votre équipe peut le faire</li>
+        <li class="fit-item"><span class="fit-mark" aria-hidden="true">✓</span> Vous voulez savoir quoi faire, et dans quel ordre, plutôt que tout refaire à l'aveugle</li>
+      </ul>
+    </div>
+    <div class="split-block is-no">
+      <h3 class="split-block-title is-muted">Ce n'est pas encore le bon moment si.</h3>
+      <ul class="fit-list">
+        <li class="fit-item is-no"><span class="fit-mark" aria-hidden="true">✕</span> Vous n'avez pas encore de site</li>
+        <li class="fit-item is-no"><span class="fit-mark" aria-hidden="true">✕</span> Vous cherchez avant tout à générer du trafic</li>
+        <li class="fit-item is-no"><span class="fit-mark" aria-hidden="true">✕</span> Vous attendez que les modifications soient intégrées pour vous</li>
+        <li class="fit-item is-no"><span class="fit-mark" aria-hidden="true">✕</span> Vous attendez une garantie de résultat chiffré</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- OFFRE + DÉROULÉ -->
+<section class="offre-dark-section reveal" id="offre" data-cta-theme="dark">
+  <div class="offre-dark-wrap">
+    <p class="dark-eyebrow">— L'offre</p>
+    <div class="offre-dark-head">
+      <div>
+        <h2>d'Aplomb</h2>
+        <p class="offre-dark-sub">Audit CRO &amp; refonte pour petites entreprises engagées</p>
+      </div>
+      <div class="offre-dark-price-wrap">
+        <span class="offre-dark-price-label">Forfait</span>
+        <span class="offre-dark-price">1&nbsp;200&nbsp;€</span>
+      </div>
+    </div>
+    <figure class="offre-quote">
+      <blockquote>«&nbsp;Elle a parfaitement respecté l'enveloppe budgétaire allouée au projet, tout en livrant un travail qui est allé au-delà de mes attentes.&nbsp;»</blockquote>
+      <figcaption>Floriane Stoecklin · Éditions L'Honnête Homme</figcaption>
+    </figure>
+    <ul class="offre-dark-list">
+      <li>Diagnostic de vos pages clés et du tunnel d'achat, desktop et mobile</li>
+      <li>Plan d'action priorisé en trois lots</li>
+      <li>Une page entièrement redessinée et réécrite&nbsp;: maquettes desktop et mobile annotées, et version mobile en ligne</li>
+      <li>Synthèse en présentation</li>
+      <li>Restitution en visio&nbsp;: le temps qu'il faut pour tout parcourir et prendre en main le plan d'action</li>
+    </ul>
+    <ul class="offre-tier-list offre-option-list">
+      <li class="offre-tier-item"><span>Option · page remaquettée et réécrite supplémentaire</span><span class="offre-tier-price">+&nbsp;250&nbsp;€</span></li>
+    </ul>
+
+    <p class="dark-eyebrow deroule-eyebrow">— Le déroulé · 2 à 3 semaines</p>
+    <ol class="deroule-dark">
+      <li><span class="deroule-n">01</span><h4>Appel découverte</h4><span class="deroule-meta">30 min</span><p>On vérifie que l'offre correspond à votre situation.</p></li>
+      <li><span class="deroule-n">02</span><h4>État des lieux technique</h4><span class="deroule-meta">10 min</span><p>Un court questionnaire&nbsp;: outil, thème, extensions.</p></li>
+      <li><span class="deroule-n">03</span><h4>Analyse et maquette</h4><span class="deroule-meta">2 à 3 semaines</span><p>L'évaluation, puis la refonte de la page clé.</p></li>
+      <li><span class="deroule-n">04</span><h4>Restitution</h4><span class="deroule-meta">en visio · le temps qu'il faut</span><p>Vous repartez avec votre plan.</p></li>
+    </ol>
+
+    <a href="#booking" class="offre-dark-cta">Réserver un appel découverte →</a>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section class="expertise-section is-compact reveal" id="expertise" data-cta-theme="light">
+  <div class="expertise-wrap">
+    <div class="expertise-text">
+      <p class="expertise-eyebrow">À propos de moi</p>
+      <h2>Un regard expert, mis à la portée des petites structures.</h2>
+      <p>10 ans de marketing digital, dont 5 côté annonceur en responsabilité Acquisition &amp; Digital. Avec d'Aplomb, je mets cette rigueur au service des entreprises qui fabriquent, éditent ou vendent avec soin — et qui méritent un site à la hauteur.</p>
+      <p class="expertise-quote">Je ne plaque pas de recettes génériques&nbsp;: je pars de ce que vous vendez, et de ce qui fait hésiter vos clients.</p>
+      <div class="expertise-sign">
+        <img src="../offer-focus/assets/anne-sophie-portrait.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+        <div>
+          <span class="expertise-sign-name">Anne-Sophie Roux</span>
+          <span class="expertise-sign-role">Consultante CRO · Fondatrice de Maat</span>
+        </div>
+        <a class="expertise-sign-link" href="../index.html#a-propos">Mon parcours →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section reveal" id="faq" data-cta-theme="light">
+  <div class="faq-wrap">
+    <p class="faq-label">FAQ</p>
+    <details class="faq-item">
+      <summary><span>Vous intégrez les modifications&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>Non. Le plan d'action et la maquette sont conçus pour être mis en œuvre par la personne qui gère votre site&nbsp;: chaque recommandation indique si elle relève du contenu, d'un réglage, d'une extension ou d'un développement potentiel. Si une modification dépasse vos compétences, je vous oriente vers un développeur de confiance.</p>
+    </details>
+    <details class="faq-item">
+      <summary><span>Mon site est sous WordPress, Shopify, Wix… ça fonctionne&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>Oui. L'analyse porte sur ce que vivent vos visiteurs, quel que soit l'outil. Le plan d'action tient compte de votre installation, décrite lors de l'état des lieux technique.</p>
+    </details>
+    <details class="faq-item">
+      <summary><span>Et si tout est à revoir&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>C'est souvent le cas — et c'est pour ça que d'Aplomb existe. Mais revoir vos pages en profondeur ne veut pas dire repartir de zéro&nbsp;: on garde votre site, votre outil et ce qui fait votre identité, et on reconstruit ce qui freine la vente. Le plan d'action vous dit par où commencer, pour obtenir des résultats dès le premier lot.</p>
+    </details>
+    <details class="faq-item">
+      <summary><span>Vous conseillez aussi un changement de CMS, d'offre ou de positionnement&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>Non. D'Aplomb travaille sur ce que vos visiteurs voient et vivent&nbsp;: vos pages, leurs textes, leur présentation, votre parcours d'achat. Les décisions de fond — changer d'outil, de gamme, de prix ou de positionnement — sortent de ce cadre. Si l'audit révèle que l'une d'elles freine vos ventes, je vous le signale clairement, pour que vous puissiez en décider en connaissance de cause. En revanche, l'audit conseille et retravaille le copywriting et la proposition de valeur, notamment via la nouvelle maquette de page.</p>
+    </details>
+    <details class="faq-item">
+      <summary><span>J'ai peu de trafic. Est-ce utile&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>Oui, et c'est même le bon moment. Avant d'investir dans la publicité ou de développer vos réseaux sociaux, mieux vaut un site qui sait transformer les visites en ventes&nbsp;: chaque visiteur que vous attirerez ensuite comptera davantage. L'évaluation ne dépend pas du volume de visites, et les recommandations se vérifient en suivant vos indicateurs après chaque lot.</p>
+    </details>
+    <details class="faq-item">
+      <summary><span>Quelle différence avec Au Clair&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p><a class="faq-link" href="../offer-focus/index.html">Au Clair</a> porte sur une offre et sa page de vente&nbsp;: pour les coachs, formateurs et consultants qui vendent leur expertise. D'Aplomb porte sur un site entier&nbsp;: pour les petites entreprises qui vendent leurs produits en ligne.</p>
+    </details>
+    <details class="faq-item">
+      <summary><span>Et mon compte Instagram&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>D'Aplomb porte sur votre site. Si Instagram mérite également de refléter au mieux vos produits, parlons-en lors de l'appel&nbsp;: je propose également un accompagnement sur ce levier.</p>
+    </details>
+    <details class="faq-item">
+      <summary><span>L'audit garantit-il une hausse des ventes&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p>Non, aucune promesse chiffrée n'est possible. L'audit met toutes les chances de votre côté, avec le trafic et les produits que vous avez.</p>
+    </details>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking" class="booking-final-section reveal" data-cta-theme="light">
+  <div class="booking-final-wrap">
+    <p class="chapter-mark">— Premier échange</p>
+    <h2>Commençons par votre site.</h2>
+    <p class="booking-final-lead">30 minutes pour comprendre où vous en êtes, ce que vous vendez, et vérifier si <em style="font-style:italic;color:var(--champagne-fonce)">d'Aplomb</em> vous convient.</p>
+    <div class="booking-final-cta-row">
+      <a href="#booking" class="booking-final-cta">Réserver un appel découverte →</a>
+      <span class="booking-final-note">30 min · sans engagement</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer reveal">
+  <div class="footer-top">
+    <svg class="feather-bauhaus footer-feather"><use href="#feather-bauhaus"/></svg>
+    <div class="footer-signature">
+      <p class="footer-tagline">Audits de conversion <em>pour les entreprises</em><br/>qui font les choses bien.</p>
+      <p class="footer-thesis">La conversion est une question d'alignement.</p>
+      <p class="footer-definition"><strong>«&nbsp;Maât&nbsp;»</strong> est le principe d'équilibre et de vérité. Nous croyons que la conversion ne se force pas&nbsp;: elle émerge quand promesse, expérience et attente s'accordent enfin.</p>
+    </div>
+  </div>
+  <nav class="footer-sitemap" aria-label="Navigation interne du site">
+    <a href="#enjeu">État des lieux</a>
+    <a href="#livrable">Le livrable</a>
+    <a href="#offre">L'offre</a>
+    <a href="#faq">FAQ</a>
+    <a href="#booking">Réserver</a>
+  </nav>
+  <div class="footer-bottom">
+    <div class="footer-contact">
+      <span class="footer-contact-label">— Contact</span>
+      <a href="mailto:annesophieroux.consulting@gmail.com" class="footer-contact-email">annesophieroux.consulting@gmail.com</a>
+      <span class="footer-contact-meta">Réponse sous 24h ouvrées</span>
+      <a href="https://www.linkedin.com/in/anne-sophie-roux" class="footer-contact-linkedin" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+    </div>
+    <div class="footer-meta">© Maat 2026 — <a href="../mentions-legales.html" class="footer-legal-link">Mentions légales</a></div>
+    <div class="footer-cta">
+      <span class="footer-cta-label">— Démarrer un audit</span>
+      <a href="#booking" class="footer-cta-link">Réserver un appel découverte →</a>
+    </div>
+  </div>
+</footer>
+
+<a href="#booking" class="mobile-cta-floating" id="mobile-cta">Réserver un appel découverte →</a>
+
+<script>
+(function() {
+  // ─── Calendly popup : tous les CTAs "Réserver un appel découverte" l'ouvrent ───
+  const CALENDLY_URL = 'https://calendly.com/annesophieroux-maat/30min?primary_color=D4B275&background_color=08041A&text_color=F4ECD3&hide_event_type_details=1&hide_gdpr_banner=1';
+  function openCalendly(e) {
+    e.preventDefault();
+    const trigger = e.currentTarget;
+    if (trigger && trigger.setAttribute) {
+      trigger.setAttribute('aria-busy', 'true');
+      setTimeout(() => trigger.removeAttribute('aria-busy'), 1500);
+    }
+    if (typeof Calendly !== 'undefined' && Calendly.initPopupWidget) {
+      Calendly.initPopupWidget({ url: CALENDLY_URL });
+    } else {
+      window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
+    }
+    return false;
+  }
+  document.querySelectorAll(
+    'a[href="#booking"], a[href="index.html#booking"], a[href$="aplomb/#booking"]'
+  ).forEach(el => el.addEventListener('click', openCalendly));
+
+  // ─── Repositionne la croix de fermeture du popup Calendly (desktop) ───
+  // Par défaut Calendly positionne .calendly-popup-close en absolute par
+  // rapport à l'overlay plein écran (top/right fixes), pas par rapport au
+  // popup lui-même. Sur desktop le popup est plus étroit que l'écran, donc
+  // la croix se retrouve loin du calendrier, près du header. On la replace
+  // juste au-dessus du coin supérieur droit du popup.
+  function repositionCalendlyClose() {
+    const overlay = document.querySelector('.calendly-overlay');
+    const popup = document.querySelector('.calendly-popup');
+    const close = document.querySelector('.calendly-popup-close');
+    if (!overlay || !popup || !close) return;
+    const overlayRect = overlay.getBoundingClientRect();
+    const popupRect = popup.getBoundingClientRect();
+    // Calendly ne recadre la croix que lorsque le popup est une carte centrée,
+    // plus étroite que l'overlay (desktop / tablette). En plein écran mobile,
+    // popup ≈ overlay : sa position par défaut colle déjà au calendrier, on
+    // ne touche à rien pour éviter de la faire sortir de l'écran.
+    const isCenteredCard = (overlayRect.width - popupRect.width) > 40;
+    if (!isCenteredCard) return;
+    const top = Math.max(popupRect.top - overlayRect.top - 40, 8) + 'px';
+    const right = Math.max(overlayRect.right - popupRect.right - 4, 8) + 'px';
+    if (close.style.top !== top) close.style.setProperty('top', top, 'important');
+    if (close.style.right !== right) close.style.setProperty('right', right, 'important');
+  }
+  // Calendly peut réappliquer sa propre position sur .calendly-popup-close
+  // après coup (ex. une fois l'iframe chargée) — un simple appel unique au
+  // moment de l'insertion peut donc se faire écraser. On surveille aussi les
+  // mutations de style sur la croix elle-même pour réimposer la nôtre à
+  // chaque fois que Calendly tente de la reposer.
+  let closeStyleObserver = null;
+  function watchCalendlyClose() {
+    const close = document.querySelector('.calendly-popup-close');
+    if (!close || closeStyleObserver) return;
+    repositionCalendlyClose();
+    closeStyleObserver = new MutationObserver(() => repositionCalendlyClose());
+    closeStyleObserver.observe(close, { attributes: true, attributeFilter: ['style'] });
+  }
+  new MutationObserver(() => {
+    if (document.querySelector('.calendly-popup-close')) {
+      watchCalendlyClose();
+    } else if (closeStyleObserver) {
+      closeStyleObserver.disconnect();
+      closeStyleObserver = null;
+    }
+  }).observe(document.body, { childList: true });
+  window.addEventListener('resize', repositionCalendlyClose);
+
+
+  // ─── Comparateur avant / après ───
+  document.querySelectorAll('.ba').forEach(ba => {
+    const range = ba.querySelector('.ba-range');
+    if (!range) return;
+    const update = () => ba.style.setProperty('--pos', range.value + '%');
+    range.addEventListener('input', update);
+    update();
+    const press = () => ba.classList.add('is-dragging');
+    const release = () => ba.classList.remove('is-dragging');
+    range.addEventListener('pointerdown', press);
+    range.addEventListener('pointerup', release);
+    range.addEventListener('pointercancel', release);
+    range.addEventListener('blur', release);
+
+    // Petit aller-retour de la séparation à la première apparition
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const hintIO = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) return;
+      hintIO.disconnect();
+      const start = range.value;
+      const steps = [Number(start) - 12, Number(start) + 8, Number(start)];
+      ba.classList.add('is-hinting');
+      steps.forEach((v, i) => setTimeout(() => {
+        if (!ba.classList.contains('is-hinting')) return;
+        ba.style.setProperty('--pos', v + '%');
+        if (i === steps.length - 1) setTimeout(() => ba.classList.remove('is-hinting'), 500);
+      }, 700 + i * 550));
+      range.addEventListener('pointerdown', () => { ba.classList.remove('is-hinting'); update(); }, { once: true });
+    }, { threshold: 0.6 });
+    hintIO.observe(ba);
+  });
+
+  // ─── Visionneuse plein écran : « + » ou toucher sur un visuel du livrable ───
+  // Toucher l'image dans la visionneuse la passe à sa taille réelle (défilable),
+  // un second toucher la remet à la largeur de l'écran. Échap, × ou fond = fermer.
+  let zoomEl = null, zoomOpener = null;
+  function openZoom(img, src, hint) {
+    if (!zoomEl) {
+      zoomEl = document.createElement('div');
+      zoomEl.className = 'zoom';
+      zoomEl.setAttribute('role', 'dialog');
+      zoomEl.setAttribute('aria-modal', 'true');
+      zoomEl.innerHTML = '<p class="zoom-hint"></p><button type="button" class="zoom-close" aria-label="Fermer">×</button><div class="zoom-scroll"><img alt=""></div>';
+      document.body.appendChild(zoomEl);
+      const big = zoomEl.querySelector('.zoom-scroll img');
+      zoomEl.querySelector('.zoom-close').addEventListener('click', closeZoom);
+      zoomEl.querySelector('.zoom-scroll').addEventListener('click', e => { if (e.target !== big) closeZoom(); });
+      big.addEventListener('click', () => {
+        const w = Math.min(big.naturalWidth, window.innerWidth * 2.5);
+        zoomEl.style.setProperty('--zoom-w', w + 'px');
+        zoomEl.classList.toggle('is-zoomed');
+      });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && zoomEl.classList.contains('is-open')) closeZoom(); });
+    }
+    const big = zoomEl.querySelector('.zoom-scroll img');
+    big.src = src || img.currentSrc || img.src;
+    big.alt = img.alt || '';
+    zoomEl.setAttribute('aria-label', img.alt || 'Image agrandie');
+    zoomEl.querySelector('.zoom-hint').textContent = hint || 'Touchez l\'image pour zoomer';
+    zoomEl.classList.remove('is-zoomed');
+    zoomEl.querySelector('.zoom-scroll').scrollTo(0, 0);
+    zoomOpener = document.activeElement;
+    zoomEl.classList.add('is-open');
+    document.documentElement.classList.add('zoom-lock');
+    zoomEl.querySelector('.zoom-close').focus();
+  }
+  function closeZoom() {
+    zoomEl.classList.remove('is-open');
+    document.documentElement.classList.remove('zoom-lock');
+    if (zoomOpener && zoomOpener !== document.body) zoomOpener.focus();
+    else document.activeElement.blur();
+  }
+  function zoomButton(onClick, label) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'zoom-btn';
+    b.textContent = '+';
+    b.setAttribute('aria-label', label || 'Agrandir l\'image');
+    b.addEventListener('pointerdown', e => e.stopPropagation());
+    b.addEventListener('click', e => { e.stopPropagation(); onClick(); });
+    return b;
+  }
+  // Captures simples (plan d'action) : bouton + toucher
+  document.querySelectorAll('.lc-shot img').forEach(img => {
+    const wrap = document.createElement('span');
+    wrap.className = 'zoom-wrap';
+    img.before(wrap);
+    wrap.appendChild(img);
+    wrap.appendChild(zoomButton(() => openZoom(img)));
+    img.addEventListener('click', () => openZoom(img));
+  });
+
+  // ─── Éventails de pages : swipe (doigt / souris), flèches clavier, points ───
+  // Les trois pages tournent : « suivante » amène la page de droite au premier
+  // plan et renvoie celle de devant tout au fond (à gauche).
+  document.querySelectorAll('.doc-fan-pages').forEach(deck => {
+    // Ordre des pages : devant, droite, gauche, puis les éventuelles pages en plus
+    // (data-only="mobile" : présentes seulement sur mobile)
+    const front = deck.querySelector('.doc-fan-front');
+    const allPages = [front, deck.querySelector('.doc-fan-back.is-right'), deck.querySelector('.doc-fan-back.is-left'),
+      ...deck.querySelectorAll('img.doc-fan-extra')];
+    if (allPages.some(p => !p)) return;
+    const w = front.getAttribute('width'), h = front.getAttribute('height');
+    // Sur mobile, un éventail peut avoir ses propres proportions (montages portrait)
+    const mobile = window.matchMedia('(max-width: 760px)');
+    const setRatio = () => {
+      const r = mobile.matches && deck.dataset.mobileRatio;
+      if (r || (w && h)) deck.style.setProperty('--deck-ratio', r || (w + ' / ' + h));
+    };
+    deck.classList.add('is-deck');
+    deck.setAttribute('tabindex', '0');
+    deck.setAttribute('role', 'group');
+    deck.setAttribute('aria-roledescription', 'carrousel');
+    deck.setAttribute('aria-label', 'Pages d\'exemple — balayer ou utiliser les flèches pour faire défiler');
+    allPages.forEach(p => p.setAttribute('draggable', 'false'));
+
+    const dots = document.createElement('div');
+    dots.className = 'doc-fan-dots';
+    deck.after(dots);
+
+    let pages = [], dotButtons = [], current = 0;
+    // (Re)construit la liste des pages et les points selon la largeur d'écran
+    function setup() {
+      pages = allPages.filter(p => mobile.matches || p.dataset.only !== 'mobile');
+      dots.replaceChildren();
+      dotButtons = pages.map((p, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'doc-fan-dot';
+        b.setAttribute('aria-label', 'Afficher la page ' + (i + 1) + ' sur ' + pages.length);
+        b.addEventListener('click', () => { current = i; render(); });
+        dots.appendChild(b);
+        return b;
+      });
+      current = 0;
+      setRatio();
+      render();
+    }
+
+    // Rôle selon la distance à la page affichée : devant, juste derrière (droite),
+    // la précédente (gauche), les autres empilées hors de vue
+    const roleFor = k => k === 0 ? ['doc-fan-front'] : k === 1 ? ['doc-fan-back', 'is-right']
+      : k === pages.length - 1 ? ['doc-fan-back', 'is-left'] : ['doc-fan-back', 'is-stacked'];
+    function render() {
+      pages.forEach((p, i) => {
+        const k = (i - current + pages.length) % pages.length;
+        p.classList.remove('doc-fan-front', 'doc-fan-back', 'is-left', 'is-right', 'is-stacked');
+        p.classList.add(...roleFor(k));
+        p.style.transform = '';
+        p.setAttribute('aria-hidden', k === 0 ? 'false' : 'true');
+      });
+      dotButtons.forEach((b, i) => {
+        b.classList.toggle('is-active', i === current);
+        b.setAttribute('aria-current', i === current ? 'true' : 'false');
+      });
+    }
+    const go = (step) => { current = (current + step + pages.length) % pages.length; render(); };
+    setup();
+    mobile.addEventListener('change', setup);
+
+    deck.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      else if (e.key === 'Enter') { e.preventDefault(); openZoom(pages[current]); }
+    });
+
+    // Un toucher (sans glissement) ouvre la page affichée en grand
+    let justDragged = false;
+    deck.addEventListener('click', () => {
+      if (justDragged) { justDragged = false; return; }
+      openZoom(pages[current]);
+    });
+    deck.appendChild(zoomButton(() => openZoom(pages[current])));
+
+    let startX = 0, startY = 0, dx = 0, pointerId = null, dragging = false;
+    deck.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      pointerId = e.pointerId; startX = e.clientX; startY = e.clientY; dx = 0; dragging = false;
+    });
+    deck.addEventListener('pointermove', e => {
+      if (e.pointerId !== pointerId) return;
+      const mx = e.clientX - startX, my = e.clientY - startY;
+      if (!dragging) {
+        if (Math.abs(mx) < 6 || Math.abs(mx) < Math.abs(my)) return;
+        dragging = true;
+        deck.classList.add('is-dragging');
+        try { deck.setPointerCapture(pointerId); } catch (_) {}
+      }
+      dx = mx;
+      const top = pages[current];
+      top.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx / 40) + 'deg)';
+    });
+    const end = e => {
+      if (e.pointerId !== pointerId) return;
+      pointerId = null;
+      if (!dragging) return;
+      dragging = false;
+      justDragged = true;
+      setTimeout(() => { justDragged = false; }, 50);
+      deck.classList.remove('is-dragging');
+      const threshold = Math.min(60, deck.offsetWidth * 0.15);
+      if (dx <= -threshold) go(1);
+      else if (dx >= threshold) go(-1);
+      else pages[current].style.transform = '';
+    };
+    deck.addEventListener('pointerup', end);
+    deck.addEventListener('pointercancel', end);
+  });
+
+  // ─── IntersectionObserver fade-up sur sections .reveal ───
+  // Le livrable est bien plus long que les sections d'Au Clair : un seuil
+  // à 15 % de sa surface le laissait invisible sur plusieurs écrans. On
+  // déclenche donc à l'entrée dans le viewport, et chaque bloc du livrable
+  // apparaît pour lui-même, au même rythme qu'une section d'Au Clair.
+  document.querySelectorAll('.lc-head, .lc-row, .lc-restitution, .lc-testimonial')
+    .forEach(el => el.classList.add('reveal'));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-visible');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ─── Mobile floating CTA ───
+  const floatingCta = document.getElementById('mobile-cta');
+  const booking = document.getElementById('booking');
+  const footer = document.querySelector('.footer');
+  let bookingVisible = false;
+  let footerVisible = false;
+  if (booking) {
+    const bookingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { bookingVisible = e.isIntersecting; updateFloatingCta(); });
+    }, { threshold: 0.05 });
+    bookingObserver.observe(booking);
+  }
+  if (footer) {
+    const footerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { footerVisible = e.isIntersecting; updateFloatingCta(); });
+    }, { threshold: 0.05 });
+    footerObserver.observe(footer);
+  }
+  function updateFloatingCta() {
+    const isMobile = window.matchMedia('(max-width: 900px)').matches;
+    const scrolled = window.scrollY > 300;
+    const show = isMobile && scrolled && !bookingVisible && !footerVisible;
+    floatingCta.classList.toggle('is-visible', show);
+  }
+  window.addEventListener('scroll', updateFloatingCta, { passive: true });
+  window.addEventListener('resize', updateFloatingCta);
+
+  // ─── Smooth scroll pour anchor links ───
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+
+  // ─── Header sticky : densification au-delà de 60px, pin du sous-menu au-delà de 300px ───
+  const mhHeader = document.getElementById('mh-header');
+  if (mhHeader) {
+    const SUBMENU_PIN_THRESHOLD = 300;
+    const onScrollHeader = () => {
+      const y = window.scrollY;
+      mhHeader.classList.toggle('is-scrolled', y > 60);
+      mhHeader.classList.toggle('is-pinned', y > SUBMENU_PIN_THRESHOLD);
+    };
+    onScrollHeader();
+    window.addEventListener('scroll', onScrollHeader, { passive: true });
+
+    const activeTab = mhHeader.querySelector('.mh-tab.is-active');
+    const row2 = mhHeader.querySelector('.mh-row2');
+    if (activeTab && row2) {
+      let hideTimer = null;
+      const reveal = () => {
+        if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+        mhHeader.classList.add('is-revealing');
+      };
+      const hide = () => {
+        if (hideTimer) clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => {
+          mhHeader.classList.remove('is-revealing');
+          hideTimer = null;
+        }, 150);
+      };
+      activeTab.addEventListener('mouseenter', reveal);
+      activeTab.addEventListener('focus', reveal);
+      activeTab.addEventListener('mouseleave', hide);
+      activeTab.addEventListener('blur', hide);
+      row2.addEventListener('mouseenter', reveal);
+      row2.addEventListener('mouseleave', hide);
+    }
+  }
+
+  // ─── Sous-menu actif : suit la section visible au scroll ───
+  const submenuTargets = ['livrable', 'offre', 'booking'];
+  const submenuItems = document.querySelectorAll('.mh-submenu-item, .mh-drawer-submenu-item');
+  const submenuSections = submenuTargets
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+  if (submenuItems.length && submenuSections.length) {
+    const setActive = (id) => {
+      submenuItems.forEach(el => {
+        el.classList.toggle('is-active', el.dataset.target === id);
+      });
+    };
+    const submenuIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { threshold: 0.4, rootMargin: '-20% 0px -50% 0px' });
+    submenuSections.forEach(s => submenuIO.observe(s));
+  }
+
+  // ─── CTA flottant mobile : bascule de thème selon le fond ───
+  const themedSections = document.querySelectorAll('[data-cta-theme]');
+  if (floatingCta && themedSections.length) {
+    const ctaThemeIO = new IntersectionObserver((entries) => {
+      let topMost = null;
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const rect = entry.boundingClientRect;
+          if (!topMost || rect.top < topMost.rect.top) {
+            topMost = { el: entry.target, rect };
+          }
+        }
+      });
+      if (topMost) {
+        const theme = topMost.el.dataset.ctaTheme;
+        floatingCta.classList.toggle('is-on-light', theme === 'light');
+      }
+    }, { threshold: 0, rootMargin: '-40% 0px -40% 0px' });
+    themedSections.forEach(s => ctaThemeIO.observe(s));
+  }
+
+  // ─── Drawer mobile : toggle ouvert/fermé ───
+  const drawerToggle = document.getElementById('mh-mobile-toggle');
+  const drawer = document.getElementById('mh-drawer');
+  if (drawerToggle && drawer) {
+    const setDrawer = (open) => {
+      drawer.classList.toggle('is-open', open);
+      drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+      drawerToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      drawerToggle.textContent = open ? 'Fermer' : 'Menu';
+    };
+    drawerToggle.addEventListener('click', () => {
+      setDrawer(!drawer.classList.contains('is-open'));
+    });
+    drawer.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', () => setDrawer(false));
+    });
+    window.addEventListener('resize', () => {
+      if (!window.matchMedia('(max-width: 900px)').matches && drawer.classList.contains('is-open')) {
+        setDrawer(false);
+      }
+    });
+  }
+
+})();
+</script>
+
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+</body>
+</html>
