@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maat — Aplomb, audit CRO &amp; refonte pour petites entreprises</title>
-<meta name="description" content="Votre site ne rend pas justice à ce que vous vendez. Aplomb : diagnostic CRO, pages clés redessinées et plan d'action par étapes pour artisans, éditeurs indépendants et marques responsables. 1 200 €.">
+<title>Maat — d'Aplomb, audit CRO &amp; refonte pour petites entreprises</title>
+<meta name="description" content="Votre site ne rend pas justice à ce que vous vendez. D'Aplomb : diagnostic CRO, pages clés redessinées et plan d'action par étapes pour artisans, éditeurs indépendants et marques responsables. 1 200 €.">
 <link rel="canonical" href="https://maat.so/aplomb/">
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="apple-touch-icon" href="../favicon.svg">
@@ -1408,18 +1408,29 @@ body {
 .ba-after { clip-path: inset(0 0 0 var(--pos)); }
 .ba-handle {
   position: absolute; top: 0; bottom: 0; left: var(--pos);
-  width: 1px; background: var(--champagne);
-  transform: translateX(-0.5px);
+  width: 3px; background: var(--champagne);
+  transform: translateX(-1.5px);
+  /* filet sombre + ombre portée des deux côtés : détache nettement deux écrans blancs */
+  box-shadow: 0 0 0 1px rgba(8, 4, 26, 0.55), 0 0 22px 2px rgba(8, 4, 26, 0.35);
   pointer-events: none;
 }
 .ba-knob {
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--hero-bg); border: 1px solid var(--champagne); color: var(--champagne);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--hero-bg); border: 2px solid var(--champagne); color: var(--champagne);
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono); font-size: 14px;
+  box-shadow: 0 8px 22px -6px rgba(8, 4, 26, 0.6);
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
+.ba-knob svg { display: block; }
+@media (hover: hover) {
+  .ba:hover .ba-knob { background: var(--champagne); color: var(--hero-bg); transform: translate(-50%, -50%) scale(1.06); }
+}
+.ba.is-dragging .ba-knob { background: var(--champagne); color: var(--hero-bg); transform: translate(-50%, -50%) scale(0.94); }
+/* Invitation au geste : la séparation oscille une fois à l'apparition */
+.ba.is-hinting .ba-layer, .ba.is-hinting .ba-handle { transition: clip-path 0.5s cubic-bezier(0.45, 0, 0.25, 1), left 0.5s cubic-bezier(0.45, 0, 0.25, 1); }
+@media (prefers-reduced-motion: reduce) { .ba-knob { transition: none; } }
 .ba-range {
   position: absolute; inset: 0; width: 100%; height: 100%;
   margin: 0; opacity: 0; cursor: ew-resize;
@@ -1505,6 +1516,26 @@ body {
 
 .lc-media .doc-fan-pages .doc-fan-back { width: 84%; }
 
+/* Éventail balayable : toutes les pages en absolu, hauteur portée par un gabarit */
+.doc-fan-pages.is-deck { touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; outline: none; }
+.doc-fan-pages.is-deck.is-dragging { cursor: grabbing; }
+.doc-fan-pages.is-deck::before { content: ""; display: block; aspect-ratio: var(--deck-ratio, 4 / 3); }
+.doc-fan-pages.is-deck img { position: absolute; top: 5%; left: 8%; width: 84%; -webkit-user-drag: none; }
+.doc-fan-pages.is-deck .doc-fan-front { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+.doc-fan-pages.is-deck.is-dragging .doc-fan-front { transition: none; }
+.doc-fan-pages.is-deck:focus-visible { outline: 1px solid var(--champagne); outline-offset: 4px; }
+.doc-fan-dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
+.doc-fan-dot {
+  width: 24px; height: 24px; padding: 0; border: none; background: none; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.doc-fan-dot::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  border: 1px solid var(--ink-mute); transition: background 0.25s ease, border-color 0.25s ease;
+}
+.doc-fan-dot.is-active::before { background: var(--ink); border-color: var(--ink); }
+.doc-fan-dots + figcaption { margin-top: 8px; }
+
 /* Capture simple avec légende */
 .lc-shot { margin: 0; }
 .lc-shot img { border: 1px solid rgba(20, 16, 42, 0.12); box-shadow: 0 18px 40px -24px rgba(20, 16, 42, 0.35); background: #fff; }
@@ -1584,8 +1615,8 @@ body {
     <nav class="mh-tabs-wrap" aria-label="Pages">
       <ul class="mh-tabs">
         <li><a class="mh-tab" href="../index.html">Audit CRO SaaS et e-commerce</a></li>
-        <li><a class="mh-tab" href="../offer-focus/index.html">Offer Focus</a></li>
-        <li><a class="mh-tab is-active" href="#top" aria-current="page">Aplomb</a></li>
+        <li><a class="mh-tab" href="../offer-focus/index.html">Au clair</a></li>
+        <li><a class="mh-tab is-active" href="#top" aria-current="page">d'Aplomb</a></li>
       </ul>
     </nav>
     <a class="mh-cta" href="#booking">Réserver un appel découverte <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
@@ -1606,18 +1637,18 @@ body {
 
 <aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
   <ul class="mh-drawer-tabs">
-    <li class="mh-drawer-category-label" aria-hidden="true">— Aplomb</li>
+    <li class="mh-drawer-category-label" aria-hidden="true">— d'Aplomb</li>
     <li>
-      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">Aplomb</a>
+      <a class="mh-drawer-tab is-active" href="#top" aria-current="page">d'Aplomb</a>
       <ul class="mh-drawer-submenu">
         <li><a class="mh-drawer-submenu-item is-active" href="#livrable" data-target="livrable">Le livrable</a></li>
         <li><a class="mh-drawer-submenu-item" href="#offre" data-target="offre">L'offre</a></li>
         <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un appel découverte</a></li>
       </ul>
     </li>
-    <li class="mh-drawer-category-label" aria-hidden="true">— Offer Focus</li>
+    <li class="mh-drawer-category-label" aria-hidden="true">— Au clair</li>
     <li>
-      <a class="mh-drawer-tab" href="../offer-focus/index.html">Offer Focus</a>
+      <a class="mh-drawer-tab" href="../offer-focus/index.html">Au clair</a>
     </li>
     <li class="mh-drawer-category-label" aria-hidden="true">— Audit CRO SaaS et e-commerce</li>
     <li>
@@ -1664,12 +1695,12 @@ body {
       <p class="hero-lead">Diagnostic expert, plan d'action par étapes + une page clé remaquettée et réécrite — pour remettre votre site d'aplomb sans repartir de zéro.</p>
     </div>
     <div class="hero-offer">
-      <p class="hero-offer-name">Aplomb</p>
+      <p class="hero-offer-name">d'Aplomb</p>
       <p class="hero-offer-descriptor">Audit CRO &amp; refonte pour petites entreprises engagées</p>
       <ul class="hero-facts">
         <li><span class="hero-fact-label">Forfait</span><span class="hero-fact-value">1&nbsp;200&nbsp;€</span></li>
         <li><span class="hero-fact-label">Délai</span><span class="hero-fact-value">2 à 3 semaines</span></li>
-        <li><span class="hero-fact-label">Mise en œuvre</span><span class="hero-fact-value">sans développeur</span></li>
+        <li><span class="hero-fact-label">Mise en œuvre</span><span class="hero-fact-value">avec ou sans développeur</span></li>
       </ul>
       <div class="hero-cta-row">
         <a href="#booking" class="cta-mono">Réserver un appel découverte →</a>
@@ -1711,7 +1742,7 @@ body {
     <span class="chapter-mark">/ ch.02 — le livrable</span>
     <div class="lc-head">
       <h2>Ce que vous recevez.</h2>
-      <p class="lc-intro">Quatre livrables, et une restitution pour les prendre en main.</p>
+      <p class="lc-intro">5 livrables, et une restitution pour les comprendre et les prendre en main.</p>
       <div class="lc-client">
         <p class="lc-client-label">— Exemples réels · audit client · Éditions L'Honnête Homme</p>
         <p class="lc-client-meta">Maison d'édition indépendante · site WordPress + WooCommerce, géré sans développeur</p>
@@ -1734,7 +1765,7 @@ body {
             <img class="doc-fan-back is-right" src="assets/hh-diagnostic.jpg" alt="Observation n°4, fiche produit : l'édition beau livre n'est mentionnée nulle part, critère Pertinence">
             <img class="doc-fan-front" src="assets/hh-diag-17.jpg" alt="Observation n°17, panier sur mobile : le bouton « Valider la commande » n'apparaît qu'après près de deux écrans, critère Friction" width="966" height="692">
           </div>
-          <figcaption>Observations n°17, 21 et 4 · tunnel d'achat et fiche produit</figcaption>
+          <figcaption>Les observations dans un PDF · extrait</figcaption>
         </figure>
       </div>
       <div class="lc-text">
@@ -1778,7 +1809,7 @@ body {
           <div><dt>Maquettes annotées</dt><dd>desktop et mobile, livrées en PDF, chaque choix expliqué</dd></div>
           <div><dt>Version mobile en ligne</dt><dd>à ouvrir sur votre téléphone, pour tester le défilement, les éléments fixes, les menus et les interactions</dd></div>
         </dl>
-        <p class="lc-note">Construite pour l'outil existant — sans changer de site.</p>
+        <p class="lc-note">Construite pour l'outil existant — sans devoir changer de CMS.</p>
       </div>
       <div class="lc-media">
         <div class="browser-frame">
@@ -1790,7 +1821,7 @@ body {
             <div class="ba-layer ba-after">
               <img src="assets/hh-fiche-apres-desktop.jpg" alt="Fiche produit redessinée : titre, sous-titre, auteur, avis, choix entre broché et beau livre, prix et bouton « Ajouter au panier » visibles dès le premier écran" width="1440" height="810">
             </div>
-            <div class="ba-handle" aria-hidden="true"><span class="ba-knob">↔</span></div>
+            <div class="ba-handle" aria-hidden="true"><span class="ba-knob"><svg viewBox="0 0 24 12" width="22" height="11"><path d="M7 1 2 6l5 5M17 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
             <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Comparer la fiche produit avant et après">
             <span class="ba-label is-before" aria-hidden="true">Avant</span>
             <span class="ba-label is-after" aria-hidden="true">Après</span>
@@ -1874,7 +1905,7 @@ body {
     <p class="dark-eyebrow">— L'offre</p>
     <div class="offre-dark-head">
       <div>
-        <h2>Aplomb</h2>
+        <h2>d'Aplomb</h2>
         <p class="offre-dark-sub">Audit CRO &amp; refonte pour petites entreprises engagées</p>
       </div>
       <div class="offre-dark-price-wrap">
@@ -1920,7 +1951,7 @@ body {
     <div class="expertise-text">
       <p class="expertise-eyebrow">À propos de moi</p>
       <h2>Un regard expert, mis à la portée des petites structures.</h2>
-      <p>10 ans de marketing digital, dont 5 côté annonceur en responsabilité Acquisition &amp; Digital. Avec Aplomb, je mets cette rigueur au service des entreprises qui fabriquent, éditent ou vendent avec soin — et qui méritent un site à la hauteur.</p>
+      <p>10 ans de marketing digital, dont 5 côté annonceur en responsabilité Acquisition &amp; Digital. Avec d'Aplomb, je mets cette rigueur au service des entreprises qui fabriquent, éditent ou vendent avec soin — et qui méritent un site à la hauteur.</p>
       <p>Je n'empile pas les bonnes pratiques. Je regarde votre site comme un vendeur, au service de ce que vous faites.</p>
     </div>
   </div>
@@ -1940,23 +1971,23 @@ body {
     </details>
     <details class="faq-item">
       <summary><span>Et si tout est à revoir&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
-      <p>C'est souvent le cas — et c'est pour ça qu'Aplomb existe. Mais revoir vos pages en profondeur ne veut pas dire repartir de zéro&nbsp;: on garde votre site, votre outil et ce qui fait votre identité, et on reconstruit ce qui freine la vente. Le plan d'action vous dit par où commencer, pour obtenir des résultats dès le premier lot.</p>
+      <p>C'est souvent le cas — et c'est pour ça que d'Aplomb existe. Mais revoir vos pages en profondeur ne veut pas dire repartir de zéro&nbsp;: on garde votre site, votre outil et ce qui fait votre identité, et on reconstruit ce qui freine la vente. Le plan d'action vous dit par où commencer, pour obtenir des résultats dès le premier lot.</p>
     </details>
     <details class="faq-item">
       <summary><span>Vous conseillez aussi un changement de CMS, d'offre ou de positionnement&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
-      <p>Non. Aplomb travaille sur ce que vos visiteurs voient et vivent&nbsp;: vos pages, leurs textes, leur présentation, votre parcours d'achat. Les décisions de fond — changer d'outil, de gamme, de prix ou de positionnement — sortent de ce cadre. Si l'audit révèle que l'une d'elles freine vos ventes, je vous le signale clairement, pour que vous puissiez en décider en connaissance de cause. En revanche, l'audit conseille et retravaille le copywriting et la proposition de valeur, notamment via la nouvelle maquette de page.</p>
+      <p>Non. D'Aplomb travaille sur ce que vos visiteurs voient et vivent&nbsp;: vos pages, leurs textes, leur présentation, votre parcours d'achat. Les décisions de fond — changer d'outil, de gamme, de prix ou de positionnement — sortent de ce cadre. Si l'audit révèle que l'une d'elles freine vos ventes, je vous le signale clairement, pour que vous puissiez en décider en connaissance de cause. En revanche, l'audit conseille et retravaille le copywriting et la proposition de valeur, notamment via la nouvelle maquette de page.</p>
     </details>
     <details class="faq-item">
       <summary><span>J'ai peu de trafic. Est-ce utile&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
       <p>Oui, et c'est même le bon moment. Avant d'investir dans la publicité ou de développer vos réseaux sociaux, mieux vaut un site qui sait transformer les visites en ventes&nbsp;: chaque visiteur que vous attirerez ensuite comptera davantage. L'évaluation ne dépend pas du volume de visites, et les recommandations se vérifient en suivant vos indicateurs après chaque lot.</p>
     </details>
     <details class="faq-item">
-      <summary><span>Quelle différence avec Offer Focus&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
-      <p><a class="faq-link" href="../offer-focus/index.html">Offer Focus</a> porte sur une offre et sa page de vente&nbsp;: pour les coachs, formateurs et consultants qui vendent leur expertise. Aplomb porte sur un site entier&nbsp;: pour les petites entreprises qui vendent leurs produits en ligne.</p>
+      <summary><span>Quelle différence avec Au clair&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p><a class="faq-link" href="../offer-focus/index.html">Au clair</a> porte sur une offre et sa page de vente&nbsp;: pour les coachs, formateurs et consultants qui vendent leur expertise. D'Aplomb porte sur un site entier&nbsp;: pour les petites entreprises qui vendent leurs produits en ligne.</p>
     </details>
     <details class="faq-item">
       <summary><span>Et mon compte Instagram&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
-      <p>Aplomb porte sur votre site. Si Instagram est votre principale vitrine, parlons-en lors de l'appel&nbsp;: la même méthode peut s'y appliquer.</p>
+      <p>D'Aplomb porte sur votre site. Si Instagram est votre principale vitrine, parlons-en lors de l'appel&nbsp;: la même méthode peut s'y appliquer.</p>
     </details>
     <details class="faq-item">
       <summary><span>L'audit garantit-il une hausse des ventes&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
@@ -1970,7 +2001,7 @@ body {
   <div class="booking-final-wrap">
     <p class="chapter-mark">— Premier échange</p>
     <h2>Commençons par votre site.</h2>
-    <p class="booking-final-lead">30 minutes pour comprendre où vous en êtes, ce que vous vendez, et vérifier si <em style="font-style:italic;color:var(--champagne-fonce)">Aplomb</em> vous convient.</p>
+    <p class="booking-final-lead">30 minutes pour comprendre où vous en êtes, ce que vous vendez, et vérifier si <em style="font-style:italic;color:var(--champagne-fonce)">d'Aplomb</em> vous convient.</p>
     <div class="booking-final-cta-row">
       <a href="#booking" class="booking-final-cta">Réserver un appel découverte →</a>
       <span class="booking-final-note">30 min · sans engagement</span>
@@ -2089,16 +2120,134 @@ body {
     const update = () => ba.style.setProperty('--pos', range.value + '%');
     range.addEventListener('input', update);
     update();
+    const press = () => ba.classList.add('is-dragging');
+    const release = () => ba.classList.remove('is-dragging');
+    range.addEventListener('pointerdown', press);
+    range.addEventListener('pointerup', release);
+    range.addEventListener('pointercancel', release);
+    range.addEventListener('blur', release);
+
+    // Petit aller-retour de la séparation à la première apparition
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const hintIO = new IntersectionObserver((entries) => {
+      if (!entries[0].isIntersecting) return;
+      hintIO.disconnect();
+      const start = range.value;
+      const steps = [Number(start) - 12, Number(start) + 8, Number(start)];
+      ba.classList.add('is-hinting');
+      steps.forEach((v, i) => setTimeout(() => {
+        if (!ba.classList.contains('is-hinting')) return;
+        ba.style.setProperty('--pos', v + '%');
+        if (i === steps.length - 1) setTimeout(() => ba.classList.remove('is-hinting'), 500);
+      }, 700 + i * 550));
+      range.addEventListener('pointerdown', () => { ba.classList.remove('is-hinting'); update(); }, { once: true });
+    }, { threshold: 0.6 });
+    hintIO.observe(ba);
+  });
+
+  // ─── Éventails de pages : swipe (doigt / souris), flèches clavier, points ───
+  // Les trois pages tournent : « suivante » amène la page de droite au premier
+  // plan et renvoie celle de devant tout au fond (à gauche).
+  document.querySelectorAll('.doc-fan-pages').forEach(deck => {
+    const pages = [
+      deck.querySelector('.doc-fan-front'),
+      deck.querySelector('.doc-fan-back.is-right'),
+      deck.querySelector('.doc-fan-back.is-left'),
+    ];
+    if (pages.some(p => !p)) return;
+    const front = pages[0];
+    const w = front.getAttribute('width'), h = front.getAttribute('height');
+    if (w && h) deck.style.setProperty('--deck-ratio', w + ' / ' + h);
+    deck.classList.add('is-deck');
+    deck.setAttribute('tabindex', '0');
+    deck.setAttribute('role', 'group');
+    deck.setAttribute('aria-roledescription', 'carrousel');
+    deck.setAttribute('aria-label', 'Pages d\'exemple — balayer ou utiliser les flèches pour faire défiler');
+    pages.forEach(p => p.setAttribute('draggable', 'false'));
+
+    const dots = document.createElement('div');
+    dots.className = 'doc-fan-dots';
+    const dotButtons = pages.map((p, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'doc-fan-dot';
+      b.setAttribute('aria-label', 'Afficher la page ' + (i + 1) + ' sur ' + pages.length);
+      b.addEventListener('click', () => { current = i; render(); });
+      dots.appendChild(b);
+      return b;
+    });
+    deck.after(dots);
+
+    const roles = [['doc-fan-front'], ['doc-fan-back', 'is-right'], ['doc-fan-back', 'is-left']];
+    let current = 0;
+    function render() {
+      pages.forEach((p, i) => {
+        const k = (i - current + pages.length) % pages.length;
+        p.classList.remove('doc-fan-front', 'doc-fan-back', 'is-left', 'is-right');
+        p.classList.add(...roles[k]);
+        p.style.transform = '';
+        p.setAttribute('aria-hidden', k === 0 ? 'false' : 'true');
+      });
+      dotButtons.forEach((b, i) => {
+        b.classList.toggle('is-active', i === current);
+        b.setAttribute('aria-current', i === current ? 'true' : 'false');
+      });
+    }
+    const go = (step) => { current = (current + step + pages.length) % pages.length; render(); };
+    render();
+
+    deck.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+    });
+
+    let startX = 0, startY = 0, dx = 0, pointerId = null, dragging = false;
+    deck.addEventListener('pointerdown', e => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      pointerId = e.pointerId; startX = e.clientX; startY = e.clientY; dx = 0; dragging = false;
+    });
+    deck.addEventListener('pointermove', e => {
+      if (e.pointerId !== pointerId) return;
+      const mx = e.clientX - startX, my = e.clientY - startY;
+      if (!dragging) {
+        if (Math.abs(mx) < 6 || Math.abs(mx) < Math.abs(my)) return;
+        dragging = true;
+        deck.classList.add('is-dragging');
+        try { deck.setPointerCapture(pointerId); } catch (_) {}
+      }
+      dx = mx;
+      const top = pages[current];
+      top.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx / 40) + 'deg)';
+    });
+    const end = e => {
+      if (e.pointerId !== pointerId) return;
+      pointerId = null;
+      if (!dragging) return;
+      dragging = false;
+      deck.classList.remove('is-dragging');
+      const threshold = Math.min(60, deck.offsetWidth * 0.15);
+      if (dx <= -threshold) go(1);
+      else if (dx >= threshold) go(-1);
+      else pages[current].style.transform = '';
+    };
+    deck.addEventListener('pointerup', end);
+    deck.addEventListener('pointercancel', end);
   });
 
   // ─── IntersectionObserver fade-up sur sections .reveal ───
+  // Le livrable est bien plus long que les sections d'Au clair : un seuil
+  // à 15 % de sa surface le laissait invisible sur plusieurs écrans. On
+  // déclenche donc à l'entrée dans le viewport, et chaque bloc du livrable
+  // apparaît pour lui-même, au même rythme qu'une section d'Au clair.
+  document.querySelectorAll('.lc-head, .lc-row, .lc-restitution, .lc-testimonial')
+    .forEach(el => el.classList.add('reveal'));
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
       e.target.classList.add('is-visible');
       io.unobserve(e.target);
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   // ─── Mobile floating CTA ───
