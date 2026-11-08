@@ -1498,10 +1498,20 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
     <article class="lc-row">
       <div class="lc-media">
         <figure class="doc-fan">
-          <div class="doc-fan-pages">
-            <img class="doc-fan-back is-left" src="assets/hh-diag-21.jpg" width="962" height="702" alt="Observation n°21, fiche produit sur mobile : les caractéristiques du livre ne sont visibles que dans le dernier onglet, critère Clarté" loading="lazy" decoding="async">
-            <img class="doc-fan-back is-right" src="assets/hh-diagnostic.jpg" width="930" height="666" alt="Observation n°4, fiche produit : l'édition beau livre n'est mentionnée nulle part, critère Pertinence" loading="lazy" decoding="async">
-            <img class="doc-fan-front" src="assets/hh-diag-17.jpg" alt="Observation n°17, panier sur mobile : le bouton « Valider la commande » n'apparaît qu'après près de deux écrans, critère Friction" width="966" height="692" loading="lazy" decoding="async">
+          <!-- Mobile : montages « emplacement + observation » (format portrait) à la place des pages PDF -->
+          <div class="doc-fan-pages" data-mobile-ratio="840 / 1110">
+            <picture>
+              <source media="(max-width: 760px)" srcset="assets/hh-diag-mobile-21.jpg" width="840" height="1110">
+              <img class="doc-fan-back is-left" src="assets/hh-diag-21.jpg" width="962" height="702" alt="Observation n°21, fiche produit sur mobile : les caractéristiques du livre ne sont visibles que dans le dernier onglet, critère Clarté" loading="lazy" decoding="async">
+            </picture>
+            <picture>
+              <source media="(max-width: 760px)" srcset="assets/hh-diag-mobile-04.jpg" width="840" height="1110">
+              <img class="doc-fan-back is-right" src="assets/hh-diagnostic.jpg" width="930" height="666" alt="Observation n°4, fiche produit : l'édition beau livre n'est mentionnée nulle part, critère Pertinence" loading="lazy" decoding="async">
+            </picture>
+            <picture>
+              <source media="(max-width: 760px)" srcset="assets/hh-diag-mobile-17.jpg" width="840" height="1110">
+              <img class="doc-fan-front" src="assets/hh-diag-17.jpg" alt="Observation n°17, panier sur mobile : le bouton « Valider la commande » n'apparaît qu'après près de deux écrans, critère Friction" width="966" height="692" loading="lazy" decoding="async">
+            </picture>
           </div>
           <figcaption>Les observations dans un PDF · extrait</figcaption>
         </figure>
@@ -1974,7 +1984,14 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
     if (pages.some(p => !p)) return;
     const front = pages[0];
     const w = front.getAttribute('width'), h = front.getAttribute('height');
-    if (w && h) deck.style.setProperty('--deck-ratio', w + ' / ' + h);
+    // Sur mobile, un éventail peut avoir ses propres proportions (montages portrait)
+    const mobile = window.matchMedia('(max-width: 760px)');
+    const setRatio = () => {
+      const r = mobile.matches && deck.dataset.mobileRatio;
+      if (r || (w && h)) deck.style.setProperty('--deck-ratio', r || (w + ' / ' + h));
+    };
+    setRatio();
+    mobile.addEventListener('change', setRatio);
     deck.classList.add('is-deck');
     deck.setAttribute('tabindex', '0');
     deck.setAttribute('role', 'group');
