@@ -15,8 +15,9 @@
      fin de body). Sans widget.js prêt au clic, openCalendly() retombe sur
      window.open() — un nouvel onglet qui recharge toute la page Calendly,
      bien plus lent que le popup in-page. Le preload garantit que le script
-     est déjà chargé quand l'utilisateur clique. -->
-<link rel="preload" as="script" href="https://assets.calendly.com/assets/external/widget.js" fetchpriority="high">
+     est déjà chargé quand l'utilisateur clique ; priorité basse pour ne pas
+     concurrencer le rendu de la page. -->
+<link rel="preload" as="script" href="https://assets.calendly.com/assets/external/widget.js" fetchpriority="low">
 <!-- Calendly widget.css en non-bloquant (même pattern que les fonts).
      Le CSS n'est nécessaire qu'au moment où le popup s'ouvre, pas pour le
      rendu initial. Évite le render-blocking au LCP. -->
@@ -662,20 +663,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
 }
-.expertise-portrait { flex: 1 1 260px; min-width: 220px; max-width: 320px; }
-.expertise-portrait-frame {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  border: 1px solid rgba(140, 106, 44, 0.25);
-  overflow: hidden;
-}
-.expertise-portrait-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+
 .expertise-text { flex: 1.4 1 380px; min-width: 280px; }
 .expertise-eyebrow {
   font-family: var(--font-mono);
@@ -1102,7 +1090,6 @@ body {
 .mh-tab.is-active { color: var(--champagne); font-weight: 500; }
 .mh-tab.is-active::after { transform: scaleX(1); }
 
-
 .mh-cta {
   font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: clamp(0.1em, 1.4vw, 0.2em); text-transform: uppercase;
   color: var(--champagne); background: transparent; border: 1px solid var(--champagne);
@@ -1169,24 +1156,7 @@ body {
 }
 .mh-drawer-tab.is-active { color: var(--champagne); font-weight: 500; font-size: 26px; }
 .mh-drawer-tab.is-active::after { transform: scaleX(1); }
-.mh-drawer-tab.is-coming {
-  color: var(--ivory);
-  font-size: 16px;
-  font-weight: 400;
-  cursor: default;
-}
-.mh-drawer-tab-stamp {
-  font-family: var(--font-mono);
-  font-style: normal;
-  font-weight: 500;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--champagne-fonce);
-  border: 1px dashed var(--champagne-fonce);
-  padding: 3px 7px;
-  white-space: nowrap;
-}
+
 .mh-drawer-category-label {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
   color: rgba(212, 178, 117, 0.5); margin: -4px 0 -4px;
@@ -1254,7 +1224,7 @@ body {
   .split-grid { flex-direction: column; gap: 2.25rem; }
   .split-block { flex-basis: auto; }
   .testi-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-  .expertise-portrait { max-width: 220px; margin: 0 auto; }
+  
   .offre-dark-head { flex-direction: column; align-items: flex-start; gap: 12px; }
   .offre-dark-price-wrap { align-items: flex-start; }
   .offre-tier-item { font-size: 15.5px; }
@@ -1682,7 +1652,7 @@ body {
       <p>10 ans de marketing digital, dont 5 côté annonceur. J'ai créé Au Clair pour les entrepreneurs et experts, en particulier ceux qui portent des projets à impact, dont l'offre est solide, mais dont la page ne la fait pas encore comprendre.</p>
       <p class="expertise-quote">Je ne regarde pas une page comme un objet UX, mais comme un outil de vente au service de votre offre.</p>
       <div class="expertise-sign">
-        <img src="assets/anne-sophie-portrait.jpg" alt="" width="56" height="56">
+        <img src="assets/anne-sophie-portrait.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
         <div>
           <span class="expertise-sign-name">Anne-Sophie Roux</span>
           <span class="expertise-sign-role">Consultante CRO · Fondatrice de Maat</span>
