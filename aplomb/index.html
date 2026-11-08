@@ -1175,6 +1175,8 @@ body {
   .lc-row .lc-text { display: contents; }
   .lc-row .lc-text > .lc-n, .lc-row .lc-text > h3 { order: -2; }
   .lc-row > .lc-media, .lc-row.is-reverse > .lc-media { order: -1; margin: 6px 0 22px; }
+  /* La maquette garde l'ordre du desktop : titre, texte, puis l'avant / après */
+  .lc-row.is-feature > .lc-media { order: 0; margin: 22px 0 0; }
   #livrable .lc-client-meta { font-family: var(--font-body); text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--ink-soft); }
   #livrable .lc-client-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
   #livrable .lc-client-stats .lc-client-stats-label { display: none; }
