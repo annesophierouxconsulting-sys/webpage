@@ -1168,6 +1168,47 @@ body {
 .doc-fan-pages.is-deck .doc-fan-front { transition: transform 0.4s ease, box-shadow 0.4s ease; }
 .doc-fan-pages.is-deck.is-dragging .doc-fan-front { transition: none; }
 .doc-fan-pages.is-deck:focus-visible { outline: 1px solid var(--champagne); outline-offset: 4px; }
+/* Agrandissement : bouton « + » sur les visuels, visionneuse plein écran (toucher l'image = taille réelle) */
+.zoom-wrap { position: relative; display: block; }
+.zoom-btn {
+  position: absolute; right: 10px; bottom: 10px; z-index: 5;
+  width: 38px; height: 38px; border-radius: 50%; padding: 0; cursor: zoom-in;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(8, 4, 26, 0.82); color: var(--champagne); border: 1px solid rgba(212, 178, 117, 0.6);
+  font-family: var(--font-mono); font-size: 20px; line-height: 1;
+  box-shadow: 0 6px 16px -6px rgba(8, 4, 26, 0.6);
+}
+.zoom-btn:hover, .zoom-btn:focus-visible { background: var(--champagne); color: var(--hero-bg); }
+.lc-shot img, .doc-fan-pages.is-deck { cursor: zoom-in; }
+.zoom {
+  position: fixed; inset: 0; z-index: 200; display: none;
+  background: rgba(8, 4, 26, 0.94);
+}
+.zoom.is-open { display: block; }
+.zoom-scroll {
+  position: absolute; inset: 0; overflow: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  display: flex; align-items: flex-start; justify-content: center; padding: 64px 12px 24px;
+}
+.zoom-scroll img { display: block; max-width: 100%; height: auto; margin: auto; background: #fff; cursor: zoom-in; }
+.zoom.is-zoomed .zoom-scroll { justify-content: flex-start; }
+.zoom.is-zoomed .zoom-scroll img { max-width: none; width: var(--zoom-w); cursor: zoom-out; }
+.zoom-close {
+  position: absolute; top: 12px; right: 12px; z-index: 2; width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(244, 236, 211, 0.12); color: var(--ivory); border: 1px solid rgba(244, 236, 211, 0.35);
+  font-size: 24px; line-height: 1; cursor: pointer;
+}
+.zoom-hint {
+  position: absolute; top: 24px; left: 16px; right: 72px; margin: 0;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(244, 236, 211, 0.7);
+}
+html.zoom-lock, html.zoom-lock body { overflow: hidden; }
+
+/* Mobile : plus d'éventail, la page de devant occupe toute la largeur ; les autres restent empilées dessous */
+@media (max-width: 760px) {
+  .doc-fan-pages, .doc-fan-pages.is-deck { padding: 0; }
+  .lc-media .doc-fan-pages.is-deck img { top: 0; left: 0; width: 100%; }
+  .doc-fan-back.is-left, .doc-fan-back.is-right { transform: none; }
+}
 .doc-fan-dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
 .doc-fan-dot {
   width: 24px; height: 24px; padding: 0; border: none; background: none; cursor: pointer;
@@ -1802,6 +1843,66 @@ body {
     hintIO.observe(ba);
   });
 
+  // ─── Visionneuse plein écran : « + » ou toucher sur un visuel du livrable ───
+  // Toucher l'image dans la visionneuse la passe à sa taille réelle (défilable),
+  // un second toucher la remet à la largeur de l'écran. Échap, × ou fond = fermer.
+  let zoomEl = null, zoomOpener = null;
+  function openZoom(img, src, hint) {
+    if (!zoomEl) {
+      zoomEl = document.createElement('div');
+      zoomEl.className = 'zoom';
+      zoomEl.setAttribute('role', 'dialog');
+      zoomEl.setAttribute('aria-modal', 'true');
+      zoomEl.innerHTML = '<p class="zoom-hint"></p><button type="button" class="zoom-close" aria-label="Fermer">×</button><div class="zoom-scroll"><img alt=""></div>';
+      document.body.appendChild(zoomEl);
+      const big = zoomEl.querySelector('.zoom-scroll img');
+      zoomEl.querySelector('.zoom-close').addEventListener('click', closeZoom);
+      zoomEl.querySelector('.zoom-scroll').addEventListener('click', e => { if (e.target !== big) closeZoom(); });
+      big.addEventListener('click', () => {
+        const w = Math.min(big.naturalWidth, window.innerWidth * 2.5);
+        zoomEl.style.setProperty('--zoom-w', w + 'px');
+        zoomEl.classList.toggle('is-zoomed');
+      });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && zoomEl.classList.contains('is-open')) closeZoom(); });
+    }
+    const big = zoomEl.querySelector('.zoom-scroll img');
+    big.src = src || img.currentSrc || img.src;
+    big.alt = img.alt || '';
+    zoomEl.setAttribute('aria-label', img.alt || 'Image agrandie');
+    zoomEl.querySelector('.zoom-hint').textContent = hint || 'Touchez l\'image pour zoomer';
+    zoomEl.classList.remove('is-zoomed');
+    zoomEl.querySelector('.zoom-scroll').scrollTo(0, 0);
+    zoomOpener = document.activeElement;
+    zoomEl.classList.add('is-open');
+    document.documentElement.classList.add('zoom-lock');
+    zoomEl.querySelector('.zoom-close').focus();
+  }
+  function closeZoom() {
+    zoomEl.classList.remove('is-open');
+    document.documentElement.classList.remove('zoom-lock');
+    if (zoomOpener && zoomOpener !== document.body) zoomOpener.focus();
+    else document.activeElement.blur();
+  }
+  function zoomButton(onClick, label) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'zoom-btn';
+    b.textContent = '+';
+    b.setAttribute('aria-label', label || 'Agrandir l\'image');
+    b.addEventListener('pointerdown', e => e.stopPropagation());
+    b.addEventListener('click', e => { e.stopPropagation(); onClick(); });
+    return b;
+  }
+  // Captures simples (plan d'action) : bouton + toucher
+  document.querySelectorAll('.lc-shot img').forEach(img => {
+    const wrap = document.createElement('span');
+    wrap.className = 'zoom-wrap';
+    img.before(wrap);
+    wrap.appendChild(img);
+    wrap.appendChild(zoomButton(() => openZoom(img)));
+    img.addEventListener('click', () => openZoom(img));
+  });
+
   // ─── Éventails de pages : swipe (doigt / souris), flèches clavier, points ───
   // Les trois pages tournent : « suivante » amène la page de droite au premier
   // plan et renvoie celle de devant tout au fond (à gauche).
@@ -1856,7 +1957,16 @@ body {
     deck.addEventListener('keydown', e => {
       if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
       else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
+      else if (e.key === 'Enter') { e.preventDefault(); openZoom(pages[current]); }
     });
+
+    // Un toucher (sans glissement) ouvre la page affichée en grand
+    let justDragged = false;
+    deck.addEventListener('click', () => {
+      if (justDragged) { justDragged = false; return; }
+      openZoom(pages[current]);
+    });
+    deck.appendChild(zoomButton(() => openZoom(pages[current])));
 
     let startX = 0, startY = 0, dx = 0, pointerId = null, dragging = false;
     deck.addEventListener('pointerdown', e => {
@@ -1881,6 +1991,8 @@ body {
       pointerId = null;
       if (!dragging) return;
       dragging = false;
+      justDragged = true;
+      setTimeout(() => { justDragged = false; }, 50);
       deck.classList.remove('is-dragging');
       const threshold = Math.min(60, deck.offsetWidth * 0.15);
       if (dx <= -threshold) go(1);
