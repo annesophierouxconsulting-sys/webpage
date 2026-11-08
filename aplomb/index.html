@@ -1614,9 +1614,9 @@ body {
     <a class="mh-logo" href="../index.html" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
     <nav class="mh-tabs-wrap" aria-label="Pages">
       <ul class="mh-tabs">
-        <li><a class="mh-tab" href="../index.html">Audit CRO SaaS et e-commerce</a></li>
-        <li><a class="mh-tab" href="../offer-focus/index.html">Au clair</a></li>
+        <li><a class="mh-tab" href="../offer-focus/index.html">Au Clair</a></li>
         <li><a class="mh-tab is-active" href="#top" aria-current="page">d'Aplomb</a></li>
+        <li><a class="mh-tab" href="../index.html#sur-mesure">Sur-mesure</a></li>
       </ul>
     </nav>
     <a class="mh-cta" href="#booking">Réserver un appel découverte <span class="mh-cta-arrow" aria-hidden="true">↗</span></a>
@@ -1646,14 +1646,10 @@ body {
         <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un appel découverte</a></li>
       </ul>
     </li>
-    <li class="mh-drawer-category-label" aria-hidden="true">— Au clair</li>
-    <li>
-      <a class="mh-drawer-tab" href="../offer-focus/index.html">Au clair</a>
-    </li>
-    <li class="mh-drawer-category-label" aria-hidden="true">— Audit CRO SaaS et e-commerce</li>
-    <li>
-      <a class="mh-drawer-tab" href="../index.html">Audit CRO SaaS et e-commerce</a>
-    </li>
+    <li class="mh-drawer-category-label" aria-hidden="true">— Les autres offres</li>
+    <li><a class="mh-drawer-tab" href="../offer-focus/index.html">Au Clair</a></li>
+    <li><a class="mh-drawer-tab" href="../index.html#sur-mesure">Sur-mesure</a></li>
+    <li><a class="mh-drawer-tab" href="../index.html">Accueil Maat</a></li>
   </ul>
   <div class="mh-drawer-divider" aria-hidden="true"></div>
   <a class="mh-drawer-cta" href="#booking">Réserver un appel découverte ↗</a>
@@ -1982,8 +1978,8 @@ body {
       <p>Oui, et c'est même le bon moment. Avant d'investir dans la publicité ou de développer vos réseaux sociaux, mieux vaut un site qui sait transformer les visites en ventes&nbsp;: chaque visiteur que vous attirerez ensuite comptera davantage. L'évaluation ne dépend pas du volume de visites, et les recommandations se vérifient en suivant vos indicateurs après chaque lot.</p>
     </details>
     <details class="faq-item">
-      <summary><span>Quelle différence avec Au clair&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
-      <p><a class="faq-link" href="../offer-focus/index.html">Au clair</a> porte sur une offre et sa page de vente&nbsp;: pour les coachs, formateurs et consultants qui vendent leur expertise. D'Aplomb porte sur un site entier&nbsp;: pour les petites entreprises qui vendent leurs produits en ligne.</p>
+      <summary><span>Quelle différence avec Au Clair&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
+      <p><a class="faq-link" href="../offer-focus/index.html">Au Clair</a> porte sur une offre et sa page de vente&nbsp;: pour les coachs, formateurs et consultants qui vendent leur expertise. D'Aplomb porte sur un site entier&nbsp;: pour les petites entreprises qui vendent leurs produits en ligne.</p>
     </details>
     <details class="faq-item">
       <summary><span>Et mon compte Instagram&nbsp;?</span><span class="faq-icon" aria-hidden="true">＋</span></summary>
@@ -2235,10 +2231,10 @@ body {
   });
 
   // ─── IntersectionObserver fade-up sur sections .reveal ───
-  // Le livrable est bien plus long que les sections d'Au clair : un seuil
+  // Le livrable est bien plus long que les sections d'Au Clair : un seuil
   // à 15 % de sa surface le laissait invisible sur plusieurs écrans. On
   // déclenche donc à l'entrée dans le viewport, et chaque bloc du livrable
-  // apparaît pour lui-même, au même rythme qu'une section d'Au clair.
+  // apparaît pour lui-même, au même rythme qu'une section d'Au Clair.
   document.querySelectorAll('.lc-head, .lc-row, .lc-restitution, .lc-testimonial')
     .forEach(el => el.classList.add('reveal'));
   const io = new IntersectionObserver((entries) => {
