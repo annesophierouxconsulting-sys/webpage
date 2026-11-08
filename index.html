@@ -1896,6 +1896,8 @@ body {
 .booking-section {
   background: var(--paper);
   padding: 5% 5%;
+  /* les infobulles des jours du calendrier dépassent à droite sur mobile */
+  overflow-x: clip;
 }
 
 .modulable-card {
@@ -3238,6 +3240,31 @@ body {
 .team-solo { max-width: 760px; margin: 0 auto; }
 .team-solo .team-person { text-align: left; }
 
+/* À propos : portrait rond à gauche, texte à droite */
+.about-grid {
+  display: grid; grid-template-columns: minmax(200px, 300px) minmax(0, 620px);
+  gap: clamp(40px, 6vw, 80px); align-items: center; justify-content: center;
+  max-width: 1000px; margin: clamp(24px, 3vw, 40px) auto 0;
+}
+.about-portrait { aspect-ratio: 1 / 1; border-radius: 50%; overflow: hidden; border: 2px solid var(--ivory); }
+.about-portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-text h2 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(28px, 3.2vw, 40px); line-height: 1.18; letter-spacing: -0.01em;
+  margin: 0 0 22px; color: var(--ivory); font-variation-settings: "opsz" 72;
+}
+.about-text h2 em { font-style: italic; color: var(--champagne); }
+.about-text .team-role { margin-bottom: 14px; }
+.about-bio {
+  font-family: var(--font-body); font-size: 15px; line-height: 1.75;
+  color: rgba(244, 236, 211, 0.78); margin: 0 0 14px; font-variation-settings: "opsz" 14;
+}
+.about-text .team-tags { margin-top: 18px; }
+@media (max-width: 760px) {
+  .about-grid { grid-template-columns: 1fr; gap: 28px; }
+  .about-portrait { width: min(200px, 60%); margin: 0 auto; }
+}
+
 /* Comment je travaille */
 .travail-section { background: var(--paper); padding: clamp(64px, 8vw, 110px) 6%; position: relative; border-top: 1px solid rgba(20, 16, 42, 0.08); }
 .travail-head { max-width: 1080px; margin: 0 auto clamp(28px, 4vw, 44px); }
@@ -3463,18 +3490,19 @@ body {
 
 <!-- 7 — À PROPOS -->
 <section class="team-section reveal" id="a-propos" data-cta-theme="dark">
-  <span class="chapter-mark on-dark">/ ch.03 — à propos</span>
-  <div class="team-head">
-    <h2>Un regard expert, <em>à chaque échelle.</em></h2>
-    <p class="lead">De la page de vente d'un(e) indépendant(e) à l'audit multi-méthodes d'un site à fort trafic, la même rigueur&nbsp;: comprendre avant de recommander.</p>
-  </div>
-  <div class="team-solo">
-    <article class="team-person">
-      <div class="team-role">Fondatrice de Maat</div>
-      <h3 class="team-name">Anne-Sophie Roux</h3>
-      <p class="team-bio">10 ans en marketing digital, du SEO au CRO, en passant par le contenu. 5 ans passés chez l'annonceur comme Responsable Acquisition / Digital, avec une forte culture data et MarTech. J'apporte une lecture CRO à l'intersection de l'acquisition, du business et de la data, et je transforme les signaux en recommandations concrètes — jusqu'à la maquette et aux textes de vos pages.</p>
+  <span class="chapter-mark on-dark">/ ch.03 — à propos de moi</span>
+  <div class="about-grid">
+    <div class="about-portrait">
+      <img src="offer-focus/assets/anne-sophie-portrait.jpg" alt="Anne-Sophie Roux, fondatrice de Maat" width="400" height="400">
+    </div>
+    <article class="about-text">
+      <h2>10 ans de marketing digital. <em>Un regard centré sur la conversion.</em></h2>
+      <div class="team-role">Anne-Sophie Roux · Consultante CRO &amp; Copywriting</div>
+      <p class="about-bio">5 ans côté annonceur, en responsabilité Acquisition &amp; Digital, puis j'ai développé ma propre lecture du CRO.</p>
+      <p class="about-bio">Ma particularité&nbsp;: je ne m'arrête pas au diagnostic. Je croise acquisition, business, UX et data pour décider quoi corriger d'abord, puis je repense vos pages et j'en réécris les textes. Vous voyez concrètement à quoi ressemble la version qui convertit.</p>
       <div class="team-tags">
         <span class="team-tag is-solid">CRO</span>
+        <span class="team-tag is-solid">UX</span>
         <span class="team-tag is-solid">Copywriting</span>
         <span class="team-tag is-solid">Data</span>
       </div>
