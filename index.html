@@ -2060,6 +2060,11 @@ body {
   .about-grid { grid-template-columns: 1fr; }
   .about-portrait { max-width: 200px; margin: 0 auto; }
 }
+
+/* Offre d'Aplomb : page pas encore en ligne, liens désactivés (sans href) */
+a.is-soon { cursor: default; opacity: 0.55; }
+a.is-soon:hover { color: inherit; }
+.mh-tab.is-soon::after { display: none; }
 </style>
 </head>
 <body>
@@ -2073,7 +2078,7 @@ body {
     <nav class="mh-tabs-wrap" aria-label="Pages">
       <ul class="mh-tabs">
         <li><a class="mh-tab" href="offer-focus/index.html">Au Clair</a></li>
-        <li><a class="mh-tab" href="aplomb/index.html">d'Aplomb</a></li>
+        <li><a class="mh-tab is-soon" aria-disabled="true" title="Page bientôt en ligne">d'Aplomb</a></li>
         <li><a class="mh-tab" href="#sur-mesure">Sur-mesure</a></li>
       </ul>
     </nav>
@@ -2114,7 +2119,7 @@ body {
     </li>
     <li class="mh-drawer-category-label" aria-hidden="true">— Les offres</li>
     <li><a class="mh-drawer-tab" href="offer-focus/index.html">Au Clair</a></li>
-    <li><a class="mh-drawer-tab" href="aplomb/index.html">d'Aplomb</a></li>
+    <li><a class="mh-drawer-tab is-soon" aria-disabled="true" title="Page bientôt en ligne">d'Aplomb</a></li>
     <li><a class="mh-drawer-tab" href="#sur-mesure">Sur-mesure</a></li>
   </ul>
   <div class="mh-drawer-divider" aria-hidden="true"></div>
@@ -2193,7 +2198,7 @@ body {
       <div class="offre-card-foot">
         <p class="offre-card-price">1&nbsp;200&nbsp;€</p>
         <p class="offre-card-scope">Audit du site + plan d'action priorisé + maquette d'une page clé</p>
-        <a class="offre-card-link" href="aplomb/index.html">Découvrir d'Aplomb →</a>
+        <a class="offre-card-link is-soon" aria-disabled="true">Page bientôt en ligne</a>
       </div>
     </article>
   </div>
@@ -2255,7 +2260,7 @@ body {
       <p>«&nbsp;Anne-Sophie a rapidement compris le contexte et les enjeux. […] Ce qui a surtout fait la différence, c'est sa passion pour le CRO et sa capacité à s'imprégner de l'univers de la maison d'édition. […] Au-delà de ses compétences techniques, elle a un sens de l'esthétique affirmé et beaucoup de goût, elle m'a proposé des maquettes qui m'ont bluffée&nbsp;!&nbsp;»</p>
     </blockquote>
     <figcaption><strong>Floriane Stoecklin</strong> · responsable communication marketing, Éditions L'Honnête Homme</figcaption>
-    <a class="quote-link" href="aplomb/index.html#livrable">Voir l'audit réalisé · d'Aplomb →</a>
+    <a class="quote-link is-soon" aria-disabled="true">Audit réalisé avec d'Aplomb · page bientôt en ligne</a>
   </figure>
 </section>
 
@@ -2394,7 +2399,7 @@ body {
   <nav class="footer-sitemap" aria-label="Navigation interne du site">
     <a href="#offres">Les offres</a>
     <a href="offer-focus/index.html">Au Clair</a>
-    <a href="aplomb/index.html">d'Aplomb</a>
+    <a class="is-soon" aria-disabled="true" title="Page bientôt en ligne">d'Aplomb</a>
     <a href="#sur-mesure">Sur-mesure</a>
     <a href="#methodes">La méthode</a>
     <a href="#a-propos">À propos</a>

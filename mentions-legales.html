@@ -663,6 +663,11 @@ body {
   .footer-bottom { grid-template-columns: 1fr; gap: 1rem; text-align: left; }
   .footer-meta, .footer-cta { text-align: left; align-items: flex-start; }
 }
+
+/* Offre d'Aplomb : page pas encore en ligne, liens désactivés (sans href) */
+a.is-soon { cursor: default; opacity: 0.55; }
+a.is-soon:hover { color: inherit; }
+.mh-tab.is-soon::after { display: none; }
 </style>
 </head>
 <body>
@@ -703,7 +708,7 @@ body {
     <nav class="mh-tabs-wrap" aria-label="Pages">
       <ul class="mh-tabs">
         <li><a class="mh-tab" href="offer-focus/index.html">Au Clair</a></li>
-        <li><a class="mh-tab" href="aplomb/index.html">d'Aplomb</a></li>
+        <li><a class="mh-tab is-soon" aria-disabled="true" title="Page bientôt en ligne">d'Aplomb</a></li>
         <li><a class="mh-tab" href="index.html#sur-mesure">Sur-mesure</a></li>
       </ul>
     </nav>
@@ -721,7 +726,7 @@ body {
   <ul class="mh-drawer-tabs">
     <li><a class="mh-drawer-tab" href="index.html">Accueil</a></li>
     <li><a class="mh-drawer-tab" href="offer-focus/index.html">Au Clair</a></li>
-    <li><a class="mh-drawer-tab" href="aplomb/index.html">d'Aplomb</a></li>
+    <li><a class="mh-drawer-tab is-soon" aria-disabled="true" title="Page bientôt en ligne">d'Aplomb</a></li>
     <li><a class="mh-drawer-tab" href="index.html#sur-mesure">Sur-mesure</a></li>
   </ul>
   <div class="mh-drawer-divider" aria-hidden="true"></div>
@@ -902,7 +907,7 @@ body {
   <nav class="footer-sitemap" aria-label="Navigation interne du site">
     <a href="index.html#offres">Les offres</a>
     <a href="offer-focus/index.html">Au Clair</a>
-    <a href="aplomb/index.html">d'Aplomb</a>
+    <a class="is-soon" aria-disabled="true" title="Page bientôt en ligne">d'Aplomb</a>
     <a href="index.html#sur-mesure">Sur-mesure</a>
     <a href="index.html#methodes">La méthode</a>
     <a href="index.html#a-propos">À propos</a>
