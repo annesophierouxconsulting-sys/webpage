@@ -430,7 +430,7 @@ body {
 .expertise-section.is-compact .expertise-text p { max-width: none; }
 .expertise-text p.expertise-quote { font-style: italic; margin-bottom: 0; }
 .expertise-sign {
-  display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: center; column-gap: 14px; row-gap: 10px;
+  display: grid; grid-template-columns: 56px minmax(0, 1fr); align-items: center; column-gap: 14px; row-gap: 10px;
   margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(20, 16, 42, 0.1);
 }
 .expertise-sign img {
@@ -445,13 +445,6 @@ body {
   display: block; margin-top: 4px; font-family: var(--font-mono); font-size: 10px;
   letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute);
 }
-.expertise-sign-link {
-  justify-self: end; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--champagne-fonce); text-decoration: none;
-  border-bottom: 1px solid rgba(140, 106, 44, 0.4); padding-bottom: 4px;
-}
-.expertise-sign-link:hover { border-bottom-color: var(--champagne-fonce); }
-@media (max-width: 560px) { .expertise-sign-link { grid-column: 2; justify-self: start; } }
 
 /* ============================================================
    TÉMOIGNAGES — emplacements réservés (testi-*)
@@ -1723,7 +1716,6 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
           <span class="expertise-sign-name">Anne-Sophie Roux</span>
           <span class="expertise-sign-role">Consultante CRO · Fondatrice de Maat</span>
         </div>
-        <a class="expertise-sign-link" href="../index.html#a-propos">Mon parcours →</a>
       </div>
     </div>
   </div>
