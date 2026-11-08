@@ -1180,7 +1180,7 @@ body {
   #livrable .lc-client-stats .lc-client-stats-label { display: none; }
   #livrable .lc-client-stats li { display: flex; flex-direction: column; gap: 2px; font-size: 12px; letter-spacing: 0.06em; }
   #livrable .lc-client-stats strong { font-size: 28px; margin: 0; vertical-align: 0; line-height: 1.1; }
-  .lc-client-label, .lc-n, .crit-tags li, .lc-hint, .doc-fan figcaption, .lc-shot figcaption, .lc-testimonial figcaption, .ba-full-btn,
+  .lc-client-label, .lc-n, .crit-tags li, .lc-hint, .doc-fan figcaption, .lc-shot figcaption, .lc-testimonial figcaption,
   #livrable .chapter-mark, .lc-text dt, .ba-label, .lc-testimonial summary span {
     font-size: 12px !important; letter-spacing: 0.08em;
   }
@@ -1192,13 +1192,16 @@ body {
   aspect-ratio: 428 / 1012; max-height: none; width: min(230px, 62vw); margin: 0 auto;
   border: 8px solid var(--hero-bg); border-radius: 28px; box-shadow: 0 30px 60px -30px rgba(8, 4, 26, 0.55);
 }
-.ba.is-phone .ba-label { top: auto; bottom: 12px; }
-.ba.is-phone .ba-label.is-before { left: 10px; }
-.ba.is-phone .ba-label.is-after { right: 10px; }
-.ba-full-btn {
-  display: block; margin: 6px auto 0; min-height: 44px; padding: 0 4px; cursor: zoom-in;
-  background: none; border: none; border-bottom: 1px solid rgba(140, 106, 44, 0.4);
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--champagne-fonce);
+/* Libellés au-dessus du cadre, pour ne rien masquer des écrans comparés */
+.ba-phone-labels {
+  display: flex; justify-content: space-between; width: min(230px, 62vw); margin: 0 auto 8px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+}
+.ba-phone-labels span:first-child { color: var(--ink-mute); }
+.ba-phone-labels span:last-child { color: var(--champagne-fonce); }
+.ba-phone-note {
+  margin: 6px auto 0; max-width: 280px; text-align: center;
+  font-family: var(--font-body); font-style: italic; font-size: 14px; line-height: 1.5; color: var(--ink-soft);
 }
 @media (max-width: 760px) {
   .ba-desktop { display: none; }
@@ -1563,6 +1566,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
         <p class="lc-hint ba-desktop" aria-hidden="true">← Faites glisser pour comparer · premier écran, desktop →</p>
         <!-- Mobile : même comparaison, au format téléphone -->
         <div class="ba-mobile">
+          <div class="ba-phone-labels" aria-hidden="true"><span>← Avant</span><span>Après →</span></div>
           <div class="ba is-phone" style="--pos: 50%">
             <div class="ba-layer ba-before">
               <img src="assets/hh-fiche-avant-mobile.jpg" alt="Fiche produit actuelle sur mobile : logo, fil d'Ariane, photo avec bandeau « Livre couverture rigide », titre en capitales coupé en bas d'écran, ni prix ni bouton d'achat visibles" width="428" height="1012" loading="lazy" decoding="async">
@@ -1572,11 +1576,9 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
             </div>
             <div class="ba-handle" aria-hidden="true"><span class="ba-knob"><svg viewBox="0 0 24 12" width="22" height="11"><path d="M7 1 2 6l5 5M17 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
             <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Comparer la fiche produit avant et après, sur mobile">
-            <span class="ba-label is-before" aria-hidden="true">Avant</span>
-            <span class="ba-label is-after" aria-hidden="true">Après</span>
           </div>
-          <p class="lc-hint" aria-hidden="true">← Faites glisser pour comparer · premier écran, mobile →</p>
-          <button type="button" class="ba-full-btn" data-full="assets/hh-fiche-avant-mobile-page.jpg">+ Voir leur page actuelle en entier</button>
+          <p class="lc-hint" aria-hidden="true">Faites glisser pour comparer</p>
+          <p class="ba-phone-note">Premier écran mobile · un extrait de la nouvelle maquette complète</p>
         </div>
       </div>
     </article>
@@ -1948,12 +1950,6 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
     b.addEventListener('click', e => { e.stopPropagation(); onClick(); });
     return b;
   }
-  // Avant / après mobile : leur page actuelle en entier, à faire défiler
-  document.querySelectorAll('.ba-full-btn').forEach(btn => {
-    btn.addEventListener('click', () => openZoom(
-      { alt: 'Fiche produit actuelle de L\'Honnête Homme sur mobile, page entière' },
-      btn.dataset.full, 'Leur page actuelle · faites défiler'));
-  });
   // Captures simples (plan d'action) : bouton + toucher
   document.querySelectorAll('.lc-shot img').forEach(img => {
     const wrap = document.createElement('span');
