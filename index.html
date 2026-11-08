@@ -3289,6 +3289,17 @@ body {
 .travail-section { padding-bottom: clamp(40px, 5vw, 64px); }
 .quote-section { padding-top: clamp(56px, 7vw, 96px); }
 
+
+/* À propos home : portrait + texte */
+.about-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: minmax(200px, 300px) 1fr; gap: clamp(36px, 6vw, 80px); align-items: center; }
+.about-portrait img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 50%; border: 1px solid rgba(212, 178, 117, 0.4); display: block; }
+.about-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.15; color: var(--ivory); margin: 0 0 0.5rem; font-variation-settings: "opsz" 72; }
+.about-title em { font-style: italic; color: var(--champagne); }
+.about-grid .team-bio { text-align: left; hyphens: none; }
+@media (max-width: 760px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-portrait { max-width: 200px; margin: 0 auto; }
+}
 </style>
 </head>
 <body>
