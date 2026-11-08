@@ -1602,6 +1602,20 @@ body {
 .offre-quote blockquote { margin: 0; font-family: var(--font-display); font-style: italic; font-size: 18px; line-height: 1.5; color: var(--ivory); }
 .offre-quote figcaption { margin-top: 10px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--champagne); }
 
+
+/* À propos compact (signature sous l'offre) */
+.expertise-section.is-compact { padding: clamp(48px, 6vw, 80px) 6%; border-top: none; }
+.expertise-section.is-compact .expertise-wrap { max-width: 760px; display: block; }
+.expertise-section.is-compact .expertise-text h2 { font-size: clamp(22px, 2.6vw, 28px); margin-bottom: 16px; }
+.expertise-section.is-compact .expertise-text p { max-width: none; }
+.expertise-section.is-compact .expertise-text p:last-child { font-style: normal; }
+.expertise-sign { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(140, 106, 44, 0.2); }
+.expertise-sign img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(140, 106, 44, 0.3); flex: none; }
+.expertise-sign-name { display: flex; flex-direction: column; gap: 3px; margin-right: auto; flex: 1 1 0; min-width: 0; }
+@media (max-width: 600px) { .expertise-sign a { flex-basis: 100%; max-width: max-content; margin-left: 70px; } }
+.expertise-sign-name strong { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 19px; color: var(--ink); }
+.expertise-sign-name span { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
+.expertise-sign a { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--champagne-fonce); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 3px; }
 </style>
 </head>
 <body>
@@ -1936,19 +1950,19 @@ body {
   </div>
 </section>
 
-<!-- EXPERTISE -->
-<section class="expertise-section reveal" id="expertise" data-cta-theme="light">
+<!-- EXPERTISE (compact) -->
+<section class="expertise-section is-compact reveal" id="expertise" data-cta-theme="light">
   <div class="expertise-wrap">
-    <div class="expertise-portrait">
-      <div class="expertise-portrait-frame">
-        <img src="../offer-focus/assets/anne-sophie-portrait.jpg" alt="Anne-Sophie Roux, fondatrice de Maat" width="400" height="400">
-      </div>
-    </div>
     <div class="expertise-text">
       <p class="expertise-eyebrow">À propos de moi</p>
       <h2>Un regard expert, mis à la portée des petites structures.</h2>
       <p>10 ans de marketing digital, dont 5 côté annonceur en responsabilité Acquisition &amp; Digital. Avec d'Aplomb, je mets cette rigueur au service des entreprises qui fabriquent, éditent ou vendent avec soin — et qui méritent un site à la hauteur.</p>
-      <p>Je n'empile pas les bonnes pratiques. Je regarde votre site comme un vendeur, au service de ce que vous faites.</p>
+      <p>Je ne coche pas une liste de bonnes pratiques&nbsp;: je regarde votre site avec les yeux de vos clients, pour qu'il défende ce que vous faites aussi bien que vous.</p>
+      <div class="expertise-sign">
+        <img src="../offer-focus/assets/anne-sophie-portrait.jpg" alt="Anne-Sophie Roux" width="56" height="56">
+        <div class="expertise-sign-name"><strong>Anne-Sophie Roux</strong><span>Consultante CRO · Fondatrice de Maat</span></div>
+        <a href="../index.html#a-propos">Mon parcours →</a>
+      </div>
     </div>
   </div>
 </section>

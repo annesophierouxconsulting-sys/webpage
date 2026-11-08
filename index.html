@@ -3262,6 +3262,17 @@ body {
 .travail-section { padding-bottom: clamp(40px, 5vw, 64px); }
 .quote-section { padding-top: clamp(56px, 7vw, 96px); }
 
+
+/* À propos home : portrait + texte */
+.about-grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: minmax(200px, 300px) 1fr; gap: clamp(36px, 6vw, 80px); align-items: center; }
+.about-portrait img { width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 50%; border: 1px solid rgba(212, 178, 117, 0.4); display: block; }
+.about-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(26px, 3.2vw, 38px); line-height: 1.15; color: var(--ivory); margin: 0 0 0.5rem; font-variation-settings: "opsz" 72; }
+.about-title em { font-style: italic; color: var(--champagne); }
+.about-grid .team-bio { text-align: left; hyphens: none; }
+@media (max-width: 760px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .about-portrait { max-width: 200px; margin: 0 auto; }
+}
 </style>
 </head>
 <body>
@@ -3463,18 +3474,17 @@ body {
 
 <!-- 7 — À PROPOS -->
 <section class="team-section reveal" id="a-propos" data-cta-theme="dark">
-  <span class="chapter-mark on-dark">/ ch.03 — à propos</span>
-  <div class="team-head">
-    <h2>Un regard expert, <em>à chaque échelle.</em></h2>
-    <p class="lead">De la page de vente d'un(e) indépendant(e) à l'audit multi-méthodes d'un site à fort trafic, la même rigueur&nbsp;: comprendre avant de recommander.</p>
-  </div>
-  <div class="team-solo">
+  <span class="chapter-mark on-dark">/ ch.03 — à propos de moi</span>
+  <div class="about-grid">
+    <div class="about-portrait"><img src="offer-focus/assets/anne-sophie-portrait.jpg" alt="Anne-Sophie Roux, fondatrice de Maat" width="400" height="400"></div>
     <article class="team-person">
-      <div class="team-role">Fondatrice de Maat</div>
-      <h3 class="team-name">Anne-Sophie Roux</h3>
-      <p class="team-bio">10 ans en marketing digital, du SEO au CRO, en passant par le contenu. 5 ans passés chez l'annonceur comme Responsable Acquisition / Digital, avec une forte culture data et MarTech. J'apporte une lecture CRO à l'intersection de l'acquisition, du business et de la data, et je transforme les signaux en recommandations concrètes — jusqu'à la maquette et aux textes de vos pages.</p>
+      <h2 class="about-title">10 ans de marketing digital. <em>Un regard centré sur la conversion.</em></h2>
+      <div class="team-role">Anne-Sophie Roux · Consultante CRO</div>
+      <p class="team-bio">5 ans côté annonceur, en responsabilité Acquisition &amp; Digital, avant de me consacrer au CRO.</p>
+      <p class="team-bio">Ma particularité&nbsp;: je ne m'arrête pas au diagnostic. Je croise acquisition, business, UX et data pour décider quoi corriger d'abord, puis je repense vos pages et j'en réécris les textes. Vous voyez concrètement à quoi ressemble la version qui convertit.</p>
       <div class="team-tags">
         <span class="team-tag is-solid">CRO</span>
+        <span class="team-tag is-solid">UX</span>
         <span class="team-tag is-solid">Copywriting</span>
         <span class="team-tag is-solid">Data</span>
       </div>
