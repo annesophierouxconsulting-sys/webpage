@@ -1612,7 +1612,7 @@ body {
 .expertise-sign { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 26px; padding-top: 22px; border-top: 1px solid rgba(140, 106, 44, 0.2); }
 .expertise-sign img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(140, 106, 44, 0.3); flex: none; }
 .expertise-sign-name { display: flex; flex-direction: column; gap: 3px; margin-right: auto; flex: 1 1 0; min-width: 0; }
-@media (max-width: 600px) { .expertise-sign a { flex-basis: 100%; max-width: max-content; margin-left: 70px; } }
+@media (max-width: 600px) { .expertise-sign { display: grid; grid-template-columns: 56px 1fr; column-gap: 14px; row-gap: 12px; } .expertise-sign a { grid-column: 2; justify-self: start; } }
 .expertise-sign-name strong { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 19px; color: var(--ink); }
 .expertise-sign-name span { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
 .expertise-sign a { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--champagne-fonce); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 3px; }
