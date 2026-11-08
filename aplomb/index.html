@@ -1246,6 +1246,10 @@ body {
 }
 html.zoom-lock, html.zoom-lock body { overflow: hidden; }
 
+/* Pages au-delà de trois : empilées hors de vue ; pages réservées au mobile absentes sur desktop */
+.doc-fan-back.is-stacked { visibility: hidden; }
+@media (min-width: 761px) { .doc-fan-pages [data-only="mobile"] { display: none; } }
+
 /* Mobile : plus d'éventail, la page de devant occupe toute la largeur ; les autres restent empilées dessous */
 @media (max-width: 760px) {
   .doc-fan-pages, .doc-fan-pages.is-deck { padding: 0; }
@@ -1512,6 +1516,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
               <source media="(max-width: 760px)" srcset="assets/hh-diag-mobile-17.jpg" width="840" height="1110">
               <img class="doc-fan-front" src="assets/hh-diag-17.jpg" alt="Observation n°17, panier sur mobile : le bouton « Valider la commande » n'apparaît qu'après près de deux écrans, critère Friction" width="966" height="692" loading="lazy" decoding="async">
             </picture>
+            <img class="doc-fan-back doc-fan-extra" data-only="mobile" src="assets/hh-diag-mobile-08.jpg" width="840" height="1110" alt="Observation n°8, panier : le forfait de livraison à 5 € est suivi de mentions qui laissent croire que le montant pourrait changer, critère Clarté" loading="lazy" decoding="async">
           </div>
           <figcaption>Les observations dans un PDF · extrait</figcaption>
         </figure>
@@ -1976,13 +1981,12 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
   // Les trois pages tournent : « suivante » amène la page de droite au premier
   // plan et renvoie celle de devant tout au fond (à gauche).
   document.querySelectorAll('.doc-fan-pages').forEach(deck => {
-    const pages = [
-      deck.querySelector('.doc-fan-front'),
-      deck.querySelector('.doc-fan-back.is-right'),
-      deck.querySelector('.doc-fan-back.is-left'),
-    ];
-    if (pages.some(p => !p)) return;
-    const front = pages[0];
+    // Ordre des pages : devant, droite, gauche, puis les éventuelles pages en plus
+    // (data-only="mobile" : présentes seulement sur mobile)
+    const front = deck.querySelector('.doc-fan-front');
+    const allPages = [front, deck.querySelector('.doc-fan-back.is-right'), deck.querySelector('.doc-fan-back.is-left'),
+      ...deck.querySelectorAll('img.doc-fan-extra')];
+    if (allPages.some(p => !p)) return;
     const w = front.getAttribute('width'), h = front.getAttribute('height');
     // Sur mobile, un éventail peut avoir ses propres proportions (montages portrait)
     const mobile = window.matchMedia('(max-width: 760px)');
@@ -1990,35 +1994,45 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
       const r = mobile.matches && deck.dataset.mobileRatio;
       if (r || (w && h)) deck.style.setProperty('--deck-ratio', r || (w + ' / ' + h));
     };
-    setRatio();
-    mobile.addEventListener('change', setRatio);
     deck.classList.add('is-deck');
     deck.setAttribute('tabindex', '0');
     deck.setAttribute('role', 'group');
     deck.setAttribute('aria-roledescription', 'carrousel');
     deck.setAttribute('aria-label', 'Pages d\'exemple — balayer ou utiliser les flèches pour faire défiler');
-    pages.forEach(p => p.setAttribute('draggable', 'false'));
+    allPages.forEach(p => p.setAttribute('draggable', 'false'));
 
     const dots = document.createElement('div');
     dots.className = 'doc-fan-dots';
-    const dotButtons = pages.map((p, i) => {
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'doc-fan-dot';
-      b.setAttribute('aria-label', 'Afficher la page ' + (i + 1) + ' sur ' + pages.length);
-      b.addEventListener('click', () => { current = i; render(); });
-      dots.appendChild(b);
-      return b;
-    });
     deck.after(dots);
 
-    const roles = [['doc-fan-front'], ['doc-fan-back', 'is-right'], ['doc-fan-back', 'is-left']];
-    let current = 0;
+    let pages = [], dotButtons = [], current = 0;
+    // (Re)construit la liste des pages et les points selon la largeur d'écran
+    function setup() {
+      pages = allPages.filter(p => mobile.matches || p.dataset.only !== 'mobile');
+      dots.replaceChildren();
+      dotButtons = pages.map((p, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'doc-fan-dot';
+        b.setAttribute('aria-label', 'Afficher la page ' + (i + 1) + ' sur ' + pages.length);
+        b.addEventListener('click', () => { current = i; render(); });
+        dots.appendChild(b);
+        return b;
+      });
+      current = 0;
+      setRatio();
+      render();
+    }
+
+    // Rôle selon la distance à la page affichée : devant, juste derrière (droite),
+    // la précédente (gauche), les autres empilées hors de vue
+    const roleFor = k => k === 0 ? ['doc-fan-front'] : k === 1 ? ['doc-fan-back', 'is-right']
+      : k === pages.length - 1 ? ['doc-fan-back', 'is-left'] : ['doc-fan-back', 'is-stacked'];
     function render() {
       pages.forEach((p, i) => {
         const k = (i - current + pages.length) % pages.length;
-        p.classList.remove('doc-fan-front', 'doc-fan-back', 'is-left', 'is-right');
-        p.classList.add(...roles[k]);
+        p.classList.remove('doc-fan-front', 'doc-fan-back', 'is-left', 'is-right', 'is-stacked');
+        p.classList.add(...roleFor(k));
         p.style.transform = '';
         p.setAttribute('aria-hidden', k === 0 ? 'false' : 'true');
       });
@@ -2028,7 +2042,8 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
       });
     }
     const go = (step) => { current = (current + step + pages.length) % pages.length; render(); };
-    render();
+    setup();
+    mobile.addEventListener('change', setup);
 
     deck.addEventListener('keydown', e => {
       if (e.key === 'ArrowRight') { e.preventDefault(); go(1); }
