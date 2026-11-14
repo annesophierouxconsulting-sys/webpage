@@ -249,6 +249,87 @@ body {
 }
 .hero-inner > .hero-promise { animation-delay: 0ms; }
 .hero-inner > .hero-offer { animation-delay: 500ms; }
+.hero-inner > .hero-proof { animation-delay: 800ms; }
+
+/* Groupe 3 — Mini-preuve : une seule citation courte, renvoi vers #temoignages.
+   .hero-proof-stack (photos groupées) prévu pour quand les 3 témoignages seront réels. */
+.hero-proof {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(212, 178, 117, 0.2);
+  max-width: 460px;
+}
+.hero-proof-item {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  column-gap: 12px;
+  row-gap: 6px;
+  align-items: center;
+}
+.hero-proof-photo {
+  grid-row: 1 / span 2;
+  align-self: start;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(212, 178, 117, 0.45);
+}
+.hero-proof-item blockquote { margin: 0; }
+.hero-proof-item blockquote p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16.5px;
+  line-height: 1.4;
+  color: var(--ivory);
+  font-variation-settings: "opsz" 24;
+}
+.hero-proof-item figcaption {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.72);
+}
+.hero-proof-name { white-space: nowrap; }
+.hero-proof-name::after { content: " ·"; }
+@media (max-width: 639px) {
+  .hero-proof-name { display: block; }
+  .hero-proof-name::after { content: none; }
+}
+.hero-proof-more {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+.hero-proof-stack { display: inline-flex; }
+.hero-proof-stack > * {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--hero-bg);
+  background: #2A2440;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--champagne);
+}
+.hero-proof-stack > * + * { margin-left: -8px; }
+.hero-proof-link {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212, 178, 117, 0.45);
+  padding-bottom: 3px;
+}
+@media (hover: hover) { .hero-proof-link:hover { border-bottom-color: var(--champagne); } }
+.hero-proof-link:focus-visible { outline: 2px solid var(--champagne); outline-offset: 4px; }
 @keyframes heroFadeUp { to { opacity: 1; transform: none; } }
 
 /* ============================================================
@@ -697,7 +778,7 @@ body {
 .expertise-section.is-compact { padding: clamp(48px, 6vw, 88px) 6%; }
 .expertise-section.is-compact .expertise-wrap { display: block; max-width: 720px; }
 .expertise-section.is-compact .expertise-text p { max-width: none; }
-.expertise-text p.expertise-quote { font-style: italic; margin-bottom: 0; }
+.expertise-text p:last-of-type { margin-bottom: 0; }
 .expertise-sign {
   display: grid; grid-template-columns: 56px minmax(0, 1fr); align-items: center; column-gap: 14px; row-gap: 10px;
   margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(20, 16, 42, 0.1);
@@ -716,82 +797,162 @@ body {
 }
 
 /* ============================================================
-   TÉMOIGNAGES — emplacements réservés (testi-*)
+   TÉMOIGNAGES — 3 cartes de même structure (testi-*)
+   Fond --band-bg : tous les textes ≥ 4.5:1 (ivoire, champagne,
+   ivoire à 78 %). Grille : empilée < 1024 px, 3 colonnes au-delà.
+   align-items: start → une carte ouverte ne déforme pas ses voisines.
    ============================================================ */
 .testi-section { background: var(--band-bg); color: var(--ivory); padding: clamp(56px, 7vw, 96px) 6%; }
-.testi-wrap { max-width: 900px; margin: 0 auto; }
+.testi-wrap { max-width: 1180px; margin: 0 auto; }
+.testi-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  text-align: center;
+  margin: 0 0 16px;
+}
 .testi-wrap h2 {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(26px, 3.2vw, 36px);
   color: var(--ivory);
   text-align: center;
-  margin: 0 0 3rem;
+  margin: 0 0 clamp(2rem, 4vw, 3rem);
   font-variation-settings: "opsz" 60;
 }
 .testi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: clamp(24px, 4vw, 48px);
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  max-width: 640px;
+  margin: 0 auto;
 }
-.testi-item { border-left: 1px solid rgba(212, 178, 117, 0.3); padding-left: 22px; display: flex; flex-direction: column; }
-.testi-quote-mark {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 44px;
-  line-height: 1;
-  color: rgba(212, 178, 117, 0.4);
-  margin: 0 0 8px;
+@media (min-width: 1024px) {
+  .testi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 32px); max-width: none; }
 }
-.testi-item p {
+.testi-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(244, 236, 211, 0.035);
+  border: 1px solid rgba(212, 178, 117, 0.22);
+  padding: clamp(24px, 2.6vw, 32px);
+  overflow-wrap: break-word;
+}
+.testi-figure { margin: 0; display: flex; flex-direction: column; }
+.testi-quote { margin: 0; }
+.testi-hook {
   font-family: var(--font-display);
-  font-style: italic;
-  font-size: 18px;
-  line-height: 1.55;
-  color: rgba(244, 236, 211, 0.35);
+  font-weight: 400;
+  font-size: clamp(21px, 2vw, 24px);
+  line-height: 1.3;
+  color: var(--ivory);
+  margin: 0 0 18px;
+  font-variation-settings: "opsz" 36;
+  text-wrap: balance;
+}
+.testi-excerpt {
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: rgba(244, 236, 211, 0.78);
   margin: 0;
-  font-variation-settings: "opsz" 24;
-  flex: 1;
+  font-variation-settings: "opsz" 14;
 }
 .testi-person {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-top: 24px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(212, 178, 117, 0.15);
+  padding-top: 18px;
+  border-top: 1px solid rgba(212, 178, 117, 0.18);
 }
 .testi-photo {
-  width: 42px; height: 42px;
+  width: 48px; height: 48px;
   border-radius: 50%;
-  border: 1px dashed rgba(212, 178, 117, 0.4);
-  background: rgba(212, 178, 117, 0.06);
-  display: flex; align-items: center; justify-content: center;
   flex: none;
-}
-.testi-photo-label {
+  object-fit: cover;
+  border: 1px solid rgba(212, 178, 117, 0.45);
+  background: rgba(212, 178, 117, 0.08);
+  display: flex; align-items: center; justify-content: center;
   font-family: var(--font-mono);
-  font-size: 6.5px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: rgba(212, 178, 117, 0.55);
-  text-align: center;
-  line-height: 1.3;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--champagne);
 }
-.testi-person-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.testi-person-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .testi-name {
   font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
+  font-size: 11px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--champagne);
   font-weight: 500;
 }
 .testi-role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+  color: rgba(244, 236, 211, 0.78);
+}
+/* Témoignage complet — même mécanique que l'accordéon FAQ */
+.testi-full { margin-top: 20px; border-top: 1px solid rgba(212, 178, 117, 0.18); }
+.testi-full summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0 2px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--champagne);
+  list-style: none;
+  cursor: pointer;
+}
+.testi-full summary::-webkit-details-marker { display: none; }
+.testi-full summary:focus-visible { outline: 2px solid var(--champagne); outline-offset: 4px; }
+.testi-full-icon { flex: none; font-size: 14px; }
+.testi-full[open] .testi-full-icon { transform: rotate(45deg); }
+@media (prefers-reduced-motion: no-preference) {
+  .testi-full-icon { transition: transform 0.2s ease-out; }
+}
+@media (hover: hover) { .testi-full summary:hover { color: var(--ivory); } }
+.testi-full-body { margin: 16px 0 0; }
+.testi-full-body p {
   font-family: var(--font-body);
-  font-size: 11.5px;
-  font-style: italic;
-  color: rgba(244, 236, 211, 0.5);
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(244, 236, 211, 0.78);
+  margin: 0 0 14px;
+}
+.testi-full-body p:last-child { margin-bottom: 0; }
+
+/* Citation de clôture — juste avant le CTA final (fond --paper) */
+.closing-quote { margin: 0 0 clamp(48px, 6vw, 72px); padding-bottom: clamp(40px, 5vw, 56px); border-bottom: 1px solid rgba(20, 16, 42, 0.1); }
+.closing-quote blockquote { margin: 0; }
+.closing-quote p {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.3;
+  color: var(--ink);
+  margin: 0;
+  font-variation-settings: "opsz" 48;
+  text-wrap: balance;
+}
+.closing-quote figcaption {
+  margin-top: 18px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
 }
 
 /* ============================================================
@@ -1216,7 +1377,6 @@ body {
   .livrable-callout::before, .livrable-callout::after { display: none; }
   .split-grid { flex-direction: column; gap: 2.25rem; }
   .split-block { flex-basis: auto; }
-  .testi-grid { grid-template-columns: 1fr; gap: 1.25rem; }
   
   .offre-dark-head { flex-direction: column; align-items: flex-start; gap: 12px; }
   .offre-dark-price-wrap { align-items: flex-start; }
@@ -1283,7 +1443,8 @@ body {
         <li class="mh-submenu-sep" aria-hidden="true">·</li>
         <li><a class="mh-submenu-item" href="#livrable" data-target="livrable">Le livrable</a></li>
         <li class="mh-submenu-sep" aria-hidden="true">·</li>
-        <!-- Témoignages désactivé temporairement — cf. section commentée plus bas -->
+        <li><a class="mh-submenu-item" href="#temoignages" data-target="temoignages">Témoignages</a></li>
+        <li class="mh-submenu-sep" aria-hidden="true">·</li>
         <li><a class="mh-submenu-item" href="#booking" data-target="booking">Réserver un appel découverte</a></li>
       </ul>
     </nav>
@@ -1298,7 +1459,7 @@ body {
       <ul class="mh-drawer-submenu">
         <li><a class="mh-drawer-submenu-item is-active" href="#analyse" data-target="analyse">L'analyse</a></li>
         <li><a class="mh-drawer-submenu-item" href="#livrable" data-target="livrable">Le livrable</a></li>
-        <!-- Témoignages désactivé temporairement — cf. section commentée plus bas -->
+        <li><a class="mh-drawer-submenu-item" href="#temoignages" data-target="temoignages">Témoignages</a></li>
         <li><a class="mh-drawer-submenu-item" href="#booking" data-target="booking">Réserver un appel découverte</a></li>
       </ul>
     </li>
@@ -1359,6 +1520,28 @@ body {
       <div class="hero-cta-row">
         <a href="#booking" class="cta-mono">Réserver un appel découverte →</a>
         <span class="hero-cta-meta">30 mn · sans engagement</span>
+      </div>
+    </div>
+    <!-- MINI-PREUVE — une seule citation courte (8 à 12 mots), différente de l'accroche
+         de la carte correspondante dans #temoignages. Si une autre cliente répond mieux
+         au H1, on remplace la citation, on n'en ajoute pas. -->
+    <div class="hero-proof">
+      <figure class="hero-proof-item">
+        <img class="hero-proof-photo" src="assets/daouila-salmi.jpg" alt="" width="36" height="36" decoding="async">
+        <blockquote><p>«&nbsp;Une capacité à mettre le doigt exactement là où ça bloque.&nbsp;»</p></blockquote>
+        <figcaption><span class="hero-proof-name">Daouila Salmi</span> <span class="hero-proof-role">Consultante, Business Mentor, Executive Coach HEC &amp; Praticienne</span></figcaption>
+      </figure>
+      <div class="hero-proof-more">
+        <!-- À ACTIVER quand les 3 témoignages seront réels : photos groupées + libellé
+             « Lire les 3 témoignages ↓ ». Remplacer les pastilles MB / AC par
+             <img src="assets/xxx.jpg" alt="" width="24" height="24" decoding="async">
+        <span class="hero-proof-stack" aria-hidden="true">
+          <img src="assets/daouila-salmi.jpg" alt="" width="24" height="24" decoding="async">
+          <span>MB</span>
+          <span>AC</span>
+        </span>
+        -->
+        <a href="#temoignages" class="hero-proof-link">Lire les témoignages ↓</a>
       </div>
     </div>
   </div>
@@ -1535,52 +1718,100 @@ body {
   </div>
 </section>
 
-<!-- TÉMOIGNAGES — désactivé en attendant les vrais retours clients (texte
-     complet à intégrer). Pour réactiver : retirer ce commentaire, et
-     restaurer les liens de nav associés (header row2, drawer, footer
-     sitemap) ainsi que 'temoignages' dans submenuTargets en fin de page. -->
-<!--
-<section class="testi-section reveal" id="temoignages" data-cta-theme="dark">
+<!-- TÉMOIGNAGES — 3 cartes de structure identique :
+     accroche (blockquote) → extrait → signature (figcaption) → témoignage complet (<details>).
+     Photo absente : pastille à initiales (.testi-photo). Pour une vraie photo, remplacer le <span>
+     par : <img class="testi-photo" src="assets/xxx.jpg" alt="Portrait de Prénom Nom" width="48" height="48" loading="lazy" decoding="async"> -->
+<section class="testi-section reveal" id="temoignages" data-cta-theme="dark" aria-labelledby="temoignages-titre">
   <div class="testi-wrap">
-    <h2>Ce qu'ils disent d'Au Clair</h2>
+    <p class="testi-eyebrow">— Témoignages</p>
+    <h2 id="temoignages-titre">Ce qu'elles disent d'Au Clair</h2>
     <div class="testi-grid">
-      <div class="testi-item">
-        <span class="testi-quote-mark" aria-hidden="true">"</span>
-        <p>[Témoignage à ajouter]</p>
-        <div class="testi-person">
-          <div class="testi-photo" aria-hidden="true"><span class="testi-photo-label">Photo</span></div>
-          <div class="testi-person-info">
-            <span class="testi-name">[Prénom Nom]</span>
-            <span class="testi-role">[Activité]</span>
-          </div>
-        </div>
-      </div>
-      <div class="testi-item">
-        <span class="testi-quote-mark" aria-hidden="true">"</span>
-        <p>[Témoignage à ajouter]</p>
-        <div class="testi-person">
-          <div class="testi-photo" aria-hidden="true"><span class="testi-photo-label">Photo</span></div>
-          <div class="testi-person-info">
-            <span class="testi-name">[Prénom Nom]</span>
-            <span class="testi-role">[Activité]</span>
-          </div>
-        </div>
-      </div>
-      <div class="testi-item">
-        <span class="testi-quote-mark" aria-hidden="true">"</span>
-        <p>[Témoignage à ajouter]</p>
-        <div class="testi-person">
-          <div class="testi-photo" aria-hidden="true"><span class="testi-photo-label">Photo</span></div>
-          <div class="testi-person-info">
-            <span class="testi-name">[Prénom Nom]</span>
-            <span class="testi-role">[Activité]</span>
-          </div>
-        </div>
-      </div>
+
+      <article class="testi-card">
+        <figure class="testi-figure">
+          <blockquote class="testi-quote">
+            <p class="testi-hook">«&nbsp;Un vrai travail de minutie, avec des recommandations concrètes et immédiatement actionnables.&nbsp;»</p>
+            <p class="testi-excerpt">Je cherchais à comprendre pourquoi ma page de vente ne convertissait pas à la hauteur de ce que je proposais. J'ai été très agréablement surprise par la qualité et la profondeur de l'audit&nbsp;: un vrai travail de minutie, qui relie à la fois le copywriting, le CRO et l'UX, avec des recommandations concrètes et immédiatement actionnables. (…) La maquette m'a aidée à visualiser concrètement les optimisations à apporter, et à prioriser les actions les plus impactantes pour mieux servir mon avatar client.</p>
+          </blockquote>
+          <figcaption class="testi-person">
+            <img class="testi-photo" src="assets/daouila-salmi.jpg" alt="Portrait de Daouila Salmi" width="48" height="48" loading="lazy" decoding="async">
+            <span class="testi-person-info">
+              <span class="testi-name">Daouila Salmi</span>
+              <span class="testi-role">Consultante, Business Mentor, Executive Coach HEC &amp; Praticienne · Fondatrice de l'Arche des Leaders Inspirés</span>
+            </span>
+          </figcaption>
+        </figure>
+        <details class="testi-full">
+          <summary><span>Lire le témoignage complet</span><span class="testi-full-icon" aria-hidden="true">＋</span></summary>
+          <blockquote class="testi-full-body">
+            <p>Avant l'audit, je cherchais surtout à comprendre pourquoi ma page de vente ne convertissait pas à la hauteur de ce que je proposais, et à identifier les points de friction qui empêchaient mon offre de parler pleinement à mon avatar client.</p>
+            <p>L'analyse m'a permis d'y voir beaucoup plus clair. J'ai été très agréablement surprise par la qualité et la profondeur de l'audit&nbsp;: un vrai travail de minutie, qui relie à la fois le copywriting, le CRO et l'UX, avec des recommandations concrètes et immédiatement actionnables.</p>
+            <p>Ce que j'ai particulièrement apprécié dans l'audit et les recommandations, c'est la capacité à mettre le doigt exactement là où ça bloquait, avec un wording de qualité qui recentre le message sur les vrais besoins du client, sans jamais perdre l'identité de la marque.</p>
+            <p>La maquette m'a aidée à visualiser concrètement les optimisations à apporter, et à prioriser les actions les plus impactantes pour mieux servir mon avatar client.</p>
+            <p>Je recommanderais cet audit à tout infopreneur ou entrepreneur qui sent que ses services ne reflètent pas pleinement leur valeur, et qui cherche un regard expert, précis et humain pour optimiser son offre et avoir un regard plus large sur sa stratégie digitale.</p>
+            <p>Merci infiniment pour ce travail de qualité.</p>
+          </blockquote>
+        </details>
+      </article>
+
+      <article class="testi-card">
+        <figure class="testi-figure">
+          <blockquote class="testi-quote">
+            <p class="testi-hook">«&nbsp;J'ai également apprécié le fait qu'elle propose des hypothèses à tester plutôt que de présenter chaque modification comme une vérité absolue.&nbsp;»</p>
+            <p class="testi-excerpt">J'ai particulièrement apprécié son approche méthodique et l'analyse de l'expérience utilisateur. Un travail dense et qui va en profondeur. (…) J'ai également apprécié le fait qu'elle propose des hypothèses à tester plutôt que de présenter chaque modification comme une vérité absolue. C'est une démarche que je trouve saine en optimisation de la conversion. Et humainement&nbsp;? Anne-Sophie est adorable&nbsp;! Disponible, à l'écoute, généreuse dans ses échanges et ultra accessible dans sa façon de vulgariser.</p>
+          </blockquote>
+          <figcaption class="testi-person">
+            <span class="testi-photo" aria-hidden="true">MB</span>
+            <span class="testi-person-info">
+              <span class="testi-name">Miss Buffet Froid</span>
+              <span class="testi-role">Consultante en personal branding &amp; leadership</span>
+            </span>
+          </figcaption>
+        </figure>
+        <details class="testi-full">
+          <summary><span>Lire le témoignage complet</span><span class="testi-full-icon" aria-hidden="true">＋</span></summary>
+          <blockquote class="testi-full-body">
+            <p>J'ai fait appel à Anne-Sophie pour bénéficier d'un audit sur ma page de capture, ma masterclass VSL et le parcours menant à la prise de rendez-vous.</p>
+            <p>J'ai particulièrement apprécié son approche méthodique et l'analyse de l'expérience utilisateur. Un travail dense et qui va en profondeur. Entre tests utilisateurs de 10 secondes, analyse heuristique, identification des points de friction, hiérarchie visuelle, clarté de la proposition de valeur, optimisation des CTA et recommandations d'A/B testing, son travail est structuré et documenté.</p>
+            <p>Elle m'a notamment apporté des pistes intéressantes sur la lisibilité de mes pages, la place des preuves sociales, le parcours utilisateur et la cohérence des messages aux différentes étapes du tunnel.</p>
+            <p>J'ai également apprécié le fait qu'elle propose des hypothèses à tester plutôt que de présenter chaque modification comme une vérité absolue. C'est une démarche que je trouve saine en optimisation de la conversion.</p>
+            <p>Et humainement&nbsp;? Anne-Sophie est adorable&nbsp;! Disponible, à l'écoute, généreuse dans ses échanges et ultra accessible dans sa façon de vulgariser.</p>
+            <p>Merci pour ce regard extérieur et ces pistes de réflexion&nbsp;!</p>
+          </blockquote>
+        </details>
+      </article>
+
+      <!-- PLACEHOLDER : en attente du témoignage. Angle visé : clarté du message et du positionnement -->
+      <article class="testi-card">
+        <figure class="testi-figure">
+          <blockquote class="testi-quote">
+            <p class="testi-hook">«&nbsp;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.&nbsp;»</p>
+            <p class="testi-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper, nullam quis risus eget urna mollis ornare vel eu leo. Sed posuere consectetur est at lobortis, etiam porta sem malesuada magna mollis euismod. Donec sed odio dui, cras justo odio dapibus ac facilisis in egestas.</p>
+          </blockquote>
+          <figcaption class="testi-person">
+            <span class="testi-photo" aria-hidden="true">AC</span>
+            <span class="testi-person-info">
+              <span class="testi-name">Alice Cathelineau</span>
+              <span class="testi-role">Designer</span>
+            </span>
+          </figcaption>
+        </figure>
+        <details class="testi-full">
+          <summary><span>Lire le témoignage complet</span><span class="testi-full-icon" aria-hidden="true">＋</span></summary>
+          <blockquote class="testi-full-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Integer posuere erat a ante venenatis dapibus posuere velit.</p>
+            <p>Donec ullamcorper nulla non metus auctor fringilla. Curabitur blandit tempus porttitor, vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nullam id dolor id nibh ultricies vehicula ut id elit, maecenas sed diam eget risus varius blandit.</p>
+            <p>Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Aenean eu leo quam, pellentesque ornare sem lacinia quam venenatis vestibulum, nulla vitae elit libero.</p>
+            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Sed posuere consectetur est at lobortis, cras mattis consectetur purus sit amet fermentum.</p>
+            <p>Maecenas faucibus mollis interdum. Aenean lacinia bibendum nulla sed consectetur, donec id elit non mi porta gravida at eget metus. Vestibulum id ligula porta felis euismod semper, cras justo odio, dapibus ac facilisis in, egestas eget quam pellentesque.</p>
+          </blockquote>
+        </details>
+      </article>
+
     </div>
   </div>
 </section>
--->
 
 <!-- POUR QUI -->
 <section class="split-section reveal" id="pour-qui" data-cta-theme="light">
@@ -1642,8 +1873,7 @@ body {
     <div class="expertise-text">
       <p class="expertise-eyebrow">À propos de moi</p>
       <h2>Pour que votre valeur se comprenne dès la première lecture.</h2>
-      <p>10 ans de marketing digital, dont 5 côté annonceur. J'ai créé Au Clair pour les entrepreneurs et experts, en particulier ceux qui portent des projets à impact, dont l'offre est solide, mais dont la page ne la fait pas encore comprendre.</p>
-      <p class="expertise-quote">Je ne regarde pas une page comme un objet UX, mais comme un outil de vente au service de votre offre.</p>
+      <p>10 ans de marketing digital, dont 5 côté annonceur. J'ai créé Au Clair pour les entrepreneurs et experts, en particulier ceux qui portent des projets à impact, dont l'offre est solide, mais dont la page ne la fait pas encore assez comprendre.</p>
       <div class="expertise-sign">
         <img src="assets/anne-sophie-portrait.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
         <div>
@@ -1689,6 +1919,12 @@ body {
 <!-- BOOKING -->
 <section id="booking" class="booking-final-section reveal" data-cta-theme="light">
   <div class="booking-final-wrap">
+    <figure class="closing-quote">
+      <blockquote>
+        <p>«&nbsp;Je recommanderais cet audit à tout infopreneur ou entrepreneur qui sent que ses services ne reflètent pas pleinement leur valeur.&nbsp;»</p>
+      </blockquote>
+      <figcaption>— Daouila Salmi</figcaption>
+    </figure>
     <p class="chapter-mark">— Premier échange</p>
     <h2>Commençons par votre offre.</h2>
     <p class="booking-final-lead">30 minutes pour comprendre vos enjeux, identifier les supports à auditer et vérifier si <em style="font-style:italic;color:var(--champagne-fonce)">Au Clair</em> est adapté à votre situation.</p>
@@ -1714,7 +1950,7 @@ body {
     <a href="#analyse">L'analyse</a>
     <a href="#livrable">Le livrable</a>
     <a href="#offre">Offre</a>
-    <!-- Témoignages désactivé temporairement — cf. section commentée plus haut -->
+    <a href="#temoignages">Témoignages</a>
     <a href="#booking">Réserver</a>
   </nav>
   <div class="footer-bottom">
@@ -1891,7 +2127,7 @@ body {
   }
 
   // ─── Sous-menu actif : suit la section visible au scroll ───
-  const submenuTargets = ['analyse', 'livrable', 'booking']; // 'temoignages' retiré temporairement (section désactivée)
+  const submenuTargets = ['analyse', 'livrable', 'temoignages', 'booking'];
   const submenuItems = document.querySelectorAll('.mh-submenu-item, .mh-drawer-submenu-item');
   const submenuSections = submenuTargets
     .map(id => document.getElementById(id))
