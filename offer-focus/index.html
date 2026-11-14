@@ -833,6 +833,15 @@ body {
 @media (min-width: 1024px) {
   .testi-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 32px); max-width: none; }
 }
+/* Desktop : les cartes partagent les mêmes rangées (titre, extrait, signature, lien),
+   pour que tout s'aligne d'une carte à l'autre quelle que soit la longueur des textes */
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 1024px) {
+    .testi-grid { align-items: stretch; }
+    .testi-grid > .testi-card { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; }
+    .testi-card > .testi-figure, .testi-figure > .testi-quote { display: contents; }
+  }
+}
 .testi-card {
   min-width: 0;
   display: flex;
@@ -1762,7 +1771,7 @@ body {
             <p class="testi-excerpt">J'ai particulièrement apprécié son approche méthodique et l'analyse de l'expérience utilisateur. Un travail dense et qui va en profondeur. (…) J'ai également apprécié le fait qu'elle propose des hypothèses à tester plutôt que de présenter chaque modification comme une vérité absolue. C'est une démarche que je trouve saine en optimisation de la conversion. Et humainement&nbsp;? Anne-Sophie est adorable&nbsp;! Disponible, à l'écoute, généreuse dans ses échanges et ultra accessible dans sa façon de vulgariser.</p>
           </blockquote>
           <figcaption class="testi-person">
-            <span class="testi-photo" aria-hidden="true">MB</span>
+            <img class="testi-photo" src="assets/miss-buffet-froid.jpg" alt="Portrait de Miss Buffet Froid" width="48" height="48" loading="lazy" decoding="async">
             <span class="testi-person-info">
               <span class="testi-name">Miss Buffet Froid</span>
               <span class="testi-role">Consultante en personal branding &amp; leadership</span>
