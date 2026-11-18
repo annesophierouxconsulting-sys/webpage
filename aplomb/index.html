@@ -1172,12 +1172,9 @@ body {
   .lc-row.is-feature > .lc-media { order: 0; margin: 22px 0 0; }
   #livrable .lc-client-meta { font-family: var(--font-body); text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--ink-soft); }
   #livrable .lc-client-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
-  #livrable .lc-client-stats .lc-client-stats-label { display: none; }
+  #livrable .lc-client-stats .lc-client-stats-label { display: block; grid-column: 1 / -1; margin-bottom: -4px; }
   #livrable .lc-client-stats li { display: flex; flex-direction: column; gap: 2px; font-size: 12px; letter-spacing: 0.06em; }
   #livrable .lc-client-stats strong { font-size: 28px; margin: 0; vertical-align: 0; line-height: 1.1; }
-  #livrable .lc-client-stats-main > span { display: flex; flex-direction: column; gap: 2px; }
-  #livrable .lc-client-sub li { display: block; font-size: 11px; line-height: 1.45; }
-  #livrable .lc-client-sub strong { font-size: 18px; margin: 0 2px; vertical-align: -1px; }
   .lc-client-label, .lc-n, .crit-tags li, .lc-hint, .doc-fan figcaption, .lc-shot figcaption, .lc-testimonial figcaption,
   #livrable .chapter-mark, .lc-text dt, .ba-label, .lc-testimonial summary span {
     font-size: 12px !important; letter-spacing: 0.08em;
@@ -1286,9 +1283,6 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
 .lc-head .lc-client { margin: 0; }
 
 .lc-client-stats { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 22px; }
-/* « dont » : sous-ensembles des 99 recommandations, en retrait et plus petits */
-.lc-client-sub { list-style: none; margin: 8px 0 0 3px; padding: 0 0 0 12px; border-left: 1px solid rgba(140, 106, 44, 0.4); display: flex; flex-direction: column; gap: 4px; }
-.lc-client-stats .lc-client-sub strong { font-size: 17px; margin: 0 3px; vertical-align: -1px; }
 .lc-client-stats li { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); }
 .lc-client-stats strong { font-family: var(--font-display); font-weight: 400; font-size: 22px; letter-spacing: 0; color: var(--champagne-fonce); margin-right: 5px; vertical-align: -2px; }
 
@@ -1490,12 +1484,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
         <ul class="lc-client-stats" aria-label="L'audit de L'Honnête Homme en chiffres">
           <li class="lc-client-stats-label">Pour cet audit&nbsp;:</li>
           <li><strong>94</strong> observations</li>
-          <li class="lc-client-stats-main"><span><strong>99</strong> recommandations</span>
-            <ul class="lc-client-sub">
-              <li>dont <strong>31</strong> transverses</li>
-              <li>dont <strong>65</strong> rapides et sans développement</li>
-            </ul>
-          </li>
+          <li><strong>99</strong> recommandations</li>
         </ul>
       </div>
     </div>
