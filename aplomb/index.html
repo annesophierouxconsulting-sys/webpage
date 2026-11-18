@@ -1265,6 +1265,30 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
 .lc-shot { margin: 0; }
 .lc-shot img { border: 1px solid rgba(20, 16, 42, 0.12); box-shadow: 0 18px 40px -24px rgba(20, 16, 42, 0.35); background: #fff; }
 .lc-shot figcaption { margin-top: 14px; text-align: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
+/* Diagnostic : observation en carte HTML (style du PDF) */
+.obs-shot { margin: 0; }
+.obs-card { background: #fff; border: 1px solid rgba(20, 16, 42, 0.12); box-shadow: 0 18px 40px -24px rgba(20, 16, 42, 0.35); padding: 18px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; color: #222; }
+.obs-loc { background: #F2F2F0; border-radius: 10px; padding: 12px; }
+.obs-loc img { display: block; width: 100%; height: auto; border-radius: 4px; border: 1px solid rgba(20, 16, 42, 0.12); }
+.obs-body { padding: 18px 6px 2px; }
+.obs-body p { margin: 0; }
+.obs-head { display: flex; align-items: baseline; gap: 8px; }
+.obs-head strong { font-size: 24px; font-weight: 700; color: #1a1a1a; letter-spacing: -0.01em; }
+.obs-total { font-size: 24px; font-weight: 700; color: #9a9a9a; }
+.obs-scope { margin-left: 10px; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: #777; }
+.obs-kind { margin-top: 12px !important; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: #3F5FA8; }
+.obs-text { margin-top: 10px !important; font-size: 14px; line-height: 1.55; color: #333; }
+.obs-page { margin-top: 16px !important; padding-top: 12px; border-top: 1px solid #e6e6e6; font-size: 12px; color: #666; }
+.obs-tag { display: inline-block; margin-top: 8px; padding: 3px 9px; border-radius: 4px; background: #FCEB8E; font-size: 12px; color: #4a4020; }
+.obs-shot figcaption { margin-top: 14px; text-align: center; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-mute); }
+@media (max-width: 760px) {
+  .obs-card { padding: 12px; }
+  .obs-loc { padding: 8px; }
+  .obs-body { padding: 14px 4px 2px; }
+  .obs-head strong, .obs-total { font-size: 21px; }
+  .obs-text { font-size: 14px; line-height: 1.5; }
+  .obs-shot figcaption { font-size: 12px; letter-spacing: 0.08em; }
+}
 
 /* Maquette : comparateur desktop pleine largeur dans un cadre navigateur */
 .lc-row.is-feature { grid-template-columns: 1fr; gap: 28px; }
@@ -1492,11 +1516,17 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
     <!-- 01 — Diagnostic -->
     <article class="lc-row">
       <div class="lc-media">
-        <figure class="lc-shot">
-          <picture>
-            <source media="(max-width: 760px)" srcset="assets/hh-diag-mobile-04.jpg" width="840" height="1030">
-            <img src="assets/hh-diagnostic.jpg" width="930" height="666" alt="Observation n°4, fiche produit : l'édition beau livre n'est mentionnée nulle part, critère Pertinence" loading="lazy" decoding="async">
-          </picture>
+        <figure class="obs-shot">
+          <div class="obs-card">
+            <div class="obs-loc"><img src="assets/hh-obs-04-emplacement.jpg" width="722" height="404" alt="Haut de la fiche produit : titre, avis, prix, frais de port et réassurance, sans aucune mention de l'édition beau livre ; une pastille bleue repère l'emplacement" loading="lazy" decoding="async"></div>
+            <div class="obs-body">
+              <p class="obs-head"><strong>#4</strong><span class="obs-total">/&nbsp;94</span><span class="obs-scope">Desktop &amp; mobile</span></p>
+              <p class="obs-kind">Observation</p>
+              <p class="obs-text">Le livre existe aussi en édition «&nbsp;beau livre&nbsp;» à couverture rigide (39&nbsp;€), mais cette fiche ne le mentionne nulle part. Le visiteur ne peut ni choisir son édition ici ni comparer les deux. Le seul lien entre les deux fiches est un «&nbsp;Voir les autres avis&nbsp;» sur la fiche beau livre, qui renvoie ici. Conséquences&nbsp;: deux pages quasi identiques qui se concurrencent, y compris en référencement, et une montée en gamme à 9&nbsp;€ de plus qui n'est jamais proposée. La fiche beau livre affiche en plus «&nbsp;Avis (0)&nbsp;», alors que ses avis existent… sur cette page.</p>
+              <p class="obs-page">Fiche produit</p>
+              <span class="obs-tag">Pertinence</span>
+            </div>
+          </div>
           <figcaption>Les observations dans un PDF · extrait</figcaption>
         </figure>
         <!-- Carrousel complet du diagnostic (observations 17, 4, 21 + 8 sur mobile), conservé pour pouvoir
