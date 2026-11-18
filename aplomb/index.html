@@ -1034,7 +1034,7 @@ body {
 
 @media (max-width: 820px) {
   .lc-row, .lc-row.is-feature { grid-template-columns: 1fr; }
-  .lc-row.is-reverse .lc-media { order: 0; }
+  .lc-row:not(.is-feature) > .lc-media { order: 1; }
 }
 
 /* Comparateur avant / après */
@@ -1160,11 +1160,12 @@ body {
 .doc-fan-pages.is-deck:focus-visible { outline: 1px solid var(--champagne); outline-offset: 4px; }
 /* Livrable sur mobile : titre avant le visuel, rien sous 12 px */
 @media (max-width: 760px) {
-  /* le numéro et le titre passent au-dessus du visuel, le texte en dessous */
+  /* numéro et titre, puis texte, puis visuel */
   .lc-row { row-gap: 0; }
   .lc-row .lc-text { display: contents; }
   .lc-row .lc-text > .lc-n, .lc-row .lc-text > h3 { order: -2; }
-  .lc-row > .lc-media, .lc-row.is-reverse > .lc-media { order: -1; margin: 6px 0 22px; }
+  .lc-row > .lc-media, .lc-row.is-reverse > .lc-media { order: 1; margin: 22px 0 0; }
+  .lc-row:not(.is-feature) .lc-text > :last-child { margin-bottom: 0; }
   /* La maquette garde l'ordre du desktop : titre, texte, puis l'avant / après */
   .lc-row.is-feature > .lc-media { order: 0; margin: 22px 0 0; }
   .lc-n, .crit-tags li, .lc-hint, .doc-fan figcaption, .lc-shot figcaption, .lc-testimonial figcaption,
