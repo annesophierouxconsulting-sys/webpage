@@ -1165,7 +1165,8 @@ body {
   .lc-row .lc-text { display: contents; }
   .lc-row .lc-text > .lc-n, .lc-row .lc-text > h3 { order: -2; }
   .lc-row > .lc-media, .lc-row.is-reverse > .lc-media { order: 1; margin: 22px 0 0; }
-  .lc-row:not(.is-feature) .lc-text > :last-child { margin-bottom: 0; }
+  .lc-row .lc-text > :last-child { margin-bottom: 0; }
+  #livrable .lc-row.is-feature { row-gap: 0; }
   /* La maquette garde l'ordre du desktop : titre, texte, puis l'avant / après */
   .lc-row.is-feature > .lc-media { order: 0; margin: 22px 0 0; }
   .lc-n, .crit-tags li, .lc-hint, .doc-fan figcaption, .lc-shot figcaption, .lc-testimonial figcaption,
@@ -1209,6 +1210,7 @@ body {
 }
 .zoom-btn:hover, .zoom-btn:focus-visible { background: var(--champagne); color: var(--hero-bg); }
 .lc-shot img, .doc-fan-pages.is-deck { cursor: zoom-in; }
+.lc-shot[data-no-zoom] img { cursor: default; }
 .zoom {
   position: fixed; inset: 0; z-index: 200; display: none;
   background: rgba(8, 4, 26, 0.94);
@@ -1613,7 +1615,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
     <!-- 04 — Synthèse -->
     <article class="lc-row is-reverse">
       <div class="lc-media">
-        <figure class="lc-shot">
+        <figure class="lc-shot" data-no-zoom>
           <img src="assets/hh-synth-11.jpg" alt="Slide « Le mobile accentue chacun de ces problèmes » : 20 écrans à faire défiler sur la home, 7,5 écrans avant le bouton d'achat sur la fiche" width="1200" height="675" loading="lazy" decoding="async">
           <figcaption>La synthèse · slide 11 sur 20</figcaption>
         </figure>
@@ -1971,7 +1973,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
     return b;
   }
   // Captures simples (plan d'action) : bouton + toucher
-  document.querySelectorAll('.lc-shot img').forEach(img => {
+  document.querySelectorAll('.lc-shot:not([data-no-zoom]) img').forEach(img => {
     const wrap = document.createElement('span');
     wrap.className = 'zoom-wrap';
     const target = img.parentElement.tagName === 'PICTURE' ? img.parentElement : img;
