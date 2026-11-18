@@ -1299,6 +1299,10 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
 .lc-head { max-width: 920px; }
 .lc-head .lc-intro { max-width: 720px; }
 .lc-head .lc-intro-case { margin-top: 7px; font-size: 15px; color: var(--ink-mute); }
+/* Flèche vers les livrables, à la place du filet du livrable 01 */
+.lc-head-arrow { display: block; margin: 28px 0 0 2px; color: var(--champagne-fonce); }
+#livrable .lc-head + .lc-row { border-top: 0; padding-top: 0; }
+@media (max-width: 760px) { .lc-head-arrow { margin-top: 22px; height: 32px; } }
 
 .lc-row.is-feature .lc-qa > div { grid-template-columns: 190px 1fr; }
 @media (max-width: 520px) { .lc-row.is-feature .lc-qa > div { grid-template-columns: 1fr; gap: 2px; } }
@@ -1485,6 +1489,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
       <h2>Ce que vous recevez.</h2>
       <p class="lc-intro">5 livrables, et une restitution pour les comprendre et les prendre en main.</p>
       <p class="lc-intro lc-intro-case">Illustrés ci-dessous avec l'audit des Éditions L'Honnête&nbsp;Homme, un site WooCommerce géré sans développeur.</p>
+      <svg class="lc-head-arrow" viewBox="0 0 16 40" width="16" height="40" aria-hidden="true"><path d="M8 1v37M2 31l6 7 6-7" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
 
     <!-- 01 — Diagnostic -->
