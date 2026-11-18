@@ -983,9 +983,6 @@ body {
   font-variation-settings: "opsz" 72;
 }
 .lc-head h2 em { font-style: italic; color: var(--champagne-fonce); }
-.lc-client { border-left: 1px solid var(--champagne-fonce); padding-left: 16px; margin: 0 0 18px; }
-
-.lc-client-meta { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); margin: 0; }
 .lc-intro { font-family: var(--font-body); font-size: 16.5px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
 
 .lc-row {
@@ -1161,7 +1158,7 @@ body {
 .doc-fan-pages.is-deck .doc-fan-front { transition: transform 0.4s ease, box-shadow 0.4s ease; }
 .doc-fan-pages.is-deck.is-dragging .doc-fan-front { transition: none; }
 .doc-fan-pages.is-deck:focus-visible { outline: 1px solid var(--champagne); outline-offset: 4px; }
-/* Livrable sur mobile : titre avant le visuel, bloc client aéré, rien sous 12 px */
+/* Livrable sur mobile : titre avant le visuel, rien sous 12 px */
 @media (max-width: 760px) {
   /* le numéro et le titre passent au-dessus du visuel, le texte en dessous */
   .lc-row { row-gap: 0; }
@@ -1170,12 +1167,7 @@ body {
   .lc-row > .lc-media, .lc-row.is-reverse > .lc-media { order: -1; margin: 6px 0 22px; }
   /* La maquette garde l'ordre du desktop : titre, texte, puis l'avant / après */
   .lc-row.is-feature > .lc-media { order: 0; margin: 22px 0 0; }
-  #livrable .lc-client-meta { font-family: var(--font-body); text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--ink-soft); }
-  #livrable .lc-client-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
-  #livrable .lc-client-stats .lc-client-stats-label { display: block; grid-column: 1 / -1; margin-bottom: -4px; }
-  #livrable .lc-client-stats li { display: flex; flex-direction: column; gap: 2px; font-size: 12px; letter-spacing: 0.06em; }
-  #livrable .lc-client-stats strong { font-size: 28px; margin: 0; vertical-align: 0; line-height: 1.1; }
-  .lc-client-label, .lc-n, .crit-tags li, .lc-hint, .doc-fan figcaption, .lc-shot figcaption, .lc-testimonial figcaption,
+  .lc-n, .crit-tags li, .lc-hint, .doc-fan figcaption, .lc-shot figcaption, .lc-testimonial figcaption,
   #livrable .chapter-mark, .lc-text dt, .ba-label, .lc-testimonial summary span {
     font-size: 12px !important; letter-spacing: 0.08em;
   }
@@ -1304,19 +1296,13 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
 
 @media (max-width: 820px) { .lc-row.is-reverse { grid-template-columns: 1fr; } }
 
-.lc-head .lc-intro { margin: 0 0 22px; }
-.lc-head .lc-client { margin: 0; }
-
-.lc-client-stats { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 22px; }
-.lc-client-stats li { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); }
-.lc-client-stats strong { font-family: var(--font-display); font-weight: 400; font-size: 22px; letter-spacing: 0; color: var(--champagne-fonce); margin-right: 5px; vertical-align: -2px; }
-
-.lc-client-label { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--champagne-fonce); margin: 0 0 8px; }
-
-.lc-client-stats .lc-client-stats-label { font-family: var(--font-body); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 14px; color: var(--ink-soft); }
-
 .lc-head { max-width: 920px; }
 .lc-head .lc-intro { max-width: 720px; }
+.lc-head .lc-intro-case { margin-top: 7px; font-size: 15px; color: var(--ink-mute); }
+/* Flèche vers les livrables, à la place du filet du livrable 01 */
+.lc-head-arrow { display: block; margin: 28px 0 0 2px; color: var(--champagne-fonce); }
+#livrable .lc-head + .lc-row { border-top: 0; padding-top: 0; }
+@media (max-width: 760px) { .lc-head-arrow { margin-top: 22px; height: 32px; } }
 
 .lc-row.is-feature .lc-qa > div { grid-template-columns: 190px 1fr; }
 @media (max-width: 520px) { .lc-row.is-feature .lc-qa > div { grid-template-columns: 1fr; gap: 2px; } }
@@ -1324,7 +1310,6 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
 
 
 
-.lc-client .lc-client-label { margin: 0 0 6px; }
 
 /* Témoignage — fin du livrable */
 .lc-testimonial { margin: clamp(40px, 5vw, 64px) 0 0; padding: clamp(28px, 4vw, 44px) 0 0; border-top: 1px solid rgba(20, 16, 42, 0.1); max-width: 820px; }
@@ -1503,15 +1488,8 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
     <div class="lc-head">
       <h2>Ce que vous recevez.</h2>
       <p class="lc-intro">5 livrables, et une restitution pour les comprendre et les prendre en main.</p>
-      <div class="lc-client">
-        <p class="lc-client-label">— Exemple</p>
-        <p class="lc-client-meta">Maison d'édition indépendante, site WooCommerce géré sans développeur</p>
-        <ul class="lc-client-stats" aria-label="L'audit de L'Honnête Homme en chiffres">
-          <li class="lc-client-stats-label">Pour cet audit&nbsp;:</li>
-          <li><strong>94</strong> observations</li>
-          <li><strong>99</strong> recommandations</li>
-        </ul>
-      </div>
+      <p class="lc-intro lc-intro-case">Illustrés ci-dessous avec l'audit des Éditions L'Honnête&nbsp;Homme, un site WooCommerce géré sans développeur.</p>
+      <svg class="lc-head-arrow" viewBox="0 0 16 40" width="16" height="40" aria-hidden="true"><path d="M8 1v37M2 31l6 7 6-7" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
 
     <!-- 01 — Diagnostic -->
@@ -1528,7 +1506,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
               <span class="obs-tag">Pertinence</span>
             </div>
           </div>
-          <figcaption>Les observations dans un PDF · extrait</figcaption>
+          <figcaption>Observation n°4 sur 94 · fiche produit · extrait du PDF</figcaption>
         </figure>
         <!-- Carrousel complet du diagnostic (observations 17, 4, 21 + 8 sur mobile), conservé pour pouvoir
              le réafficher : remplacer la figure ci-dessus par le contenu de ce <template>. -->
@@ -1569,7 +1547,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
       <div class="lc-media">
         <figure class="lc-shot">
           <img src="assets/hh-plan-action.jpg" alt="Plan d'action dans Notion : chaque observation avec sa priorité, son lot, la page concernée, le chantier, le critère et sa portée" width="748" height="533" loading="lazy" decoding="async">
-          <figcaption>Le plan d'action dans Notion · extrait</figcaption>
+          <figcaption>Le plan d'action dans Notion · 99 recommandations · extrait</figcaption>
         </figure>
       </div>
       <div class="lc-text">
@@ -1628,7 +1606,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
             <input class="ba-range" type="range" min="0" max="100" value="50" aria-label="Comparer la fiche produit avant et après, sur mobile">
           </div>
           <p class="lc-hint" aria-hidden="true">Faites glisser pour comparer</p>
-          <p class="ba-phone-note">Premier écran mobile · un extrait de la nouvelle maquette complète</p>
+          <p class="ba-phone-note">lhonnetehomme.fr · fiche produit, premier écran mobile</p>
         </div>
       </div>
     </article>
@@ -1638,7 +1616,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
       <div class="lc-media">
         <figure class="lc-shot">
           <img src="assets/hh-synth-11.jpg" alt="Slide « Le mobile accentue chacun de ces problèmes » : 20 écrans à faire défiler sur la home, 7,5 écrans avant le bouton d'achat sur la fiche" width="1200" height="675" loading="lazy" decoding="async">
-          <figcaption>Extrait de la synthèse · slide 11</figcaption>
+          <figcaption>La synthèse · slide 11 sur 20</figcaption>
         </figure>
       </div>
       <div class="lc-text">
