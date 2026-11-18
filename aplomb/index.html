@@ -1492,6 +1492,16 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
     <!-- 01 — Diagnostic -->
     <article class="lc-row">
       <div class="lc-media">
+        <figure class="lc-shot">
+          <picture>
+            <source media="(max-width: 760px)" srcset="assets/hh-diag-mobile-04.jpg" width="840" height="1030">
+            <img src="assets/hh-diagnostic.jpg" width="930" height="666" alt="Observation n°4, fiche produit : l'édition beau livre n'est mentionnée nulle part, critère Pertinence" loading="lazy" decoding="async">
+          </picture>
+          <figcaption>Les observations dans un PDF · extrait</figcaption>
+        </figure>
+        <!-- Carrousel complet du diagnostic (observations 17, 4, 21 + 8 sur mobile), conservé pour pouvoir
+             le réafficher : remplacer la figure ci-dessus par le contenu de ce <template>. -->
+        <template id="diag-carousel">
         <figure class="doc-fan">
           <!-- Mobile : montages « emplacement + observation » (format portrait) à la place des pages PDF -->
           <div class="doc-fan-pages" data-mobile-ratio="840 / 1030">
@@ -1500,8 +1510,8 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
               <img class="doc-fan-back is-left" src="assets/hh-diag-21.jpg" width="962" height="702" alt="Observation n°21, fiche produit sur mobile : les caractéristiques du livre ne sont visibles que dans le dernier onglet, critère Clarté" loading="lazy" decoding="async">
             </picture>
             <picture>
-              <source media="(max-width: 760px)" srcset="assets/hh-diag-mobile-04.jpg" width="840" height="1030">
-              <img class="doc-fan-back is-right" src="assets/hh-diagnostic.jpg" width="930" height="666" alt="Observation n°4, fiche produit : l'édition beau livre n'est mentionnée nulle part, critère Pertinence" loading="lazy" decoding="async">
+              <source media="(max-width: 760px)" srcset="assets/hh-diag-mobile-04-v1.jpg" width="840" height="1030">
+              <img class="doc-fan-back is-right" src="assets/hh-diagnostic-v1.jpg" width="930" height="666" alt="Observation n°4, fiche produit : l'édition beau livre n'est mentionnée nulle part, critère Pertinence" loading="lazy" decoding="async">
             </picture>
             <picture>
               <source media="(max-width: 760px)" srcset="assets/hh-diag-mobile-17.jpg" width="840" height="1030">
@@ -1511,6 +1521,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
           </div>
           <figcaption>Les observations dans un PDF · extrait</figcaption>
         </figure>
+        </template>
       </div>
       <div class="lc-text">
         <span class="lc-n">01</span>
@@ -1955,8 +1966,9 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
   document.querySelectorAll('.lc-shot img').forEach(img => {
     const wrap = document.createElement('span');
     wrap.className = 'zoom-wrap';
-    img.before(wrap);
-    wrap.appendChild(img);
+    const target = img.parentElement.tagName === 'PICTURE' ? img.parentElement : img;
+    target.before(wrap);
+    wrap.appendChild(target);
     wrap.appendChild(zoomButton(() => openZoom(img)));
     img.addEventListener('click', () => openZoom(img));
   });
