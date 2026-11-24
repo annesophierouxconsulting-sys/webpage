@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maat — Étude de cas d'Aplomb : Les Éditions L'Honnête Homme</title>
+<meta name="description" content="Des livres soignés, un site qui ne leur rendait pas justice : comment l'audit d'Aplomb a remis d'aplomb le parcours d'achat des Éditions L'Honnête Homme, de la home à la commande.">
+<link rel="canonical" href="https://maat.so/aplomb/lhonnete-homme/">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="apple-touch-icon" href="../../favicon.svg">
+<link rel="preconnect" href="https://calendly.com">
+<link rel="preconnect" href="https://assets.calendly.com">
+<link rel="preload" as="script" href="https://assets.calendly.com/assets/external/widget.js" fetchpriority="high">
+<link rel="preload" as="style" href="https://assets.calendly.com/assets/external/widget.css">
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+</noscript>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Mono:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Mono:wght@300;400;500&display=swap" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Mono:wght@300;400;500&display=swap">
+</noscript>
+<!-- Privacy-friendly analytics by Plausible (sans cookies, RGPD-compliant) -->
+<script async src="https://plausible.io/js/pa-IQIBlETfvM5eOFGPGg27a.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+<style>
+/* ============================================================
+   TOKENS — identiques au reste du site (cohérence de marque)
+   ============================================================ */
+:root {
+  --hero-bg: #08041A;
+  --paper: #FBF4E0;
+  --champagne: #D4B275;
+  --champagne-fonce: #8C6A2C;
+  --ink: #14102A;
+  --ink-soft: #3A3658;
+  --ink-mute: #6E6890;
+  --ivory: #F4ECD3;
+  --alert: #A4452C;
+
+  --champagne-a05: rgba(212, 178, 117, 0.05);
+  --champagne-fonce-a18: rgba(140, 106, 44, 0.18);
+  --champagne-fonce-a45: rgba(140, 106, 44, 0.45);
+  --ink-a08: rgba(20, 16, 42, 0.08);
+  --ink-a15: rgba(20, 16, 42, 0.15);
+
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Newsreader', Georgia, serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+
+  --fs-mono-xs: 9px;
+  --fs-mono-sm: 10px;
+  --fs-mono-md: 11px;
+  --ls-mono: 0.18em;
+  --ls-mono-wide: 0.22em;
+  --fs-display-md: clamp(22px, 2.8vw, 30px);
+
+  --max-w: 1100px;
+  --max-w-prose: 620px;
+  --header-height: 100px;
+  --header-height-mobile: 70px;
+}
+
+* { box-sizing: border-box; }
+
+@view-transition { navigation: auto; }
+
+html { scroll-padding-top: var(--header-height); }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  background: var(--paper);
+  color: var(--ink);
+  font-variation-settings: "opsz" 14;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--ink);
+  font-variation-settings: "opsz" 60;
+  text-wrap: pretty;
+}
+h1 em, h2 em, h3 em, h4 em { font-style: italic; color: var(--champagne-fonce); font-variation-settings: "opsz" 72; }
+p { margin: 0; text-wrap: pretty; }
+img { max-width: 100%; height: auto; display: block; }
+
+.wrap { max-width: var(--max-w); margin: 0 auto; }
+
+/* Libellé mono (overline) */
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-sm);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+}
+.mono.is-md { font-size: var(--fs-mono-md); }
+.mono.is-xs { font-size: var(--fs-mono-xs); letter-spacing: 0.12em; }
+.mono.is-mute { color: var(--ink-mute); }
+
+/* Encart papier à coins dorés */
+.fiche {
+  position: relative;
+  border: 1px solid var(--champagne-fonce-a18);
+  background: var(--champagne-a05);
+}
+.fiche::before, .fiche::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 0 solid var(--champagne-fonce);
+}
+.fiche::before { top: -1px; left: -1px; border-top-width: 1px; border-left-width: 1px; }
+.fiche::after { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
+
+.link-mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-sm);
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--champagne-fonce);
+  text-decoration: none;
+  border-bottom: 1px solid var(--champagne-fonce-a45);
+  padding-bottom: 4px;
+  transition: border-color 0.2s ease-out;
+}
+@media (hover: hover) { .link-mono:hover { border-bottom-color: var(--champagne-fonce); } }
+.link-mono.is-md { font-size: var(--fs-mono-md); padding-bottom: 5px; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ============================================================
+   HERO — fond foncé : client, promesse, offre, chiffres clés
+   ============================================================ */
+.hero {
+  background: var(--hero-bg);
+  color: var(--ivory);
+  padding: calc(var(--header-height) + clamp(40px, 6vw, 80px)) 5% clamp(48px, 6vw, 72px);
+}
+.hero-intro {
+  position: relative;
+  padding-left: 1.75rem;
+  max-width: 780px;
+}
+.hero-intro::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 4px; bottom: 4px;
+  width: 1px;
+  background: linear-gradient(to bottom,
+    rgba(212, 178, 117, 0.4), rgba(212, 178, 117, 0.75), rgba(212, 178, 117, 0.4));
+}
+.hero-eyebrow { display: block; color: var(--champagne); margin: 0 0 20px; }
+.hero h1 {
+  font-size: clamp(40px, 6vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: var(--ivory);
+  font-variation-settings: "opsz" 72;
+}
+.hero-lead {
+  font-size: clamp(18px, 1.8vw, 21px);
+  line-height: 1.5;
+  color: rgba(244, 236, 211, 0.82);
+  margin: 24px 0 0;
+  max-width: 620px;
+}
+.hero-lead em { font-style: italic; color: var(--champagne); }
+.hero-offer-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(24px, 2.4vw, 30px);
+  line-height: 1.2;
+  color: var(--champagne);
+  margin: 44px 0 9px;
+  font-variation-settings: "opsz" 32;
+}
+.hero-offer-descriptor {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-md);
+  line-height: 1.6;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--champagne);
+}
+
+/* Chiffres clés de l'audit */
+.hero-figures {
+  list-style: none;
+  margin: clamp(48px, 6vw, 72px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgba(212, 178, 117, 0.3);
+}
+.hero-figures li { padding: 24px 24px 0 0; }
+.hero-figures li + li { padding-left: 24px; border-left: 1px solid rgba(212, 178, 117, 0.15); }
+.hero-figure {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 4.4vw, 56px);
+  line-height: 1;
+  color: var(--ivory);
+  font-variation-settings: "opsz" 72;
+  margin-bottom: 10px;
+}
+.hero-figure-label { font-size: 15px; line-height: 1.45; color: rgba(244, 236, 211, 0.7); }
+
+.hero-intro > *, .hero-figures {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: heroFadeUp 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+.hero-intro > .hero-offer-name, .hero-intro > .hero-offer-descriptor { animation-delay: 200ms; }
+.hero-figures { animation-delay: 400ms; }
+@keyframes heroFadeUp { to { opacity: 1; transform: none; } }
+
+/* ============================================================
+   CAS — fiche contexte / point de départ / remis
+   ============================================================ */
+.case { padding: clamp(56px, 7vw, 96px) 5% 0; }
+
+.case-sheet { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.case-sheet-col { padding: 28px; }
+.case-sheet-col + .case-sheet-col { border-left: 1px solid var(--champagne-fonce-a18); }
+.case-sheet-col > .mono { display: block; margin: 0 0 18px; }
+.stake-list { display: flex; flex-direction: column; gap: 14px; }
+.stake-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1.1;
+  font-variation-settings: "opsz" 48;
+}
+.stake-value small { font-size: 0.55em; color: var(--ink-mute); }
+.symptom-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(19px, 2vw, 22px);
+  line-height: 1.35;
+  margin: 0 0 14px;
+  font-variation-settings: "opsz" 36;
+}
+.sheet-text { font-size: 16px; line-height: 1.55; color: var(--ink-soft); margin: 0 0 18px; }
+
+/* Partie numérotée I / II / III */
+.part { margin-top: clamp(64px, 8vw, 104px); }
+.part-head { display: flex; align-items: baseline; gap: 18px; margin: 0 0 40px; }
+.part-head .mono { font-size: var(--fs-mono-md); }
+.part-head h2 { font-size: var(--fs-display-md); line-height: 1.1; margin: 0; white-space: nowrap; }
+.part-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--champagne-fonce-a45), transparent);
+}
+.part-intro { font-size: 17px; line-height: 1.6; color: var(--ink-soft); margin: -20px 0 48px; max-width: var(--max-w-prose); }
+
+/* I — Diagnostic : trois chiffres */
+.findings {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+}
+.finding { display: flex; flex-direction: column; border-top: 1px solid var(--ink); padding-top: 20px; }
+.finding > .mono { color: var(--champagne-fonce); margin-bottom: 14px; }
+.finding h3 { font-size: clamp(24px, 2.4vw, 30px); line-height: 1.15; margin: 0 0 14px; }
+.finding p:not([class]) { font-size: 15px; line-height: 1.58; color: var(--ink-soft); }
+.finding-proof {
+  margin-top: auto;
+  padding-top: 20px;
+  min-height: 104px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+.finding-proof strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 34px;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.finding-proof strong small { font-size: 0.55em; color: var(--ink-mute); }
+.finding-viz { margin-top: 12px; min-height: 42px; align-items: flex-end; align-content: flex-end; }
+.viz-sections { display: flex; gap: 4px; }
+.viz-sections span { width: 16px; height: 28px; background: var(--ink-a08); border: 1px solid var(--ink-a15); }
+.viz-sections .is-dup { background: rgba(164, 69, 44, 0.18); border-color: var(--alert); }
+.viz-screens { display: flex; gap: 4px; align-items: flex-end; }
+.viz-screens span { width: 16px; height: 28px; border: 1px solid var(--ink-a15); }
+.viz-screens .is-scrolled { background: var(--ink-a08); }
+.viz-screens .is-buy { border-color: var(--alert); background: rgba(164, 69, 44, 0.18); }
+.viz-card { display: flex; align-items: center; gap: 10px; padding: 6px 10px 6px 6px; border: 1px solid var(--ink-a15); background: rgba(255,255,255,0.45); max-width: 280px; }
+.viz-card-cover { width: 20px; height: 28px; flex: none; background: #1E2A3A; }
+.viz-card-body { display: flex; flex-direction: column; gap: 5px; flex: none; }
+.viz-card-title { width: 64px; height: 5px; background: var(--ink-a15); }
+.viz-card-price { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; color: var(--ink-soft); }
+.viz-card-missing { margin-left: auto; padding: 5px 8px; border: 1px dashed var(--alert); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em; color: var(--alert); opacity: 0.85; white-space: nowrap; }
+
+/* I — Les quatre problèmes transverses */
+.issues { list-style: none; margin: clamp(48px, 6vw, 72px) 0 0; padding: 0; border-top: 1px solid var(--ink-a15); }
+.issue {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 12px 32px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--ink-a08);
+  align-items: baseline;
+}
+.issue-n { font-family: var(--font-mono); font-size: var(--fs-mono-md); color: var(--champagne-fonce); }
+.issue h3 { font-size: 22px; line-height: 1.2; margin: 0; }
+.issue p { font-size: 15px; line-height: 1.6; color: var(--ink-soft); }
+.issues-note { font-size: 15px; line-height: 1.6; color: var(--ink-soft); margin: 20px 0 0; max-width: 760px; }
+.issues-note strong { font-weight: 500; color: var(--ink); }
+
+/* II — Avant / après en captures */
+.shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.shot { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.shot > .mono { font-size: var(--fs-mono-xs); }
+.shot-frame { border: 1px solid var(--ink-a15); background: #fff; overflow: hidden; }
+.shot.is-after .shot-frame { border-color: var(--champagne-fonce-a45); }
+.shot figcaption { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); }
+
+.shots.is-mobile { grid-template-columns: repeat(2, minmax(0, 260px)); justify-content: start; gap: 32px; }
+.shots.is-mobile .shot-frame img { width: 100%; }
+
+.illustrative-note { font-family: var(--font-mono); font-size: var(--fs-mono-xs); letter-spacing: 0.06em; font-style: italic; color: var(--ink-mute); margin: 16px 0 0; }
+
+/* II — Les gestes A à D */
+.gestures {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 48px 64px;
+  margin-top: clamp(48px, 6vw, 72px);
+}
+.gesture { display: flex; gap: 16px; align-items: flex-start; }
+.gesture-n {
+  flex: none;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--champagne-fonce);
+  color: var(--champagne-fonce);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.gesture h3 { font-size: 24px; line-height: 1.2; margin: 2px 0 10px; }
+.gesture p { font-size: 15px; line-height: 1.6; color: var(--ink-soft); }
+.gesture p + p { margin-top: 10px; }
+.gesture-quote { font-family: var(--font-display); font-style: italic; color: var(--champagne-fonce) !important; }
+.gesture-tech { font-family: var(--font-mono); font-size: var(--fs-mono-xs) !important; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mute) !important; }
+
+.mobile-block {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px 56px;
+  align-items: center;
+  margin-top: clamp(56px, 7vw, 88px);
+  padding-top: clamp(40px, 5vw, 56px);
+  border-top: 1px solid var(--ink-a08);
+}
+.mobile-block h3 { font-size: 24px; line-height: 1.2; margin: 0 0 12px; }
+.mobile-block p { font-size: 15px; line-height: 1.6; color: var(--ink-soft); max-width: 420px; }
+
+/* Sous la zone d'achat : le reste de la fiche */
+.suite {
+  margin-top: clamp(56px, 7vw, 88px);
+  padding-top: clamp(40px, 5vw, 56px);
+  border-top: 1px solid var(--ink-a08);
+}
+.suite-head { max-width: 640px; margin-bottom: 36px; }
+.suite-head h3 { font-size: 24px; line-height: 1.2; margin: 10px 0 12px; }
+.suite-head p { font-size: 15px; line-height: 1.6; color: var(--ink-soft); }
+.suite-copy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
+  gap: 32px;
+  align-items: start;
+}
+.suite-copy .is-before .shot-frame { max-height: 760px; }
+.suite-copy .is-before .shot-frame::before {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0; height: 90px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0), #fff);
+  z-index: 1;
+}
+.suite-after { display: flex; flex-direction: column; gap: 28px; }
+.tone {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--ink-a08);
+}
+.tone > .mono { grid-column: 1 / -1; }
+.tone blockquote { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.tone blockquote p { font-family: var(--font-display); font-style: italic; font-size: 18px; line-height: 1.45; color: var(--ink-soft); }
+.tone .is-after p { color: var(--champagne-fonce); }
+.tone blockquote .mono { font-size: var(--fs-mono-xs); }
+.suite-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 48px;
+}
+.suite-more {
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--ink-a08);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 40px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+.suite-more > .mono { grid-column: 1 / -1; }
+.suite-more strong { font-weight: 500; color: var(--ink); }
+
+/* III — Le plan */
+.lots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.lot { border-top: 1px solid var(--ink); padding-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+.lot-figure { font-family: var(--font-display); font-size: 44px; line-height: 1; font-variation-settings: "opsz" 72; }
+.lot-figure small { font-size: 0.4em; color: var(--ink-mute); }
+.lot h3 { font-size: 20px; line-height: 1.25; margin: 0; }
+.lot p:not([class]) { font-size: 14.5px; line-height: 1.55; color: var(--ink-soft); }
+
+/* Extrait du backlog — style Notion, en HTML pour rester net à toutes les tailles */
+.backlog { margin-top: clamp(48px, 6vw, 72px); }
+.backlog-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin: 0 0 14px; }
+.backlog-table { background: #fff; border: 1px solid var(--ink-a15); }
+.backlog-row {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) minmax(0, 1.5fr) 190px;
+  gap: 18px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--ink-a08);
+  align-items: baseline;
+}
+.backlog-row:last-child { border-bottom: none; }
+.backlog-row.is-head {
+  padding-top: 11px; padding-bottom: 11px;
+  background: rgba(20, 16, 42, 0.03);
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.backlog-prio { font-family: var(--font-mono); font-size: var(--fs-mono-sm); color: var(--ink-soft); white-space: nowrap; }
+.backlog-prio b { font-weight: 500; color: var(--alert); margin-right: 4px; }
+.backlog-obs { font-size: 15px; line-height: 1.4; font-weight: 500; color: var(--ink); }
+.backlog-reco { font-size: 14.5px; line-height: 1.5; color: var(--ink-soft); }
+.backlog-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tag { font-style: normal; font-size: 12px; line-height: 1.3; padding: 2px 7px; border-radius: 3px; color: var(--ink); white-space: nowrap; }
+.tag.is-blue { background: #DDEBF1; }
+.tag.is-yellow { background: #FBF3DB; }
+.tag.is-orange { background: #FAEBDD; }
+.tag.is-red { background: #FBE4E4; }
+.tag.is-green { background: #DDEDEA; }
+.tag.is-purple { background: #EAE4F2; }
+
+/* Captures cliquables : ouverture en pleine résolution */
+a.shot-frame { display: block; position: relative; cursor: zoom-in; }
+a.shot-frame::after {
+  content: '⤢';
+  position: absolute; right: 10px; bottom: 10px;
+  width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  color: var(--ivory);
+  background: rgba(8, 4, 26, 0.72);
+  border-radius: 50%;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+@media (hover: hover) { a.shot-frame:hover::after { opacity: 1; } }
+.prio-more { font-size: 14px; color: var(--ink-mute); margin: 12px 0 0; }
+.backlog-full { margin-top: clamp(32px, 4vw, 44px); }
+.backlog-full .shot-frame { border-color: var(--ink-a15); }
+.plan-note { font-size: 17px; line-height: 1.5; margin: clamp(40px, 5vw, 56px) 0 0; padding-left: 16px; border-left: 1px solid var(--champagne-fonce); max-width: var(--max-w-prose); }
+.plan-note em { color: var(--champagne-fonce); }
+
+/* Livrables + témoignage + reconnaissance */
+.closing {
+  margin-top: clamp(64px, 8vw, 104px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 64px;
+  padding: 40px 0 0;
+  border-top: 1px solid var(--ink-a15);
+}
+.closing > div > .mono { display: block; margin: 0 0 16px; }
+.deliverables { list-style: none; margin: 0; padding: 0; }
+.deliverables li { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--ink-a08); font-size: 15px; line-height: 1.45; }
+.deliverables li:last-child { border-bottom: none; }
+.deliverables li > span { flex: none; font-family: var(--font-mono); font-size: 10px; color: var(--champagne-fonce); padding-top: 4px; }
+.deliverables strong { font-weight: 500; }
+.deliverables em { color: var(--ink-soft); }
+.closing-side { display: flex; flex-direction: column; gap: 24px; }
+.testimonial { padding: 28px; }
+.testimonial > .mono { display: block; margin: 0 0 14px; }
+.testimonial-text { font-family: var(--font-display); font-style: italic; font-size: 19px; line-height: 1.45; margin: 0 0 16px; font-variation-settings: "opsz" 36; }
+.testimonial-author { font-family: var(--font-mono); font-size: var(--fs-mono-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-mute); }
+.testimonial-author strong { font-weight: 500; color: var(--ink); }
+.recognize { padding: 28px; }
+.recognize > .mono { display: block; margin: 0 0 14px; }
+.recognize-text { font-family: var(--font-display); font-style: italic; font-size: 21px; line-height: 1.4; margin: 0 0 24px; font-variation-settings: "opsz" 36; }
+.recognize-text span { color: var(--champagne-fonce); }
+.recognize-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+
+/* ============================================================
+   BOOKING
+   ============================================================ */
+.booking { padding: clamp(96px, 11vw, 160px) 5% clamp(80px, 9vw, 128px); }
+.booking-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 64px;
+  align-items: end;
+  border-top: 1px solid var(--ink);
+  padding-top: 48px;
+}
+.booking-grid .mono { display: block; margin: 0 0 20px; }
+.booking h2 { font-size: clamp(36px, 5vw, 60px); line-height: 1.05; margin: 0; }
+.booking-lead { font-size: 17px; line-height: 1.55; color: var(--ink-soft); margin: 0 0 28px; max-width: 460px; }
+.booking-lead em { color: var(--champagne-fonce); }
+.booking-cta-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.booking-cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: var(--ls-mono);
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--ink);
+  padding: 17px 32px;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+@media (hover: hover) { .booking-cta:hover { background: var(--champagne-fonce); } }
+.booking-cta:active { transform: scale(0.97); }
+.booking-back { display: inline-block; margin-top: 28px; }
+
+/* ============================================================
+   FOOTER — clair
+   ============================================================ */
+.footer { padding: 56px 5% 32px; border-top: 1px solid var(--ink-a08); background: rgba(140, 106, 44, 0.045); }
+.footer-top { display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; padding-bottom: 36px; border-bottom: 1px solid var(--ink-a08); }
+.footer-feather { width: 24px; height: 90px; color: var(--champagne-fonce); flex: none; }
+.footer-signature { flex: 1; min-width: 260px; max-width: 680px; }
+.footer-tagline { font-family: var(--font-display); font-style: italic; font-size: clamp(20px, 2.4vw, 26px); line-height: 1.25; margin: 0 0 16px; font-variation-settings: "opsz" 60; }
+.footer-tagline span { color: var(--champagne-fonce); }
+.footer-definition { font-size: 15px; line-height: 1.65; color: var(--ink-soft); }
+.footer-definition em { color: var(--champagne-fonce); }
+.footer-bottom {
+  display: flex; justify-content: space-between; gap: 20px 32px; flex-wrap: wrap;
+  padding-top: 24px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono-xs);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.footer-bottom a { color: var(--ink-mute); text-decoration: none; }
+.footer-bottom a:hover { color: var(--ink); }
+.footer-bottom .footer-email { color: var(--champagne-fonce); letter-spacing: 0.04em; text-transform: none; font-size: 12px; }
+.footer-bottom nav { display: flex; gap: 24px; flex-wrap: wrap; }
+
+/* ============================================================
+   HEADER STICKY — repris de /aplomb/ (mh-*)
+   ============================================================ */
+.mh-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: transparent; border-bottom: 1px solid transparent;
+  transition: background-color 300ms ease, border-color 300ms ease, backdrop-filter 300ms ease;
+}
+.mh-header.is-scrolled {
+  background: rgba(8, 4, 26, 0.95);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  border-bottom-color: rgba(212, 178, 117, 0.18);
+}
+.mh-row1 { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; padding: 22px 5% 14px; transition: padding 300ms ease; }
+.mh-header.is-scrolled .mh-row1 { padding: 14px 5% 8px; }
+.mh-logo {
+  font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 30px;
+  color: var(--ivory); letter-spacing: 0.005em; text-decoration: none;
+  display: inline-flex; align-items: baseline; line-height: 1;
+  font-variation-settings: "opsz" 32; transition: font-size 300ms ease;
+}
+.mh-header.is-scrolled .mh-logo { font-size: 26px; }
+.mh-logo-macron { position: relative; display: inline-block; }
+.mh-logo-macron::after { content: ''; position: absolute; top: 0.05em; left: 12%; width: 76%; height: 0.05em; background: #F4ECD3; }
+.mh-tabs { display: flex; gap: clamp(1.25rem, 3vw, 2.5rem); justify-content: center; align-items: center; margin: 0; padding: 0; list-style: none; }
+.mh-tab {
+  position: relative;
+  font-family: var(--font-display); font-style: italic; font-size: clamp(14px, 1.6vw, 17px);
+  white-space: nowrap;
+  color: rgba(244, 236, 211, 0.6); text-decoration: none; padding: 4px 0;
+  transition: color 250ms ease;
+}
+.mh-tab::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 1.5px;
+  background: var(--champagne); transform: scaleX(0); transform-origin: left center;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mh-tab:hover { color: var(--ivory); }
+.mh-tab:hover::after { transform: scaleX(1); }
+.mh-tab.is-active { color: var(--champagne); font-weight: 500; }
+.mh-tab.is-active::after { transform: scaleX(1); }
+.mh-cta {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: clamp(0.1em, 1.4vw, 0.2em); text-transform: uppercase;
+  color: var(--champagne); background: transparent; border: 1px solid var(--champagne);
+  padding: 9px clamp(11px, 1.6vw, 16px); text-decoration: none; white-space: nowrap;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+.mh-cta:hover { background: var(--champagne); color: var(--hero-bg); }
+.mh-mobile-toggle {
+  display: none;
+  font-family: var(--font-mono); font-size: 10px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--champagne); background: transparent; border: 1px solid var(--champagne); padding: 8px 12px; cursor: pointer;
+}
+.mh-drawer {
+  display: none; position: fixed; top: var(--header-height-mobile); left: 0; right: 0;
+  background: var(--hero-bg); border-bottom: 1px solid rgba(212, 178, 117, 0.45);
+  box-shadow: 0 8px 24px -2px rgba(8, 4, 26, 0.6);
+  padding: 24px 24px 32px; z-index: 99;
+  transform: translateY(calc(-100% - var(--header-height-mobile) - 20px));
+  transition: transform 300ms ease;
+  max-height: calc(100vh - var(--header-height-mobile));
+  overflow-y: auto;
+}
+.mh-drawer.is-open { transform: translateY(0); }
+.mh-drawer-tabs { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin: 0 0 22px; padding: 0; list-style: none; }
+.mh-drawer-category-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(212, 178, 117, 0.5); }
+.mh-drawer-tab { font-family: var(--font-display); font-style: italic; color: var(--ivory); text-decoration: none; font-size: 16px; line-height: 1.1; padding-bottom: 6px; }
+.mh-drawer-tab.is-active { color: var(--champagne); font-weight: 500; font-size: 26px; border-bottom: 1.5px solid var(--champagne); }
+.mh-drawer-submenu { display: flex; flex-direction: column; gap: 4px; margin: 10px 0 14px; padding: 0 0 0 14px; list-style: none; border-left: 2px solid var(--champagne); }
+.mh-drawer-submenu-item {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(244, 236, 211, 0.5); text-decoration: none; padding: 6px 0;
+}
+.mh-drawer-submenu-item.is-active { color: var(--champagne); }
+.mh-drawer-divider { height: 1px; background: rgba(212, 178, 117, 0.18); margin: 0 0 18px; }
+.mh-drawer-cta {
+  display: inline-block;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--hero-bg); background: var(--champagne); padding: 14px 20px; text-decoration: none;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 900px) {
+  html { scroll-padding-top: var(--header-height-mobile); }
+  .mh-row1 { padding: 14px 5%; grid-template-columns: auto auto; }
+  .mh-header.is-scrolled .mh-row1 { padding: 14px 5% 12px; }
+  .mh-tabs-wrap, .mh-cta { display: none; }
+  .mh-mobile-toggle { display: inline-flex; justify-self: end; }
+  .mh-drawer { display: block; }
+  .mh-logo { font-size: 26px; }
+  .mh-header.is-scrolled .mh-logo { font-size: 22px; }
+
+  .hero { padding-top: calc(var(--header-height-mobile) + 48px); }
+  .hero-intro { padding-left: 1.25rem; }
+  .hero-figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero-figures li, .hero-figures li + li { padding: 20px 16px 4px 0; border-left: none; }
+  .hero-figures li:nth-child(even) { padding-left: 16px; border-left: 1px solid rgba(212, 178, 117, 0.15); }
+
+  .case-sheet { grid-template-columns: 1fr; }
+  .case-sheet-col { padding: 24px; }
+  .case-sheet-col + .case-sheet-col { border-left: none; border-top: 1px solid var(--champagne-fonce-a18); }
+
+  .part-head h2 { white-space: normal; }
+  .findings, .gestures, .lots, .closing, .booking-grid { grid-template-columns: 1fr; }
+  .backlog-row.is-head { display: none; }
+  .backlog-row { grid-template-columns: 1fr; gap: 6px; padding: 16px; }
+  .backlog-tags { margin-top: 4px; }
+  .issue { grid-template-columns: 40px minmax(0, 1fr); }
+  .issue p { grid-column: 2; }
+  .shots { grid-template-columns: 1fr; }
+  .shots.is-mobile { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .mobile-block { grid-template-columns: 1fr; }
+  .suite-copy, .suite-grid, .tone, .suite-more { grid-template-columns: 1fr; }
+  .suite-copy .is-before .shot-frame { max-height: 520px; }
+
+  .footer-bottom { flex-direction: column; letter-spacing: 0.14em; }
+}
+@media (max-width: 640px) {
+  .booking-cta { display: block; width: 100%; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER STICKY — DA aubergine, navigation des offres
+     ============================================================ -->
+<header class="mh-header" id="mh-header" aria-label="Navigation principale">
+  <div class="mh-row1">
+    <a class="mh-logo" href="../../index.html" aria-label="Maat — accueil">Ma<span class="mh-logo-macron">a</span>t</a>
+    <nav class="mh-tabs-wrap" aria-label="Pages">
+      <ul class="mh-tabs">
+        <li><a class="mh-tab" href="../../au-clair/index.html">Au Clair</a></li>
+        <li><a class="mh-tab is-active" href="../index.html">d'Aplomb</a></li>
+        <li><a class="mh-tab" href="../../index.html#sur-mesure">Sur-mesure</a></li>
+      </ul>
+    </nav>
+    <a class="mh-cta js-calendly" href="#booking">Réserver un appel découverte ↗</a>
+    <button class="mh-mobile-toggle" id="mh-mobile-toggle" type="button" aria-expanded="false" aria-controls="mh-drawer">Menu</button>
+  </div>
+</header>
+
+<aside class="mh-drawer" id="mh-drawer" aria-hidden="true">
+  <ul class="mh-drawer-tabs">
+    <li class="mh-drawer-category-label" aria-hidden="true">— d'Aplomb</li>
+    <li>
+      <a class="mh-drawer-tab" href="../index.html">d'Aplomb</a>
+      <ul class="mh-drawer-submenu">
+        <li><a class="mh-drawer-submenu-item is-active" href="#top">Étude de cas · L'Honnête Homme</a></li>
+      </ul>
+    </li>
+    <li class="mh-drawer-category-label" aria-hidden="true">— Les autres offres</li>
+    <li><a class="mh-drawer-tab" href="../../au-clair/index.html">Au Clair</a></li>
+    <li><a class="mh-drawer-tab" href="../../index.html#sur-mesure">Sur-mesure</a></li>
+    <li><a class="mh-drawer-tab" href="../../index.html">Accueil Maat</a></li>
+  </ul>
+  <div class="mh-drawer-divider" aria-hidden="true"></div>
+  <a class="mh-drawer-cta js-calendly" href="#booking">Réserver un appel découverte ↗</a>
+</aside>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="feather" viewBox="0 0 64 240">
+      <g fill="currentColor">
+        <line x1="32" y1="8" x2="32" y2="232" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M32 26 18 38h14Z M32 26 46 38H32Z" fill-opacity="0.7"/>
+        <path d="M32 48 14 60h18Z M32 48 50 60H32Z" fill-opacity="0.7"/>
+        <path d="M32 70 10 82h22Z M32 70 54 82H32Z" fill-opacity="0.75"/>
+        <path d="M32 92 8 104h24Z M32 92 56 104H32Z" fill-opacity="0.8"/>
+        <path d="M32 114 8 126h24Z M32 114 56 126H32Z" fill-opacity="0.8"/>
+        <path d="M32 136 10 148h22Z M32 136 54 148H32Z" fill-opacity="0.75"/>
+        <path d="M32 158 14 170h18Z M32 158 50 170H32Z" fill-opacity="0.7"/>
+        <path d="M32 180 18 192h14Z M32 180 46 192H32Z" fill-opacity="0.65"/>
+        <path d="M32 202 24 212h8Z M32 202 40 212H32Z" fill-opacity="0.6"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-intro">
+      <span class="mono is-md hero-eyebrow">— Étude de cas</span>
+      <h1>Les Éditions L'Honnête Homme</h1>
+      <p class="hero-lead">Des livres soignés, un site qui ne leur rendait pas justice. <em>Remettre d'aplomb tout le parcours d'achat, de la home à la commande.</em></p>
+      <p class="hero-offer-name">d'Aplomb</p>
+      <p class="hero-offer-descriptor">Audit CRO &amp; refonte pour petites entreprises engagées</p>
+    </div>
+
+    <ul class="hero-figures">
+      <li><span class="hero-figure">94</span><span class="hero-figure-label">points d'amélioration, de la home à la commande</span></li>
+      <li><span class="hero-figure">99</span><span class="hero-figure-label">recommandations priorisées, en 3 lots</span></li>
+      <li><span class="hero-figure">65</span><span class="hero-figure-label">d'entre elles rapides et faciles à mettre en œuvre</span></li>
+      <li><span class="hero-figure">1</span><span class="hero-figure-label">fiche produit refondue, modèle pour tout le catalogue</span></li>
+    </ul>
+  </div>
+</section>
+
+<article class="case" aria-label="Étude de cas : Les Éditions L'Honnête Homme">
+  <div class="wrap">
+
+    <!-- Fiche : contexte / point de départ / remis -->
+    <div class="case-sheet fiche reveal">
+      <div class="case-sheet-col">
+        <span class="mono">Le contexte</span>
+        <div class="stake-list">
+          <div><span class="stake-value">14 titres</span><span class="mono is-xs is-mute">Élégance, savoir-vivre, famille, foi</span></div>
+          <div><span class="stake-value">WooCommerce</span><span class="mono is-xs is-mute">Un site géré sans développeur</span></div>
+          <div><span class="stake-value">5&nbsp;€<small> de port fixe</small></span><span class="mono is-xs is-mute">Quel que soit le nombre de livres</span></div>
+        </div>
+      </div>
+      <div class="case-sheet-col">
+        <span class="mono">Le point de départ</span>
+        <p class="symptom-quote">«&nbsp;Dans le cadre d'une refonte complète du site de la maison d'édition, j'ai souhaité confier la partie CRO à une professionnelle aguerrie.&nbsp;»</p>
+        <p class="mono is-xs is-mute">— Floriane Stoecklin, responsable communication marketing</p>
+      </div>
+      <div class="case-sheet-col">
+        <span class="mono">Ce que j'ai remis</span>
+        <p class="sheet-text">Le diagnostic des pages du site, un plan d'action précis et priorisé, et la fiche produit entièrement redessinée et réécrite.</p>
+        <a class="link-mono" href="#livrables">4 livrables ↓</a>
+      </div>
+    </div>
+
+    <!-- I — Diagnostic -->
+    <section class="part reveal" aria-labelledby="diag">
+      <div class="part-head">
+        <span class="mono">I</span>
+        <h2 id="diag">Le diagnostic, <em>en trois constats.</em></h2>
+      </div>
+      <p class="part-intro">Home, catalogue, fiche produit, panier et commande&nbsp;: j'ai passé chaque écran au crible de cinq critères, sur desktop et sur mobile. Sur la fiche produit, trois problèmes freinaient l'achat.</p>
+      <ol class="findings">
+        <li class="finding">
+          <span class="mono">Constat 1</span>
+          <h3>Le lecteur doit chercher comment acheter.</h3>
+          <p>Deux fiches pour un même livre, sans moyen de comparer les éditions. Le prix s'affiche sans bouton à côté&nbsp;: le seul «&nbsp;Ajouter au panier&nbsp;» arrive sous toute la description.</p>
+          <p class="finding-proof"><strong>7,5 <small>écrans sur 9</small></strong>à faire défiler sur mobile avant le bouton d'achat.</p>
+          <div class="finding-viz viz-screens" aria-hidden="true">
+            <span class="is-scrolled"></span><span class="is-scrolled"></span><span class="is-scrolled"></span><span class="is-scrolled"></span><span class="is-scrolled"></span><span class="is-scrolled"></span><span class="is-scrolled"></span><span class="is-buy"></span><span></span>
+          </div>
+        </li>
+        <li class="finding">
+          <span class="mono">Constat 2</span>
+          <h3>Le texte répète au lieu de convaincre.</h3>
+          <p>Les mêmes promesses reviennent sous plusieurs titres, chacun précédé d'un émoji. L'auteur et le sous-titre n'apparaissent nulle part, et la page se termine sur un ton de développement personnel, loin d'un éditeur de tradition.</p>
+          <p class="finding-proof"><strong>10 <small>sections</small></strong>titrées, dont 5 qui disent la même chose.</p>
+          <div class="finding-viz viz-sections" aria-hidden="true">
+            <span class="is-dup"></span><span class="is-dup"></span><span class="is-dup"></span><span class="is-dup"></span><span class="is-dup"></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </li>
+        <li class="finding">
+          <span class="mono">Constat 3</span>
+          <h3>Les vrais atouts restent cachés.</h3>
+          <p>Des avis à 5/5 aux verbatims concrets, mais dispersés dans la description et un onglet. Un argument cadeau enfoui en milieu de page. Aucun autre livre proposé, alors que le port est fixe à 5&nbsp;€.</p>
+          <p class="finding-proof"><strong>12 <small>livres sur 14</small></strong>notés 5/5, sans que le catalogue ni la home ne le montrent.</p>
+          <div class="finding-viz viz-card" aria-hidden="true">
+            <span class="viz-card-cover"></span>
+            <span class="viz-card-body"><span class="viz-card-title"></span><span class="viz-card-price">30,00 €</span></span>
+            <span class="viz-card-missing">★★★★★ 5/5</span>
+          </div>
+        </li>
+      </ol>
+
+      <ol class="issues">
+        <li class="issue">
+          <span class="issue-n">01</span>
+          <h3>Les livres, et le moyen de les acheter, <em>arrivent trop tard.</em></h3>
+          <p>Un H1 d'accueil au lieu d'une promesse, sans bouton&nbsp;; les ouvrages après les articles du blog. Au catalogue, la réassurance passe avant les livres.</p>
+        </li>
+        <li class="issue">
+          <span class="issue-n">02</span>
+          <h3>Le panier est difficile <em>à trouver et à suivre.</em></h3>
+          <p>Séparé de la navigation et libellé en anglais («&nbsp;0 ITEMS&nbsp;») sur desktop&nbsp;; rangé dans le menu burger, sans icône ni compteur, sur mobile. Et après l'ajout, un bandeau de confirmation presque illisible (contraste de 2,7:1).</p>
+        </li>
+        <li class="issue">
+          <span class="issue-n">03</span>
+          <h3>La réassurance manque <em>aux moments où elle compte.</em></h3>
+          <p>Ni délai ni stock, alors qu'on offre souvent un livre à date fixe. Le paiement sécurisé, répété trois fois sur la fiche, disparaît au panier.</p>
+        </li>
+        <li class="issue">
+          <span class="issue-n">04</span>
+          <h3>Le tunnel détourne l'attention <em>de la commande.</em></h3>
+          <p>La sidebar du blog et le header complet jusqu'au paiement&nbsp;; un code promo plus visible que «&nbsp;Valider la commande&nbsp;».</p>
+        </li>
+      </ol>
+      <p class="issues-note"><strong>Et le mobile accentue chacun de ces problèmes</strong>&nbsp;: 20 écrans à faire défiler sur la home, où les livres n'arrivent qu'au 7<sup>e</sup>, un popup en plein écran, et 4 écrans de formulaire avant le bouton «&nbsp;Commander&nbsp;».</p>
+    </section>
+
+    <!-- II — Décisions -->
+    <section class="part reveal" aria-labelledby="decisions">
+      <div class="part-head">
+        <span class="mono">II</span>
+        <h2 id="decisions">La fiche produit, <em>refondue.</em></h2>
+      </div>
+      <p class="part-intro">J'ai repensé et entièrement réécrit la fiche du <em>Guide du style classique et sartorial</em>&nbsp;: un modèle pour toutes les fiches du catalogue.</p>
+
+      <div class="shots">
+        <figure class="shot">
+          <span class="mono is-mute">Avant · premier écran, desktop</span>
+          <a class="shot-frame" href="../assets/hh-fiche-avant-desktop.jpg" target="_blank" rel="noopener" aria-label="Ouvrir la capture en pleine résolution"><img src="../assets/hh-fiche-avant-desktop.jpg" alt="Ancienne fiche produit du Guide du style classique et sartorial, édition beau livre : titre en capitales, prix seul, liste de réassurance et sidebar du blog." width="1440" height="810" loading="lazy"></a>
+          <figcaption>Le prix, sans bouton à côté. Une fiche par édition, une sidebar de blog, et l'avertissement «&nbsp;Le bouton se trouve en bas de cette présentation&nbsp;».</figcaption>
+        </figure>
+        <figure class="shot is-after">
+          <span class="mono">Après · premier écran, desktop</span>
+          <a class="shot-frame" href="../assets/hh-fiche-apres-desktop.jpg" target="_blank" rel="noopener" aria-label="Ouvrir la capture en pleine résolution"><img src="../assets/hh-fiche-apres-desktop.jpg" alt="Nouvelle fiche produit : titre, sous-titre, auteur, note 5/5, choix entre broché et beau livre, prix et bouton Ajouter au panier dans le premier écran." width="1440" height="810" loading="lazy"></a>
+          <figcaption>Tout ce qu'il faut pour choisir et acheter tient dans le premier écran&nbsp;: sous-titre, avis, choix de l'édition, prix, bouton, délai.</figcaption>
+        </figure>
+      </div>
+      <p class="illustrative-note">Visuels de la maquette générés par IA, à titre de direction artistique.</p>
+
+      <div class="gestures">
+        <div class="gesture">
+          <span class="gesture-n">A</span>
+          <div>
+            <h3>Une seule fiche <em>pour les deux éditions.</em></h3>
+            <p>Le broché (30&nbsp;€) et le beau livre (39&nbsp;€) avaient deux fiches quasi identiques, qui se concurrençaient. Désormais, une fiche et un choix d'édition qui change l'image, le prix et la reliure.</p>
+            <p class="gesture-quote">«&nbsp;Le broché pour la lecture au quotidien, le beau livre pour offrir ou garder dans sa bibliothèque.&nbsp;»</p>
+            <p class="gesture-tech">Produit variable WooCommerce · a priori sans développement</p>
+          </div>
+        </div>
+        <div class="gesture">
+          <span class="gesture-n">B</span>
+          <div>
+            <h3>L'achat <em>remonte.</em></h3>
+            <p>Le bloc d'achat passe sous le titre, avec le choix d'édition, et le bouton reste fixe en bas d'écran sur mobile. Délai, stock et réassurance sont regroupés près du bouton&nbsp;: «&nbsp;En stock, expédié sous 48&nbsp;h&nbsp;».</p>
+          </div>
+        </div>
+        <div class="gesture">
+          <span class="gesture-n">C</span>
+          <div>
+            <h3>Le contenu <em>s'ordonne.</em></h3>
+            <p>L'auteur et le sous-titre, absents, apparaissent sous le titre. Les avis 5/5 remontent avec un verbatim. La galerie, revue, met le livre en valeur avec de vraies photos à la place de la maquette 3D, et le design s'accorde enfin à l'univers élégant de la maison.</p>
+          </div>
+        </div>
+        <div class="gesture">
+          <span class="gesture-n">D</span>
+          <div>
+            <h3>Après l'ajout, <em>une suite.</em></h3>
+            <p>Un bandeau de confirmation lisible, un compteur «&nbsp;Panier (1)&nbsp;» en français, et un deuxième livre suggéré&nbsp;: le port étant fixe, chaque livre ajouté coûte moins cher à expédier.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-block">
+        <div>
+          <span class="mono">Sur mobile</span>
+          <h3>Le livre, son édition et son prix, <em>sans faire défiler.</em></h3>
+          <p>Le bouton d'achat suit la lecture, fixé en bas d'écran avec l'édition choisie et son prix. J'ai livré la maquette mobile en ligne, cliquable, pour la tester sur téléphone.</p>
+        </div>
+        <div class="shots is-mobile">
+          <figure class="shot">
+            <span class="mono is-mute">Avant</span>
+            <a class="shot-frame" href="../assets/hh-fiche-avant-mobile.jpg" target="_blank" rel="noopener" aria-label="Ouvrir la capture en pleine résolution"><img src="../assets/hh-fiche-avant-mobile.jpg" alt="Ancienne fiche produit sur mobile : fil d'Ariane, visuel avec bandeau rouge, titre en capitales." width="428" height="1012" loading="lazy"></a>
+          </figure>
+          <figure class="shot is-after">
+            <span class="mono">Après</span>
+            <a class="shot-frame" href="../assets/hh-fiche-apres-mobile.jpg" target="_blank" rel="noopener" aria-label="Ouvrir la capture en pleine résolution"><img src="../assets/hh-fiche-apres-mobile.jpg" alt="Nouvelle fiche produit sur mobile : titre, sous-titre, note 5/5, photo du livre et barre d'achat fixe Broché, 30 euros, Ajouter au panier." width="780" height="1844" loading="lazy"></a>
+          </figure>
+        </div>
+      </div>
+
+      <div class="suite">
+        <div class="suite-head">
+          <span class="mono">Sous la zone d'achat</span>
+          <h3>Le reste de la page, <em>réécrit et réordonné.</em></h3>
+          <p>Celui qui hésite descend lire. J'ai donc repris tout le texte de la fiche, accordé le ton à la maison, et ajouté ce qui manquait pour décider.</p>
+        </div>
+
+        <div class="suite-copy">
+          <figure class="shot is-before">
+            <span class="mono is-mute">Avant · la description, desktop</span>
+            <a class="shot-frame" href="../assets/hh-suite-avant-description.jpg" target="_blank" rel="noopener" aria-label="Ouvrir la capture en pleine résolution"><img src="../assets/hh-suite-avant-description.jpg" alt="Ancienne description : sections en capitales précédées d'émojis, Pourquoi choisir ce guide, Pourquoi ce guide est-il essentiel, Ce que vous allez apprendre, Qu'est-ce que ce livre va m'apporter, Que contient ce guide, À qui s'adresse ce livre." width="640" height="1568" loading="lazy"></a>
+            <figcaption>Dix sections titrées, chacune avec son émoji. Les mêmes promesses, reformulées cinq fois.</figcaption>
+          </figure>
+          <div class="suite-after">
+            <figure class="shot is-after">
+              <span class="mono">Après · la présentation, desktop</span>
+              <a class="shot-frame" href="../assets/hh-suite-presentation.jpg" target="_blank" rel="noopener" aria-label="Ouvrir la capture en pleine résolution"><img src="../assets/hh-suite-presentation.jpg" alt="Nouvelle présentation : titre L'élégance s'apprend, le style se cultive, puis trois colonnes, Ce que contient le guide, Ce que vous saurez faire, À qui s'adresse ce livre." width="1360" height="760" loading="lazy"></a>
+              <figcaption>Une accroche, puis les trois questions que se pose l'acheteur&nbsp;: ce que contient le guide, ce qu'il saura faire, à qui il s'adresse.</figcaption>
+            </figure>
+            <div class="tone">
+              <span class="mono">Le ton, accordé à un éditeur de tradition</span>
+              <blockquote>
+                <span class="mono is-mute">Avant · fin de page</span>
+                <p>«&nbsp;Ne laissez plus le hasard guider votre élégance. […] Cliquez sur “Ajouter au panier” pour commencer votre transformation.&nbsp;»</p>
+              </blockquote>
+              <blockquote class="is-after">
+                <span class="mono">Après · fin de page</span>
+                <p>«&nbsp;L'élégance ne se décrète pas&nbsp;: elle se cultive, avec patience et mesure. Puisse ce guide vous accompagner sur ce chemin.&nbsp;»</p>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+
+        <div class="suite-grid">
+          <figure class="shot is-after">
+            <span class="mono">Le sommaire, rendu visible · desktop</span>
+            <a class="shot-frame" href="../assets/hh-suite-sommaire.jpg" target="_blank" rel="noopener" aria-label="Ouvrir la capture en pleine résolution"><img src="../assets/hh-suite-sommaire.jpg" alt="Section Sommaire : quatre parties, vingt chapitres, six annexes." width="1360" height="620" loading="lazy"></a>
+            <figcaption>Un atout de l'ancienne fiche, caché dans un onglet&nbsp;: il donne la mesure du livre en un coup d'œil.</figcaption>
+          </figure>
+          <figure class="shot is-after">
+            <span class="mono">Les avis, regroupés · desktop</span>
+            <a class="shot-frame" href="../assets/hh-suite-avis.jpg" target="_blank" rel="noopener" aria-label="Ouvrir la capture en pleine résolution"><img src="../assets/hh-suite-avis.jpg" alt="Section Ce qu'en disent nos lecteurs : note 5/5 sur 5 avis et trois verbatims." width="1360" height="530" loading="lazy"></a>
+            <figcaption>Les cinq avis à 5/5, réunis en un seul endroit au lieu d'être dispersés.</figcaption>
+          </figure>
+          <figure class="shot is-after">
+            <span class="mono">Un deuxième livre · desktop</span>
+            <a class="shot-frame" href="../assets/hh-suite-livres.jpg" target="_blank" rel="noopener" aria-label="Ouvrir la capture en pleine résolution"><img src="../assets/hh-suite-livres.jpg" alt="Section Complétez votre commande, la livraison reste à 5 euros : deux livres du même rayon avec un bouton Ajouter au panier." width="1360" height="450" loading="lazy"></a>
+            <figcaption>Deux livres du même rayon, avec l'argument qui compte&nbsp;: la livraison reste à 5&nbsp;€.</figcaption>
+          </figure>
+        </div>
+
+        <div class="suite-more">
+          <span class="mono">Et aussi</span>
+          <p><strong>L'argument cadeau, sous le bouton</strong>&nbsp;: «&nbsp;Un anniversaire, Noël, un premier costume&nbsp;: le livre peut être expédié directement chez le destinataire.&nbsp;»</p>
+          <p><strong>La maison présentée</strong> en quelques lignes, pour qui la découvre par ce livre.</p>
+          <p><strong>Une fiche technique comparée</strong> du broché et du beau livre, repliée par défaut.</p>
+          <p><strong>Une lettre d'information qui promet quelque chose</strong>&nbsp;: «&nbsp;un conseil de savoir-vivre, une lecture choisie et nos nouvelles parutions&nbsp;».</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- III — Le plan -->
+    <section class="part reveal" aria-labelledby="plan">
+      <div class="part-head">
+        <span class="mono">III</span>
+        <h2 id="plan">Le plan d'action, <em>en trois lots.</em></h2>
+      </div>
+      <p class="part-intro">J'ai formulé 99 recommandations, chacune rattachée à sa page, son type de travail, son critère et sa priorité. 65 sont rapides et faciles&nbsp;: moins d'une journée de travail, sans développement.</p>
+
+      <div class="lots">
+        <div class="lot">
+          <span class="mono">Lot 1 · avant Noël</span>
+          <p class="lot-figure">19<small> actions</small></p>
+          <h3>Les corrections rapides, sur tout le parcours.</h3>
+          <p>Un panier visible partout, un titre et un bouton en haut de la home, une confirmation d'ajout lisible, un popup moins intrusif, la réassurance au panier.</p>
+        </div>
+        <div class="lot">
+          <span class="mono">Lot 2</span>
+          <p class="lot-figure">27<small> actions</small></p>
+          <h3>La fiche refondue, d'un bloc.</h3>
+          <p>Préparée sur une copie du site, puis mise en ligne d'un coup, selon la maquette. Les nouvelles photos et les nouveaux avis pourront suivre.</p>
+        </div>
+        <div class="lot">
+          <span class="mono">Lot 3 · au fil de l'eau</span>
+          <p class="lot-figure">51<small> actions</small></p>
+          <h3>Le reste du backlog, sans urgence.</h3>
+          <p>20 priorités 2 et 31 priorités 3, suivies dans Notion, colonne Statut.</p>
+        </div>
+      </div>
+
+      <!-- Extrait du backlog Notion, reconstruit en HTML (lignes réelles du backlog) -->
+      <div class="backlog">
+        <div class="backlog-head">
+          <span class="mono">Le plan d'action dans Notion · extrait</span>
+          <span class="mono is-xs is-mute">6 lignes sur 99</span>
+        </div>
+        <div class="backlog-table" role="table" aria-label="Extrait du backlog priorisé">
+          <div class="backlog-row is-head" role="row">
+            <span role="columnheader">Priorité</span>
+            <span role="columnheader">Observation</span>
+            <span role="columnheader">Recommandation</span>
+            <span role="columnheader">Page · chantier</span>
+          </div>
+          <div class="backlog-row" role="row">
+            <span class="backlog-prio" role="cell"><b>P1</b> Lot 1</span>
+            <span class="backlog-obs" role="cell">Panier séparé de la navigation, libellé en anglais</span>
+            <span class="backlog-reco" role="cell">Intégrer l'icône panier avec compteur dans la navigation principale, à droite du menu, et traduire le libellé («&nbsp;Panier (0)&nbsp;»).</span>
+            <span class="backlog-tags" role="cell"><i class="tag is-blue">Home</i><i class="tag is-yellow">Interface</i></span>
+          </div>
+          <div class="backlog-row" role="row">
+            <span class="backlog-prio" role="cell"><b>P1</b> Lot 1</span>
+            <span class="backlog-obs" role="cell">Panier caché dans le menu burger</span>
+            <span class="backlog-reco" role="cell">Ajouter une icône panier avec compteur dans le header mobile, à côté du menu burger.</span>
+            <span class="backlog-tags" role="cell"><i class="tag is-blue">Home</i><i class="tag is-yellow">Interface</i></span>
+          </div>
+          <div class="backlog-row" role="row">
+            <span class="backlog-prio" role="cell"><b>P1</b> Lot 1</span>
+            <span class="backlog-obs" role="cell">Bandeau d'ajout peu lisible, bouton éloigné</span>
+            <span class="backlog-reco" role="cell">Fond foncé ou blanc avec un texte contrasté (au moins 4,5:1), bouton «&nbsp;Voir le panier&nbsp;» contrasté et placé près du message.</span>
+            <span class="backlog-tags" role="cell"><i class="tag is-orange">Ajout au panier</i><i class="tag is-yellow">Interface</i></span>
+          </div>
+          <div class="backlog-row" role="row">
+            <span class="backlog-prio" role="cell"><b>P1</b> Lot 1</span>
+            <span class="backlog-obs" role="cell">Auteur absent de la fiche</span>
+            <span class="backlog-reco" role="cell">Signer le livre sous le titre et ajouter un court encadré «&nbsp;À propos&nbsp;» : «&nbsp;Par les Éditions L'Honnête Homme&nbsp;» plutôt que l'anonyme «&nbsp;Collectif&nbsp;» repris d'Amazon.</span>
+            <span class="backlog-tags" role="cell"><i class="tag is-red">Fiche produit</i><i class="tag is-green">Rédaction</i></span>
+          </div>
+          <div class="backlog-row" role="row">
+            <span class="backlog-prio" role="cell"><b>P1</b> Lot 1</span>
+            <span class="backlog-obs" role="cell">H1 en formule d'accueil, sans proposition de valeur</span>
+            <span class="backlog-reco" role="cell">Réécrire le H1 à partir de la proposition de valeur, par exemple «&nbsp;Des livres pour former son caractère et cultiver l'élégance&nbsp;», et garder la devise en signature.</span>
+            <span class="backlog-tags" role="cell"><i class="tag is-blue">Home</i><i class="tag is-green">Rédaction</i></span>
+          </div>
+          <div class="backlog-row" role="row">
+            <span class="backlog-prio" role="cell"><b>P1</b> Lot 2</span>
+            <span class="backlog-obs" role="cell">Pas de choix entre broché et beau livre</span>
+            <span class="backlog-reco" role="cell">Fusionner les deux fiches en une seule, avec un sélecteur d'édition&nbsp;: broché (30&nbsp;€) par défaut, beau livre (39&nbsp;€). Avis mutualisés, ancienne URL redirigée en 301.</span>
+            <span class="backlog-tags" role="cell"><i class="tag is-red">Fiche produit</i><i class="tag is-purple">Gestion du catalogue</i></span>
+          </div>
+        </div>
+        <p class="prio-more">Chaque ligne indique aussi son critère, sa portée (page ou transverse), si elle est rapide et faisable sans développement, et son statut.</p>
+
+        <figure class="shot backlog-full">
+          <span class="mono is-mute">Le backlog dans Notion · vue «&nbsp;Priorisation&nbsp;», les premières lignes sur 99</span>
+          <a class="shot-frame" href="../assets/hh-backlog-complet.png" target="_blank" rel="noopener" aria-label="Ouvrir la capture du backlog en pleine résolution"><img src="../assets/hh-backlog-complet.png" alt="Capture du backlog Notion de L'Honnête Homme : identifiant, priorité, lot, observation, constat, recommandation, page, emplacement, support, chantier, critère heuristique, portée, statut et référence au PDF." width="1817" height="566" loading="lazy"></a>
+          <figcaption>Chaque recommandation est rattachée à sa page, son emplacement, son support, son chantier et son critère, et renvoie à l'observation du PDF.</figcaption>
+        </figure>
+      </div>
+
+      <p class="plan-note"><em>Des hypothèses d'expert, à confirmer par le suivi.</em> Je n'ai disposé ni de données d'audience ni de tests utilisateurs&nbsp;: chaque lot se vérifie ensuite en suivant les indicateurs du site.</p>
+    </section>
+
+    <!-- Livrables + témoignage + reconnaissance -->
+    <section class="closing reveal" id="livrables" aria-label="Les livrables">
+      <div>
+        <p class="mono">Les livrables · 4</p>
+        <ol class="deliverables">
+          <li><span>01</span><div><strong>L'audit annoté</strong> <em>· PDF</em><br>94 points d'amélioration, captures desktop et mobile annotées à l'appui.</div></li>
+          <li><span>02</span><div><strong>Le plan d'action</strong> <em>· Notion</em><br>99 recommandations priorisées, classées par thème et réparties en 3 lots.</div></li>
+          <li><span>03</span><div><strong>La refonte de la fiche produit</strong><br>Maquettes desktop et mobile commentées en PDF, et maquette mobile en ligne, cliquable.</div></li>
+          <li><span>04</span><div><strong>La synthèse</strong> <em>· présentation</em><br>L'essentiel de l'audit et des choix de la refonte, que nous avons parcouru ensemble en restitution.</div></li>
+        </ol>
+      </div>
+      <div class="closing-side">
+        <div class="testimonial fiche">
+          <p class="mono">Ce qu'en dit la cliente</p>
+          <p class="testimonial-text">«&nbsp;Elle a rapidement compris le contexte et les enjeux de cette refonte. […] Elle m'a proposé des maquettes qui m'ont bluffée&nbsp;! Elle a parfaitement respecté l'enveloppe budgétaire allouée au projet, tout en livrant un travail qui est allé au-delà de mes attentes.&nbsp;»</p>
+          <p class="testimonial-author"><strong>Floriane Stoecklin</strong> · responsable communication marketing</p>
+        </div>
+        <div class="recognize fiche">
+          <p class="mono">Vous vous reconnaîtrez si…</p>
+          <p class="recognize-text">… vous vendez des produits auxquels vous croyez, <span>et votre site ne le montre pas encore.</span></p>
+          <div class="recognize-row">
+            <a class="link-mono is-md js-calendly" href="#booking">Réserver un appel →</a>
+            <span class="mono is-xs is-mute">30 min · sans engagement</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</article>
+
+<!-- BOOKING -->
+<section class="booking reveal" id="booking">
+  <div class="wrap booking-grid">
+    <div>
+      <p class="mono is-md">— À votre tour</p>
+      <h2>Commençons par <em>votre site.</em></h2>
+    </div>
+    <div>
+      <p class="booking-lead">30 minutes pour comprendre où vous en êtes, ce que vous vendez, et vérifier si <em>d'Aplomb</em> vous convient.</p>
+      <div class="booking-cta-row">
+        <a class="booking-cta js-calendly" href="#booking">Réserver un appel découverte →</a>
+        <span class="mono is-xs is-mute">30 min · sans engagement</span>
+      </div>
+      <a class="link-mono booking-back" href="../index.html">← Découvrir l'offre d'Aplomb</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <svg class="footer-feather"><use href="#feather"/></svg>
+      <div class="footer-signature">
+        <p class="footer-tagline">Audits de conversion <span>pour les entreprises</span> qui font les choses bien.</p>
+        <p class="footer-definition"><em>«&nbsp;Maât&nbsp;»</em> est le principe d'équilibre et de vérité. Je crois que la conversion ne se force pas&nbsp;: elle émerge quand promesse, expérience et attente s'accordent enfin.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a class="footer-email" href="mailto:annesophieroux.consulting@gmail.com">annesophieroux.consulting@gmail.com</a>
+      <nav aria-label="Navigation du pied de page">
+        <a href="../index.html">d'Aplomb</a>
+        <a href="../../au-clair/index.html">Au Clair</a>
+        <a href="https://www.linkedin.com/in/anne-sophie-roux" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      </nav>
+      <span>© Maat 2026 — <a href="../../mentions-legales.html">Mentions légales</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  // ─── Calendly popup : même lien que /aplomb/ ───
+  const CALENDLY_URL = 'https://calendly.com/annesophieroux-maat/appel-de-decouverte-daplomb?primary_color=D4B275&background_color=08041A&text_color=F4ECD3&hide_event_type_details=1&hide_gdpr_banner=1';
+  function openCalendly(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    if (typeof Calendly !== 'undefined' && Calendly.initPopupWidget) {
+      Calendly.initPopupWidget({ url: CALENDLY_URL });
+    } else {
+      window.open(CALENDLY_URL, '_blank', 'noopener,noreferrer');
+    }
+  }
+  document.querySelectorAll('.js-calendly').forEach(el => el.addEventListener('click', openCalendly));
+
+  // ─── Fade-up des sections .reveal ───
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('is-visible');
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ─── Smooth scroll pour les ancres ───
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      const target = id.length > 1 && document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ─── Header : fond aubergine dès qu'on quitte le haut du hero ───
+  const mhHeader = document.getElementById('mh-header');
+  const onScrollHeader = () => mhHeader.classList.toggle('is-scrolled', window.scrollY > 60);
+  onScrollHeader();
+  window.addEventListener('scroll', onScrollHeader, { passive: true });
+
+  // ─── Drawer mobile ───
+  const drawerToggle = document.getElementById('mh-mobile-toggle');
+  const drawer = document.getElementById('mh-drawer');
+  const setDrawer = (open) => {
+    drawer.classList.toggle('is-open', open);
+    drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+    drawerToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    drawerToggle.textContent = open ? 'Fermer' : 'Menu';
+  };
+  drawerToggle.addEventListener('click', () => setDrawer(!drawer.classList.contains('is-open')));
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setDrawer(false)));
+})();
+</script>
+
+<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+</body>
+</html>
