@@ -1335,6 +1335,14 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
 .lc-testimonial-text { margin-top: 20px; padding-left: 18px; border-left: 1px solid var(--champagne-fonce); }
 .lc-testimonial-text p { font-family: var(--font-body); font-size: 16px; line-height: 1.65; color: var(--ink-soft); margin: 0 0 14px; }
 
+/* Lien vers l'étude de cas */
+.lc-case-inline { color: var(--champagne-fonce); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; white-space: nowrap; }
+.lc-case-link {
+  display: inline-block; margin-top: 36px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--champagne-fonce); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 4px;
+}
+.lc-case-link:hover { color: var(--ink); }
 /* Témoignage court — sous le prix */
 .offre-quote { margin: 0 0 32px; padding-left: 16px; border-left: 1px solid rgba(212, 178, 117, 0.6); }
 .offre-quote blockquote { margin: 0; font-family: var(--font-display); font-style: italic; font-size: 18px; line-height: 1.5; color: var(--ivory); }
@@ -1489,7 +1497,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
     <div class="lc-head">
       <h2>Ce que vous recevez.</h2>
       <p class="lc-intro">5 livrables, et une restitution pour les comprendre et les prendre en main.</p>
-      <p class="lc-intro lc-intro-case">Illustrés ci-dessous avec l'audit des Éditions L'Honnête&nbsp;Homme, un site WooCommerce géré sans développeur.</p>
+      <p class="lc-intro lc-intro-case">Illustrés ci-dessous avec l'audit des Éditions L'Honnête&nbsp;Homme, un site WooCommerce géré sans développeur. <a class="lc-case-inline" href="lhonnete-homme/">Voir l'étude de cas</a></p>
       <svg class="lc-head-arrow" viewBox="0 0 16 40" width="16" height="40" aria-hidden="true"><path d="M8 1v37M2 31l6 7 6-7" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
 
@@ -1647,6 +1655,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
         </div>
       </details>
     </figure>
+    <a class="lc-case-link" href="lhonnete-homme/">Voir l'étude de cas <span aria-hidden="true">→</span></a>
   </div>
 </section>
 
@@ -1802,6 +1811,7 @@ html.zoom-lock, html.zoom-lock body { overflow: hidden; }
     <a href="#offre">L'offre</a>
     <a href="#faq">FAQ</a>
     <a href="#booking">Réserver</a>
+    <a href="lhonnete-homme/">Étude de cas</a>
   </nav>
   <div class="footer-bottom">
     <div class="footer-contact">
